@@ -751,6 +751,40 @@
         </div>
       </div>
 
+        <!-- Ramzi Theory -->
+        <div class="gender-input-card">
+          <label>🩺 Ramzi Theory (Week 6–10)</label>
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:7px">From your early ultrasound: which side is the placenta on?</div>
+          <div class="gender-options">
+            <div class="gender-opt" data-group="ramzi" data-val="girl" onclick="selectGenderOpt(this)">Left side → Girl</div>
+            <div class="gender-opt" data-group="ramzi" data-val="boy"  onclick="selectGenderOpt(this)">Right side → Boy</div>
+            <div class="gender-opt" data-group="ramzi" data-val="skip" onclick="selectGenderOpt(this)">Not sure / N/A</div>
+          </div>
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:5px">Based on placental location in early scans · Not proven</div>
+        </div>
+        <!-- Ring Test -->
+        <div class="gender-input-card">
+          <label>💍 Wedding Ring Test</label>
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:7px">Hang your wedding ring on a hair/string over your bump. What does it do?</div>
+          <div class="gender-options">
+            <div class="gender-opt" data-group="ring" data-val="girl" onclick="selectGenderOpt(this)">Circles → Girl</div>
+            <div class="gender-opt" data-group="ring" data-val="boy"  onclick="selectGenderOpt(this)">Back &amp; forth → Boy</div>
+            <div class="gender-opt" data-group="ring" data-val="skip" onclick="selectGenderOpt(this)">Not tried</div>
+          </div>
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:5px">Ancient folk test · Pure fun · No science</div>
+        </div>
+        <!-- Dreams -->
+        <div class="gender-input-card">
+          <label>💤 Dreams</label>
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:7px">Old wives' tale: you dream about the <em>opposite</em> of what you're having</div>
+          <div class="gender-options">
+            <div class="gender-opt" data-group="dream" data-val="boy"  onclick="selectGenderOpt(this)">Dreaming of a Girl → Boy</div>
+            <div class="gender-opt" data-group="dream" data-val="girl" onclick="selectGenderOpt(this)">Dreaming of a Boy → Girl</div>
+            <div class="gender-opt" data-group="dream" data-val="skip" onclick="selectGenderOpt(this)">No strong dreams</div>
+          </div>
+        </div>
+      </div>
+
       <button class="btn-predict" onclick="predictGender()">🔮 Reveal My Prediction</button>
       <div id="genderResult" class="gender-result" style="display:none"></div>
 
@@ -1187,6 +1221,15 @@
     }
   }
 
+  function copyGenderResult(encodedText) {
+    var txt = decodeURIComponent(encodedText);
+    var btn = document.getElementById('gCopyBtn');
+    navigator.clipboard.writeText(txt).then(function() {
+      btn.textContent = '✓ Copied!';
+      setTimeout(function() { btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy &amp; Share'; }, 2500);
+    }).catch(function() { prompt('Copy this:', txt); });
+  }
+
   // ─────────────────────────────────────────────────────────
   //  RENDER RESULT
   // ─────────────────────────────────────────────────────────
@@ -1378,16 +1421,16 @@
     var votes = { boy: 0, girl: 0 };
     var details = [];
 
-    // Heart rate
+    // Heart rate — HCG link: girls average 18% higher hCG → more nausea (1 real science point)
     var bpm = parseInt(document.getElementById('gBpm').value);
     if (!isNaN(bpm) && bpm >= 100 && bpm <= 200) {
       if (bpm > 140)      { votes.girl++; details.push('Heart rate ' + bpm + ' bpm → Girl'); }
       else if (bpm < 140) { votes.boy++;  details.push('Heart rate ' + bpm + ' bpm → Boy'); }
     }
 
-    // Option groups
-    var groupNames = { bump: 'Bump shape', sick: 'Morning sickness', crav: 'Cravings', skin: 'Skin' };
-    ['bump', 'sick', 'crav', 'skin'].forEach(function(g) {
+    // Option groups — now includes ramzi, ring, dream
+    var groupNames = { bump: 'Bump shape', sick: 'Morning sickness', crav: 'Cravings', skin: 'Skin changes', ramzi: 'Ramzi theory', ring: 'Ring test', dream: 'Dreams' };
+    ['bump', 'sick', 'crav', 'skin', 'ramzi', 'ring', 'dream'].forEach(function(g) {
       var sel = document.querySelector('.gender-opt[data-group="' + g + '"].selected');
       if (sel && sel.dataset.val !== 'skip') {
         votes[sel.dataset.val]++;
@@ -1399,8 +1442,8 @@
     var age   = parseInt(document.getElementById('gAge').value);
     var month = parseInt(document.getElementById('gMonth').value);
     if (!isNaN(age) && !isNaN(month) && age >= 18 && month >= 1 && month <= 12) {
-      var lunarAge  = age + 1; // traditional Chinese calendar adds 1 year
-      var chResult  = ((lunarAge + month) % 2 === 0) ? 'girl' : 'boy';
+      var lunarAge = age + 1; // traditional Chinese calendar adds 1 year
+      var chResult = ((lunarAge + month) % 2 === 0) ? 'girl' : 'boy';
       votes[chResult]++;
       details.push('Chinese calendar → ' + (chResult === 'girl' ? 'Girl' : 'Boy'));
     }
@@ -1435,7 +1478,43 @@
     if (details.length) {
       html += '<div class="gender-methods">Based on: ' + details.join(' · ') + '</div>';
     }
-    html += '<div class="gender-fun-note">These methods have no scientific basis and are no more accurate than guessing. Your 20-week anatomy scan (or NIPT/Harmony test) is the only reliable way to find out — where legally permitted.</div>';
+
+    // ── When can you find out for real? ──────────────────────────────────────
+    var scanNote = '';
+    if (currentResult) {
+      var wk = currentResult.weekNum;
+      if (wk < 12) {
+        var weeksTo12 = 12 - wk;
+        scanNote = '🔬 <strong>Nub Theory</strong> possible at your 12-week scan (in ~' + weeksTo12 + ' week' + (weeksTo12 !== 1 ? 's' : '') + ') — an experienced sonographer can sometimes read the angle of the genital tubercle.';
+      } else if (wk >= 12 && wk < 20) {
+        var weeksTo20 = 20 - wk;
+        scanNote = '🩺 Your <strong>20-week anatomy scan</strong> is in ~' + weeksTo20 + ' week' + (weeksTo20 !== 1 ? 's' : '') + ' — this is when sex is confirmed visually (where legally permitted).';
+      } else if (wk >= 20) {
+        scanNote = '✅ You\'ve passed your 20-week scan! Your sonographer should have been able to confirm sex at that point (where legally permitted).';
+      }
+    } else {
+      scanNote = '🩺 Your <strong>20-week anatomy scan</strong> is when sex can be confirmed visually — the most reliable non-invasive method (where legally permitted).';
+    }
+    html += '<div style="background:var(--primary-light);border-radius:10px;padding:12px 14px;margin-top:14px;font-size:0.82rem;color:var(--primary);line-height:1.6">' + scanNote + '</div>';
+
+    // ── Science fact ──────────────────────────────────────────────────────────
+    html += '<div class="gender-fun-note"><strong>🧬 How it actually works:</strong> Your baby\'s sex (XX or XY) was decided at fertilisation — Week 3. But external genitalia look identical until <strong>Week 9</strong> when testosterone kicks in for XY babies. That\'s why symptoms like morning sickness (linked to higher hCG in girl pregnancies — the one old wives\' tale with real science behind it) appear in Weeks 6–10, right when the hormonal differences first emerge.<br><br>These methods have no scientific basis and are no more accurate than a coin flip. Only a scan or NIPT blood test can tell you for sure.</div>';
+
+    // ── Share buttons ─────────────────────────────────────────────────────────
+    var shareText = verdict !== 'tie'
+      ? 'Old wives\' tales say I\'m having a ' + (verdict === 'girl' ? 'girl 👧' : 'boy 👦') + '! (' + (verdict === 'girl' ? girlPct : boyPct) + '% of signals agree). What do you think? Try it: https://www.getpregnancyready.com'
+      : 'The old wives\' tales are perfectly split on my baby\'s gender! Try the predictor: https://www.getpregnancyready.com';
+
+    html += '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px">';
+    // WhatsApp (huge for India audience)
+    html += '<a href="https://wa.me/?text=' + encodeURIComponent(shareText) + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:#25D366;color:#fff;border-radius:999px;font-size:0.85rem;font-weight:600;text-decoration:none;">'
+          + '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.555 4.103 1.523 5.824L.057 23.885l6.244-1.637A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.868 9.868 0 01-5.034-1.378l-.36-.214-3.742.98 1.001-3.648-.234-.374A9.831 9.831 0 012.106 12C2.106 6.533 6.533 2.106 12 2.106c5.467 0 9.894 4.427 9.894 9.894 0 5.467-4.427 9.894-9.894 9.894z"/></svg>'
+          + 'Share on WhatsApp</a>';
+    // Copy link
+    html += '<button onclick="copyGenderResult(\'' + encodeURIComponent(shareText) + '\')" style="display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:var(--primary-light);color:var(--primary);border:2px solid var(--primary);border-radius:999px;font-size:0.85rem;font-weight:600;cursor:pointer;font-family:inherit" id="gCopyBtn">'
+          + '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>'
+          + 'Copy &amp; Share</button>';
+    html += '</div>';
 
     resultEl.innerHTML = html;
     requestAnimationFrame(function() {

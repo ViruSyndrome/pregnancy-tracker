@@ -438,19 +438,51 @@
       font-size: 0.8rem; color: var(--text-muted); line-height: 1.6;
     }
 
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--primary); border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none; position: absolute; top: 56px; left: 0; right: 0;
+        background: rgba(255,255,255,0.98); border-bottom: 1px solid var(--border);
+        flex-direction: column; padding: 8px 0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a {
+        padding: 14px 24px; font-size: 1rem;
+        border-bottom: 1px solid var(--border);
+        min-height: 44px; display: flex; align-items: center;
+      }
       .result-grid { grid-template-columns: 1fr 1fr; }
       .week-sections { grid-template-columns: 1fr; }
       .products-grid { grid-template-columns: 1fr; }
       .content-grid { grid-template-columns: 1fr; }
+      .hero { padding: 36px 20px 28px; }
       .hero h1 { font-size: 1.75rem; }
-      .calc-card { padding: 20px; }
+      .hero-sub { font-size: 0.95rem; margin-bottom: 24px; }
+      .calc-card { padding: 20px 16px; }
       .week-card-header { flex-direction: column; text-align: center; }
+      .container { padding: 0 16px; }
+      .gender-opt { padding: 8px 12px; }
+      .share-btn { min-height: 44px; }
     }
     @media (max-width: 420px) {
       .result-grid { grid-template-columns: 1fr; }
-      .nav-links { gap: 12px; }
     }
 
     /* ── WEEK DETAIL SECTION (permanent outside resultPanel) ── */
@@ -571,6 +603,7 @@
         </svg>
         PregnancyWeekTracker
       </a>
+      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
       <div class="nav-links">
         <a href="#tracker">Tracker</a>
         <a href="#all-weeks">All Weeks</a>

@@ -1,0 +1,1465 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pregnancy Week Tracker — How Many Weeks Pregnant Am I? | GetPregnancyReady</title>
+  <meta name="description" content="Free pregnancy week tracker. Enter your last period date to instantly find out how many weeks pregnant you are, your due date, baby's size and development this week. No sign-up required.">
+  <link rel="canonical" href="https://www.getpregnancyready.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Pregnancy Week Tracker — How Many Weeks Pregnant Am I?">
+  <meta property="og:description" content="Free, instant pregnancy week calculator. Baby development, due date, and what to prepare — week by week. No sign-up needed.">
+  <meta property="og:url" content="https://www.getpregnancyready.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://www.getpregnancyready.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Twemoji SVG images via CDN (no JS library — pure codepoint conversion in script) -->
+
+  <!-- Google Analytics 4 — replace G-XXXXXXXXXX -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script> -->
+
+  <!-- Google AdSense — replace ca-pub-XXXXXXXXXXXXXXXX -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Pregnancy Week Tracker",
+    "url": "https://www.getpregnancyready.com/",
+    "description": "Free pregnancy week tracker. Calculates how many weeks pregnant you are and shows week-by-week fetal development, due date, and baby size.",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "All",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "featureList": ["Due date calculator", "Week-by-week fetal development", "Baby size guide", "Trimester tracker", "Pregnancy product guide"]
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary: #be185d;
+      --primary-dark: #9d174d;
+      --primary-light: #fce7f3;
+      --accent: #f97316;
+      --accent-light: #fff7ed;
+      --bg: #fdf4f7;
+      --bg-card: #ffffff;
+      --text: #111827;
+      --text-muted: #6b7280;
+      --border: #f3d6e8;
+      --success: #16a34a;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(190, 24, 93, 0.09);
+      --shadow-sm: 0 2px 8px rgba(190, 24, 93, 0.06);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 980px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; font-weight: 700; font-size: 1rem; color: var(--primary);
+    }
+    .nav-brand svg { color: var(--primary); }
+    .nav-links { display: flex; gap: 20px; }
+    .nav-links a {
+      text-decoration: none; font-size: 0.875rem; font-weight: 500;
+      color: var(--text-muted); transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #fff0f6 0%, #fff7ed 50%, #fdf4f7 100%);
+      padding: 60px 24px 48px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      padding: 4px 12px; border-radius: 999px; margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800; line-height: 1.15;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.05rem; color: var(--text-muted);
+      max-width: 520px; margin: 0 auto 36px;
+    }
+
+    /* ── CALCULATOR CARD ── */
+    .calc-card {
+      background: var(--bg-card); border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 600px; margin: 0 auto;
+      padding: 32px;
+    }
+    .calc-toggle {
+      display: flex; gap: 0;
+      background: var(--bg); border-radius: 10px;
+      padding: 4px; margin-bottom: 24px;
+    }
+    .calc-toggle button {
+      flex: 1; padding: 8px 16px;
+      border: none; cursor: pointer; border-radius: 8px;
+      font-size: 0.875rem; font-weight: 500; color: var(--text-muted);
+      background: transparent; transition: all 0.2s;
+    }
+    .calc-toggle button.active {
+      background: var(--bg-card); color: var(--primary);
+      font-weight: 600; box-shadow: var(--shadow-sm);
+    }
+    .input-group { margin-bottom: 20px; }
+    .input-group label {
+      display: block; font-size: 0.875rem; font-weight: 600;
+      color: var(--text); margin-bottom: 8px;
+    }
+    .input-group input[type="date"], .input-group input[type="number"] {
+      width: 100%; padding: 12px 16px;
+      border: 2px solid var(--border); border-radius: 10px;
+      font-size: 1rem; font-family: inherit; color: var(--text);
+      background: var(--bg); outline: none; transition: border-color 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .input-group input:focus { border-color: var(--primary); background: #fff; }
+    .input-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 6px; }
+    .btn-calc {
+      width: 100%; padding: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff; font-size: 1rem; font-weight: 700;
+      border: none; border-radius: 10px; cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s; letter-spacing: 0.01em;
+    }
+    .btn-calc:hover { opacity: 0.92; }
+    .btn-calc:active { transform: scale(0.99); }
+
+    /* ── MAIN CONTAINER ── */
+    .container { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── RESULT PANEL ── */
+    #resultPanel { display: none; padding: 40px 0 0; }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    #resultPanel.reveal { animation: fadeSlideUp 0.6s cubic-bezier(0.22,1,0.36,1) both; }
+
+    .result-headline { text-align: center; padding: 12px 0 28px; }
+    .result-headline .rh-week {
+      font-size: clamp(1.8rem, 5vw, 2.5rem); font-weight: 800; line-height: 1.2;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 6px;
+    }
+    .result-headline .rh-baby { font-size: 1.05rem; color: var(--text); font-weight: 500; margin-bottom: 6px; }
+    .result-headline .rh-sub  { font-size: 0.9rem; color: var(--text-muted); }
+
+    .milestone-banner {
+      background: linear-gradient(135deg, var(--primary-light) 0%, #fff7ed 100%);
+      border: 2px solid var(--primary); border-radius: 16px;
+      padding: 20px 24px; text-align: center; margin-bottom: 24px;
+    }
+    .ms-icon  { font-size: 2.4rem; display: block; margin-bottom: 6px; }
+    .ms-title { font-size: 1.05rem; font-weight: 800; color: var(--primary); }
+    .ms-sub   { font-size: 0.87rem; color: var(--text-muted); margin-top: 4px; line-height: 1.55; }
+
+    .share-row { display: flex; justify-content: center; gap: 12px; margin-bottom: 28px; flex-wrap: wrap; }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; border-radius: 999px;
+      font-size: 0.875rem; font-weight: 600; cursor: pointer; font-family: inherit;
+      transition: all 0.2s; border: 2px solid var(--primary);
+      background: var(--primary-light); color: var(--primary);
+    }
+    .share-btn:hover { background: var(--primary); color: #fff; }
+    .share-btn svg   { flex-shrink: 0; }
+    .result-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px; margin-bottom: 24px;
+    }
+    .result-stat {
+      background: var(--bg-card); border-radius: var(--radius);
+      padding: 20px; text-align: center;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+    }
+    .result-stat .stat-value {
+      font-size: 2rem; font-weight: 800; color: var(--primary);
+      line-height: 1.1; margin-bottom: 4px;
+    }
+    .result-stat .stat-label {
+      font-size: 0.78rem; font-weight: 600; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .result-stat .stat-sub {
+      font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;
+    }
+
+    /* ── TRIMESTER PROGRESS ── */
+    .trimester-bar-wrap {
+      background: var(--bg-card); border-radius: var(--radius);
+      padding: 20px 24px; margin-bottom: 24px;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+    }
+    .trimester-labels {
+      display: flex; justify-content: space-between;
+      font-size: 0.75rem; font-weight: 600; color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .trimester-labels span.active-tri { color: var(--primary); }
+    .progress-track {
+      height: 12px; background: var(--bg);
+      border-radius: 999px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 999px; transition: width 0.8s ease;
+    }
+    .trimester-dividers {
+      display: flex; justify-content: space-between;
+      padding: 4px 0;
+    }
+    .tri-div { font-size: 0.7rem; color: var(--text-muted); }
+
+    /* ── WEEK DETAIL CARD ── */
+    .week-card {
+      background: var(--bg-card); border-radius: var(--radius);
+      box-shadow: var(--shadow); overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .week-card-header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      padding: 24px; color: #fff;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .week-emoji { font-size: 3.5rem; line-height: 1; }
+    .week-emoji img.emoji-img { width: 96px; height: 96px; display: block; object-fit: cover; border-radius: 16px; }
+    .week-title-wrap {}
+    .week-number { font-size: 0.75rem; font-weight: 600; opacity: 0.85; letter-spacing: 0.08em; text-transform: uppercase; }
+    .week-size { font-size: 1.5rem; font-weight: 800; }
+    .week-size-sub { font-size: 0.875rem; opacity: 0.85; margin-top: 2px; }
+    .week-card-body { padding: 24px; }
+    .week-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .week-section {}
+    .week-section h3 {
+      font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; color: var(--primary); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .week-section p { font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .week-tip {
+      margin-top: 20px; padding: 14px 18px;
+      background: var(--accent-light); border-radius: 10px;
+      border-left: 3px solid var(--accent);
+      font-size: 0.875rem; color: var(--text);
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .week-tip strong { color: var(--accent); }
+
+    /* ── PRODUCT RECOMMENDATIONS ── */
+    .products-section {
+      background: var(--bg-card); border-radius: var(--radius);
+      box-shadow: var(--shadow-sm); padding: 24px;
+      margin-bottom: 24px; border: 1px solid var(--border);
+    }
+    .products-section h2 {
+      font-size: 1rem; font-weight: 700; color: var(--text);
+      margin-bottom: 4px;
+    }
+    .products-section .products-sub {
+      font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;
+    }
+    .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .product-card {
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px; display: flex; gap: 12px; align-items: flex-start;
+      text-decoration: none; color: var(--text);
+      transition: box-shadow 0.2s, border-color 0.2s; background: var(--bg);
+    }
+    .product-card:hover { box-shadow: var(--shadow-sm); border-color: var(--primary); }
+    .product-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .product-name { font-size: 0.82rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+    .product-why { font-size: 0.75rem; color: var(--text-muted); }
+    .affiliate-badge {
+      display: inline-block; font-size: 0.65rem; font-weight: 600;
+      background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0;
+      padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;
+    }
+
+    /* ── ADVERT SLOT ── */
+    .ad-slot {
+      background: var(--bg-card); border: 1px dashed var(--border);
+      border-radius: var(--radius); padding: 24px; text-align: center;
+      color: var(--text-muted); font-size: 0.8rem; margin: 24px 0;
+      min-height: 90px; display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── WEEKS TIMELINE ── */
+    .timeline-section { padding: 40px 0; }
+    .timeline-section h2 {
+      font-size: 1.5rem; font-weight: 800; color: var(--text);
+      margin-bottom: 8px;
+    }
+    .timeline-section .section-sub {
+      font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px;
+    }
+    .tri-group { margin-bottom: 32px; }
+    .tri-group-title {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 1rem; font-weight: 700; color: var(--primary);
+      margin-bottom: 12px; padding-bottom: 8px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .tri-badge {
+      background: var(--primary-light); color: var(--primary);
+      font-size: 0.7rem; font-weight: 700; padding: 2px 10px;
+      border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .weeks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 8px;
+    }
+    .week-chip {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 12px;
+      cursor: pointer; transition: all 0.18s;
+      display: flex; flex-direction: column; gap: 3px;
+    }
+    .week-chip:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); transform: translateY(-1px); }
+    @keyframes chipPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(190,24,93,0.28); }
+      50%       { box-shadow: 0 0 0 8px rgba(190,24,93,0); }
+    }
+    .week-chip.current {
+      border-color: var(--primary); background: var(--primary-light);
+      animation: chipPulse 2.5s ease infinite;
+    }
+    .week-chip-num { font-size: 0.7rem; font-weight: 700; color: var(--primary); letter-spacing: 0.05em; text-transform: uppercase; }
+    .week-chip-emoji { font-size: 1.4rem; line-height: 1; }
+    .week-chip-emoji img.emoji-img { width: 48px; height: 48px; display: block; margin: 0 auto; object-fit: cover; border-radius: 8px; }
+    .week-chip-size { font-size: 0.72rem; color: var(--text-muted); }
+
+    /* ── SEO CONTENT ── */
+    .content-section { padding: 48px 0 24px; }
+    .content-section h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 16px; }
+    .content-section p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 16px; }
+    .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+    .content-card {
+      background: var(--bg-card); border-radius: 12px;
+      padding: 20px; border: 1px solid var(--border);
+    }
+    .content-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; }
+    .content-card ul { padding-left: 18px; }
+    .content-card li { font-size: 0.87rem; color: var(--text-muted); margin-bottom: 6px; line-height: 1.5; }
+
+    /* ── FAQ ── */
+    .faq-section { padding: 40px 0; }
+    .faq-section h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 24px; }
+    .faq-item {
+      background: var(--bg-card); border-radius: 10px; margin-bottom: 8px;
+      border: 1px solid var(--border); overflow: hidden;
+    }
+    .faq-q {
+      padding: 16px 20px; font-weight: 600; font-size: 0.9rem; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      user-select: none;
+    }
+    .faq-q:hover { background: var(--primary-light); }
+    .faq-q svg { flex-shrink: 0; color: var(--primary); transition: transform 0.2s; }
+    .faq-q.open svg { transform: rotate(45deg); }
+    .faq-a {
+      padding: 0 20px; font-size: 0.87rem; color: var(--text-muted); line-height: 1.7;
+      max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.2s;
+    }
+    .faq-a.open { max-height: 300px; padding: 0 20px 16px; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--text); color: #e5e7eb;
+      padding: 40px 24px 24px;
+    }
+    .footer-inner {
+      max-width: 980px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; gap: 32px; justify-content: space-between;
+      padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-brand { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .footer-desc { font-size: 0.82rem; color: #9ca3af; max-width: 260px; line-height: 1.6; }
+    .footer-links h4 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #9ca3af; margin-bottom: 12px; }
+    .footer-links ul { list-style: none; }
+    .footer-links li { margin-bottom: 8px; }
+    .footer-links a { text-decoration: none; font-size: 0.85rem; color: #d1d5db; }
+    .footer-links a:hover { color: #fff; }
+    .footer-copy { max-width: 980px; margin: 0 auto; padding-top: 20px; font-size: 0.78rem; color: #6b7280; }
+    .footer-copy a { color: #9ca3af; text-decoration: none; }
+    .footer-copy a:hover { color: #fff; }
+    .disclaimer {
+      background: var(--accent-light); border: 1px solid #fed7aa;
+      border-radius: 10px; padding: 14px 18px; margin: 24px 0;
+      font-size: 0.8rem; color: var(--text-muted); line-height: 1.6;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .result-grid { grid-template-columns: 1fr 1fr; }
+      .week-sections { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: 1fr; }
+      .content-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 1.75rem; }
+      .calc-card { padding: 20px; }
+      .week-card-header { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 420px) {
+      .result-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 12px; }
+    }
+
+    /* ── WEEK DETAIL SECTION (permanent outside resultPanel) ── */
+    #weekDetailSection { display: none; padding: 8px 0 0; }
+    #weekDetailSection.visible { display: block; }
+
+    /* ── WEEK CHIP ACTIVE STATE ── */
+    .week-chip.active-detail {
+      border-color: var(--accent); background: var(--accent-light);
+      box-shadow: 0 0 0 3px rgba(249,115,22,0.15);
+      transform: translateY(-2px);
+    }
+    .week-chip:active { transform: scale(0.97); }
+
+    /* ── GENDER PREDICTION SECTION ── */
+    .gender-section {
+      background: linear-gradient(135deg, #f5f3ff 0%, #fce7f3 100%);
+      border-radius: var(--radius);
+      border: 1px solid #e9d5ff;
+      padding: 32px;
+      margin: 0 0 40px;
+    }
+    .gender-section h2 { font-size: 1.4rem; font-weight: 800; color: #7c3aed; margin-bottom: 8px; }
+    .gender-intro { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.65; }
+    .gender-disclaimer {
+      font-size: 0.78rem; color: var(--text);
+      background: #fff; border-radius: 8px; padding: 10px 14px;
+      border-left: 3px solid #f59e0b;
+      margin-bottom: 20px; line-height: 1.65;
+    }
+    .gender-inputs-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+      margin-bottom: 20px;
+    }
+    .gender-input-card {
+      background: #fff; border-radius: 12px; padding: 14px;
+      border: 1px solid #e9d5ff;
+    }
+    .gender-input-card label {
+      display: block; font-size: 0.73rem; font-weight: 700;
+      color: #7c3aed; margin-bottom: 8px;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .gender-options { display: flex; flex-wrap: wrap; gap: 5px; }
+    .gender-opt {
+      padding: 5px 10px; border: 1.5px solid #e9d5ff; border-radius: 6px;
+      font-size: 0.76rem; font-weight: 500; cursor: pointer; background: #fff;
+      transition: all 0.15s; color: var(--text); user-select: none; -webkit-user-select: none;
+    }
+    .gender-opt:hover  { border-color: #7c3aed; background: #f5f3ff; }
+    .gender-opt.selected { background: #7c3aed; color: #fff; border-color: #7c3aed; }
+    .gender-num-input {
+      width: 100%; padding: 8px 10px;
+      border: 1.5px solid #e9d5ff; border-radius: 8px;
+      font-size: 0.9rem; font-family: inherit; color: var(--text);
+      outline: none; transition: border-color 0.15s; background: var(--bg);
+    }
+    .gender-num-input:focus { border-color: #7c3aed; background: #fff; }
+    .gender-select {
+      width: 100%; padding: 8px 10px;
+      border: 1.5px solid #e9d5ff; border-radius: 8px;
+      font-size: 0.82rem; font-family: inherit; background: var(--bg);
+      color: var(--text); outline: none; cursor: pointer; transition: border-color 0.15s;
+    }
+    .gender-select:focus { border-color: #7c3aed; }
+    .btn-predict {
+      width: 100%; padding: 14px;
+      background: linear-gradient(135deg, #7c3aed, #be185d);
+      color: #fff; font-size: 1rem; font-weight: 700;
+      border: none; border-radius: 10px; cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    .btn-predict:hover  { opacity: 0.9; }
+    .btn-predict:active { transform: scale(0.99); }
+    .gender-result {
+      background: #fff; border-radius: 12px; padding: 24px;
+      border: 2px solid #e9d5ff; text-align: center; margin-top: 16px;
+    }
+    .gender-verdict       { font-size: 2.2rem; font-weight: 800; margin: 10px 0 4px; }
+    .gender-verdict.boy   { color: #3b82f6; }
+    .gender-verdict.girl  { color: #be185d; }
+    .gender-verdict.tie   { color: var(--text-muted); }
+    .gender-meter-track {
+      height: 18px; background: #f1f5f9; border-radius: 999px;
+      overflow: hidden; margin: 12px 0; display: flex;
+    }
+    .gender-meter-boy  { background: linear-gradient(90deg,#60a5fa,#3b82f6); transition: width 0.8s ease; }
+    .gender-meter-girl { background: linear-gradient(90deg,#f9a8d4,#be185d); transition: width 0.8s ease; }
+    .gender-breakdown  { font-size: 0.78rem; color: var(--text-muted); }
+    .gender-methods    { font-size: 0.72rem; color: var(--text-muted); margin-top: 6px; line-height: 1.55; }
+    .gender-fun-note {
+      font-size: 0.74rem; color: var(--text-muted); font-style: italic;
+      margin-top: 12px; padding: 10px 12px;
+      background: var(--bg); border-radius: 8px; line-height: 1.55;
+    }
+    .india-callout {
+      background: #fff8f0; border: 1px solid #fed7aa;
+      border-radius: 10px; padding: 12px 16px; margin-top: 16px;
+      font-size: 0.78rem; color: var(--text); line-height: 1.65;
+    }
+    @media (max-width: 640px) {
+      .gender-inputs-grid { grid-template-columns: 1fr; }
+      .gender-section { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">
+        <svg width="22" height="22" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="22" cy="22" r="20" fill="currentColor" opacity="0.12"/>
+          <path d="M22 10 C22 10 14 14 14 22 C14 30 18 34 22 36 C26 34 30 30 30 22 C30 14 22 10 22 10Z" fill="currentColor" opacity="0.7"/>
+          <circle cx="22" cy="22" r="4" fill="currentColor"/>
+        </svg>
+        GetPregnancyReady
+      </a>
+      <div class="nav-links">
+        <a href="#tracker">Tracker</a>
+        <a href="#all-weeks">All Weeks</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="tracker">
+    <div class="hero-eyebrow">Free · No Sign-Up · Private</div>
+    <h1>How Many Weeks<br>Pregnant Am I?</h1>
+    <p class="hero-sub">Enter your last period date and instantly see your pregnancy week, due date, baby size, and what's happening right now.</p>
+
+    <div class="calc-card">
+      <div class="calc-toggle">
+        <button class="active" id="btnLMP" onclick="switchMode('lmp')">I know when my period started</button>
+        <button id="btnDD" onclick="switchMode('due')">I know my due date</button>
+      </div>
+
+      <div id="lmpMode">
+        <div class="input-group">
+          <label for="lmpDate">When did your last period start?</label>
+          <input type="date" id="lmpDate" max="">
+          <p class="input-hint">Use the first day your period began. Don't worry if you're not 100% sure — an approximate date works fine.</p>
+        </div>
+        <div class="input-group">
+          <label for="cycleLen">Cycle length (days)</label>
+          <input type="number" id="cycleLen" value="28" min="20" max="45">
+          <p class="input-hint">Most cycles are 28 days. Adjust if yours is shorter or longer.</p>
+        </div>
+      </div>
+
+      <div id="dueMode" style="display:none">
+        <div class="input-group">
+          <label for="dueDate">Your due date</label>
+          <input type="date" id="dueDate">
+          <p class="input-hint">Your due date will be used to calculate how many weeks you are.</p>
+        </div>
+      </div>
+
+      <button class="btn-calc" onclick="calculate()">Calculate My Pregnancy Week →</button>
+    </div>
+  </section>
+
+  <!-- RESULT PANEL -->
+  <div class="container">
+    <div id="resultPanel">
+
+      <!-- Celebratory headline -->
+      <div id="resultHeadline" class="result-headline"></div>
+
+      <!-- Milestone banner (shown at key weeks only) -->
+      <div id="milestoneBanner" class="milestone-banner" style="display:none"></div>
+
+      <!-- Stats -->
+      <div class="result-grid" id="statGrid"></div>
+
+      <!-- Share row -->
+      <div class="share-row" id="shareRow" style="display:none">
+        <button class="share-btn" id="shareBtn" onclick="shareResult()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Share Your News
+        </button>
+      </div>
+
+      <!-- Trimester progress -->
+      <div class="trimester-bar-wrap" id="trimBar"></div>
+
+      <!-- Week detail card -->
+      <div class="week-card" id="weekCard"></div>
+
+      <!-- AdSense slot 1 -->
+      <div class="ad-slot">
+        <!-- Replace with your AdSense ad unit -->
+        <!-- <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script> -->
+        Advertisement
+      </div>
+
+      <!-- Product recommendations -->
+      <div class="products-section" id="productsSection"></div>
+
+      <!-- Affiliate & medical disclaimer -->
+      <div class="disclaimer">
+        <strong>Disclaimer:</strong> This tool is for informational purposes only and is not medical advice. Always consult your midwife, obstetrician, or GP for medical guidance. Due dates are estimates — only about 5% of babies are born on their exact due date. Product links marked <span class="affiliate-badge">Affiliate</span> may earn a small commission at no extra cost to you.
+      </div>
+
+    </div><!-- /resultPanel -->
+
+    <!-- ── WEEK DETAIL (populated on chip tap, always in DOM) ── -->
+    <div id="weekDetailSection"></div>
+
+    <!-- ── ALL WEEKS TIMELINE ── -->
+    <section class="timeline-section" id="all-weeks">
+      <h2>Pregnancy Week by Week</h2>
+      <p class="section-sub">Tap any week to see baby's development, size, and what to expect. Your current week is highlighted.</p>
+      <div id="weeksTimeline"></div>
+    </section>
+
+    <!-- AdSense slot 2 -->
+    <div class="ad-slot">
+      <!-- Replace with your AdSense ad unit -->
+      Advertisement
+    </div>
+
+    <!-- ── GENDER PREDICTION QUIZ ── -->
+    <section class="gender-section" id="gender-prediction">
+      <h2>🔮 Fun Gender Prediction</h2>
+      <p class="gender-intro">Try the old wives' tales from around the world. Answer what you know — skip the rest. The more you fill in, the more fun the result!</p>
+      <div class="gender-disclaimer">
+        ⚠️ <strong>For entertainment only.</strong> None of these methods are scientifically proven — most have ~50% accuracy, the same as a coin flip. In India, it is illegal for doctors to reveal a baby's sex under the PC-PNDT Act 1994. This tool exists purely for fun.
+      </div>
+
+      <div class="gender-inputs-grid">
+        <!-- Heart Rate -->
+        <div class="gender-input-card">
+          <label>💓 Baby's Heart Rate (bpm)</label>
+          <input type="number" class="gender-num-input" id="gBpm" placeholder="e.g. 148" min="100" max="200">
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:5px">&gt;140 bpm = Girl theory · &lt;140 bpm = Boy theory · No scientific proof</div>
+        </div>
+        <!-- Bump Shape -->
+        <div class="gender-input-card">
+          <label>🤰 Bump Shape</label>
+          <div class="gender-options">
+            <div class="gender-opt" data-group="bump" data-val="girl" onclick="selectGenderOpt(this)">Round / High</div>
+            <div class="gender-opt" data-group="bump" data-val="boy"  onclick="selectGenderOpt(this)">Pointy / Low</div>
+            <div class="gender-opt" data-group="bump" data-val="skip" onclick="selectGenderOpt(this)">Not sure</div>
+          </div>
+        </div>
+        <!-- Morning Sickness -->
+        <div class="gender-input-card">
+          <label>🤢 Morning Sickness</label>
+          <div class="gender-options">
+            <div class="gender-opt" data-group="sick" data-val="boy"  onclick="selectGenderOpt(this)">None / Mild</div>
+            <div class="gender-opt" data-group="sick" data-val="girl" onclick="selectGenderOpt(this)">Moderate</div>
+            <div class="gender-opt" data-group="sick" data-val="girl" onclick="selectGenderOpt(this)">Severe / All day</div>
+          </div>
+        </div>
+        <!-- Cravings -->
+        <div class="gender-input-card">
+          <label>🍭 Food Cravings</label>
+          <div class="gender-options">
+            <div class="gender-opt" data-group="crav" data-val="girl" onclick="selectGenderOpt(this)">Sweet / Fruity</div>
+            <div class="gender-opt" data-group="crav" data-val="boy"  onclick="selectGenderOpt(this)">Salty / Sour</div>
+            <div class="gender-opt" data-group="crav" data-val="skip" onclick="selectGenderOpt(this)">Both / Neither</div>
+          </div>
+        </div>
+        <!-- Skin -->
+        <div class="gender-input-card">
+          <label>✨ Skin Changes</label>
+          <div class="gender-options">
+            <div class="gender-opt" data-group="skin" data-val="boy"  onclick="selectGenderOpt(this)">Glowing / Clear</div>
+            <div class="gender-opt" data-group="skin" data-val="girl" onclick="selectGenderOpt(this)">Dull / Acne</div>
+            <div class="gender-opt" data-group="skin" data-val="skip" onclick="selectGenderOpt(this)">No change</div>
+          </div>
+        </div>
+        <!-- Chinese Calendar -->
+        <div class="gender-input-card">
+          <label>🍯 Chinese Gender Calendar</label>
+          <div style="display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap">
+            <div>
+              <div style="font-size:0.68rem;color:var(--text-muted);margin-bottom:3px">Your age when conceived</div>
+              <input type="number" class="gender-num-input" id="gAge" placeholder="e.g. 28" min="18" max="45" style="width:95px">
+            </div>
+            <div>
+              <div style="font-size:0.68rem;color:var(--text-muted);margin-bottom:3px">Month of conception</div>
+              <select class="gender-select" id="gMonth" title="Month of conception" style="width:110px">
+                <option value="">Select…</option>
+                <option value="1">January</option><option value="2">February</option>
+                <option value="3">March</option><option value="4">April</option>
+                <option value="5">May</option><option value="6">June</option>
+                <option value="7">July</option><option value="8">August</option>
+                <option value="9">September</option><option value="10">October</option>
+                <option value="11">November</option><option value="12">December</option>
+              </select>
+            </div>
+          </div>
+          <div style="font-size:0.7rem;color:var(--text-muted)">Ancient Chinese folk method · ~50% accurate</div>
+        </div>
+      </div>
+
+      <button class="btn-predict" onclick="predictGender()">🔮 Reveal My Prediction</button>
+      <div id="genderResult" class="gender-result" style="display:none"></div>
+
+      <div class="india-callout">
+        🇮🇳 <strong>For Indian parents:</strong> Under the PC-PNDT Act 1994, it is illegal for doctors or sonographers to reveal a baby's sex in India — with penalties up to 3 years imprisonment. That's why Indian parents use fun prediction methods more than anywhere else in the world. This tool is provided purely for entertainment — the same way people worldwide use it before their 20-week scan.
+      </div>
+    </section>
+
+    <!-- ── SEO CONTENT ── -->
+    <section class="content-section">
+      <h2>Understanding Your Pregnancy Weeks</h2>
+      <p>Pregnancy is measured in weeks from the first day of your last menstrual period (LMP) — even though fertilisation actually occurs about two weeks later. This means that when your period is "late" by one week, you are technically already 5 weeks pregnant.</p>
+      <p>A full-term pregnancy lasts between 37 and 42 weeks. Your estimated due date (EDD) is calculated as 280 days (40 weeks) from your LMP. The due date is based on Naegele's rule, which adds 9 months and 7 days to your LMP.</p>
+
+      <div class="content-grid">
+        <div class="content-card">
+          <h3>🌱 First Trimester (Weeks 1–12)</h3>
+          <ul>
+            <li>All major organs begin forming</li>
+            <li>Morning sickness often peaks at week 8–10</li>
+            <li>Miscarriage risk is highest — but drops sharply after week 12</li>
+            <li>12-week scan (dating scan) confirms due date</li>
+            <li>Most couples share news publicly after week 12</li>
+          </ul>
+        </div>
+        <div class="content-card">
+          <h3>🌸 Second Trimester (Weeks 13–26)</h3>
+          <ul>
+            <li>Nausea usually eases — the "golden trimester"</li>
+            <li>Baby movements felt from around week 18–20</li>
+            <li>20-week anomaly scan checks all organs in detail</li>
+            <li>Gender can often be determined at the 20-week scan</li>
+            <li>Bump becomes clearly visible</li>
+          </ul>
+        </div>
+        <div class="content-card">
+          <h3>🎀 Third Trimester (Weeks 27–40)</h3>
+          <ul>
+            <li>Baby gains most of its weight in these weeks</li>
+            <li>Braxton Hicks contractions become more frequent</li>
+            <li>Sleep becomes more difficult — use a pregnancy pillow</li>
+            <li>Baby "drops" (engages into pelvis) around week 35–36</li>
+            <li>Weekly midwife checks from week 36</li>
+          </ul>
+        </div>
+        <div class="content-card">
+          <h3>📋 Key Antenatal Appointments</h3>
+          <ul>
+            <li><strong>Week 8–10:</strong> First midwife appointment (booking appointment)</li>
+            <li><strong>Week 12:</strong> Dating scan + blood tests</li>
+            <li><strong>Week 16:</strong> Midwife check + blood results</li>
+            <li><strong>Week 20:</strong> Anomaly scan</li>
+            <li><strong>Week 28:</strong> Blood tests + anti-D if Rh negative</li>
+            <li><strong>Week 34–36:</strong> Midwife checks, position check</li>
+            <li><strong>Week 38–40+:</strong> Weekly midwife checks</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ ── -->
+    <section class="faq-section" id="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div id="faqList"></div>
+    </section>
+
+  </div><!-- /container -->
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">GetPregnancyReady</div>
+        <p class="footer-desc">Free pregnancy tools for expectant parents. No sign-up. No data stored. Just answers.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="/">Pregnancy Week Tracker</a></li>
+          <li><a href="/#all-weeks">Week by Week Guide</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Info</h4>
+        <ul>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/terms.html">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-copy">
+      © 2026 GetPregnancyReady. For informational purposes only — not medical advice.
+      <span style="margin-left: 12px;">Also try: <a href="https://www.getniftyready.com">GetNiftyReady</a> · <a href="https://www.getatsready.com">GetATSReady</a></span>
+    </div>
+  </footer>
+
+  <script>
+  // ─────────────────────────────────────────────────────────
+  //  REAL PHOTO IMAGE SYSTEM — Wikipedia thumbnails via API
+  //  Falls back to OpenMoji SVG → native emoji
+  // ─────────────────────────────────────────────────────────
+
+  // Map week number → Wikipedia article title to query for a photo
+  const WEEK_WIKI = {
+    1:  'Fertilisation',       2:  'Zygote',
+    3:  'Blastocyst',          4:  'Poppy seed',
+    5:  'Sesame',              6:  'Pea',
+    7:  'Blueberry',           8:  'Raspberry',
+    9:  'Grape',               10: 'Strawberry',
+    11: 'Lime (fruit)',        12: 'Plum',
+    13: 'Peach',               14: 'Lemon',
+    15: 'Apple',               16: 'Avocado',
+    17: 'Pear',                18: 'Bell pepper',
+    19: 'Mango',               20: 'Banana',
+    21: 'Carrot',              22: 'Papaya',
+    23: 'Grapefruit',          24: 'Sweet corn',
+    25: 'Turnip',              26: 'Lettuce',
+    27: 'Cauliflower',         28: 'Eggplant',
+    29: 'Cucumber',            30: 'Cabbage',
+    31: 'Coconut',             32: 'Potato',
+    33: 'Pineapple',           34: 'Cantaloupe',
+    35: 'Honeydew (melon)',    36: 'Romaine lettuce',
+    37: 'Leek',                38: 'Leek',
+    39: 'Watermelon',          40: 'Pumpkin',
+    41: 'Pumpkin',             42: 'Pumpkin'
+  };
+
+  // Cache: week number → confirmed thumbnail URL (populated by loadWeekImages)
+  var WIKI_IMGS = {};
+  var _wikiLoaded = false;
+  var _wikiPending = []; // callbacks waiting for load to finish
+
+  function loadWeekImages() {
+    if (_wikiLoaded) return Promise.resolve();
+    return new Promise(function(resolve) {
+      _wikiPending.push(resolve);
+      if (_wikiPending.length > 1) return; // already in flight
+
+      // De-duplicate titles and build batch query (Wikipedia supports up to 50 titles with |)
+      var uniqueTitles = [];
+      var seen = {};
+      Object.values(WEEK_WIKI).forEach(function(t) {
+        if (!seen[t]) { seen[t] = true; uniqueTitles.push(t); }
+      });
+
+      var url = 'https://en.wikipedia.org/w/api.php?action=query&titles=' +
+        uniqueTitles.map(encodeURIComponent).join('|') +
+        '&prop=pageimages&piprop=thumbnail&pithumbsize=200&format=json&origin=*';
+
+      fetch(url)
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          // Build title → img URL map (normalised titles may differ from query)
+          var titleMap = {};
+          var pages = data.query.pages;
+          // Handle normalisation redirects
+          var norm = {};
+          if (data.query.normalized) {
+            data.query.normalized.forEach(function(n) { norm[n.from] = n.to; });
+          }
+          if (data.query.redirects) {
+            data.query.redirects.forEach(function(rd) { norm[rd.from] = rd.to; });
+          }
+          Object.values(pages).forEach(function(pg) {
+            if (pg.thumbnail) titleMap[pg.title] = pg.thumbnail.source;
+          });
+
+          // Populate WIKI_IMGS by week
+          Object.keys(WEEK_WIKI).forEach(function(wk) {
+            var rawTitle = WEEK_WIKI[wk];
+            var resolvedTitle = norm[rawTitle] || rawTitle;
+            if (titleMap[resolvedTitle]) {
+              WIKI_IMGS[wk] = titleMap[resolvedTitle];
+            } else if (titleMap[rawTitle]) {
+              WIKI_IMGS[wk] = titleMap[rawTitle];
+            }
+          });
+        })
+        .catch(function() { /* Silently fall back to emoji on network error */ })
+        .finally(function() {
+          _wikiLoaded = true;
+          _wikiPending.forEach(function(cb) { cb(); });
+          _wikiPending = [];
+        });
+    });
+  }
+
+  // Call once on page load so images are ready before user taps a week
+  loadWeekImages();
+
+  // Render a week's image: Wikipedia photo → OpenMoji SVG → native emoji fallback
+  function weekImg(wkNum, emoji) {
+    if (WIKI_IMGS[wkNum]) {
+      return '<img class="emoji-img" src="' + WIKI_IMGS[wkNum] + '" alt="Week ' + wkNum + ' size" loading="lazy" draggable="false" onerror="this.src=\'\';">';
+    }
+    // OpenMoji fallback
+    var points = [];
+    for (var i = 0; i < emoji.length; ) {
+      var code = emoji.codePointAt(i);
+      if (code !== 0xFE0F) points.push(code.toString(16).toUpperCase());
+      i += code > 0xFFFF ? 2 : 1;
+    }
+    var cp = points.join('-');
+    return '<img class="emoji-img" src="https://cdn.jsdelivr.net/npm/openmoji@14.0.0/color/svg/' + cp + '.svg" alt="' + emoji + '" loading="lazy" draggable="false" onerror="this.parentNode.innerHTML=\'<span style=font-size:3rem>\'+\'' + emoji + '\'+ \'</span>\'">';
+  }
+
+  // Keep tw() as legacy alias so nothing breaks
+  function tw(emoji) { return weekImg(0, emoji); }
+
+  // ─────────────────────────────────────────────────────────
+  //  WEEK DATA — 40 weeks of pregnancy
+  // ─────────────────────────────────────────────────────────
+  const WEEKS = [
+    { week: 1,  size: 'Not yet visible', size_mm: 0,   emoji: '✨', baby: "Week 1 is counted from the first day of your last period — fertilisation hasn't happened yet. Your body is releasing FSH to mature an egg.", mom: "Your period is ongoing. No pregnancy symptoms. Take 400mcg folic acid daily if you're trying to conceive.", tip: "Start folic acid before you conceive — it prevents neural tube defects in the first critical weeks of development." },
+    { week: 2,  size: 'Microscopic',     size_mm: 0,   emoji: '🔬', baby: "Ovulation occurs around day 14. A sperm and egg may unite to form a zygote — one cell carrying your baby's complete genetic blueprint.", mom: "Clear, stretchy cervical mucus signals your fertile window. Some women feel mild ovulation pain (mittelschmerz).", tip: "This is the most fertile window. For tracking, ovulation tests or a basal body thermometer can confirm your timing." },
+    { week: 3,  size: 'Pin head',        size_mm: 0.1, emoji: '📌', baby: "The fertilised egg divides rapidly as it travels down the fallopian tube, becoming a blastocyst. It begins implanting into the uterine lining.", mom: "Implantation may cause light spotting and mild cramping. The hormone hCG starts to rise — too low for most tests yet.", tip: "Wait until day 1 of your missed period for the most accurate home pregnancy test result." },
+    { week: 4,  size: 'Poppy seed',      size_mm: 1,   emoji: '🌺', baby: "The embryo is 1mm. The neural tube — which becomes the brain and spinal cord — begins forming. The placenta and amniotic sac are developing.", mom: "A pregnancy test will show positive now. You may feel bloated, fatigued, or have breast tenderness. Morning sickness hasn't usually started yet.", tip: "Book your first midwife or GP appointment now. Early booking ensures you're enrolled in antenatal care on time." },
+    { week: 5,  size: 'Sesame seed',     size_mm: 2,   emoji: '🌻', baby: "The heart begins to beat! The embryo develops three layers: the ectoderm (skin, brain), mesoderm (heart, muscles), and endoderm (lungs, gut).", mom: "Morning sickness often starts this week. Smell sensitivity is heightened. Fatigue can be overwhelming — your body is working incredibly hard.", tip: "Ginger tea, small frequent meals, and Sea-Band acupressure wristbands are well-evidenced for easing nausea." },
+    { week: 6,  size: 'Sweet pea',       size_mm: 5,   emoji: '🫘', baby: "Tiny arm and leg buds appear. The nose, eyes, and ears begin forming. The heart beats about 100–160 times per minute — often visible on early scan.", mom: "Nausea often peaks around week 6–8. Frequent urination increases as your kidneys work harder. First scan may be scheduled.", tip: "Stay hydrated even if nausea makes it hard. Ice chips, cold water, or sparkling water often go down more easily." },
+    { week: 7,  size: 'Blueberry',       size_mm: 8,   emoji: '🫐', baby: "Baby's brain grows by about 100 new cells per minute. Arm and leg buds develop into paddle-shaped hands and feet. Baby is now 10,000× larger than at conception.", mom: "Food aversions and cravings are common. Tender, heavy breasts are normal. You may feel more emotional than usual.", tip: "Keep a small snack on your bedside table — eating crackers before getting up can ease morning nausea." },
+    { week: 8,  size: 'Raspberry',       size_mm: 15,  emoji: '🍒', baby: "All major organs are forming. Webbed fingers and toes are visible. Baby moves but you won't feel it yet. Eyelids form to cover the eyes.", mom: "Pregnancy hormones are at their peak — this is often the hardest week for symptoms. Your uterus has doubled in size.", tip: "Start weekly bump photos from week 8 — even if you're not showing, the progression series is something you'll cherish forever." },
+    { week: 9,  size: 'Grape',           size_mm: 20,  emoji: '🟣', baby: "Baby is now officially a foetus, not an embryo. The embryonic tail disappears. Muscles and nerves connect, allowing tiny spontaneous movements.", mom: "Your waistband may feel tight. Mood swings are hormone-driven and completely normal. Many women tell close family this week.", tip: "Book your 12-week dating scan now — appointments fill up quickly at most hospitals." },
+    { week: 10, size: 'Strawberry',      size_mm: 30,  emoji: '🍓', baby: "Critical organ development is nearly complete. The heart, brain, lungs, and kidneys are all in place and beginning to function. Tiny fingernails form.", mom: "Nausea may start to ease slightly after week 10 for some women. Round ligament pain (sharp side aches) may begin.", tip: "Discuss NIPT (non-invasive prenatal testing) or nuchal scan screening with your midwife if you'd like it." },
+    { week: 11, size: 'Lime',            size_mm: 40,  emoji: '🍋', baby: "Baby is about 4cm. External genitalia are forming (too early to see gender). Hair follicles develop. Baby can hiccup, stretch, and suck its thumb.", mom: "Your uterus is the size of a grapefruit. Energy levels may begin to return as the first trimester draws to a close.", tip: "Start moisturising your belly daily with a pregnancy-safe oil or cream to support your skin as it stretches." },
+    { week: 12, size: 'Plum',            size_mm: 55,  emoji: '🫒', baby: "Major milestone: all vital organs are formed and functioning. Baby has reflexes — fingers close if touched. Risk of miscarriage drops significantly after today.", mom: "Your 12-week dating scan confirms your due date and checks for structural issues. Most couples choose to share their news publicly after this scan.", tip: "The nuchal translucency measurement at the 12-week scan screens for chromosomal conditions including Down's syndrome." },
+    { week: 13, size: 'Peach',           size_mm: 70,  emoji: '🍑', baby: "Welcome to the second trimester! Fingerprints are forming. Bones begin hardening. Baby can make facial expressions — frowns and squints are visible on scan.", mom: "Most women feel dramatically better from week 13. Energy returns, nausea fades, and the so-called 'pregnancy glow' often appears.", tip: "The second trimester is ideal for exercise — prenatal yoga, swimming, and walking are all excellent choices." },
+    { week: 14, size: 'Lemon',           size_mm: 85,  emoji: '🍋', baby: "Baby makes sucking movements. Fine hair called lanugo covers the body for warmth. The liver produces bile; the spleen produces red blood cells.", mom: "Round ligament pains may continue as your belly grows. Appetite often increases. Constipation and heartburn can begin now.", tip: "A pregnancy pillow can dramatically improve sleep quality. Invest in one now before you really need it in the third trimester." },
+    { week: 15, size: 'Apple',           size_mm: 100, emoji: '🍎', baby: "Taste buds form. Ears reach their final position — baby can now hear sounds from outside the womb. The skeleton is changing from cartilage to bone.", mom: "You may feel the first faint flutters of baby movement — often described as butterflies or gas bubbles. Nosebleeds and gum sensitivity are common.", tip: "Start talking and singing to your bump — baby can hear you now, and it supports early bonding." },
+    { week: 16, size: 'Avocado',         size_mm: 115, emoji: '🥑', size_in: 'Raw keri (green mango)', baby: "Baby holds its head up. Eyes can sense light. Baby constantly moves, swallows amniotic fluid, and practises breathing movements.", mom: "Your bump is clearly visible. Your 16-week midwife check includes blood pressure, urine test, and — most excitingly — listening to baby's heartbeat.", tip: "Now is a great time to buy maternity clothes. Your bump will grow rapidly from here and regular clothes will become very uncomfortable." },
+    { week: 17, size: 'Pear',            size_mm: 130, emoji: '🍐', baby: "Fat begins accumulating under baby's skin for insulation and energy. The umbilical cord thickens and strengthens. Heartbeat is about 140–150 bpm.", mom: "Baby movements should be more clearly felt this week. Your centre of gravity is shifting — you may feel slightly off-balance.", tip: "Pelvic floor exercises daily from now on — they prevent incontinence and significantly aid recovery after birth." },
+    { week: 18, size: 'Bell pepper',     size_mm: 140, emoji: '🫑', baby: "Baby is about 14cm. The nervous system develops rapidly. Baby yawns, stretches, and makes sucking motions. A covering called myelin begins insulating nerve fibres.", mom: "Your 20-week anomaly scan is typically booked now. Start thinking about your birth preferences and researching options.", tip: "Research maternity leave and benefits in your country now — the paperwork deadlines often come around earlier than you expect." },
+    { week: 19, size: 'Mango',           size_mm: 150, emoji: '🥭', size_in: 'Alphonso mango', baby: "Vernix caseosa — a creamy white coating — forms on baby's skin to protect it. Sensory development accelerates: touch, taste, smell, sight, and hearing all advancing.", mom: "Movements are stronger and more regular. Backache and sciatic nerve pain may start as posture changes under the weight of your bump.", tip: "A physiotherapist or prenatal massage therapist can help with pelvic girdle pain and backache — don't just endure it." },
+    { week: 20, size: 'Banana',          size_mm: 160, emoji: '🍌', baby: "Halfway there! Baby is now measured head to toe — about 25cm. In girls, the uterus has formed; in boys, the testes are descending. Baby can hear music.", mom: "The anomaly scan this week checks all major organs in detail. This is one of the most exciting appointments of pregnancy.", tip: "Start a baby registry now — you have time to research properly and won't be overwhelmed with a newborn yet." },
+    { week: 21, size: 'Carrot',          size_mm: 265, emoji: '🥕', baby: "Movements form a recognisable pattern — you'll start to learn your baby's active times. Rapid eye movements occur during sleep. Fingernails are fully formed.", mom: "Heartburn and indigestion may intensify as the uterus pushes against your stomach. Sleeping with your head elevated helps.", tip: "Shop for a maternity bra — your cup size will change significantly during pregnancy and nursing." },
+    { week: 22, size: 'Papaya',          size_mm: 275, emoji: '🍈', baby: "Baby weighs about 430g. Eyebrows and eyelashes have appeared. The sense of hearing is well developed — baby recognises your voice.", mom: "Braxton Hicks contractions (practice contractions) may begin — irregular, painless tightening. Ankle swelling can start.", tip: "Elevate your feet when sitting and stay well hydrated to reduce ankle swelling, which is very common from now on." },
+    { week: 23, size: 'Grapefruit',      size_mm: 285, emoji: '🍊', baby: "Baby has a real sleeping and waking cycle. The face is fully formed. Skin is still red and somewhat transparent as fat continues to accumulate underneath.", mom: "Your uterus is now above your belly button. Weight gain of 5–8kg by now is typical. Stretch marks may begin appearing.", tip: "Stretch mark creams (Bio-Oil, coconut oil, shea butter) applied twice daily can help — though genetics play a large role too." },
+    { week: 24, size: 'Corn',            size_mm: 295, emoji: '🌽', baby: "Baby reaches viability — a critical milestone. Born at 24 weeks, a baby has a chance of survival with intensive care. Lungs produce surfactant to work after birth.", mom: "Glucose tolerance test screens for gestational diabetes. Tiredness and more frequent Braxton Hicks contractions are common.", tip: "Know the signs of preterm labour: regular contractions, lower back pain, pelvic pressure, or unusual discharge. Call your midwife if concerned." },
+    { week: 25, size: 'Large turnip',    size_mm: 340, emoji: '🧅', size_in: 'Shalgam (turnip)', baby: "Baby responds to touch and sound consistently. Hair shows pigmentation. Hands are fully formed with well-developed fingerprints unique to your baby.", mom: "You may feel baby hiccuping — a rhythmic pulsing sensation. Carpal tunnel syndrome (wrist tingling) is common in pregnancy.", tip: "Write your birth plan now while you have time to research and discuss it calmly with your midwife." },
+    { week: 26, size: 'Lettuce head',    size_mm: 355, emoji: '🥬', size_in: 'Palak bunch (spinach)', baby: "Baby's eyes open for the first time. Brainwave activity begins — your baby may dream! The immune system is developing as antibodies transfer from you to baby.", mom: "The third trimester begins next week. Lower back pain and pelvic girdle pain can become more noticeable. Keep stretching and moving.", tip: "Book antenatal classes now — they fill up fast. NCT, NHS, and online options are all available." },
+    { week: 27, size: 'Cauliflower',     size_mm: 370, emoji: '🥦', baby: "Welcome to the third trimester! Baby weighs about 900g. Lungs are maturing but still need more time. Baby practises breathing by inhaling amniotic fluid.", mom: "Sleep becomes more challenging. A U-shaped pregnancy pillow will transform your sleep quality. Heartburn, leg cramps, and frequent urination intensify.", tip: "A good pregnancy pillow is the single best purchase for the third trimester. Invest in one this week — your sleep will thank you." },
+    { week: 28, size: 'Large aubergine', size_mm: 375, emoji: '🍆', baby: "Baby weighs about 1kg. Eyes are fully open and can detect light. The brain grows rapidly, developing the characteristic folds that increase surface area.", mom: "Your 28-week blood tests check for anaemia. You may start anti-D injections if you're Rh negative. Fetal movements should be monitored daily.", tip: "Count fetal movements daily from now — 10 movements in 2 hours is reassuring. Call your midwife if movements reduce significantly." },
+    { week: 29, size: 'Butternut squash',size_mm: 385, emoji: '🥒', size_in: 'Lauki (bottle gourd)', baby: "Baby weighs about 1.2kg. Muscles and lungs continue maturing. Fat accumulates rapidly. Baby's skin is less wrinkled as fat fills it out.", mom: "Shortness of breath increases as your uterus pushes against your diaphragm. Sleep on your left side to improve circulation.", tip: "Pack your hospital bag now — babies can arrive early. Include items for labour, delivery, and the postnatal ward." },
+    { week: 30, size: 'Cabbage',         size_mm: 395, emoji: '🟢', baby: "Baby can now regulate body temperature. Brain surface wrinkles are forming rapidly. The fine body hair (lanugo) begins to disappear.", mom: "You may feel breathless and very tired. Pelvic pressure increases. Baby's kicks and rolls are reassuring signs of good health.", tip: "Research infant CPR and first aid for babies — a short course before birth gives you confidence from day one." },
+    { week: 31, size: 'Coconut',         size_mm: 405, emoji: '🥥', baby: "Baby can turn its head. Five senses are almost fully developed. Brain growth is accelerating. Baby's pupils react to light now.", mom: "Braxton Hicks contractions are more frequent. Sleep is disrupted by discomfort, movements, and toilet trips. Rest whenever you can.", tip: "Arrange a tour of your hospital's maternity unit — being familiar with the space reduces anxiety during labour." },
+    { week: 32, size: 'Large turnip',    size_mm: 420, emoji: '🥔', size_in: 'Shalgam (turnip)', baby: "Baby weighs about 1.8kg. Survival rate if born now is over 95% with good neonatal care. Baby often moves into the head-down position this week.", mom: "You're gaining about 500g per week now. Swelling of feet and ankles is common. Report sudden severe swelling to your midwife immediately.", tip: "Discuss pain relief options thoroughly with your midwife — understand epidurals, gas and air, TENS machines, and water birth." },
+    { week: 33, size: 'Pineapple',       size_mm: 430, emoji: '🍍', baby: "Baby's skull is hardening but remains soft enough to compress for birth. The immune system strengthens. Baby practises sucking and swallowing continuously.", mom: "Pelvic pressure intensifies as baby engages. You may notice colostrum (first milk) leaking from your nipples — this is completely normal.", tip: "Buy nursing pads now — you'll need them postpartum whether or not you plan to breastfeed, as colostrum may leak." },
+    { week: 34, size: 'Cantaloupe',      size_mm: 450, emoji: '🥝', size_in: 'Kharbooja (musk melon)', baby: "Baby's nails reach the fingertips. The central nervous system and lungs are almost fully mature. Baby is usually in a head-down position by now.", mom: "Your midwife will check baby's position at your 34-week appointment. Heartburn, backache, and tiredness are very common now.", tip: "Freeze meals for the first weeks after birth now while you have the energy — cooking with a newborn is extremely difficult." },
+    { week: 35, size: 'Honeydew melon',  size_mm: 460, emoji: '🍏', size_in: 'Kharbooja (musk melon)', baby: "Baby weighs about 2.4kg. Most development is complete — the next weeks are mainly about weight gain and final lung maturation.", mom: "Monitor movements carefully — they should remain regular. Contact your midwife if you notice a significant reduction in movement.", tip: "Prepare your postpartum recovery kit: maternity pads, comfortable underwear, pain relief, witch hazel, and hospital-bag snacks." },
+    { week: 36, size: 'Romaine lettuce', size_mm: 470, emoji: '🌿', size_in: 'Bunch of palak leaves', baby: "Baby weighs about 2.7kg and gains 28g per day. Cheeks are chubby from fat deposits. Sucking muscles are strong and ready for feeding.", mom: "Baby may 'drop' (engage into the pelvis) this week — you'll breathe more easily but feel more pelvic pressure and urgency to urinate.", tip: "Register on your hospital's patient portal now and download any maternity apps they recommend for monitoring movements." },
+    { week: 37, size: 'Bunch of greens', size_mm: 480, emoji: '🌱', size_in: 'Bunch of methi (fenugreek)', baby: "Baby is early term. Lungs are mature. Baby practises all skills for birth: sucking, swallowing, gripping, and breathing movements.", mom: "You may notice the mucus plug passing ('bloody show') — a sign labour is approaching in the coming days or weeks.", tip: "Know the difference between Braxton Hicks and real labour: real contractions become longer, stronger, and closer together over time." },
+    { week: 38, size: 'Leek',            size_mm: 490, emoji: '🪴', baby: "Baby is full term. All organs function. Baby continues gaining fat. Vernix and lanugo shed and are swallowed into the amniotic fluid.", mom: "The nesting instinct often kicks in strongly. Irregular contractions and backache may signal that labour is not far away.", tip: "Double-check your hospital bag is packed. Make sure your birth partner knows the route, where to park, and which entrance to use." },
+    { week: 39, size: 'Mini watermelon',  size_mm: 500, emoji: '🍉', baby: "Baby is 50cm and weighs about 3.3kg. The brain and lungs benefit enormously from every extra day inside the womb at this stage.", mom: "You may feel every day is the day! Watch for: contractions 5 minutes apart for 1 hour, waters breaking, or strong bloody show.", tip: "Prepare mentally for birth — hypnobirthing, breathing techniques, and visualisation are all clinically evidenced to help manage labour." },
+    { week: 40, size: 'Small pumpkin',   size_mm: 510, emoji: '🌕', size_in: 'Kaddu (Indian pumpkin)', baby: "This is your due date week! Baby is around 51cm and 3.4kg on average. Only about 5% of babies are born on their exact due date.", mom: "If labour hasn't started, your midwife will discuss membrane sweep or induction. Most babies arrive within 2 weeks of their due date.", tip: "Rest. Trust your body. You are ready. However labour starts — you've got this." },
+    { week: 41, size: 'Pumpkin',         size_mm: 515, emoji: '🎃', baby: "Baby continues to grow. Placental function is monitored closely. Baby is considered overdue (post-term) this week.", mom: "Induction is typically offered between 41 and 42 weeks. CTG monitoring checks baby's heart rate and movements regularly.", tip: "Induction is a safe, well-evidenced option. Discuss it with your care team — it significantly reduces risk beyond 42 weeks." },
+    { week: 42, size: 'Large pumpkin',   size_mm: 520, emoji: '🎃', baby: "At 42 weeks most hospitals strongly recommend induction. Placental function naturally decreases after 42 weeks, so timing is important.", mom: "You are post-term. Induction should be arranged. Amniotic fluid levels and placental function are closely monitored.", tip: "Discuss all options with your care team. You are so close to meeting your baby — and they will be here very soon." }
+  ];
+
+  // ─────────────────────────────────────────────────────────
+  //  PRODUCT RECOMMENDATIONS BY TRIMESTER
+  //  Replace href values with your actual Amazon affiliate links
+  // ─────────────────────────────────────────────────────────
+  const PRODUCTS = {
+    t1: [
+      { icon: '💊', name: 'Prenatal Vitamins', why: 'Folic acid + iron + DHA for early development', href: 'https://www.amazon.co.uk/s?k=prenatal+vitamins&tag=REPLACE-ME' },
+      { icon: '🌊', name: 'Sea-Band Wristbands', why: 'Drug-free acupressure relief for morning sickness', href: 'https://www.amazon.co.uk/s?k=sea+band+pregnancy&tag=REPLACE-ME' },
+      { icon: '📖', name: '"What to Expect When You\'re Expecting"', why: 'The most trusted pregnancy guide — covers every week', href: 'https://www.amazon.co.uk/s?k=what+to+expect+when+expecting&tag=REPLACE-ME' },
+      { icon: '🫚', name: 'Pregnancy-Safe Body Oil', why: 'Start early to moisturise skin as it begins to stretch', href: 'https://www.amazon.co.uk/s?k=bio+oil+pregnancy&tag=REPLACE-ME' }
+    ],
+    t2: [
+      { icon: '🛏️', name: 'U-Shaped Pregnancy Pillow', why: 'The most impactful purchase for sleep comfort in pregnancy', href: 'https://www.amazon.co.uk/s?k=pregnancy+pillow+u+shaped&tag=REPLACE-ME' },
+      { icon: '👗', name: 'Maternity Leggings & Tops', why: 'Comfortable, bump-accommodating staples for everyday wear', href: 'https://www.amazon.co.uk/s?k=maternity+clothes&tag=REPLACE-ME' },
+      { icon: '🧴', name: 'Stretch Mark Cream', why: 'Shea butter and vitamin E to support skin elasticity', href: 'https://www.amazon.co.uk/s?k=stretch+mark+cream+pregnancy&tag=REPLACE-ME' },
+      { icon: '👶', name: 'Baby Names Book', why: 'Start the name conversation early — it takes longer than you think!', href: 'https://www.amazon.co.uk/s?k=baby+names+book&tag=REPLACE-ME' }
+    ],
+    t3: [
+      { icon: '🎒', name: 'Hospital Bag Kit', why: 'Everything you need for labour, delivery, and the postnatal ward', href: 'https://www.amazon.co.uk/s?k=hospital+bag+pregnancy+kit&tag=REPLACE-ME' },
+      { icon: '📹', name: 'Baby Monitor (Video)', why: 'Peace of mind from day one — video + audio + breathing sensor', href: 'https://www.amazon.co.uk/s?k=baby+monitor+video&tag=REPLACE-ME' },
+      { icon: '🤱', name: 'Nursing Bra Set (3-pack)', why: 'Essential for postpartum — whether breastfeeding or not', href: 'https://www.amazon.co.uk/s?k=nursing+bra+set&tag=REPLACE-ME' },
+      { icon: '🍼', name: 'Muslin Swaddle Blankets', why: 'Swaddling calms newborns — you will go through 6+ per day', href: 'https://www.amazon.co.uk/s?k=muslin+swaddle+blankets&tag=REPLACE-ME' }
+    ]
+  };
+
+  // ─────────────────────────────────────────────────────────
+  //  FAQ DATA
+  // ─────────────────────────────────────────────────────────
+  const FAQS = [
+    { q: 'How is my pregnancy due date calculated?', a: 'Your estimated due date (EDD) is calculated as 280 days (40 weeks) from the first day of your last menstrual period (LMP). This is called Naegele\'s rule. The calculation assumes a 28-day cycle — if your cycle is longer or shorter, your actual due date may differ slightly. Your 12-week dating scan gives a more accurate estimate based on baby\'s actual measurements.' },
+    { q: 'Why does pregnancy start from the last period, not conception?', a: 'Doctors and midwives count pregnancy from the LMP because it\'s a known, consistent date — the exact moment of ovulation and conception varies and can\'t be pinpointed. So when your period is one week late, you\'re technically already 5 weeks pregnant (2 weeks before ovulation + 3 weeks since). It\'s a convention, not biology.' },
+    { q: 'How accurate is this due date calculator?', a: 'This calculator uses the standard obstetric formula (Naegele\'s rule). However, due dates are estimates — only about 5% of babies arrive on their exact due date. Most are born within 2 weeks before or after. Your 12-week dating scan, which measures your baby\'s crown-rump length, gives a more accurate estimate and supersedes the LMP calculation if there\'s a significant difference.' },
+    { q: 'When should I tell people I\'m pregnant?', a: 'Most couples choose to wait until after the 12-week scan before sharing widely, as the risk of miscarriage drops significantly after this point. However, there is no "right time" — some people share immediately with close family, others wait until the second trimester or beyond. Trust your instincts about what\'s right for you.' },
+    { q: 'What is the difference between a trimester and a gestational week?', a: 'A gestational week is simply one of the 40 weeks of pregnancy. Trimesters divide pregnancy into three roughly equal phases: First trimester (weeks 1–12), Second trimester (weeks 13–26), and Third trimester (weeks 27–40). Each trimester has distinct developmental milestones and different challenges for the mother.' },
+    { q: 'When will I feel my baby move for the first time?', a: 'First movements (called quickening) are typically felt between weeks 16 and 20. First-time mothers often feel them later (around week 20) as they may not recognise the sensation at first. Women who have been pregnant before often recognise the flutter-like movements sooner. From around week 28, your midwife will ask you to monitor movements daily.' },
+    { q: 'Is this tool safe to use? Does it store my data?', a: 'All calculations happen entirely in your browser — no data is sent to any server. We do not store your dates, results, or any personal information. This tool respects your privacy completely. The URL sharing feature only works if you choose to copy and share it; we do not record who visits or what dates they enter.' }
+  ];
+
+  // ─────────────────────────────────────────────────────────
+  //  STATE
+  // ─────────────────────────────────────────────────────────
+  var currentMode = 'lmp';
+  var currentResult = null;
+
+  // ─────────────────────────────────────────────────────────
+  //  INIT
+  // ─────────────────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', function() {
+    // Set max date for LMP input to today
+    var today = new Date();
+    var maxLMP = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000); // at least 1 week ago
+    document.getElementById('lmpDate').max = formatDateInput(today);
+    document.getElementById('dueDate').min = formatDateInput(today);
+    document.getElementById('dueDate').max = formatDateInput(new Date(today.getTime() + 308 * 24 * 60 * 60 * 1000));
+
+    renderWeeksTimeline(null);
+    renderFAQ();
+
+    // Load from URL query params if present
+    var params = new URLSearchParams(window.location.search);
+    var lmpParam = params.get('lmp');
+    if (lmpParam) {
+      document.getElementById('lmpDate').value = lmpParam;
+      calculate();
+    }
+  });
+
+  // ─────────────────────────────────────────────────────────
+  //  MODE SWITCH
+  // ─────────────────────────────────────────────────────────
+  function switchMode(mode) {
+    currentMode = mode;
+    document.getElementById('lmpMode').style.display = mode === 'lmp' ? '' : 'none';
+    document.getElementById('dueMode').style.display = mode === 'due' ? '' : 'none';
+    document.getElementById('btnLMP').classList.toggle('active', mode === 'lmp');
+    document.getElementById('btnDD').classList.toggle('active', mode === 'due');
+  }
+
+  // ─────────────────────────────────────────────────────────
+  //  CALCULATE
+  // ─────────────────────────────────────────────────────────
+  function calculate() {
+    var lmpDate;
+    var cycleLen = parseInt(document.getElementById('cycleLen').value) || 28;
+    var today = new Date(); today.setHours(0,0,0,0);
+
+    if (currentMode === 'lmp') {
+      var lmpVal = document.getElementById('lmpDate').value;
+      if (!lmpVal) { alert('Please enter the first day of your last period.'); return; }
+      lmpDate = new Date(lmpVal + 'T00:00:00');
+    } else {
+      var dueDateVal = document.getElementById('dueDate').value;
+      if (!dueDateVal) { alert('Please enter your due date.'); return; }
+      var dueDate = new Date(dueDateVal + 'T00:00:00');
+      // LMP = dueDate - 280 days (adjusted for cycle length deviation)
+      lmpDate = new Date(dueDate.getTime() - (280 + (cycleLen - 28)) * 24 * 60 * 60 * 1000);
+    }
+
+    if (lmpDate > today) { alert('The first day of your last period cannot be in the future.'); return; }
+
+    // Cycle-length adjusted ovulation offset
+    var ovulationOffset = cycleLen - 14;
+    var conceptualLMP = new Date(lmpDate.getTime() - ovulationOffset * 24 * 60 * 60 * 1000 + ovulationOffset * 24 * 60 * 60 * 1000);
+    // Due date: LMP + 280 days (standard), adjusted for cycle
+    var adjustedDays = 280 + (cycleLen - 28);
+    var dueDate = new Date(lmpDate.getTime() + adjustedDays * 24 * 60 * 60 * 1000);
+
+    var daysSinceLMP = Math.floor((today - lmpDate) / (24 * 60 * 60 * 1000));
+    var weekNum = Math.floor(daysSinceLMP / 7);
+    var daysExtra = daysSinceLMP % 7;
+
+    if (weekNum < 0) { alert('Your last period date appears to be in the future. Please check the date.'); return; }
+    if (weekNum > 45) { alert('The date you entered is more than 45 weeks ago. Please check it.'); return; }
+
+    var daysUntilDue = Math.ceil((dueDate - today) / (24 * 60 * 60 * 1000));
+    var trimester = weekNum <= 12 ? 1 : weekNum <= 26 ? 2 : 3;
+    var progress = Math.min((daysSinceLMP / 280) * 100, 100);
+
+    currentResult = { weekNum, daysExtra, dueDate, daysUntilDue, trimester, progress, lmpDate };
+
+    // Update URL for shareability (no page reload)
+    var url = new URL(window.location.href);
+    url.searchParams.set('lmp', formatDateInput(lmpDate));
+    window.history.replaceState(null, '', url.toString());
+
+    renderResult(currentResult);
+    renderWeeksTimeline(weekNum);
+
+    var rp = document.getElementById('resultPanel');
+    rp.style.display = 'block';
+    rp.classList.remove('reveal');
+    void rp.offsetWidth; // force reflow so animation replays on recalculate
+    rp.classList.add('reveal');
+    document.querySelector('.btn-calc').textContent = 'Update My Week →';
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        rp.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  }
+
+  // ─────────────────────────────────────────────────────────
+  //  MILESTONE HELPER
+  // ─────────────────────────────────────────────────────────
+  function getMilestone(w) {
+    if (w === 4)               return { icon: '🎉', title: 'Positive test!', sub: 'Congratulations — your journey has officially begun! Start folic acid 400mcg daily if you haven\'t already.' };
+    if (w === 6)               return { icon: '💓', title: 'Baby\'s heart is beating!', sub: 'A tiny heartbeat of 100–160 bpm has formed. You may see it flickering on an early scan this week.' };
+    if (w === 8)               return { icon: '🌱', title: 'All major organs are forming!', sub: 'This is one of the most critical development weeks. Heart, brain, liver, and kidneys are all being built.' };
+    if (w === 12)              return { icon: '🌟', title: 'Dating scan week!', sub: 'The 12-week scan confirms your due date and checks for chromosomal conditions. Miscarriage risk drops sharply after this point.' };
+    if (w === 13)              return { icon: '🌸', title: 'Second trimester — you made it!', sub: 'The worst of the symptoms are usually behind you now. Energy returns, nausea fades, and your bump begins to show.' };
+    if (w === 20)              return { icon: '🎊', title: 'Halfway there!', sub: 'Exactly halfway through your pregnancy! Your 20-week anatomy scan checks every organ in detail — and you may find out the sex.' };
+    if (w === 27)              return { icon: '👶', title: 'Third trimester begins!', sub: 'Baby is gaining weight rapidly now. You can feel strong movements every day. Start preparing your hospital bag.' };
+    if (w >= 37 && w < 40)    return { icon: '🎀', title: 'Full term!', sub: 'Baby is fully developed and ready to arrive any day. Pack your hospital bag, install the car seat, and rest!' };
+    if (w === 40)              return { icon: '✨', title: 'Due date week!', sub: 'Your estimated due date is this week. Only 5% of babies arrive exactly on time — stay calm and trust your body.' };
+    if (w > 40)                return { icon: '🤗', title: 'Baby is taking their time!', sub: 'Completely normal — babies often arrive up to 2 weeks after their due date. Your midwife will monitor you closely.' };
+    return null;
+  }
+
+  // ─────────────────────────────────────────────────────────
+  //  SHARE RESULT
+  // ─────────────────────────────────────────────────────────
+  function shareResult() {
+    if (!currentResult) return;
+    var wk  = currentResult.weekNum;
+    var due = formatDisplayDate(currentResult.dueDate);
+    var txt = 'I\'m ' + wk + ' weeks pregnant! 🌸\nMy due date is ' + due + '\nFind out your pregnancy week free: https://www.getpregnancyready.com';
+    var btn = document.getElementById('shareBtn');
+    if (navigator.share) {
+      navigator.share({ title: 'My Pregnancy Week', text: txt }).catch(function() {});
+    } else {
+      var svgIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>';
+      navigator.clipboard.writeText(txt).then(function() {
+        btn.innerHTML = '✓ Copied to clipboard!';
+        setTimeout(function() { btn.innerHTML = svgIcon + ' Share Your News'; }, 2500);
+      }).catch(function() { prompt('Copy this to share:', txt); });
+    }
+  }
+
+  // ─────────────────────────────────────────────────────────
+  //  RENDER RESULT
+  // ─────────────────────────────────────────────────────────
+  function renderResult(r) {
+    var weekData = WEEKS.find(function(w) { return w.week === r.weekNum; }) || WEEKS[WEEKS.length - 1];
+    var trimLabel = ['First', 'Second', 'Third'][r.trimester - 1] + ' Trimester';
+    var daysStr = r.daysUntilDue >= 0 ? r.daysUntilDue + ' days to go' : Math.abs(r.daysUntilDue) + ' days overdue';
+
+    // ── Celebratory headline ──────────────────────────────
+    var weekWord = r.weekNum + ' week' + (r.weekNum === 1 ? '' : 's');
+    var sizeNote = weekData.size_mm > 0 ? ' — about ' + (weekData.size_mm >= 10 ? (weekData.size_mm / 10).toFixed(1) + ' cm' : weekData.size_mm + ' mm') + ' long' : '';
+    var dueNote  = r.daysUntilDue >= 0
+      ? 'Due date: ' + formatDisplayDate(r.dueDate) + ' &nbsp;·&nbsp; ' + r.daysUntilDue + ' days to go'
+      : formatDisplayDate(r.dueDate) + ' &nbsp;·&nbsp; ' + Math.abs(r.daysUntilDue) + ' days past your due date';
+    document.getElementById('resultHeadline').innerHTML =
+      '<div class="rh-week">You\'re ' + weekWord + ' pregnant! 🌸</div>' +
+      '<div class="rh-baby">Baby is the size of a <strong>' + weekData.size.toLowerCase() + '</strong>' + sizeNote + '</div>' +
+      '<div class="rh-sub">' + dueNote + '</div>';
+
+    // ── Milestone banner ──────────────────────────────────
+    var ms = getMilestone(r.weekNum);
+    var msBanner = document.getElementById('milestoneBanner');
+    if (ms) {
+      msBanner.innerHTML = '<span class="ms-icon">' + ms.icon + '</span><div class="ms-title">' + ms.title + '</div><div class="ms-sub">' + ms.sub + '</div>';
+      msBanner.style.display = 'block';
+    } else {
+      msBanner.style.display = 'none';
+    }
+
+    // ── Show share row ────────────────────────────────────
+    document.getElementById('shareRow').style.display = 'flex';
+
+    // Stats grid
+    document.getElementById('statGrid').innerHTML = [
+      '<div class="result-stat"><div class="stat-value">Week ' + r.weekNum + '</div><div class="stat-label">Pregnancy Week</div><div class="stat-sub">' + r.daysExtra + ' day' + (r.daysExtra !== 1 ? 's' : '') + ' into this week</div></div>',
+      '<div class="result-stat"><div class="stat-value">' + formatDisplayDate(r.dueDate) + '</div><div class="stat-label">Due Date (EDD)</div><div class="stat-sub">' + daysStr + '</div></div>',
+      '<div class="result-stat"><div class="stat-value">' + trimLabel.split(' ')[0] + '</div><div class="stat-label">Trimester</div><div class="stat-sub">Weeks ' + (r.trimester === 1 ? '1–12' : r.trimester === 2 ? '13–26' : '27–40') + '</div></div>'
+    ].join('');
+
+    // Trimester bar
+    var t1W = r.trimester === 1 ? 'font-weight:700;color:var(--primary)' : '';
+    var t2W = r.trimester === 2 ? 'font-weight:700;color:var(--primary)' : '';
+    var t3W = r.trimester === 3 ? 'font-weight:700;color:var(--primary)' : '';
+    document.getElementById('trimBar').innerHTML =
+      '<div class="trimester-labels"><span style="' + t1W + '">1st Trimester</span><span style="' + t2W + '">2nd Trimester</span><span style="' + t3W + '">3rd Trimester</span></div>' +
+      '<div class="progress-track"><div class="progress-fill" style="width:' + r.progress.toFixed(1) + '%"></div></div>' +
+      '<div class="trimester-dividers"><span class="tri-div">Week 1</span><span class="tri-div">Week 13</span><span class="tri-div">Week 27</span><span class="tri-div">Week 40</span></div>';
+
+    // Week detail card
+    document.getElementById('weekCard').innerHTML =
+      '<div class="week-card-header">' +
+        '<div class="week-emoji">' + weekImg(r.weekNum, weekData.emoji) + '</div>' +
+        '<div class="week-title-wrap">' +
+          '<div class="week-number">Week ' + r.weekNum + ' of 40</div>' +
+          '<div class="week-size">' + weekData.size + '</div>' +
+          '<div class="week-size-sub">Baby\'s approximate size this week</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="week-card-body">' +
+        '<div class="week-sections">' +
+          '<div class="week-section"><h3><span>👶</span> Baby\'s Development</h3><p>' + weekData.baby + '</p></div>' +
+          '<div class="week-section"><h3><span>🤰</span> What You May Feel</h3><p>' + weekData.mom + '</p></div>' +
+        '</div>' +
+        '<div class="week-tip"><span>💡</span><span><strong>This week\'s tip:</strong> ' + weekData.tip + '</span></div>' +
+      '</div>';
+
+    // Products
+    var prodKey = r.trimester === 1 ? 't1' : r.trimester === 2 ? 't2' : 't3';
+    var prodLabel = trimLabel;
+    var products = PRODUCTS[prodKey];
+    document.getElementById('productsSection').innerHTML =
+      '<h2>Recommended for Your ' + prodLabel + ' <span class="affiliate-badge">Affiliate</span></h2>' +
+      '<p class="products-sub">Curated products for where you are in your pregnancy. Affiliate links — clicking and purchasing supports this free tool at no extra cost to you.</p>' +
+      '<div class="products-grid">' +
+      products.map(function(p) {
+        return '<a class="product-card" href="' + p.href + '" target="_blank" rel="noopener noreferrer">' +
+          '<div class="product-icon">' + p.icon + '</div>' +
+          '<div><div class="product-name">' + p.name + '</div><div class="product-why">' + p.why + '</div></div>' +
+          '</a>';
+      }).join('') +
+      '</div>';
+  }
+
+  // ─────────────────────────────────────────────────────────
+  //  RENDER WEEKS TIMELINE
+  // ─────────────────────────────────────────────────────────
+  function renderWeeksTimeline(currentWeek) {
+    var trimesters = [
+      { label: 'First Trimester', range: [1, 12] },
+      { label: 'Second Trimester', range: [13, 26] },
+      { label: 'Third Trimester', range: [27, 42] }
+    ];
+    var html = '';
+    trimesters.forEach(function(tri) {
+      html += '<div class="tri-group">';
+      html += '<div class="tri-group-title"><span class="tri-badge">' + tri.label + '</span> Weeks ' + tri.range[0] + '–' + tri.range[1] + '</div>';
+      html += '<div class="weeks-grid">';
+      for (var w = tri.range[0]; w <= tri.range[1]; w++) {
+        var wd = WEEKS.find(function(x) { return x.week === w; });
+        if (!wd) continue;
+        var isCurrent = currentWeek !== null && w === currentWeek;
+        html += '<div class="week-chip' + (isCurrent ? ' current' : '') + '" data-week="' + w + '" onclick="showWeekDetail(' + w + ')">' +
+          '<div class="week-chip-num">Week ' + w + (isCurrent ? ' ◀ You' : '') + '</div>' +
+          '<div class="week-chip-emoji">' + weekImg(w, wd.emoji) + '</div>' +
+          '<div class="week-chip-size">' + wd.size + '</div>' +
+          '</div>';
+      }
+      html += '</div></div>';
+    });
+    document.getElementById('weeksTimeline').innerHTML = html;
+  }
+
+  function showWeekDetail(weekNum) {
+    var wd = WEEKS.find(function(w) { return w.week === weekNum; });
+    if (!wd) return;
+
+    // Highlight the tapped chip, clear previous highlight
+    document.querySelectorAll('.week-chip').forEach(function(c) { c.classList.remove('active-detail'); });
+    var chip = document.querySelector('.week-chip[data-week="' + weekNum + '"]');
+    if (chip) chip.classList.add('active-detail');
+
+    var indiaNote = wd.size_in
+      ? '<div style="font-size:0.78rem;background:var(--accent-light);border-radius:8px;padding:8px 12px;margin-top:12px;border-left:3px solid var(--accent)">🇮🇳 Indian size equivalent: <strong>' + wd.size_in + '</strong></div>'
+      : '';
+
+    var detailSection = document.getElementById('weekDetailSection');
+    detailSection.innerHTML =
+      '<div class="week-card" style="margin-bottom:0">' +
+        '<div class="week-card-header">' +
+          '<div class="week-emoji">' + weekImg(weekNum, wd.emoji) + '</div>' +
+          '<div class="week-title-wrap">' +
+            '<div class="week-number">Week ' + weekNum + ' of 40</div>' +
+            '<div class="week-size">' + wd.size + '</div>' +
+            '<div class="week-size-sub">' + (wd.size_mm > 0 ? 'Approx. ' + wd.size_mm + ' mm long' : 'Microscopic — not yet visible') + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="week-card-body">' +
+          '<div class="week-sections">' +
+            '<div class="week-section"><h3><span>👶</span> Baby\'s Development</h3><p>' + wd.baby + '</p></div>' +
+            '<div class="week-section"><h3><span>🤰</span> What You May Feel</h3><p>' + wd.mom + '</p></div>' +
+          '</div>' +
+          indiaNote +
+          '<div class="week-tip"><span>💡</span><span><strong>This week\'s tip:</strong> ' + wd.tip + '</span></div>' +
+        '</div>' +
+      '</div>';
+
+    detailSection.classList.add('visible');
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        detailSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  }
+
+  // ─────────────────────────────────────────────────────────
+  //  RENDER FAQ
+  // ─────────────────────────────────────────────────────────
+  function renderFAQ() {
+    document.getElementById('faqList').innerHTML = FAQS.map(function(f, i) {
+      return '<div class="faq-item">' +
+        '<div class="faq-q" id="fq' + i + '" onclick="toggleFAQ(' + i + ')">' +
+          '<span>' + f.q + '</span>' +
+          '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>' +
+        '</div>' +
+        '<div class="faq-a" id="fa' + i + '">' + f.a + '</div>' +
+        '</div>';
+    }).join('');
+  }
+
+  function toggleFAQ(i) {
+    var q = document.getElementById('fq' + i);
+    var a = document.getElementById('fa' + i);
+    q.classList.toggle('open');
+    a.classList.toggle('open');
+  }
+
+  // ─────────────────────────────────────────────────────────
+  //  GENDER PREDICTION
+  // ─────────────────────────────────────────────────────────
+  function selectGenderOpt(el) {
+    var group = el.dataset.group;
+    document.querySelectorAll('.gender-opt[data-group="' + group + '"]').forEach(function(o) {
+      o.classList.remove('selected');
+    });
+    el.classList.add('selected');
+  }
+
+  function predictGender() {
+    var votes = { boy: 0, girl: 0 };
+    var details = [];
+
+    // Heart rate
+    var bpm = parseInt(document.getElementById('gBpm').value);
+    if (!isNaN(bpm) && bpm >= 100 && bpm <= 200) {
+      if (bpm > 140)      { votes.girl++; details.push('Heart rate ' + bpm + ' bpm → Girl'); }
+      else if (bpm < 140) { votes.boy++;  details.push('Heart rate ' + bpm + ' bpm → Boy'); }
+    }
+
+    // Option groups
+    var groupNames = { bump: 'Bump shape', sick: 'Morning sickness', crav: 'Cravings', skin: 'Skin' };
+    ['bump', 'sick', 'crav', 'skin'].forEach(function(g) {
+      var sel = document.querySelector('.gender-opt[data-group="' + g + '"].selected');
+      if (sel && sel.dataset.val !== 'skip') {
+        votes[sel.dataset.val]++;
+        details.push(groupNames[g] + ' → ' + (sel.dataset.val === 'girl' ? 'Girl' : 'Boy'));
+      }
+    });
+
+    // Chinese calendar — lunar age + month formula
+    var age   = parseInt(document.getElementById('gAge').value);
+    var month = parseInt(document.getElementById('gMonth').value);
+    if (!isNaN(age) && !isNaN(month) && age >= 18 && month >= 1 && month <= 12) {
+      var lunarAge  = age + 1; // traditional Chinese calendar adds 1 year
+      var chResult  = ((lunarAge + month) % 2 === 0) ? 'girl' : 'boy';
+      votes[chResult]++;
+      details.push('Chinese calendar → ' + (chResult === 'girl' ? 'Girl' : 'Boy'));
+    }
+
+    var total   = votes.boy + votes.girl;
+    var resultEl = document.getElementById('genderResult');
+    resultEl.style.display = '';
+
+    if (total === 0) {
+      resultEl.innerHTML = '<p style="color:var(--text-muted);font-size:0.9rem">Please answer at least one question above to see a prediction.</p>';
+      return;
+    }
+
+    var girlPct = Math.round((votes.girl / total) * 100);
+    var boyPct  = 100 - girlPct;
+    var verdict = votes.girl > votes.boy ? 'girl' : votes.boy > votes.girl ? 'boy' : 'tie';
+
+    var html = '';
+    if (verdict === 'tie') {
+      html += '<div class="gender-verdict tie">🤷 Perfectly Tied!</div>';
+      html += '<p style="font-size:0.875rem;color:var(--text-muted);margin:8px 0">The signs are equally split. Try answering more questions.</p>';
+    } else {
+      html += '<div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:4px">The old wives\' tales say…</div>';
+      html += '<div class="gender-verdict ' + verdict + '">' + (verdict === 'girl' ? '👧 Girl' : '👦 Boy') + '</div>';
+    }
+
+    html += '<div class="gender-meter-track">'
+          + '<div class="gender-meter-boy"  style="width:' + boyPct  + '%"></div>'
+          + '<div class="gender-meter-girl" style="width:' + girlPct + '%"></div>'
+          + '</div>';
+    html += '<div class="gender-breakdown">👦 Boy signals: ' + boyPct + '% &nbsp;·&nbsp; 👧 Girl signals: ' + girlPct + '%</div>';
+    if (details.length) {
+      html += '<div class="gender-methods">Based on: ' + details.join(' · ') + '</div>';
+    }
+    html += '<div class="gender-fun-note">These methods have no scientific basis and are no more accurate than guessing. Your 20-week anatomy scan (or NIPT/Harmony test) is the only reliable way to find out — where legally permitted.</div>';
+
+    resultEl.innerHTML = html;
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    });
+  }
+
+  // ─────────────────────────────────────────────────────────
+  //  UTILITIES
+  // ─────────────────────────────────────────────────────────
+  function formatDateInput(d) {
+    var y = d.getFullYear();
+    var m = String(d.getMonth() + 1).padStart(2, '0');
+    var day = String(d.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + day;
+  }
+
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function formatDisplayDate(d) {
+    if (!d) return '—';
+    return d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+  }
+  </script>
+</body>
+</html>

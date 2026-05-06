@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pregnancy Week Tracker — How Many Weeks Pregnant Am I? | GetPregnancyReady</title>
   <meta name="description" content="Free pregnancy week tracker. Enter your last period date to instantly find out how many weeks pregnant you are, your due date, baby's size and development this week. No sign-up required.">
-  <link rel="canonical" href="https://www.getpregnancyready.com/">
+  <link rel="canonical" href="https://www.pregnancyweektracker.com/">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Pregnancy Week Tracker — How Many Weeks Pregnant Am I?">
   <meta property="og:description" content="Free, instant pregnancy week calculator. Baby development, due date, and what to prepare — week by week. No sign-up needed.">
-  <meta property="og:url" content="https://www.getpregnancyready.com/">
+  <meta property="og:url" content="https://www.pregnancyweektracker.com/">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://www.getpregnancyready.com/og-image.png">
+  <meta property="og:image" content="https://www.pregnancyweektracker.com/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- Google Fonts -->
@@ -35,7 +35,7 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Pregnancy Week Tracker",
-    "url": "https://www.getpregnancyready.com/",
+    "url": "https://www.pregnancyweektracker.com/",
     "description": "Free pregnancy week tracker. Calculates how many weeks pregnant you are and shows week-by-week fetal development, due date, and baby size.",
     "applicationCategory": "HealthApplication",
     "operatingSystem": "All",
@@ -1209,7 +1209,7 @@
     if (!currentResult) return;
     var wk  = currentResult.weekNum;
     var due = formatDisplayDate(currentResult.dueDate);
-    var txt = 'I\'m ' + wk + ' weeks pregnant! 🌸\nMy due date is ' + due + '\nFind out your pregnancy week free: https://www.getpregnancyready.com';
+    var txt = 'I\'m ' + wk + ' weeks pregnant! 🌸\nMy due date is ' + due + '\nFind out your pregnancy week free: https://www.pregnancyweektracker.com';
     var btn = document.getElementById('shareBtn');
     if (navigator.share) {
       navigator.share({ title: 'My Pregnancy Week', text: txt }).catch(function() {});
@@ -1503,8 +1503,8 @@
 
     // ── Share buttons ─────────────────────────────────────────────────────────
     var shareText = verdict !== 'tie'
-      ? 'Old wives\' tales say I\'m having a ' + (verdict === 'girl' ? 'girl 👧' : 'boy 👦') + '! (' + (verdict === 'girl' ? girlPct : boyPct) + '% of signals agree). What do you think? Try it: https://www.getpregnancyready.com'
-      : 'The old wives\' tales are perfectly split on my baby\'s gender! Try the predictor: https://www.getpregnancyready.com';
+      ? 'Old wives\' tales say I\'m having a ' + (verdict === 'girl' ? 'girl 👧' : 'boy 👦') + '! (' + (verdict === 'girl' ? girlPct : boyPct) + '% of signals agree). What do you think? Try it: https://www.pregnancyweektracker.com'
+      : 'The old wives\' tales are perfectly split on my baby\'s gender! Try the predictor: https://www.pregnancyweektracker.com';
 
     html += '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px">';
     // WhatsApp (huge for India audience)

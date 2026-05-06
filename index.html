@@ -67,22 +67,29 @@
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--bg);
-      background-image: 
-        radial-gradient(circle at 10% 20%, rgba(190, 24, 93, 0.05) 4px, transparent 5px),
-        radial-gradient(circle at 70% 60%, rgba(249, 115, 22, 0.04) 6px, transparent 7px),
-        radial-gradient(circle at 40% 80%, rgba(219, 39, 119, 0.04) 3px, transparent 4px),
-        radial-gradient(circle at 50% 50%, rgba(252, 231, 243, 0.4), transparent 80%);
-      background-attachment: fixed;
-      background-size: 150px 150px, 200px 200px, 100px 100px, 150% 150%;
-      animation: pwtFloat 20s linear infinite;
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
     }
 
+    body::before {
+      content: "";
+      position: fixed;
+      top: -50%; left: -50%; width: 200%; height: 200%;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(190, 24, 93, 0.05) 4px, transparent 5px),
+        radial-gradient(circle at 70% 60%, rgba(249, 115, 22, 0.04) 6px, transparent 7px),
+        radial-gradient(circle at 40% 80%, rgba(219, 39, 119, 0.04) 3px, transparent 4px),
+        radial-gradient(circle at 50% 50%, rgba(252, 231, 243, 0.4), transparent 80%);
+      background-size: 150px 150px, 200px 200px, 100px 100px, 50% 50%;
+      animation: pwtFloat 25s linear infinite;
+      z-index: -1;
+      pointer-events: none;
+    }
+
     @keyframes pwtFloat {
-      0%   { background-position: 0px 0px, 0px 0px, 0px 0px, 50% 50%; }
-      100% { background-position: 0px -150px, 0px -200px, 0px -100px, 50% 50%; }
+      0%   { transform: translate(0px, 0px); }
+      100% { transform: translate(0px, -200px); }
     }
 
     /* ── NAVBAR ── */

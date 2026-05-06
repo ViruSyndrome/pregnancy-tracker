@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -26,8 +26,8 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVGV89T5QG"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-LVGV89T5QG');</script>
 
-  <!-- Google AdSense — replace ca-pub-XXXXXXXXXXXXXXXX -->
-  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2959862133855422" crossorigin="anonymous"></script>
 
   <!-- Schema.org structured data -->
   <script type="application/ld+json">
@@ -1078,27 +1078,71 @@
   ];
 
   // ─────────────────────────────────────────────────────────
-  //  PRODUCT RECOMMENDATIONS BY TRIMESTER
-  //  Replace href values with your actual Amazon affiliate links
+  //  AMAZON ASSOCIATES — LOCALE DETECTION
+  //  India (.in):  tag = pregnancyweek-21
+  //  Global (.com): tag = pregnancywe08-20
   // ─────────────────────────────────────────────────────────
-  const PRODUCTS = {
+  var AMAZON_LOCALES = {
+    'en-IN': { domain: 'amazon.in',  tag: 'pregnancyweek-21' },
+    'hi':    { domain: 'amazon.in',  tag: 'pregnancyweek-21' },
+    'hi-IN': { domain: 'amazon.in',  tag: 'pregnancyweek-21' },
+    'en-GB': { domain: 'amazon.co.uk', tag: 'pregnancywe08-20' },
+    'en-AU': { domain: 'amazon.com.au', tag: 'pregnancywe08-20' },
+    'en-CA': { domain: 'amazon.ca',  tag: 'pregnancywe08-20' },
+    'default': { domain: 'amazon.com', tag: 'pregnancywe08-20' }
+  };
+
+  function getAmazonLocale() {
+    var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+    // Check Indian locales first (highest priority for this site)
+    if (lang === 'en-in' || lang === 'hi' || lang === 'hi-in' || lang.startsWith('hi')) {
+      return AMAZON_LOCALES['en-IN'];
+    }
+    // Check timezone as fallback for India
+    try {
+      var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      if (tz.startsWith('Asia/Kolkata') || tz.startsWith('Asia/Calcutta')) {
+        return AMAZON_LOCALES['en-IN'];
+      }
+    } catch(e) {}
+    // UK visitors
+    if (lang === 'en-gb') return AMAZON_LOCALES['en-GB'];
+    // Australia
+    if (lang === 'en-au') return AMAZON_LOCALES['en-AU'];
+    // Canada
+    if (lang === 'en-ca') return AMAZON_LOCALES['en-CA'];
+    // Everyone else → amazon.com
+    return AMAZON_LOCALES['default'];
+  }
+
+  var USER_LOCALE = getAmazonLocale();
+
+  function amzLink(keyword) {
+    return 'https://www.' + USER_LOCALE.domain + '/s?k=' + encodeURIComponent(keyword) + '&tag=' + USER_LOCALE.tag;
+  }
+
+  // ─────────────────────────────────────────────────────────
+  //  PRODUCT RECOMMENDATIONS BY TRIMESTER
+  //  Links auto-switch between amazon.in / .com / .co.uk / .ca / .com.au
+  // ─────────────────────────────────────────────────────────
+  var PRODUCTS = {
     t1: [
-      { icon: '💊', name: 'Prenatal Vitamins', why: 'Folic acid + iron + DHA for early development', href: 'https://www.amazon.co.uk/s?k=prenatal+vitamins&tag=REPLACE-ME' },
-      { icon: '🌊', name: 'Sea-Band Wristbands', why: 'Drug-free acupressure relief for morning sickness', href: 'https://www.amazon.co.uk/s?k=sea+band+pregnancy&tag=REPLACE-ME' },
-      { icon: '📖', name: '"What to Expect When You\'re Expecting"', why: 'The most trusted pregnancy guide — covers every week', href: 'https://www.amazon.co.uk/s?k=what+to+expect+when+expecting&tag=REPLACE-ME' },
-      { icon: '🫚', name: 'Pregnancy-Safe Body Oil', why: 'Start early to moisturise skin as it begins to stretch', href: 'https://www.amazon.co.uk/s?k=bio+oil+pregnancy&tag=REPLACE-ME' }
+      { icon: '💊', name: 'Prenatal Vitamins', why: 'Folic acid + iron + DHA for early development', keyword: 'prenatal vitamins' },
+      { icon: '🌊', name: 'Sea-Band Wristbands', why: 'Drug-free acupressure relief for morning sickness', keyword: 'sea band pregnancy' },
+      { icon: '📖', name: '"What to Expect When You\'re Expecting"', why: 'The most trusted pregnancy guide — covers every week', keyword: 'what to expect when expecting' },
+      { icon: '🫚', name: 'Pregnancy-Safe Body Oil', why: 'Start early to moisturise skin as it begins to stretch', keyword: 'bio oil pregnancy' }
     ],
     t2: [
-      { icon: '🛏️', name: 'U-Shaped Pregnancy Pillow', why: 'The most impactful purchase for sleep comfort in pregnancy', href: 'https://www.amazon.co.uk/s?k=pregnancy+pillow+u+shaped&tag=REPLACE-ME' },
-      { icon: '👗', name: 'Maternity Leggings & Tops', why: 'Comfortable, bump-accommodating staples for everyday wear', href: 'https://www.amazon.co.uk/s?k=maternity+clothes&tag=REPLACE-ME' },
-      { icon: '🧴', name: 'Stretch Mark Cream', why: 'Shea butter and vitamin E to support skin elasticity', href: 'https://www.amazon.co.uk/s?k=stretch+mark+cream+pregnancy&tag=REPLACE-ME' },
-      { icon: '👶', name: 'Baby Names Book', why: 'Start the name conversation early — it takes longer than you think!', href: 'https://www.amazon.co.uk/s?k=baby+names+book&tag=REPLACE-ME' }
+      { icon: '🛏️', name: 'U-Shaped Pregnancy Pillow', why: 'The most impactful purchase for sleep comfort in pregnancy', keyword: 'pregnancy pillow u shaped' },
+      { icon: '👗', name: 'Maternity Leggings \x26 Tops', why: 'Comfortable, bump-accommodating staples for everyday wear', keyword: 'maternity clothes' },
+      { icon: '🧴', name: 'Stretch Mark Cream', why: 'Shea butter and vitamin E to support skin elasticity', keyword: 'stretch mark cream pregnancy' },
+      { icon: '👶', name: 'Baby Names Book', why: 'Start the name conversation early — it takes longer than you think!', keyword: 'baby names book' }
     ],
     t3: [
-      { icon: '🎒', name: 'Hospital Bag Kit', why: 'Everything you need for labour, delivery, and the postnatal ward', href: 'https://www.amazon.co.uk/s?k=hospital+bag+pregnancy+kit&tag=REPLACE-ME' },
-      { icon: '📹', name: 'Baby Monitor (Video)', why: 'Peace of mind from day one — video + audio + breathing sensor', href: 'https://www.amazon.co.uk/s?k=baby+monitor+video&tag=REPLACE-ME' },
-      { icon: '🤱', name: 'Nursing Bra Set (3-pack)', why: 'Essential for postpartum — whether breastfeeding or not', href: 'https://www.amazon.co.uk/s?k=nursing+bra+set&tag=REPLACE-ME' },
-      { icon: '🍼', name: 'Muslin Swaddle Blankets', why: 'Swaddling calms newborns — you will go through 6+ per day', href: 'https://www.amazon.co.uk/s?k=muslin+swaddle+blankets&tag=REPLACE-ME' }
+      { icon: '🎒', name: 'Hospital Bag Kit', why: 'Everything you need for labour, delivery, and the postnatal ward', keyword: 'hospital bag pregnancy kit' },
+      { icon: '📹', name: 'Baby Monitor (Video)', why: 'Peace of mind from day one — video + audio + breathing sensor', keyword: 'baby monitor video' },
+      { icon: '🤱', name: 'Nursing Bra Set (3-pack)', why: 'Essential for postpartum — whether breastfeeding or not', keyword: 'nursing bra set' },
+      { icon: '🍼', name: 'Muslin Swaddle Blankets', why: 'Swaddling calms newborns — you will go through 6+ per day', keyword: 'muslin swaddle blankets' }
     ]
   };
 
@@ -1339,7 +1383,7 @@
       '<p class="products-sub">Curated products for where you are in your pregnancy. Affiliate links — clicking and purchasing supports this free tool at no extra cost to you.</p>' +
       '<div class="products-grid">' +
       products.map(function(p) {
-        return '<a class="product-card" href="' + p.href + '" target="_blank" rel="noopener noreferrer">' +
+        return '<a class="product-card" href="' + amzLink(p.keyword) + '" target="_blank" rel="noopener noreferrer">' +
           '<div class="product-icon">' + p.icon + '</div>' +
           '<div><div class="product-name">' + p.name + '</div><div class="product-why">' + p.why + '</div></div>' +
           '</a>';

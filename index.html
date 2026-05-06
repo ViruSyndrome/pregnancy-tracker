@@ -607,6 +607,7 @@
       <div class="nav-links">
         <a href="#tracker">Tracker</a>
         <a href="#all-weeks">All Weeks</a>
+        <a href="#gender-prediction">Gender Predictor</a>
         <a href="#faq">FAQ</a>
       </div>
     </div>
@@ -711,7 +712,7 @@
 
     <!-- ── GENDER PREDICTION QUIZ ── -->
     <section class="gender-section" id="gender-prediction">
-      <h2>🔮 Fun Gender Prediction</h2>
+      <h2>🔮 Fun Gender Predictor</h2>
       <p class="gender-intro">Try the old wives' tales from around the world. Answer what you know — skip the rest. The more you fill in, the more fun the result!</p>
       <div class="gender-disclaimer">
         ⚠️ <strong>For entertainment only.</strong> None of these methods are scientifically proven — most have ~50% accuracy, the same as a coin flip. In India, it is illegal for doctors to reveal a baby's sex under the PC-PNDT Act 1994. This tool exists purely for fun.
@@ -1176,6 +1177,11 @@
     document.getElementById('dueDate').min = formatDateInput(today);
     document.getElementById('dueDate').max = formatDateInput(new Date(today.getTime() + 308 * 24 * 60 * 60 * 1000));
 
+    // Wait for Wikipedia images to load, then render timeline with real photos
+    loadWeekImages().then(function() {
+      renderWeeksTimeline(null);
+    });
+    // Also render immediately with fallback emojis (will be replaced once images load)
     renderWeeksTimeline(null);
     renderFAQ();
 
@@ -1433,6 +1439,24 @@
       ? '<div style="font-size:0.78rem;background:var(--accent-light);border-radius:8px;padding:8px 12px;margin-top:12px;border-left:3px solid var(--accent)">🇮🇳 Indian size equivalent: <strong>' + wd.size_in + '</strong></div>'
       : '';
 
+    // Determine trimester from week number for product recommendations
+    var trimester = weekNum <= 12 ? 1 : weekNum <= 26 ? 2 : 3;
+    var prodKey = trimester === 1 ? 't1' : trimester === 2 ? 't2' : 't3';
+    var trimLabel = trimester === 1 ? 'First Trimester' : trimester === 2 ? 'Second Trimester' : 'Third Trimester';
+    var products = PRODUCTS[prodKey];
+    var productsHtml =
+      '<div class="products-section" style="margin-top:20px">' +
+      '<h2>Recommended for ' + trimLabel + ' <span class="affiliate-badge">Affiliate</span></h2>' +
+      '<p class="products-sub">Curated products for this stage of pregnancy. Clicking and purchasing supports this free tool at no extra cost to you.</p>' +
+      '<div class="products-grid">' +
+      products.map(function(p) {
+        return '<a class="product-card" href="' + amzLink(p.keyword) + '" target="_blank" rel="noopener noreferrer">' +
+          '<div class="product-icon">' + p.icon + '</div>' +
+          '<div><div class="product-name">' + p.name + '</div><div class="product-why">' + p.why + '</div></div>' +
+          '</a>';
+      }).join('') +
+      '</div></div>';
+
     var detailSection = document.getElementById('weekDetailSection');
     detailSection.innerHTML =
       '<div class="week-card" style="margin-bottom:0">' +
@@ -1452,7 +1476,8 @@
           indiaNote +
           '<div class="week-tip"><span>💡</span><span><strong>This week\'s tip:</strong> ' + wd.tip + '</span></div>' +
         '</div>' +
-      '</div>';
+      '</div>' +
+      productsHtml;
 
     detailSection.classList.add('visible');
     requestAnimationFrame(function() {

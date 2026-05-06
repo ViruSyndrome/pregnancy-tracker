@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pregnancy Week Tracker — How Many Weeks Pregnant Am I? | PregnancyWeekTracker</title>
   <meta name="description" content="Free pregnancy week tracker. Enter your last period date to instantly find out how many weeks pregnant you are, your due date, baby's size and development this week. No sign-up required.">
-  <link rel="canonical" href="https://www.pregnancyweektracker.com/">\r\n  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="canonical" href="https://www.pregnancyweektracker.com/">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Pregnancy Week Tracker — How Many Weeks Pregnant Am I?">
@@ -588,6 +589,102 @@
       .gender-inputs-grid { grid-template-columns: 1fr; }
       .gender-section { padding: 20px 16px; }
     }
+
+    /* ── TOOLS SECTION (Kick Counter & Contraction Timer) ── */
+    .tools-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 0 0 40px;
+    }
+    .tool-card {
+      background: #fff;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .tool-card h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .tool-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .tool-btn {
+      display: inline-block;
+      width: 100%;
+      padding: 16px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      margin-bottom: 16px;
+      user-select: none;
+    }
+    .tool-btn:active { transform: scale(0.98); }
+    .btn-kick { background: linear-gradient(135deg, #10b981, #059669); color: white; }
+    .btn-contraction { background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; }
+    .btn-stop { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
+    
+    .tool-stats {
+      display: flex;
+      justify-content: space-around;
+      background: var(--bg);
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+    }
+    .stat-box { display: flex; flex-direction: column; }
+    .stat-val { font-size: 1.4rem; font-weight: 800; color: var(--text); }
+    .stat-lbl { font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; letter-spacing: 0.05em; }
+    
+    .tool-history {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      max-height: 150px;
+      overflow-y: auto;
+      text-align: left;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+    }
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .history-item:last-child { border-bottom: none; }
+    
+    .rule-alert {
+      background: #fef2f2;
+      border: 1px solid #fca5a5;
+      color: #b91c1c;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+
+    @media (max-width: 768px) {
+      .tools-section { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -826,6 +923,62 @@
 
       <div class="india-callout">
         🇮🇳 <strong>For Indian parents:</strong> Under the PC-PNDT Act 1994, it is illegal for doctors or sonographers to reveal a baby's sex in India — with penalties up to 3 years imprisonment. That's why Indian parents use fun prediction methods more than anywhere else in the world. This tool is provided purely for entertainment — the same way people worldwide use it before their 20-week scan.
+      </div>
+    </section>
+
+    <!-- ── EVERYDAY TOOLS ── -->
+    <section class="tools-section" id="daily-tools">
+      
+      <!-- KICK COUNTER -->
+      <div class="tool-card" id="kickCounterCard">
+        <h2>🦶 Baby Kick Counter</h2>
+        <p class="tool-desc">Standard medical advice is 10 kicks in 2 hours. Start the session and tap the button every time you feel a movement.</p>
+        
+        <div class="tool-stats">
+          <div class="stat-box">
+            <span class="stat-val" id="kcCount">0</span>
+            <span class="stat-lbl">Kicks</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-val" id="kcTimer">00:00</span>
+            <span class="stat-lbl">Elapsed</span>
+          </div>
+        </div>
+
+        <button class="tool-btn btn-kick" id="kcBtn" onclick="kcRecord()">Start Counting</button>
+        <button class="tool-btn btn-stop" id="kcStopBtn" style="display:none; padding:10px" onclick="kcStop()">Stop Session</button>
+
+        <div class="tool-history" id="kcHistory">
+          <!-- History injected here -->
+        </div>
+      </div>
+
+      <!-- CONTRACTION TIMER -->
+      <div class="tool-card" id="contractionCard">
+        <h2>⏱️ Contraction Timer</h2>
+        <p class="tool-desc">Track frequency and duration. We'll alert you if you hit the <strong>5-1-1 rule</strong> (contractions 5 mins apart, lasting 1 min, for 1 hour).</p>
+        
+        <div id="ctAlert" class="rule-alert" style="display:none">
+          🚨 5-1-1 Rule met! It may be time to call your midwife or head to the hospital.
+        </div>
+
+        <div class="tool-stats">
+          <div class="stat-box">
+            <span class="stat-val" id="ctDuration">0s</span>
+            <span class="stat-lbl">Duration</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-val" id="ctInterval">--</span>
+            <span class="stat-lbl">Interval</span>
+          </div>
+        </div>
+
+        <button class="tool-btn btn-contraction" id="ctBtn" onclick="ctToggle()">Start Contraction</button>
+        <button class="tool-btn btn-stop" id="ctResetBtn" style="padding:10px" onclick="ctReset()">Reset All</button>
+
+        <div class="tool-history" id="ctHistory">
+          <!-- History injected here -->
+        </div>
       </div>
     </section>
 
@@ -1642,6 +1795,176 @@
   function formatDisplayDate(d) {
     if (!d) return '—';
     return d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+  }
+  // ─────────────────────────────────────────────────────────
+  //  KICK COUNTER LOGIC
+  // ─────────────────────────────────────────────────────────
+  var kcActive = false;
+  var kcStartTime = null;
+  var kcInterval = null;
+  var kcHits = [];
+
+  function kcFormatTime(ms) {
+    if (ms < 0) ms = 0;
+    var totalSec = Math.floor(ms / 1000);
+    var m = Math.floor(totalSec / 60);
+    var s = totalSec % 60;
+    return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+  }
+
+  function kcUpdateDisplay() {
+    document.getElementById('kcCount').innerText = kcHits.length;
+    if (kcStartTime) {
+      document.getElementById('kcTimer').innerText = kcFormatTime(Date.now() - kcStartTime);
+    }
+  }
+
+  function kcRecord() {
+    if (!kcActive) {
+      // Start new session
+      kcActive = true;
+      kcStartTime = Date.now();
+      kcHits = [];
+      document.getElementById('kcBtn').innerText = 'I Felt a Kick!';
+      document.getElementById('kcStopBtn').style.display = 'inline-block';
+      kcInterval = setInterval(kcUpdateDisplay, 1000);
+      document.getElementById('kcHistory').innerHTML = '<div style="text-align:center;padding:10px;color:var(--text-muted)">Session started...</div>';
+    }
+    
+    // Record kick
+    kcHits.push(Date.now());
+    kcUpdateDisplay();
+    
+    // Show in history
+    var d = new Date();
+    var timeStr = d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'});
+    var itemHtml = '<div class="history-item"><span>Kick #' + kcHits.length + '</span><span>' + timeStr + '</span></div>';
+    
+    var hist = document.getElementById('kcHistory');
+    if (kcHits.length === 1) hist.innerHTML = ''; // clear "started" message
+    hist.insertAdjacentHTML('afterbegin', itemHtml);
+
+    // Goal reached?
+    if (kcHits.length === 10) {
+      hist.insertAdjacentHTML('afterbegin', '<div style="background:#d1fae5;color:#065f46;padding:8px;border-radius:6px;margin-bottom:8px;text-align:center;font-weight:600;font-size:0.8rem">✅ Goal Reached! 10 kicks recorded.</div>');
+    }
+  }
+
+  function kcStop() {
+    kcActive = false;
+    clearInterval(kcInterval);
+    document.getElementById('kcBtn').innerText = 'Start New Session';
+    document.getElementById('kcStopBtn').style.display = 'none';
+  }
+
+  // ─────────────────────────────────────────────────────────
+  //  CONTRACTION TIMER LOGIC
+  // ─────────────────────────────────────────────────────────
+  var ctActive = false;
+  var ctStartTime = null;
+  var ctInterval = null;
+  var ctHistoryList = []; // { start: ms, end: ms, duration: ms, interval: ms }
+  var ctLastStart = null;
+
+  function ctFormatDuration(ms) {
+    if (ms < 0) ms = 0;
+    var totalSec = Math.floor(ms / 1000);
+    var m = Math.floor(totalSec / 60);
+    var s = totalSec % 60;
+    return (m > 0 ? m + 'm ' : '') + s + 's';
+  }
+
+  function ctUpdateDisplay() {
+    if (ctActive && ctStartTime) {
+      document.getElementById('ctDuration').innerText = ctFormatDuration(Date.now() - ctStartTime);
+    }
+  }
+
+  function check511Rule() {
+    if (ctHistoryList.length < 3) return; // need a few to check
+    
+    // Check last 3 contractions
+    var recent = ctHistoryList.slice(0, 3);
+    var allLastMinute = recent.every(function(c) { return c.duration >= 50000; }); // ~1 min
+    var all5MinApart = recent.every(function(c) { return c.interval && c.interval <= 360000; }); // ~5-6 mins
+    
+    if (allLastMinute && all5MinApart) {
+      document.getElementById('ctAlert').style.display = 'block';
+    } else {
+      document.getElementById('ctAlert').style.display = 'none';
+    }
+  }
+
+  function ctRenderHistory() {
+    var hist = document.getElementById('ctHistory');
+    if (ctHistoryList.length === 0) {
+      hist.innerHTML = '';
+      return;
+    }
+    
+    var html = ctHistoryList.map(function(c, i) {
+      var d = new Date(c.start);
+      var timeStr = d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+      var intStr = c.interval ? ctFormatDuration(c.interval) : '--';
+      return '<div class="history-item" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center">' +
+        '<span style="text-align:left">' + timeStr + '</span>' +
+        '<span>' + ctFormatDuration(c.duration) + ' long</span>' +
+        '<span style="text-align:right">' + intStr + ' apart</span>' +
+        '</div>';
+    }).join('');
+    
+    html = '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;font-size:0.7rem;text-transform:uppercase;color:var(--text-muted);font-weight:700;margin-bottom:5px;border-bottom:1px solid #eee;padding-bottom:5px"><span style="text-align:left">Time</span><span>Duration</span><span style="text-align:right">Apart</span></div>' + html;
+    
+    hist.innerHTML = html;
+  }
+
+  function ctToggle() {
+    var btn = document.getElementById('ctBtn');
+    
+    if (!ctActive) {
+      // Start contraction
+      ctActive = true;
+      ctStartTime = Date.now();
+      btn.innerText = 'Stop Contraction';
+      btn.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)'; // Red
+      
+      var intervalSinceLast = ctLastStart ? (ctStartTime - ctLastStart) : null;
+      document.getElementById('ctInterval').innerText = intervalSinceLast ? ctFormatDuration(intervalSinceLast) : '--';
+      
+      ctLastStart = ctStartTime;
+      ctInterval = setInterval(ctUpdateDisplay, 1000);
+      
+    } else {
+      // Stop contraction
+      ctActive = false;
+      clearInterval(ctInterval);
+      btn.innerText = 'Start Contraction';
+      btn.style.background = 'linear-gradient(135deg, #6366f1, #4f46e5)'; // Indigo back
+      
+      var duration = Date.now() - ctStartTime;
+      document.getElementById('ctDuration').innerText = ctFormatDuration(duration);
+      
+      // Save
+      ctHistoryList.unshift({
+        start: ctStartTime,
+        end: Date.now(),
+        duration: duration,
+        interval: ctHistoryList.length > 0 ? (ctStartTime - ctHistoryList[0].start) : null
+      });
+      
+      ctRenderHistory();
+      check511Rule();
+    }
+  }
+
+  function ctReset() {
+    if(ctActive) ctToggle(); // stop if running
+    ctHistoryList = [];
+    ctLastStart = null;
+    document.getElementById('ctDuration').innerText = '0s';
+    document.getElementById('ctInterval').innerText = '--';
+    document.getElementById('ctHistory').innerHTML = '';
+    document.getElementById('ctAlert').style.display = 'none';
   }
   </script>
 </body>

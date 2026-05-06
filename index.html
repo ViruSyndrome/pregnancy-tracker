@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pregnancy Week Tracker — How Many Weeks Pregnant Am I? | GetPregnancyReady</title>
+  <title>Pregnancy Week Tracker — How Many Weeks Pregnant Am I? | PregnancyWeekTracker</title>
   <meta name="description" content="Free pregnancy week tracker. Enter your last period date to instantly find out how many weeks pregnant you are, your due date, baby's size and development this week. No sign-up required.">
   <link rel="canonical" href="https://www.pregnancyweektracker.com/">
 
@@ -569,7 +569,7 @@
           <path d="M22 10 C22 10 14 14 14 22 C14 30 18 34 22 36 C26 34 30 30 30 22 C30 14 22 10 22 10Z" fill="currentColor" opacity="0.7"/>
           <circle cx="22" cy="22" r="4" fill="currentColor"/>
         </svg>
-        GetPregnancyReady
+        PregnancyWeekTracker
       </a>
       <div class="nav-links">
         <a href="#tracker">Tracker</a>
@@ -858,7 +858,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <div>
-        <div class="footer-brand">GetPregnancyReady</div>
+        <div class="footer-brand">PregnancyWeekTracker</div>
         <p class="footer-desc">Free pregnancy tools for expectant parents. No sign-up. No data stored. Just answers.</p>
       </div>
       <div class="footer-links">
@@ -878,7 +878,7 @@
       </div>
     </div>
     <div class="footer-copy">
-      © 2026 GetPregnancyReady. For informational purposes only — not medical advice.
+      © 2026 PregnancyWeekTracker. For informational purposes only — not medical advice.
       <span style="margin-left: 12px;">Also try: <a href="https://www.getniftyready.com">GetNiftyReady</a> · <a href="https://www.getatsready.com">GetATSReady</a></span>
     </div>
   </footer>
@@ -1209,7 +1209,7 @@
     if (!currentResult) return;
     var wk  = currentResult.weekNum;
     var due = formatDisplayDate(currentResult.dueDate);
-    var txt = 'I\'m ' + wk + ' weeks pregnant! 🌸\nMy due date is ' + due + '\nFind out your pregnancy week free: https://www.pregnancyweektracker.com';
+    var txt = 'I\'m ' + wk + ' weeks pregnant! 🌸\nMy due date is ' + due + '\nFind out your pregnancy week free: https://www.pregnancyweektracker.com';  
     var btn = document.getElementById('shareBtn');
     if (navigator.share) {
       navigator.share({ title: 'My Pregnancy Week', text: txt }).catch(function() {});

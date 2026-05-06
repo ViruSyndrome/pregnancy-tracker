@@ -66,14 +66,7 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', sans-serif;
-      background-color: var(--bg);
-      background-image: 
-        radial-gradient(circle at 10% 20%, rgba(190, 24, 93, 0.04), transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(249, 115, 22, 0.03), transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(252, 231, 243, 0.4), transparent 60%);
-      background-attachment: fixed;
-      background-size: 140% 140%;
-      animation: ambientBg 20s ease-in-out infinite alternate;
+      background: var(--bg);
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
@@ -725,8 +718,9 @@
       <div class="nav-links">
         <a href="#tracker">Tracker</a>
         <a href="#all-weeks">All Weeks</a>
+        <a href="#kick-counter">Kick Counter</a>
+        <a href="#contraction-timer">Contraction Timer</a>
         <a href="#gender-prediction">Gender Predictor</a>
-        <a href="#daily-tools">Tools</a>
         <a href="#faq">FAQ</a>
       </div>
     </div>
@@ -828,6 +822,81 @@
       <!-- Replace with your AdSense ad unit -->
       Advertisement
     </div>
+
+    <!-- ── EVERYDAY TOOLS ── -->
+    <section class="tools-section" id="daily-tools">
+      
+      <!-- KICK COUNTER -->
+      <div class="tool-card" id="kick-counter">
+        <h2>🦶 Baby Kick Counter</h2>
+        <p class="tool-desc">Standard medical advice is 10 kicks in 2 hours. Start the session and tap the button every time you feel a movement.</p>
+        
+        <div class="tool-stats">
+          <div class="stat-box">
+            <span class="stat-val" id="kcCount">0</span>
+            <span class="stat-lbl">Kicks</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-val" id="kcTimer">00:00</span>
+            <span class="stat-lbl">Elapsed</span>
+          </div>
+        </div>
+
+        <button class="tool-btn btn-kick" id="kcBtn" onclick="kcRecord()">Start Counting</button>
+        <button class="tool-btn btn-stop" id="kcStopBtn" style="display:none; padding:10px" onclick="kcStop()">Stop Session</button>
+
+        <div class="tool-history" id="kcHistory">
+          <!-- History injected here -->
+        </div>
+
+        <div style="font-size:0.85rem;color:var(--text-muted);margin-top:20px;text-align:left;background:rgba(0,0,0,0.03);padding:14px;border-radius:10px;border-left:3px solid var(--primary)">
+          <strong style="color:var(--text)">What to do with these results:</strong> You should start counting kicks daily from 28 weeks. A healthy baby should reach 10 movements (kicks, flutters, swishes, or rolls) within 2 hours.
+          <ul style="margin-top:8px;padding-left:20px;margin-bottom:0">
+            <li style="margin-bottom:4px"><strong>Normal:</strong> Reaching 10 movements in under 2 hours. Most active times are usually evenings or after eating.</li>
+            <li><strong style="color:var(--primary)">When to call your hospital:</strong> If you don't feel 10 movements in 2 hours, or if you notice a significant decrease in your baby's normal movement pattern, contact your maternity unit immediately. Do not wait until the next day.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CONTRACTION TIMER -->
+      <div class="tool-card" id="contraction-timer">
+        <h2>⏱️ Contraction Timer</h2>
+        <p class="tool-desc">Track frequency and duration. We'll alert you if you hit the <strong>5-1-1 rule</strong>.</p>
+        
+        <div id="ctAlert" class="rule-alert" style="display:none">
+          🚨 5-1-1 Rule met! It may be time to call your midwife or head to the hospital.
+        </div>
+
+        <div class="tool-stats">
+          <div class="stat-box">
+            <span class="stat-val" id="ctDuration">0s</span>
+            <span class="stat-lbl">Duration</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-val" id="ctInterval">--</span>
+            <span class="stat-lbl">Interval</span>
+          </div>
+        </div>
+
+        <button class="tool-btn btn-contraction" id="ctBtn" onclick="ctToggle()">Start Contraction</button>
+        <button class="tool-btn btn-stop" id="ctResetBtn" style="padding:10px" onclick="ctReset()">Reset All</button>
+
+        <div class="tool-history" id="ctHistory">
+          <!-- History injected here -->
+        </div>
+
+        <div style="font-size:0.85rem;color:var(--text-muted);margin-top:20px;text-align:left;background:rgba(0,0,0,0.03);padding:14px;border-radius:10px;border-left:3px solid var(--primary)">
+          <strong style="color:var(--text)">What is the 5-1-1 Rule?</strong> It's the standard medical guideline for when to go to the hospital during labour:
+          <ul style="margin-top:8px;padding-left:20px;margin-bottom:12px">
+            <li><strong>5:</strong> Contractions are <strong>5 minutes apart</strong> (measured from the start of one to the start of the next).</li>
+            <li><strong>1:</strong> Each contraction lasts for at least <strong>1 full minute</strong>.</li>
+            <li><strong>1:</strong> This pattern has been consistent for <strong>1 full hour</strong>.</li>
+          </ul>
+          <strong style="color:var(--text)">What to do with these results:</strong> If you are over 37 weeks and hit the 5-1-1 rule, call your hospital or midwife. <br><br>
+          <strong style="color:var(--primary)">Call immediately if:</strong> Your water breaks, you are bleeding, or you are less than 37 weeks pregnant and having regular contractions, regardless of the 5-1-1 rule.
+        </div>
+      </div>
+    </section>
 
     <!-- ── GENDER PREDICTION QUIZ ── -->
     <section class="gender-section" id="gender-prediction">
@@ -944,62 +1013,6 @@
 
       <div class="india-callout">
         🇮🇳 <strong>For Indian parents:</strong> Under the PC-PNDT Act 1994, it is illegal for doctors or sonographers to reveal a baby's sex in India — with penalties up to 3 years imprisonment. That's why Indian parents use fun prediction methods more than anywhere else in the world. This tool is provided purely for entertainment — the same way people worldwide use it before their 20-week scan.
-      </div>
-    </section>
-
-    <!-- ── EVERYDAY TOOLS ── -->
-    <section class="tools-section" id="daily-tools">
-      
-      <!-- KICK COUNTER -->
-      <div class="tool-card" id="kickCounterCard">
-        <h2>🦶 Baby Kick Counter</h2>
-        <p class="tool-desc">Standard medical advice is 10 kicks in 2 hours. Start the session and tap the button every time you feel a movement.</p>
-        
-        <div class="tool-stats">
-          <div class="stat-box">
-            <span class="stat-val" id="kcCount">0</span>
-            <span class="stat-lbl">Kicks</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-val" id="kcTimer">00:00</span>
-            <span class="stat-lbl">Elapsed</span>
-          </div>
-        </div>
-
-        <button class="tool-btn btn-kick" id="kcBtn" onclick="kcRecord()">Start Counting</button>
-        <button class="tool-btn btn-stop" id="kcStopBtn" style="display:none; padding:10px" onclick="kcStop()">Stop Session</button>
-
-        <div class="tool-history" id="kcHistory">
-          <!-- History injected here -->
-        </div>
-      </div>
-
-      <!-- CONTRACTION TIMER -->
-      <div class="tool-card" id="contractionCard">
-        <h2>⏱️ Contraction Timer</h2>
-        <p class="tool-desc">Track frequency and duration. We'll alert you if you hit the <strong>5-1-1 rule</strong> (contractions 5 mins apart, lasting 1 min, for 1 hour).</p>
-        
-        <div id="ctAlert" class="rule-alert" style="display:none">
-          🚨 5-1-1 Rule met! It may be time to call your midwife or head to the hospital.
-        </div>
-
-        <div class="tool-stats">
-          <div class="stat-box">
-            <span class="stat-val" id="ctDuration">0s</span>
-            <span class="stat-lbl">Duration</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-val" id="ctInterval">--</span>
-            <span class="stat-lbl">Interval</span>
-          </div>
-        </div>
-
-        <button class="tool-btn btn-contraction" id="ctBtn" onclick="ctToggle()">Start Contraction</button>
-        <button class="tool-btn btn-stop" id="ctResetBtn" style="padding:10px" onclick="ctReset()">Reset All</button>
-
-        <div class="tool-history" id="ctHistory">
-          <!-- History injected here -->
-        </div>
       </div>
     </section>
 

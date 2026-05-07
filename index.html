@@ -111,8 +111,8 @@
       backdrop-filter: blur(5px);
     }
     .img-modal-content {
-      max-width: 90%;
-      max-height: 90%;
+      max-width: 98%;
+      max-height: 98%;
       border-radius: 12px;
       box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
       transition: transform 0.3s ease;
@@ -320,7 +320,7 @@
       display: flex; align-items: center; gap: 16px;
     }
     .week-emoji { font-size: 3.5rem; line-height: 1; }
-    .week-emoji img.emoji-img { width: 96px; height: 96px; display: block; object-fit: cover; border-radius: 16px; }
+    .week-emoji img.emoji-img { width: 120px; height: 120px; display: block; object-fit: cover; border-radius: 16px; }
     .week-title-wrap {}
     .week-number { font-size: 0.75rem; font-weight: 600; opacity: 0.85; letter-spacing: 0.08em; text-transform: uppercase; }
     .week-size { font-size: 1.5rem; font-weight: 800; }
@@ -1281,7 +1281,7 @@
   // Call once on page load so images are ready before user taps a week
   loadWeekImages();
 
-  const AI_SCALE_WEEKS = [4, 8, 12, 16, 20, 25, 28, 30, 35, 38, 40];
+  const AI_SCALE_WEEKS = [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 25, 28, 30, 32, 35, 38, 40];
 
   // Render a week's image: AI Scale image → Wikipedia photo → OpenMoji SVG → native emoji fallback
   function weekImg(wkNum, emoji) {

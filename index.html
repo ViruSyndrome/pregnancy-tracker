@@ -95,6 +95,30 @@
       100% { transform: translate(0px, -200px); }
     }
 
+    /* Modal for big image */
+    .img-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.85);
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+      backdrop-filter: blur(5px);
+    }
+    .img-modal-content {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+    }
+    .img-modal-content:active { transform: scale(0.98); }
+
     /* ── NAVBAR ── */
     .navbar {
       position: sticky; top: 0; z-index: 100;
@@ -1138,6 +1162,8 @@
         <ul>
           <li><a href="index.html">Pregnancy Week Tracker</a></li>
           <li><a href="index.html#all-weeks">Week by Week Guide</a></li>
+          <li><a href="index.html#kick-counter">Baby Kick Counter</a></li>
+          <li><a href="index.html#contraction-timer">Contraction Timer</a></li>
         </ul>
       </div>
       <div class="footer-links">
@@ -1148,7 +1174,6 @@
           <li><a href="privacy.html">Privacy Policy</a></li>
           <li><a href="terms.html">Terms of Use</a></li>
           <li><a href="#" style="color:var(--accent);font-weight:600" onclick="alert('Support this project! Donation link coming soon.')">Support this Project ❤️</a></li>
-          <li><a href="mailto:hello@pregnancyweektracker.com?subject=Help with my Pregnancy Tracker" style="color:var(--primary);font-weight:600">Need Help? 💬</a></li>
         </ul>
       </div>
     </div>
@@ -1252,13 +1277,16 @@
   // Call once on page load so images are ready before user taps a week
   loadWeekImages();
 
-  const AI_SCALE_WEEKS = [8, 12, 16, 20, 25, 30, 35, 40];
+  const AI_SCALE_WEEKS = [4, 8, 12, 16, 20, 25, 28, 30, 35, 38, 40];
 
   // Render a week's image: AI Scale image → Wikipedia photo → OpenMoji SVG → native emoji fallback
   function weekImg(wkNum, emoji) {
     wkNum = Number(wkNum);
     if (AI_SCALE_WEEKS.includes(wkNum)) {
-      return '<div style="position:relative;display:inline-block"><img class="emoji-img" src="assets/fruits/week_' + wkNum + '.png" alt="Week ' + wkNum + ' true scale" loading="lazy" draggable="false" onerror="this.src=\'\';"><div style="position:absolute;bottom:0;right:0;background:var(--primary);color:#fff;font-size:0.5rem;padding:2px 4px;border-radius:4px;font-weight:bold;line-height:1">AI Scale View</div></div>';
+      var imgSrc = 'assets/fruits/week_' + wkNum + '.png';
+      return '<div style="position:relative;display:inline-block;cursor:zoom-in" onclick="openImgModal(\'' + imgSrc + '\', \'Week ' + wkNum + ' scale\')">' +
+             '<img class="emoji-img" src="' + imgSrc + '" alt="Week ' + wkNum + ' true scale" loading="lazy" draggable="false" onerror="this.src=\'\';">' +
+             '</div>';
     }
     if (WIKI_IMGS[wkNum]) {
       return '<img class="emoji-img" src="' + WIKI_IMGS[wkNum] + '" alt="Week ' + wkNum + ' size" loading="lazy" draggable="false" onerror="this.src=\'\';">';
@@ -2091,6 +2119,24 @@
     document.getElementById('ctHistory').innerHTML = '';
     document.getElementById('ctAlert').style.display = 'none';
   }
+
+  // Modal logic
+  function openImgModal(src, alt) {
+    const modal = document.getElementById('imgModal');
+    const modalImg = document.getElementById('imgModalContent');
+    modal.style.display = 'flex';
+    modalImg.src = src;
+    modalImg.alt = alt;
+  }
+  function closeImgModal() {
+    document.getElementById('imgModal').style.display = 'none';
+  }
   </script>
+
+  <!-- Image Modal -->
+  <div id="imgModal" class="img-modal" onclick="closeImgModal()">
+    <img id="imgModalContent" class="img-modal-content" src="" alt="">
+  </div>
+
 </body>
 </html>

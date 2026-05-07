@@ -320,7 +320,12 @@
       display: flex; align-items: center; gap: 16px;
     }
     .week-emoji { font-size: 3.5rem; line-height: 1; }
-    .week-emoji img.emoji-img { width: 120px; height: 120px; display: block; object-fit: cover; border-radius: 16px; }
+    .week-emoji img.emoji-img { 
+      width: 140px; height: 140px; display: block; object-fit: contain; 
+      padding: 24px; background: #fff; border-radius: 24px;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+    }
     .week-title-wrap {}
     .week-number { font-size: 0.75rem; font-weight: 600; opacity: 0.85; letter-spacing: 0.08em; text-transform: uppercase; }
     .week-size { font-size: 1.5rem; font-weight: 800; }
@@ -424,7 +429,11 @@
     }
     .week-chip-num { font-size: 0.7rem; font-weight: 700; color: var(--primary); letter-spacing: 0.05em; text-transform: uppercase; }
     .week-chip-emoji { font-size: 1.4rem; line-height: 1; }
-    .week-chip-emoji img.emoji-img { width: 48px; height: 48px; display: block; margin: 0 auto; object-fit: cover; border-radius: 8px; }
+    .week-chip-emoji img.emoji-img { 
+      width: 44px; height: 44px; display: block; margin: 0 auto; 
+      object-fit: contain; padding: 6px; background: #fff; 
+      border-radius: 10px; border: 1px solid var(--border);
+    }
     .week-chip-size { font-size: 0.72rem; color: var(--text-muted); }
 
     /* ── SEO CONTENT ── */
@@ -1279,23 +1288,16 @@
   }
 
   // Call once on page load so images are ready before user taps a week
-  loadWeekImages();
+  // Wikipedia loading disabled
+  // loadWeekImages();
 
-  const AI_SCALE_WEEKS = [4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 25, 28, 30, 32, 35, 38, 40, 41];
+  // Photo-based scale view disabled for now
+  const AI_SCALE_WEEKS = [];
 
   // Render a week's image: AI Scale image → Wikipedia photo → OpenMoji SVG → native emoji fallback
   function weekImg(wkNum, emoji) {
     wkNum = Number(wkNum);
-    if (AI_SCALE_WEEKS.includes(wkNum)) {
-      var imgSrc = 'assets/fruits/week_' + wkNum + '.png';
-      return '<div style="position:relative;display:inline-block;cursor:zoom-in" onclick="openImgModal(\'' + imgSrc + '\', \'Week ' + wkNum + ' scale\')">' +
-             '<img class="emoji-img" src="' + imgSrc + '" alt="Week ' + wkNum + ' true scale" loading="lazy" draggable="false" onerror="this.src=\'\';">' +
-             '</div>';
-    }
-    if (WIKI_IMGS[wkNum]) {
-      return '<img class="emoji-img" src="' + WIKI_IMGS[wkNum] + '" alt="Week ' + wkNum + ' size" loading="lazy" draggable="false" onerror="this.src=\'\';">';
-    }
-    // OpenMoji fallback
+    // Convert emoji to hex points for OpenMoji
     var points = [];
     for (var i = 0; i < emoji.length; ) {
       var code = emoji.codePointAt(i);
@@ -1303,7 +1305,7 @@
       i += code > 0xFFFF ? 2 : 1;
     }
     var cp = points.join('-');
-    return '<img class="emoji-img" src="https://cdn.jsdelivr.net/npm/openmoji@14.0.0/color/svg/' + cp + '.svg" alt="' + emoji + '" loading="lazy" draggable="false" onerror="this.parentNode.innerHTML=\'<span style=font-size:3rem>\'+\'' + emoji + '\'+ \'</span>\'">';
+    return '<img class="emoji-img" src="https://cdn.jsdelivr.net/npm/openmoji@14.0.0/color/svg/' + cp + '.svg" alt="' + emoji + '" loading="lazy" draggable="false" onerror="this.parentNode.innerHTML=\'<span style=font-size:3.5rem>\'+\'' + emoji + '\'+ \'</span>\'">';
   }
 
   // Keep tw() as legacy alias so nothing breaks

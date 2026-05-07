@@ -19,7 +19,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
 
   <!-- Twemoji SVG images via CDN (no JS library — pure codepoint conversion in script) -->
 
@@ -57,10 +57,12 @@
       --text: #111827;
       --text-muted: #6b7280;
       --border: #f3d6e8;
-      --success: #16a34a;
-      --radius: 16px;
-      --shadow: 0 4px 24px rgba(190, 24, 93, 0.09);
-      --shadow-sm: 0 2px 8px rgba(190, 24, 93, 0.06);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --radius: 20px;
+      --shadow: 0 10px 30px rgba(190, 24, 93, 0.07);
+      --shadow-sm: 0 4px 12px rgba(190, 24, 93, 0.04);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -134,9 +136,10 @@
       text-transform: uppercase;
     }
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 800; line-height: 1.15;
-      margin-bottom: 16px;
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      font-weight: 800; line-height: 1.1;
+      margin-bottom: 20px;
       background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
@@ -620,96 +623,122 @@
     }
     .tool-card {
       background: #fff;
-      border-radius: 20px;
+      border-radius: var(--radius);
       border: 1px solid var(--border);
-      padding: 28px 24px;
+      padding: 32px 24px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.02);
+      box-shadow: var(--shadow);
       transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .tool-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 34px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.04);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(190, 24, 93, 0.1);
     }
     .tool-card h2 {
-      font-size: 1.3rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
       font-weight: 800;
-      color: var(--accent);
-      margin-bottom: 8px;
+      color: var(--primary);
+      margin-bottom: 12px;
     }
     .tool-desc {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
-      margin-bottom: 16px;
-      line-height: 1.5;
+      margin-bottom: 24px;
+      line-height: 1.6;
+      max-width: 400px;
     }
-    .tool-btn {
-      display: inline-block;
+    
+    /* Progress Circle for Kick Counter */
+    .kc-visual {
+      position: relative;
+      width: 180px; height: 180px;
+      margin-bottom: 24px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .kc-svg { transform: rotate(-90deg); }
+    .kc-bg { fill: none; stroke: var(--bg); stroke-width: 10; }
+    .kc-progress {
+      fill: none; stroke: var(--success); stroke-width: 10;
+      stroke-linecap: round; stroke-dasharray: 502.6;
+      stroke-dashoffset: 502.6; transition: stroke-dashoffset 0.6s ease;
+    }
+    .kc-center {
+      position: absolute;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .kc-val { font-size: 2.8rem; font-weight: 800; color: var(--text); line-height: 1; }
+    .kc-lbl { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-top: 2px; }
+
+    .tool-btn-main {
+      width: 100%; max-width: 320px;
+      padding: 18px; font-size: 1.15rem; font-weight: 800;
+      border: none; border-radius: 16px; cursor: pointer;
+      transition: all 0.2s; user-select: none;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      font-family: 'Outfit', sans-serif;
+    }
+    .tool-btn-main:active { transform: scale(0.96); }
+    
+    .btn-kick-pulse {
+      background: linear-gradient(135deg, var(--success), #059669);
+      color: white;
+    }
+    .btn-contraction-start {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+    }
+    .btn-contraction-end {
+      background: linear-gradient(135deg, var(--danger), #dc2626);
+      color: white;
+    }
+    
+    .tool-timer-wrap {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 20px;
+      font-weight: 700; color: var(--text); font-size: 1.2rem;
+    }
+    .tool-timer-wrap span { font-variant-numeric: tabular-nums; }
+
+    .tool-history-list {
       width: 100%;
-      padding: 16px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: opacity 0.2s, transform 0.1s;
-      margin-bottom: 16px;
-      user-select: none;
-    }
-    .tool-btn:active { transform: scale(0.98); }
-    .btn-kick { background: linear-gradient(135deg, #10b981, #059669); color: white; }
-    .btn-contraction { background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; }
-    .btn-stop { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
-    
-    .tool-stats {
-      display: flex;
-      justify-content: space-around;
       background: var(--bg);
-      padding: 12px;
-      border-radius: 10px;
-      margin-bottom: 16px;
-    }
-    .stat-box { display: flex; flex-direction: column; }
-    .stat-val { font-size: 1.4rem; font-weight: 800; color: var(--text); }
-    .stat-lbl { font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600; letter-spacing: 0.05em; }
-    
-    .tool-history {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      max-height: 150px;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 24px;
+      max-height: 250px;
       overflow-y: auto;
-      text-align: left;
-      border-top: 1px solid var(--border);
-      padding-top: 12px;
     }
-    .history-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 6px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
+    .history-card {
+      background: white; border-radius: 8px; padding: 12px;
+      margin-bottom: 8px; box-shadow: var(--shadow-sm);
+      display: flex; justify-content: space-between; align-items: center;
+      animation: slideIn 0.3s ease-out;
     }
-    .history-item:last-child { border-bottom: none; }
-    
-    .rule-alert {
-      background: #fef2f2;
-      border: 1px solid #fca5a5;
-      color: #b91c1c;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 16px;
-      animation: pulse 2s infinite;
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+    .hc-left { display: flex; flex-direction: column; text-align: left; }
+    .hc-time { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+    .hc-date { font-size: 0.7rem; color: var(--text-muted); }
+    .hc-right { font-size: 0.9rem; font-weight: 800; color: var(--primary); }
+
+    .contraction-banner {
+      width: 100%; background: #fee2e2; border: 2px solid var(--danger);
+      color: var(--danger); border-radius: 12px; padding: 16px;
+      margin-bottom: 24px; font-weight: 800; text-align: center;
+      animation: alertShake 0.5s ease infinite alternate;
     }
-    
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
-      70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    @keyframes alertShake { from { transform: scale(1); } to { transform: scale(1.02); } }
+
+    .encouragement {
+      font-size: 1rem; font-weight: 700; color: var(--success);
+      margin-bottom: 16px; display: none;
     }
 
     @media (max-width: 768px) {
       .tools-section { grid-template-columns: 1fr; }
+      .tool-card { padding: 32px 16px; }
     }
   </style>
 </head>
@@ -844,31 +873,38 @@
       <!-- KICK COUNTER -->
       <div class="tool-card" id="kick-counter">
         <h2>🦶 Baby Kick Counter</h2>
-        <p class="tool-desc">Standard medical advice is 10 kicks in 2 hours. Start the session and tap the button every time you feel a movement.</p>
+        <p class="tool-desc">Standard medical advice is 10 kicks in 2 hours. Start counting when baby is active.</p>
         
-        <div class="tool-stats">
-          <div class="stat-box">
-            <span class="stat-val" id="kcCount">0</span>
-            <span class="stat-lbl">Kicks</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-val" id="kcTimer">00:00</span>
-            <span class="stat-lbl">Elapsed</span>
+        <div id="kcEncourage" class="encouragement">🎉 All 10 kicks counted! Baby is doing great.</div>
+
+        <div class="kc-visual">
+          <svg class="kc-svg" width="180" height="180">
+            <circle class="kc-bg" cx="90" cy="90" r="80"></circle>
+            <circle id="kcProgressRing" class="kc-progress" cx="90" cy="90" r="80"></circle>
+          </svg>
+          <div class="kc-center">
+            <span id="kcCount" class="kc-val">0</span>
+            <span class="kc-lbl">Kicks</span>
           </div>
         </div>
 
-        <button class="tool-btn btn-kick" id="kcBtn" onclick="kcRecord()">Start Counting</button>
-        <button class="tool-btn btn-stop" id="kcStopBtn" style="display:none; padding:10px" onclick="kcStop()">Stop Session</button>
+        <div class="tool-timer-wrap">
+          <span>⏱️</span> <span id="kcTimer">00:00</span>
+        </div>
 
-        <div class="tool-history" id="kcHistory">
+        <button class="tool-btn-main btn-kick-pulse" id="kcBtn" onclick="kcRecord()">Start Counting</button>
+        <button class="tool-btn-main btn-stop" id="kcStopBtn" style="display:none; padding:12px; margin-top:8px; opacity:0.8; font-size:0.9rem" onclick="kcStop()">Stop &amp; Save Session</button>
+
+        <div class="tool-history-list" id="kcHistory">
           <!-- History injected here -->
         </div>
 
-        <div style="font-size:0.85rem;color:var(--text-muted);margin-top:20px;text-align:left;background:rgba(0,0,0,0.03);padding:14px;border-radius:10px;border-left:3px solid var(--primary)">
-          <strong style="color:var(--text)">What to do with these results:</strong> You should start counting kicks daily from 28 weeks. A healthy baby should reach 10 movements (kicks, flutters, swishes, or rolls) within 2 hours.
-          <ul style="margin-top:8px;padding-left:20px;margin-bottom:0">
-            <li style="margin-bottom:4px"><strong>Normal:</strong> Reaching 10 movements in under 2 hours. Most active times are usually evenings or after eating.</li>
-            <li><strong style="color:var(--primary)">When to call your hospital:</strong> If you don't feel 10 movements in 2 hours, or if you notice a significant decrease in your baby's normal movement pattern, contact your maternity unit immediately. Do not wait until the next day.</li>
+        <div style="font-size:0.85rem;color:var(--text-muted);margin-top:24px;text-align:left;background:rgba(0,0,0,0.03);padding:18px;border-radius:14px;border-left:4px solid var(--success)">
+          <strong style="color:var(--text)">Actionable Guide:</strong> 
+          <ul style="margin-top:10px;padding-left:20px;margin-bottom:0">
+            <li style="margin-bottom:6px"><strong>Daily Tracking:</strong> Start daily counts from 28 weeks.</li>
+            <li style="margin-bottom:6px"><strong>Goal:</strong> Reaching 10 movements (kicks, swishes, or rolls) in under 2 hours.</li>
+            <li><strong style="color:var(--danger)">Urgent:</strong> If you don't feel 10 movements in 2 hours, or notice a significant decrease in pattern, <strong>call your maternity unit immediately</strong>.</li>
           </ul>
         </div>
       </div>
@@ -876,39 +912,38 @@
       <!-- CONTRACTION TIMER -->
       <div class="tool-card" id="contraction-timer">
         <h2>⏱️ Contraction Timer</h2>
-        <p class="tool-desc">Track frequency and duration. We'll alert you if you hit the <strong>5-1-1 rule</strong>.</p>
+        <p class="tool-desc">Track the frequency and duration of your contractions to know when it's time.</p>
         
-        <div id="ctAlert" class="rule-alert" style="display:none">
-          🚨 5-1-1 Rule met! It may be time to call your midwife or head to the hospital.
+        <div id="ctAlert" class="contraction-banner" style="display:none">
+          🚨 5-1-1 Rule Met: It may be time to go to the hospital!
         </div>
 
-        <div class="tool-stats">
-          <div class="stat-box">
-            <span class="stat-val" id="ctDuration">0s</span>
+        <div class="tool-stats" style="width:100%; gap:12px; background:none; padding:0; margin-bottom:24px;">
+          <div class="stat-box" style="flex:1; background:var(--bg); padding:16px; border-radius:14px;">
+            <span class="stat-val" id="ctDuration" style="font-size:1.8rem; color:var(--primary)">0s</span>
             <span class="stat-lbl">Duration</span>
           </div>
-          <div class="stat-box">
-            <span class="stat-val" id="ctInterval">--</span>
+          <div class="stat-box" style="flex:1; background:var(--bg); padding:16px; border-radius:14px;">
+            <span class="stat-val" id="ctInterval" style="font-size:1.8rem; color:var(--accent)">--</span>
             <span class="stat-lbl">Interval</span>
           </div>
         </div>
 
-        <button class="tool-btn btn-contraction" id="ctBtn" onclick="ctToggle()">Start Contraction</button>
-        <button class="tool-btn btn-stop" id="ctResetBtn" style="padding:10px" onclick="ctReset()">Reset All</button>
+        <button class="tool-btn-main btn-contraction-start" id="ctBtn" onclick="ctToggle()">Contraction Started</button>
+        <button class="tool-btn-main btn-stop" id="ctResetBtn" style="padding:12px; margin-top:8px; opacity:0.8; font-size:0.9rem" onclick="ctReset()">Reset History</button>
 
-        <div class="tool-history" id="ctHistory">
+        <div class="tool-history-list" id="ctHistory">
           <!-- History injected here -->
         </div>
 
-        <div style="font-size:0.85rem;color:var(--text-muted);margin-top:20px;text-align:left;background:rgba(0,0,0,0.03);padding:14px;border-radius:10px;border-left:3px solid var(--primary)">
-          <strong style="color:var(--text)">What is the 5-1-1 Rule?</strong> It's the standard medical guideline for when to go to the hospital during labour:
-          <ul style="margin-top:8px;padding-left:20px;margin-bottom:12px">
-            <li><strong>5:</strong> Contractions are <strong>5 minutes apart</strong> (measured from the start of one to the start of the next).</li>
-            <li><strong>1:</strong> Each contraction lasts for at least <strong>1 full minute</strong>.</li>
-            <li><strong>1:</strong> This pattern has been consistent for <strong>1 full hour</strong>.</li>
+        <div style="font-size:0.85rem;color:var(--text-muted);margin-top:24px;text-align:left;background:rgba(0,0,0,0.03);padding:18px;border-radius:14px;border-left:4px solid var(--primary)">
+          <strong style="color:var(--text)">The 5-1-1 Rule:</strong> 
+          <ul style="margin-top:10px;padding-left:20px;margin-bottom:0">
+            <li style="margin-bottom:6px"><strong>5:</strong> Contractions are <strong>5 mins apart</strong>.</li>
+            <li style="margin-bottom:6px"><strong>1:</strong> Each lasts for <strong>1 full minute</strong>.</li>
+            <li style="margin-bottom:6px"><strong>1:</strong> Pattern is consistent for <strong>1 hour</strong>.</li>
+            <li><strong style="color:var(--danger)">Urgent:</strong> If water breaks or you are bleeding, head to the hospital regardless of the 5-1-1 rule.</li>
           </ul>
-          <strong style="color:var(--text)">What to do with these results:</strong> If you are over 37 weeks and hit the 5-1-1 rule, call your hospital or midwife. <br><br>
-          <strong style="color:var(--primary)">Call immediately if:</strong> Your water breaks, you are bleeding, or you are less than 37 weeks pregnant and having regular contractions, regardless of the 5-1-1 rule.
         </div>
       </div>
     </section>
@@ -1109,8 +1144,11 @@
         <h4>Info</h4>
         <ul>
           <li><a href="/about.html">About</a></li>
+          <li><a href="/contact.html">Contact</a></li>
           <li><a href="/privacy.html">Privacy Policy</a></li>
           <li><a href="/terms.html">Terms of Use</a></li>
+          <li><a href="#" style="color:var(--accent);font-weight:600" onclick="alert('Support this project! Donation link coming soon.')">Support this Project ❤️</a></li>
+          <li><a href="mailto:hello@pregnancyweektracker.com?subject=Help with my Pregnancy Tracker" style="color:var(--primary);font-weight:600">Need Help? 💬</a></li>
         </ul>
       </div>
     </div>
@@ -1214,7 +1252,7 @@
   // Call once on page load so images are ready before user taps a week
   loadWeekImages();
 
-  const AI_SCALE_WEEKS = [12, 20, 30, 40];
+  const AI_SCALE_WEEKS = [8, 12, 16, 20, 25, 30, 35, 40];
 
   // Render a week's image: AI Scale image → Wikipedia photo → OpenMoji SVG → native emoji fallback
   function weekImg(wkNum, emoji) {
@@ -1363,8 +1401,9 @@
     { q: 'How is my pregnancy due date calculated?', a: 'Your estimated due date (EDD) is calculated as 280 days (40 weeks) from the first day of your last menstrual period (LMP). This is called Naegele\'s rule. The calculation assumes a 28-day cycle — if your cycle is longer or shorter, your actual due date may differ slightly. Your 12-week dating scan gives a more accurate estimate based on baby\'s actual measurements.' },
     { q: 'Why does pregnancy start from the last period, not conception?', a: 'Doctors and midwives count pregnancy from the LMP because it\'s a known, consistent date — the exact moment of ovulation and conception varies and can\'t be pinpointed. So when your period is one week late, you\'re technically already 5 weeks pregnant (2 weeks before ovulation + 3 weeks since). It\'s a convention, not biology.' },
     { q: 'How accurate is this due date calculator?', a: 'This calculator uses the standard obstetric formula (Naegele\'s rule). However, due dates are estimates — only about 5% of babies arrive on their exact due date. Most are born within 2 weeks before or after. Your 12-week dating scan, which measures your baby\'s crown-rump length, gives a more accurate estimate and supersedes the LMP calculation if there\'s a significant difference.' },
-    { q: 'When should I tell people I\'m pregnant?', a: 'Most couples choose to wait until after the 12-week scan before sharing widely, as the risk of miscarriage drops significantly after this point. However, there is no "right time" — some people share immediately with close family, others wait until the second trimester or beyond. Trust your instincts about what\'s right for you.' },
-    { q: 'What is the difference between a trimester and a gestational week?', a: 'A gestational week is simply one of the 40 weeks of pregnancy. Trimesters divide pregnancy into three roughly equal phases: First trimester (weeks 1–12), Second trimester (weeks 13–26), and Third trimester (weeks 27–40). Each trimester has distinct developmental milestones and different challenges for the mother.' },
+    { q: 'What is the 5-1-1 rule for contractions?', a: 'The 5-1-1 rule is a standard guideline for when to head to the hospital. It means: your contractions are <strong>5 minutes apart</strong> (measured from the start of one to the start of the next), each one lasts for <strong>1 full minute</strong>, and this pattern has been consistent for <strong>1 full hour</strong>. Always call your midwife or hospital before leaving to confirm they are ready for you.' },
+    { q: 'How should I use the Baby Kick Counter?', a: 'Standard medical advice is to start counting kicks daily from 28 weeks. Find a time when your baby is usually active (often after a meal or in the evening). You should aim to feel 10 movements (kicks, flutters, swishes, or rolls) within 2 hours. If you don\'t reach 10 in 2 hours, or if you notice a significant decrease in your baby\'s normal movement pattern, contact your maternity unit immediately.' },
+    { q: 'Are the size comparison photos real?', a: 'Yes! We use custom-shot scale reference photos that show common fruits and vegetables in a real human hand. This gives you a much more accurate sense of your baby\'s actual size and volume compared to generic stock photos or icons used in other apps.' },
     { q: 'When will I feel my baby move for the first time?', a: 'First movements (called quickening) are typically felt between weeks 16 and 20. First-time mothers often feel them later (around week 20) as they may not recognise the sensation at first. Women who have been pregnant before often recognise the flutter-like movements sooner. From around week 28, your midwife will ask you to monitor movements daily.' },
     { q: 'Is this tool safe to use? Does it store my data?', a: 'All calculations happen entirely in your browser — no data is sent to any server. We do not store your dates, results, or any personal information. This tool respects your privacy completely. The URL sharing feature only works if you choose to copy and share it; we do not record who visits or what dates they enter.' }
   ];
@@ -1644,7 +1683,8 @@
     var chip = document.querySelector('.week-chip[data-week="' + weekNum + '"]');
     if (chip) chip.classList.add('active-detail');
 
-    var indiaNote = wd.size_in
+    var isIndia = USER_LOCALE.domain === 'amazon.in';
+    var indiaNote = (wd.size_in && isIndia)
       ? '<div style="font-size:0.78rem;background:var(--accent-light);border-radius:8px;padding:8px 12px;margin-top:12px;border-left:3px solid var(--accent)">🇮🇳 Indian size equivalent: <strong>' + wd.size_in + '</strong></div>'
       : '';
 
@@ -1868,7 +1908,17 @@
   }
 
   function kcUpdateDisplay() {
-    document.getElementById('kcCount').innerText = kcHits.length;
+    var count = kcHits.length;
+    document.getElementById('kcCount').innerText = count;
+    
+    // Update Progress Ring (Circumference is 502.6 for r=80)
+    var ring = document.getElementById('kcProgressRing');
+    if (ring) {
+      var pct = Math.min(count / 10, 1);
+      var offset = 502.6 - (pct * 502.6);
+      ring.style.strokeDashoffset = offset;
+    }
+
     if (kcStartTime) {
       document.getElementById('kcTimer').innerText = kcFormatTime(Date.now() - kcStartTime);
     }
@@ -1880,28 +1930,42 @@
       kcActive = true;
       kcStartTime = Date.now();
       kcHits = [];
-      document.getElementById('kcBtn').innerText = 'I Felt a Kick!';
+      document.getElementById('kcBtn').innerText = 'I Felt a Kick! 🦶';
       document.getElementById('kcStopBtn').style.display = 'inline-block';
+      document.getElementById('kcEncourage').style.display = 'none';
       kcInterval = setInterval(kcUpdateDisplay, 1000);
-      document.getElementById('kcHistory').innerHTML = '<div style="text-align:center;padding:10px;color:var(--text-muted)">Session started...</div>';
+      document.getElementById('kcHistory').innerHTML = '<div style="text-align:center;padding:10px;color:var(--text-muted);font-size:0.85rem">Session started. Tap when you feel a movement.</div>';
+      return;
     }
     
     // Record kick
     kcHits.push(Date.now());
     kcUpdateDisplay();
     
+    // Haptic feedback feel (animation)
+    var btn = document.getElementById('kcBtn');
+    btn.style.transform = 'scale(0.92)';
+    setTimeout(() => { btn.style.transform = ''; }, 100);
+
     // Show in history
     var d = new Date();
     var timeStr = d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'});
-    var itemHtml = '<div class="history-item"><span>Kick #' + kcHits.length + '</span><span>' + timeStr + '</span></div>';
+    var dateStr = d.toLocaleDateString([], {day: 'numeric', month: 'short'});
+    
+    var itemHtml = '<div class="history-card">' +
+      '<div class="hc-left"><span class="hc-time">Kick #' + kcHits.length + '</span><span class="hc-date">' + timeStr + '</span></div>' +
+      '<div class="hc-right">✅</div>' +
+    '</div>';
     
     var hist = document.getElementById('kcHistory');
-    if (kcHits.length === 1) hist.innerHTML = ''; // clear "started" message
+    if (kcHits.length === 1) hist.innerHTML = ''; // clear initial message
     hist.insertAdjacentHTML('afterbegin', itemHtml);
 
     // Goal reached?
     if (kcHits.length === 10) {
-      hist.insertAdjacentHTML('afterbegin', '<div style="background:#d1fae5;color:#065f46;padding:8px;border-radius:6px;margin-bottom:8px;text-align:center;font-weight:600;font-size:0.8rem">✅ Goal Reached! 10 kicks recorded.</div>');
+      document.getElementById('kcEncourage').style.display = 'block';
+      // Optional: stop timer or keep going if mum wants to count more? 
+      // Medical advice is "10 kicks in 2 hours", so we let her keep going if she wants, but celebrate the milestone.
     }
   }
 
@@ -1910,6 +1974,9 @@
     clearInterval(kcInterval);
     document.getElementById('kcBtn').innerText = 'Start New Session';
     document.getElementById('kcStopBtn').style.display = 'none';
+    // Keep history visible but show it's ended
+    var hist = document.getElementById('kcHistory');
+    hist.insertAdjacentHTML('afterbegin', '<div style="text-align:center;padding:8px;font-size:0.75rem;color:var(--text-muted);border-bottom:1px dashed #ccc;margin-bottom:10px">Session ended. Total: ' + kcHits.length + ' kicks.</div>');
   }
 
   // ─────────────────────────────────────────────────────────
@@ -1936,14 +2003,18 @@
   }
 
   function check511Rule() {
-    if (ctHistoryList.length < 3) return; // need a few to check
+    if (ctHistoryList.length < 3) return;
     
-    // Check last 3 contractions
-    var recent = ctHistoryList.slice(0, 3);
-    var allLastMinute = recent.every(function(c) { return c.duration >= 50000; }); // ~1 min
-    var all5MinApart = recent.every(function(c) { return c.interval && c.interval <= 360000; }); // ~5-6 mins
+    // The 5-1-1 Rule: 
+    // 5: Contractions are 5 mins apart (interval <= 6 mins)
+    // 1: Each lasts 1 full minute (duration >= 50-60s)
+    // 1: Consistent for 1 hour (check timestamps of last 3-5)
     
-    if (allLastMinute && all5MinApart) {
+    var recent = ctHistoryList.slice(0, 4); // check last 4 for better consistency
+    var allGoodDuration = recent.every(c => c.duration >= 45000); // at least 45s (close enough to 1m)
+    var allGoodInterval = recent.every(c => !c.interval || c.interval <= 360000); // 6 mins or less apart
+    
+    if (allGoodDuration && allGoodInterval) {
       document.getElementById('ctAlert').style.display = 'block';
     } else {
       document.getElementById('ctAlert').style.display = 'none';
@@ -1953,22 +2024,21 @@
   function ctRenderHistory() {
     var hist = document.getElementById('ctHistory');
     if (ctHistoryList.length === 0) {
-      hist.innerHTML = '';
+      hist.innerHTML = '<div style="text-align:center;padding:10px;color:var(--text-muted);font-size:0.85rem">No history yet. Tap the button to start.</div>';
       return;
     }
     
     var html = ctHistoryList.map(function(c, i) {
       var d = new Date(c.start);
       var timeStr = d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-      var intStr = c.interval ? ctFormatDuration(c.interval) : '--';
-      return '<div class="history-item" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center">' +
-        '<span style="text-align:left">' + timeStr + '</span>' +
-        '<span>' + ctFormatDuration(c.duration) + ' long</span>' +
-        '<span style="text-align:right">' + intStr + ' apart</span>' +
-        '</div>';
+      var durStr = ctFormatDuration(c.duration);
+      var intStr = c.interval ? ctFormatDuration(c.interval) + ' apart' : 'First one';
+      
+      return '<div class="history-card">' +
+        '<div class="hc-left"><span class="hc-time">' + timeStr + '</span><span class="hc-date">' + intStr + '</span></div>' +
+        '<div class="hc-right" style="color:var(--primary)">' + durStr + '</div>' +
+      '</div>';
     }).join('');
-    
-    html = '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center;font-size:0.7rem;text-transform:uppercase;color:var(--text-muted);font-weight:700;margin-bottom:5px;border-bottom:1px solid #eee;padding-bottom:5px"><span style="text-align:left">Time</span><span>Duration</span><span style="text-align:right">Apart</span></div>' + html;
     
     hist.innerHTML = html;
   }

@@ -1214,8 +1214,14 @@
   // Call once on page load so images are ready before user taps a week
   loadWeekImages();
 
-  // Render a week's image: Wikipedia photo → OpenMoji SVG → native emoji fallback
+  const AI_SCALE_WEEKS = [12, 20, 30, 40];
+
+  // Render a week's image: AI Scale image → Wikipedia photo → OpenMoji SVG → native emoji fallback
   function weekImg(wkNum, emoji) {
+    wkNum = Number(wkNum);
+    if (AI_SCALE_WEEKS.includes(wkNum)) {
+      return '<div style="position:relative;display:inline-block"><img class="emoji-img" src="assets/fruits/week_' + wkNum + '.png" alt="Week ' + wkNum + ' true scale" loading="lazy" draggable="false" onerror="this.src=\'\';"><div style="position:absolute;bottom:0;right:0;background:var(--primary);color:#fff;font-size:0.5rem;padding:2px 4px;border-radius:4px;font-weight:bold;line-height:1">AI Scale View</div></div>';
+    }
     if (WIKI_IMGS[wkNum]) {
       return '<img class="emoji-img" src="' + WIKI_IMGS[wkNum] + '" alt="Week ' + wkNum + ' size" loading="lazy" draggable="false" onerror="this.src=\'\';">';
     }

@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About - Pregnancy Week Tracker</title>
-  <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVGV89T5QG"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-LVGV89T5QG');</script>
 
@@ -25,13 +24,25 @@
     body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; margin: 0; }
     .navbar { background: #fff; padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
     .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-    .nav-brand { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--primary); text-decoration: none; font-size: 1.2rem; }
+    .nav-brand { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--primary); text-decoration: none; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
     .nav-links a { margin-left: 20px; text-decoration: none; color: var(--text); font-weight: 500; font-size: 0.9rem; }
     .nav-links a:hover { color: var(--primary); }
     
-    .container { max-width: 800px; margin: 60px auto; background: #fff; padding: 40px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-    h1 { font-family: 'Outfit', sans-serif; color: var(--primary); margin-top: 0; }
+    .container { max-width: 900px; margin: 60px auto; background: #fff; padding: 60px; border-radius: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    h1 { font-family: 'Outfit', sans-serif; color: var(--primary); margin-top: 0; font-size: 2.5rem; margin-bottom: 24px; text-align: center; }
+    h2 { font-family: 'Outfit', sans-serif; color: var(--text); font-size: 1.6rem; margin-top: 40px; margin-bottom: 16px; }
+    p { margin-bottom: 20px; font-size: 1.1rem; color: #374151; }
     
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin: 48px 0; }
+    .feature-card { text-align: center; padding: 32px 24px; background: var(--bg); border-radius: 20px; border: 1px solid #f3d6e8; }
+    .feature-emoji { font-size: 2.5rem; margin-bottom: 16px; display: block; }
+    .feature-card h3 { font-family: 'Outfit', sans-serif; font-size: 1.2rem; color: var(--primary); margin-bottom: 8px; }
+    .feature-card p { font-size: 0.9rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
+
+    .source-list { background: #f9fafb; padding: 24px; border-radius: 16px; border-left: 4px solid var(--primary); font-size: 0.95rem; }
+    .source-list ul { margin: 12px 0 0; padding-left: 20px; }
+    .source-list li { margin-bottom: 8px; }
+
     .footer { background: #fff; padding: 60px 20px 30px; border-top: 1px solid #eee; margin-top: 80px; }
     .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
     .footer-brand { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--primary); font-size: 1.4rem; margin-bottom: 10px; }
@@ -43,11 +54,8 @@
     .footer-copy { max-width: 1200px; margin: 40px auto 0; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
 
     @media (max-width: 768px) {
-      .nav-inner { flex-direction: column; gap: 10px; text-align: center; }
-      .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-      .nav-links a { margin: 0; }
-      .container { margin: 30px 15px; padding: 25px; border-radius: 15px; }
-      h1 { font-size: 1.6rem; }
+      .container { margin: 20px 15px; padding: 32px 20px; border-radius: 20px; }
+      h1 { font-size: 2rem; }
       .footer-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
     }
   </style>
@@ -55,7 +63,10 @@
 <body>
   <nav class="navbar">
     <div class="nav-inner">
-      <a href="index.html" class="nav-brand">Pregnancy<span style="color:var(--accent)">Week</span>Tracker</a>
+      <a href="index.html" class="nav-brand">
+        <img src="assets/logo/logo.png" alt="PWT Logo" style="height:24px;">
+        Pregnancy<span style="color:var(--accent)">Week</span>Tracker
+      </a>
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="about.html" style="color:var(--primary)">About</a>
@@ -66,15 +77,43 @@
 
   <div class="container">
     <h1>About Pregnancy Week Tracker</h1>
-    <p>Welcome to Pregnancy Week Tracker, a simple, privacy-first tool designed to help expectant parents track their baby's development without the clutter of traditional apps.</p>
-    <p>I built this tool for my sister-in-law when she was pregnant. I noticed that most pregnancy apps require forced signups, collect too much personal data, and are often overloaded with ads and marketing emails.</p>
-    <p><strong>Our Philosophy:</strong></p>
-    <ul>
-      <li><strong>Privacy First:</strong> We don't store your data. All calculations happen in your browser.</li>
-      <li><strong>No Signups:</strong> You don't need an account to use any of our tools.</li>
-      <li><strong>Visual Scale:</strong> We use high-quality vector icons to help you visualize your baby's size each week.</li>
-    </ul>
-    <p>If you have any feedback or suggestions, please feel free to reach out via our <a href="contact.html">contact page</a>.</p>
+    <p>Welcome to Pregnancy Week Tracker — a simple, premium, and privacy-first resource for expectant parents.</p>
+    
+    <h2>Why I Built This Tool</h2>
+    <p>As a father of two, I’ve seen first-hand the incredible journey of pregnancy — and the frustration of trying to find clear, simple information. Most apps today are overloaded with ads, forced sign-ups, and collection of too much personal data.</p>
+    <p>I wanted to create a free, privacy-first resource for moms and their families. This project is the result of extensive research into fetal development, combined with our unique <strong>Scale-Accurate Photography</strong>. Unlike generic icons, our comparisons use real-world objects to give you a true sense of your baby's growth.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <span class="feature-emoji">🛡️</span>
+        <h3>Privacy First</h3>
+        <p>No data stored on any server. Everything stays in your browser. We don't track your pregnancy journey.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-emoji">📏</span>
+        <h3>Scientifically Sourced</h3>
+        <p>Sizes and development milestones are based on vetted clinical data and international medical standards.</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-emoji">📸</span>
+        <h3>Real Scale</h3>
+        <p>Comparisons designed to give a tangible sense of scale using real-world objects, not just generic icons.</p>
+      </div>
+    </div>
+
+    <h2>Scientific Accuracy & Sources</h2>
+    <div class="source-list">
+      <strong>How we calculate your baby's size and progress:</strong>
+      <p>Our week-by-week data, fetal lengths, and development milestones are sourced from established medical and research organizations, including:</p>
+      <ul>
+        <li><strong>Carnegie Stages:</strong> The global standard for human embryonic development.</li>
+        <li><strong>World Health Organization (WHO):</strong> Fetal growth charts and prenatal care guidelines.</li>
+        <li><strong>NIH / PubMed:</strong> Clinical research on gestational development and anatomical changes.</li>
+        <li><strong>ACOG (American College of Obstetricians and Gynecologists):</strong> Standards for gestational age and due date calculation (Naegele's Rule).</li>
+      </ul>
+    </div>
+
+    <p style="margin-top: 32px;">If you have any feedback or suggestions, please feel free to reach out via our <a href="contact.html">contact page</a>.</p>
   </div>
 
   <footer class="footer">
@@ -86,9 +125,11 @@
       <div class="footer-links">
         <h4>Tools</h4>
         <ul>
-          <li><a href="index.html">Pregnancy Tracker</a></li>
-          <li><a href="index.html#kick-counter">Kick Counter</a></li>
+          <li><a href="index.html">Pregnancy Week Tracker</a></li>
+          <li><a href="index.html#all-weeks">Week by Week Guide</a></li>
+          <li><a href="index.html#kick-counter">Baby Kick Counter</a></li>
           <li><a href="index.html#contraction-timer">Contraction Timer</a></li>
+          <li><a href="index.html#gender-prediction">Fun Gender Predictor</a></li>
         </ul>
       </div>
       <div class="footer-links">

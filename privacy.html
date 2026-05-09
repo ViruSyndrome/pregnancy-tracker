@@ -4,109 +4,79 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy - Pregnancy Week Tracker</title>
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVGV89T5QG"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-LVGV89T5QG');</script>
-
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #be185d;
-      --primary-dark: #9d174d;
-      --primary-light: #fce7f3;
-      --accent: #f97316;
-      --bg: #fdf4f7;
-      --text: #111827;
-      --text-muted: #6b7280;
+      --primary: #be185d; --primary-dark: #9d174d; --primary-light: #fce7f3;
+      --accent: #f97316; --bg: #fdf4f7; --border: #f3d6e8;
+      --text: #111827; --text-muted: #6b7280; --radius: 20px;
     }
-    body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; margin: 0; }
-    .navbar { background: #fff; padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-    .nav-brand { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--primary); text-decoration: none; font-size: 1.2rem; }
-    .nav-links a { margin-left: 20px; text-decoration: none; color: var(--text); font-weight: 500; font-size: 0.9rem; }
-    .nav-links a:hover { color: var(--primary); }
-    
-    .container { max-width: 800px; margin: 60px auto; background: #fff; padding: 40px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-    h1 { font-family: 'Outfit', sans-serif; color: var(--primary); margin-top: 0; }
-    h2 { font-family: 'Outfit', sans-serif; margin-top: 30px; font-size: 1.3rem; }
-    
-    .footer { background: #fff; padding: 60px 20px 30px; border-top: 1px solid #eee; margin-top: 80px; }
-    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
-    .footer-brand { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--primary); font-size: 1.4rem; margin-bottom: 10px; }
-    .footer-links h4 { margin-bottom: 20px; color: var(--text); }
-    .footer-links ul { list-style: none; padding: 0; }
-    .footer-links li { margin-bottom: 12px; }
-    .footer-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
-    .footer-links a:hover { color: var(--primary); }
-    .footer-copy { max-width: 1200px; margin: 40px auto 0; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
-
-    @media (max-width: 768px) {
-      .nav-inner { flex-direction: column; gap: 10px; text-align: center; }
-      .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-      .nav-links a { margin: 0; }
-      .container { margin: 30px 15px; padding: 25px; border-radius: 15px; }
-      h1 { font-size: 1.6rem; }
-      .footer-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+    .navbar { background: #fff; padding: 16px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.25rem; color: var(--primary); text-decoration: none; }
+    .logo span { color: var(--accent); }
+    .container { max-width: 800px; margin: 60px auto; background: #fff; padding: 48px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    h1 { font-family: 'Outfit', sans-serif; color: var(--primary); margin-bottom: 24px; }
+    h2 { font-family: 'Outfit', sans-serif; color: var(--text); margin-top: 32px; margin-bottom: 16px; }
+    p { margin-bottom: 16px; }
+    .footer { background: #fff; padding: 60px 0; border-top: 1px solid var(--border); margin-top: 80px; text-align: center; }
   </style>
 </head>
 <body>
   <nav class="navbar">
     <div class="nav-inner">
-      <a href="index.html" class="nav-brand">Pregnancy<span style="color:var(--accent)">Week</span>Tracker</a>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-      </div>
+      <a href="index.html" class="logo">Pregnancy <span>Week</span> Tracker</a>
     </div>
   </nav>
-
   <div class="container">
     <h1>Privacy Policy</h1>
-    <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:28px;">Last updated: May 7, 2026</p>
+    <p>Last updated: May 2026</p>
+    <p>At Pregnancy Week Tracker, we take your privacy seriously. This tool is designed to be completely anonymous and private.</p>
     
-    <h2>1. We Don't Collect Your Data</h2>
-    <p>Pregnancy Week Tracker is a privacy-first tool. All calculations related to your Last Menstrual Period (LMP) or due date happen entirely within your own web browser. We do not store, transmit, or have any access to the dates you enter or the results generated.</p>
-
-    <h2>2. Cookies and Analytics</h2>
-    <p>We use Google Analytics (GA4) to understand general traffic patterns (e.g., how many people visit the site each day). This data is anonymized and does not include any information that could identify you personally or your specific pregnancy details.</p>
-
-    <h2>3. Third-Party Links</h2>
-    <p>Our site contains links to Amazon (affiliate links). If you click on these links and make a purchase, we may earn a small commission at no extra cost to you. Please refer to Amazon's own privacy policy for details on how they handle your data.</p>
-
+    <h2>1. No Data Collection</h2>
+    <p>We do not collect or store any personal information. All dates, calculations, and results stay entirely in your web browser. Nothing is sent to our servers.</p>
+    
+    <h2>2. Cookies</h2>
+    <p>We use essential local storage only to remember your comparison mode (Fruit vs Object). We do not use tracking cookies or third-party advertising cookies that track your identity.</p>
+    
+    <h2>3. External Links</h2>
+    <p>Our site contains links to other websites (like Amazon for product recommendations). We are not responsible for the privacy practices of those external sites.</p>
+    
     <h2>4. Contact</h2>
-    <p>If you have any questions about this policy, please contact us at hello@pregnancyweektracker.com.</p>
+    <p>If you have any questions about this policy, please contact us via our contact page.</p>
   </div>
-
-  <footer class="footer">
-    <div class="footer-inner">
-      <div>
-        <div class="footer-brand">PregnancyWeekTracker</div>
-        <p style="color:var(--text-muted); font-size:0.9rem;">Free pregnancy tools for expectant parents. No sign-up. No data stored. Just answers.</p>
+  <footer class="footer" style="background: var(--text); color: #e5e7eb; padding: 60px 24px 32px; border-top: none; margin-top: 80px;">
+    <div class="footer-inner" style="max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between; text-align: left;">
+      <div style="flex: 1; min-width: 250px;">
+        <div class="footer-brand" style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.2rem; color: #fff; margin-bottom: 16px;">Pregnancy<span style="color:var(--accent)">Week</span>Tracker</div>
+        <p style="color:#9ca3af; font-size:0.875rem; line-height: 1.6;">Free pregnancy tools for expectant parents. No sign-up. No data stored. Just answers.</p>
       </div>
       <div class="footer-links">
-        <h4>Tools</h4>
-        <ul>
-          <li><a href="index.html">Pregnancy Tracker</a></li>
-          <li><a href="index.html#kick-counter">Kick Counter</a></li>
-          <li><a href="index.html#contraction-timer">Contraction Timer</a></li>
+        <h4 style="font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: #9ca3af; margin-bottom: 20px; letter-spacing: 0.05em;">Tools</h4>
+        <ul style="list-style: none;">
+          <li style="margin-bottom: 12px;"><a href="index.html" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">Pregnancy Week Tracker</a></li>
+          <li style="margin-bottom: 12px;"><a href="index.html#all-weeks" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">Week by Week Guide</a></li>
+          <li style="margin-bottom: 12px;"><a href="index.html#kick-counter" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">Baby Kick Counter</a></li>
+          <li style="margin-bottom: 12px;"><a href="index.html#contraction-timer" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">Contraction Timer</a></li>
+          <li style="margin-bottom: 12px;"><a href="index.html#gender-prediction" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">Fun Gender Predictor</a></li>
         </ul>
       </div>
       <div class="footer-links">
-        <h4>Info</h4>
-        <ul>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="privacy.html">Privacy Policy</a></li>
-          <li><a href="terms.html">Terms of Use</a></li>
+        <h4 style="font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: #9ca3af; margin-bottom: 20px; letter-spacing: 0.05em;">Info</h4>
+        <ul style="list-style: none;">
+          <li style="margin-bottom: 12px;"><a href="about.html" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">About</a></li>
+          <li style="margin-bottom: 12px;"><a href="contact.html" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">Contact</a></li>
+          <li style="margin-bottom: 12px;"><a href="privacy.html" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">Privacy Policy</a></li>
+          <li style="margin-bottom: 12px;"><a href="terms.html" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">Terms of Use</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-copy">
+    <div style="max-width: 1000px; margin: 60px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.82rem; color: #6b7280; text-align: center;">
       © 2026 PregnancyWeekTracker. For informational purposes only — not medical advice.
     </div>
   </footer>

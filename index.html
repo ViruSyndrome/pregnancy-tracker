@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pregnancy Week Tracker — How Many Weeks Pregnant Am I? | PregnancyWeekTracker</title>
+  <title>Pregnancy Week Tracker - Track Baby's Development</title>
   <meta name="description" content="Free pregnancy week tracker. Enter your last period date to instantly find out how many weeks pregnant you are, your due date, baby's size and development this week. No sign-up required.">
   <link rel="canonical" href="https://www.pregnancyweektracker.com/">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=9">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Pregnancy Week Tracker — How Many Weeks Pregnant Am I?">
@@ -42,7 +42,7 @@
     "operatingSystem": "All",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
     "featureList": ["Due date calculator", "Week-by-week fetal development", "Baby size guide", "Trimester tracker", "Pregnancy product guide"]
-  }
+}
   </script>
 
   <style>
@@ -63,7 +63,7 @@
       --radius: 20px;
       --shadow: 0 10px 30px rgba(190, 24, 93, 0.07);
       --shadow-sm: 0 4px 12px rgba(190, 24, 93, 0.04);
-    }
+  }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
@@ -72,7 +72,7 @@
       color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
-    }
+  }
 
     body::before {
       content: "";
@@ -88,12 +88,12 @@
       animation: pwtFloat 25s linear infinite;
       z-index: -1;
       pointer-events: none;
-    }
+  }
 
     @keyframes pwtFloat {
       0%   { transform: translate(0px, 0px); }
       100% { transform: translate(0px, -200px); }
-    }
+  }
 
     /* Modal for big image */
     .img-modal {
@@ -109,14 +109,14 @@
       justify-content: center;
       cursor: zoom-out;
       backdrop-filter: blur(5px);
-    }
+  }
     .img-modal-content {
       max-width: 98%;
       max-height: 98%;
       border-radius: 12px;
       box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
       transition: transform 0.3s ease;
-    }
+  }
     .img-modal-content:active { transform: scale(0.98); }
 
     /* ── NAVBAR ── */
@@ -127,22 +127,22 @@
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 0 24px;
-    }
+  }
     .nav-inner {
-      max-width: 980px; margin: 0 auto;
+      max-width: 1000px; margin: 0 auto;
       display: flex; align-items: center; justify-content: space-between;
-      height: 56px;
-    }
+      height: 64px;
+  }
     .nav-brand {
       display: flex; align-items: center; gap: 10px;
       text-decoration: none; font-weight: 700; font-size: 1rem; color: var(--primary);
-    }
+  }
     .nav-brand svg { color: var(--primary); }
     .nav-links { display: flex; gap: 20px; }
     .nav-links a {
       text-decoration: none; font-size: 0.875rem; font-weight: 500;
       color: var(--text-muted); transition: color 0.2s;
-    }
+  }
     .nav-links a:hover { color: var(--primary); }
 
     /* ── HERO ── */
@@ -150,7 +150,7 @@
       background: linear-gradient(135deg, rgba(255,240,246,0.6) 0%, rgba(255,247,237,0.4) 50%, rgba(253,244,247,0.6) 100%);
       padding: 60px 24px 48px;
       text-align: center;
-    }
+  }
     .hero-eyebrow {
       display: inline-block;
       background: var(--primary-light);
@@ -158,7 +158,7 @@
       font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
       padding: 4px 12px; border-radius: 999px; margin-bottom: 16px;
       text-transform: uppercase;
-    }
+  }
     .hero h1 {
       font-family: 'Outfit', sans-serif;
       font-size: clamp(2.2rem, 6vw, 3.5rem);
@@ -166,11 +166,11 @@
       margin-bottom: 20px;
       background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
+  }
     .hero-sub {
       font-size: 1.05rem; color: var(--text-muted);
       max-width: 520px; margin: 0 auto 36px;
-    }
+  }
 
     /* ── CALCULATOR CARD ── */
     .calc-card {
@@ -178,27 +178,27 @@
       box-shadow: var(--shadow);
       max-width: 600px; margin: 0 auto;
       padding: 32px;
-    }
+  }
     .calc-toggle {
       display: flex; gap: 0;
       background: var(--bg); border-radius: 10px;
       padding: 4px; margin-bottom: 24px;
-    }
+  }
     .calc-toggle button {
       flex: 1; padding: 8px 16px;
       border: none; cursor: pointer; border-radius: 8px;
       font-size: 0.875rem; font-weight: 500; color: var(--text-muted);
       background: transparent; transition: all 0.2s;
-    }
+  }
     .calc-toggle button.active {
       background: var(--bg-card); color: var(--primary);
       font-weight: 600; box-shadow: var(--shadow-sm);
-    }
+  }
     .input-group { margin-bottom: 20px; }
     .input-group label {
       display: block; font-size: 0.875rem; font-weight: 600;
       color: var(--text); margin-bottom: 8px;
-    }
+  }
     .input-group input[type="date"], .input-group input[type="number"] {
       width: 100%; padding: 12px 16px;
       border: 2px solid var(--border); border-radius: 10px;
@@ -206,7 +206,7 @@
       background: var(--bg); outline: none; transition: border-color 0.2s;
       -webkit-appearance: none;
       appearance: none;
-    }
+  }
     .input-group input:focus { border-color: var(--primary); background: #fff; }
     .input-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 6px; }
     .btn-calc {
@@ -215,19 +215,38 @@
       color: #fff; font-size: 1rem; font-weight: 700;
       border: none; border-radius: 10px; cursor: pointer;
       transition: opacity 0.2s, transform 0.1s; letter-spacing: 0.01em;
-    }
-    .btn-calc:hover { opacity: 0.92; }
-    .btn-calc:active { transform: scale(0.99); }
+  }
+    .btn-calc, .share-btn, .btn-predict, .tool-btn-main {
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+    .btn-calc:hover, .share-btn:hover, .btn-predict:hover, .tool-btn-main:hover {
+      transform: translateY(-2px) scale(1.02);
+      filter: brightness(1.1);
+      box-shadow: 0 12px 24px rgba(190, 24, 93, 0.2);
+  }
+    .btn-calc:active, .share-btn:active, .btn-predict:active, .tool-btn-main:active {
+      transform: translateY(0) scale(0.97);
+  }
 
-    /* ── MAIN CONTAINER ── */
-    .container { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+    .week-chip {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 12px;
+      cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex; flex-direction: column; gap: 3px;
+  }
+    .week-chip:hover { 
+      border-color: var(--primary); 
+      box-shadow: var(--shadow); 
+      transform: translateY(-5px) scale(1.03); 
+  }
 
     /* ── RESULT PANEL ── */
     #resultPanel { display: none; padding: 40px 0 0; }
     @keyframes fadeSlideUp {
       from { opacity: 0; transform: translateY(28px); }
       to   { opacity: 1; transform: translateY(0); }
-    }
+  }
     #resultPanel.reveal { animation: fadeSlideUp 0.6s cubic-bezier(0.22,1,0.36,1) both; }
 
     .result-headline { text-align: center; padding: 12px 0 28px; }
@@ -236,7 +255,7 @@
       background: linear-gradient(135deg, var(--primary), var(--accent));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       margin-bottom: 6px;
-    }
+  }
     .result-headline .rh-baby { font-size: 1.05rem; color: var(--text); font-weight: 500; margin-bottom: 6px; }
     .result-headline .rh-sub  { font-size: 0.9rem; color: var(--text-muted); }
 
@@ -244,7 +263,7 @@
       background: linear-gradient(135deg, var(--primary-light) 0%, #fff7ed 100%);
       border: 2px solid var(--primary); border-radius: 16px;
       padding: 20px 24px; text-align: center; margin-bottom: 24px;
-    }
+  }
     .ms-icon  { font-size: 2.4rem; display: block; margin-bottom: 6px; }
     .ms-title { font-size: 1.05rem; font-weight: 800; color: var(--primary); }
     .ms-sub   { font-size: 0.87rem; color: var(--text-muted); margin-top: 4px; line-height: 1.55; }
@@ -256,56 +275,63 @@
       font-size: 0.875rem; font-weight: 600; cursor: pointer; font-family: inherit;
       transition: all 0.2s; border: 2px solid var(--primary);
       background: var(--primary-light); color: var(--primary);
-    }
+  }
     .share-btn:hover { background: var(--primary); color: #fff; }
     .share-btn svg   { flex-shrink: 0; }
     .result-grid {
       display: grid; grid-template-columns: 1fr 1fr 1fr;
       gap: 16px; margin-bottom: 24px;
-    }
+  }
     .result-stat {
       background: var(--bg-card); border-radius: var(--radius);
       padding: 20px; text-align: center;
       box-shadow: var(--shadow-sm);
       border: 1px solid var(--border);
-    }
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: default;
+  }
+    .result-stat:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+      border-color: var(--primary);
+  }
     .result-stat .stat-value {
       font-size: 2rem; font-weight: 800; color: var(--primary);
       line-height: 1.1; margin-bottom: 4px;
-    }
+  }
     .result-stat .stat-label {
       font-size: 0.78rem; font-weight: 600; color: var(--text-muted);
       text-transform: uppercase; letter-spacing: 0.06em;
-    }
+  }
     .result-stat .stat-sub {
       font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;
-    }
+  }
 
     /* ── TRIMESTER PROGRESS ── */
     .trimester-bar-wrap {
       background: var(--bg-card); border-radius: var(--radius);
       padding: 20px 24px; margin-bottom: 24px;
       box-shadow: var(--shadow-sm); border: 1px solid var(--border);
-    }
+  }
     .trimester-labels {
       display: flex; justify-content: space-between;
       font-size: 0.75rem; font-weight: 600; color: var(--text-muted);
       margin-bottom: 8px;
-    }
+  }
     .trimester-labels span.active-tri { color: var(--primary); }
     .progress-track {
       height: 12px; background: var(--bg);
       border-radius: 999px; overflow: hidden;
-    }
+  }
     .progress-fill {
       height: 100%;
       background: linear-gradient(90deg, var(--primary), var(--accent));
       border-radius: 999px; transition: width 0.8s ease;
-    }
+  }
     .trimester-dividers {
       display: flex; justify-content: space-between;
       padding: 4px 0;
-    }
+  }
     .tri-div { font-size: 0.7rem; color: var(--text-muted); }
 
     /* ── WEEK DETAIL CARD ── */
@@ -313,16 +339,16 @@
       background: var(--bg-card); border-radius: var(--radius);
       box-shadow: var(--shadow); overflow: hidden;
       margin-bottom: 24px;
-    }
+  }
     .week-card-header {
       background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
       padding: 24px; color: #fff;
       display: flex; align-items: center; gap: 16px;
-    }
+  }
     .week-emoji { font-size: 3.5rem; line-height: 1; }
     .week-emoji img.emoji-img { 
       width: 150px; height: 150px; display: block; object-fit: contain; 
-    }
+  }
     .week-title-wrap {}
     .week-number { font-size: 0.75rem; font-weight: 600; opacity: 0.85; letter-spacing: 0.08em; text-transform: uppercase; }
     .week-size { font-size: 1.5rem; font-weight: 800; }
@@ -334,7 +360,7 @@
       font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
       letter-spacing: 0.07em; color: var(--primary); margin-bottom: 10px;
       display: flex; align-items: center; gap: 6px;
-    }
+  }
     .week-section p { font-size: 0.9rem; color: var(--text); line-height: 1.65; }
     .week-tip {
       margin-top: 20px; padding: 14px 18px;
@@ -342,7 +368,7 @@
       border-left: 3px solid var(--accent);
       font-size: 0.875rem; color: var(--text);
       display: flex; gap: 10px; align-items: flex-start;
-    }
+  }
     .week-tip strong { color: var(--accent); }
 
     /* ── PRODUCT RECOMMENDATIONS ── */
@@ -350,21 +376,21 @@
       background: var(--bg-card); border-radius: var(--radius);
       box-shadow: var(--shadow-sm); padding: 24px;
       margin-bottom: 24px; border: 1px solid var(--border);
-    }
+  }
     .products-section h2 {
       font-size: 1rem; font-weight: 700; color: var(--text);
       margin-bottom: 4px;
-    }
+  }
     .products-section .products-sub {
       font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;
-    }
+  }
     .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .product-card {
       border: 1px solid var(--border); border-radius: 10px;
       padding: 14px; display: flex; gap: 12px; align-items: flex-start;
       text-decoration: none; color: var(--text);
       transition: box-shadow 0.2s, border-color 0.2s; background: var(--bg);
-    }
+  }
     .product-card:hover { box-shadow: var(--shadow-sm); border-color: var(--primary); }
     .product-icon { font-size: 1.6rem; flex-shrink: 0; }
     .product-name { font-size: 0.82rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
@@ -373,7 +399,7 @@
       display: inline-block; font-size: 0.65rem; font-weight: 600;
       background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0;
       padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;
-    }
+  }
 
     /* ── ADVERT SLOT ── */
     .ad-slot {
@@ -381,128 +407,131 @@
       border-radius: var(--radius); padding: 24px; text-align: center;
       color: var(--text-muted); font-size: 0.8rem; margin: 24px 0;
       min-height: 90px; display: flex; align-items: center; justify-content: center;
-    }
+  }
 
     /* ── WEEKS TIMELINE ── */
     .timeline-section { padding: 40px 0; }
     .timeline-section h2 {
       font-size: 1.5rem; font-weight: 800; color: var(--text);
       margin-bottom: 8px;
-    }
+  }
     .timeline-section .section-sub {
       font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px;
-    }
+  }
     .tri-group { margin-bottom: 32px; }
     .tri-group-title {
       display: flex; align-items: center; gap: 12px;
       font-size: 1rem; font-weight: 700; color: var(--primary);
       margin-bottom: 12px; padding-bottom: 8px;
       border-bottom: 2px solid var(--primary-light);
-    }
+  }
     .tri-badge {
       background: var(--primary-light); color: var(--primary);
       font-size: 0.7rem; font-weight: 700; padding: 2px 10px;
       border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em;
-    }
+  }
     .weeks-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
       gap: 8px;
-    }
+  }
     .week-chip {
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: 10px; padding: 10px 12px;
       cursor: pointer; transition: all 0.18s;
       display: flex; flex-direction: column; gap: 3px;
-    }
+  }
     .week-chip:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); transform: translateY(-1px); }
     @keyframes chipPulse {
       0%, 100% { box-shadow: 0 0 0 0 rgba(190,24,93,0.28); }
       50%       { box-shadow: 0 0 0 8px rgba(190,24,93,0); }
-    }
+  }
     .week-chip.current {
       border-color: var(--primary); background: var(--primary-light);
       animation: chipPulse 2.5s ease infinite;
-    }
+  }
     .week-chip-num { font-size: 0.7rem; font-weight: 700; color: var(--primary); letter-spacing: 0.05em; text-transform: uppercase; }
     .week-chip-emoji { font-size: 1.4rem; line-height: 1; }
     .week-chip-emoji img.emoji-img { 
-      width: 52px; height: 52px; display: block; margin: 0 auto; 
+      max-width: 60px; max-height: 60px; width: auto; height: auto; display: block; margin: 0 auto; 
       object-fit: contain;
-    }
+  }
     .week-chip-size { font-size: 0.72rem; color: var(--text-muted); }
 
     /* ── SEO CONTENT ── */
-    .content-section { padding: 48px 0 24px; }
-    .content-section h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 16px; }
-    .content-section p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 16px; }
-    .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+    .content-section { padding: 48px 0 24px; text-align: center; }
+    .content-section h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 24px; font-family: 'Outfit', sans-serif; color: var(--primary); }
+    .content-section p { font-size: 1rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 16px; max-width: 800px; margin-left: auto; margin-right: auto; }
+    .content-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 32px; text-align: left; }
     .content-card {
-      background: var(--bg-card); border-radius: 12px;
-      padding: 20px; border: 1px solid var(--border);
-    }
-    .content-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; }
-    .content-card ul { padding-left: 18px; }
-    .content-card li { font-size: 0.87rem; color: var(--text-muted); margin-bottom: 6px; line-height: 1.5; }
+      background: var(--bg-card); border-radius: 20px;
+      padding: 28px; border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+  }
+    .content-card h3 { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 800; margin-bottom: 16px; color: var(--text); }
+    .content-card ul { padding-left: 20px; }
+    .content-card li { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; line-height: 1.5; }
 
     /* ── FAQ ── */
-    .faq-section { padding: 40px 0; }
-    .faq-section h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 24px; }
+    .faq-section { padding: 40px 0; text-align: center; }
+    .faq-section h2 { font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 800; margin-bottom: 32px; color: var(--primary); }
+    .faq-wrapper { max-width: 800px; margin: 0 auto; text-align: left; }
     .faq-item {
       background: var(--bg-card); border-radius: 10px; margin-bottom: 8px;
       border: 1px solid var(--border); overflow: hidden;
-    }
+  }
     .faq-q {
       padding: 16px 20px; font-weight: 600; font-size: 0.9rem; cursor: pointer;
       display: flex; justify-content: space-between; align-items: center;
       user-select: none;
-    }
+  }
     .faq-q:hover { background: var(--primary-light); }
     .faq-q svg { flex-shrink: 0; color: var(--primary); transition: transform 0.2s; }
     .faq-q.open svg { transform: rotate(45deg); }
     .faq-a {
       padding: 0 20px; font-size: 0.87rem; color: var(--text-muted); line-height: 1.7;
       max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.2s;
-    }
+  }
     .faq-a.open { max-height: 300px; padding: 0 20px 16px; }
 
     /* ── FOOTER ── */
     .footer {
       background: var(--text); color: #e5e7eb;
       padding: 40px 24px 24px;
-    }
+  }
     .footer-inner {
-      max-width: 980px; margin: 0 auto;
+      max-width: 1000px; margin: 0 auto;
       display: flex; flex-wrap: wrap; gap: 32px; justify-content: space-between;
-      padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .footer-brand { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
-    .footer-desc { font-size: 0.82rem; color: #9ca3af; max-width: 260px; line-height: 1.6; }
-    .footer-links h4 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #9ca3af; margin-bottom: 12px; }
+      padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+    .footer-brand { font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 800; color: #fff; margin-bottom: 12px; }
+    .footer-brand span { color: var(--accent); }
+    .footer-desc { font-size: 0.85rem; color: #9ca3af; max-width: 300px; line-height: 1.6; }
+    .footer-links h4 { font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; color: #9ca3af; margin-bottom: 16px; }
     .footer-links ul { list-style: none; }
-    .footer-links li { margin-bottom: 8px; }
-    .footer-links a { text-decoration: none; font-size: 0.85rem; color: #d1d5db; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a { text-decoration: none; font-size: 0.9rem; color: #d1d5db; transition: color 0.2s; }
     .footer-links a:hover { color: #fff; }
-    .footer-copy { max-width: 980px; margin: 0 auto; padding-top: 20px; font-size: 0.78rem; color: #6b7280; }
-    .footer-copy a { color: #9ca3af; text-decoration: none; }
-    .footer-copy a:hover { color: #fff; }
+    .footer-copy { max-width: 1000px; margin: 0 auto; padding-top: 24px; font-size: 0.82rem; color: #6b7280; text-align: center; }
+    .footer-copy a { color: #9ca3af; text-decoration: none; border-bottom: 1px dotted #4b5563; }
+    .footer-copy a:hover { color: #fff; border-bottom-style: solid; }
     .disclaimer {
       background: var(--accent-light); border: 1px solid #fed7aa;
       border-radius: 10px; padding: 14px 18px; margin: 24px 0;
       font-size: 0.8rem; color: var(--text-muted); line-height: 1.6;
-    }
+  }
 
     /* ── HAMBURGER ── */
     .hamburger {
       display: none; flex-direction: column; gap: 5px;
       background: none; border: none; cursor: pointer; padding: 4px;
       -webkit-tap-highlight-color: transparent;
-    }
+  }
     .hamburger span {
       display: block; width: 22px; height: 2px;
       background: var(--primary); border-radius: 2px;
       transition: transform 0.25s, opacity 0.25s;
-    }
+  }
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -515,13 +544,13 @@
         background: rgba(255,255,255,0.98); border-bottom: 1px solid var(--border);
         flex-direction: column; padding: 8px 0;
         box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      }
+    }
       .nav-links.open { display: flex; }
       .nav-links a {
         padding: 14px 24px; font-size: 1rem;
         border-bottom: 1px solid var(--border);
         min-height: 44px; display: flex; align-items: center;
-      }
+    }
       .result-grid { grid-template-columns: 1fr 1fr; }
       .week-sections { grid-template-columns: 1fr; }
       .products-grid { grid-template-columns: 1fr; }
@@ -536,10 +565,10 @@
       .share-btn { min-height: 44px; }
       .footer-inner { flex-direction: column; text-align: center; gap: 40px; }
       .footer-desc { margin: 0 auto; }
-    }
+  }
     @media (max-width: 420px) {
       .result-grid { grid-template-columns: 1fr; }
-    }
+  }
 
     /* ── WEEK DETAIL SECTION (permanent outside resultPanel) ── */
     #weekDetailSection { display: none; padding: 8px 0 0; }
@@ -550,7 +579,7 @@
       border-color: var(--accent); background: var(--accent-light);
       box-shadow: 0 0 0 3px rgba(249,115,22,0.15);
       transform: translateY(-2px);
-    }
+  }
     .week-chip:active { transform: scale(0.97); }
 
     /* ── GENDER PREDICTION SECTION ── */
@@ -560,7 +589,7 @@
       border: 1px solid #e9d5ff;
       padding: 32px;
       margin: 0 0 40px;
-    }
+  }
     .gender-section h2 { font-size: 1.4rem; font-weight: 800; color: #7c3aed; margin-bottom: 8px; }
     .gender-intro { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.65; }
     .gender-disclaimer {
@@ -568,26 +597,26 @@
       background: #fff; border-radius: 8px; padding: 10px 14px;
       border-left: 3px solid #f59e0b;
       margin-bottom: 20px; line-height: 1.65;
-    }
+  }
     .gender-inputs-grid {
       display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
       margin-bottom: 20px;
-    }
+  }
     .gender-input-card {
       background: #fff; border-radius: 12px; padding: 14px;
       border: 1px solid #e9d5ff;
-    }
+  }
     .gender-input-card label {
       display: block; font-size: 0.73rem; font-weight: 700;
       color: #7c3aed; margin-bottom: 8px;
       text-transform: uppercase; letter-spacing: 0.05em;
-    }
+  }
     .gender-options { display: flex; flex-wrap: wrap; gap: 5px; }
     .gender-opt {
       padding: 5px 10px; border: 1.5px solid #e9d5ff; border-radius: 6px;
       font-size: 0.76rem; font-weight: 500; cursor: pointer; background: #fff;
       transition: all 0.15s; color: var(--text); user-select: none; -webkit-user-select: none;
-    }
+  }
     .gender-opt:hover  { border-color: #7c3aed; background: #f5f3ff; }
     .gender-opt.selected { background: #7c3aed; color: #fff; border-color: #7c3aed; }
     .gender-num-input {
@@ -595,14 +624,14 @@
       border: 1.5px solid #e9d5ff; border-radius: 8px;
       font-size: 0.9rem; font-family: inherit; color: var(--text);
       outline: none; transition: border-color 0.15s; background: var(--bg);
-    }
+  }
     .gender-num-input:focus { border-color: #7c3aed; background: #fff; }
     .gender-select {
       width: 100%; padding: 8px 10px;
       border: 1.5px solid #e9d5ff; border-radius: 8px;
       font-size: 0.82rem; font-family: inherit; background: var(--bg);
       color: var(--text); outline: none; cursor: pointer; transition: border-color 0.15s;
-    }
+  }
     .gender-select:focus { border-color: #7c3aed; }
     .btn-predict {
       display: block; width: fit-content; margin: 0 auto;
@@ -611,13 +640,13 @@
       color: #fff; font-size: 1rem; font-weight: 700;
       border: none; border-radius: 10px; cursor: pointer;
       transition: opacity 0.2s, transform 0.1s;
-    }
+  }
     .btn-predict:hover  { opacity: 0.9; }
     .btn-predict:active { transform: scale(0.99); }
     .gender-result {
       background: #fff; border-radius: 12px; padding: 24px;
       border: 2px solid #e9d5ff; text-align: center; margin-top: 16px;
-    }
+  }
     .gender-verdict       { font-size: 2.2rem; font-weight: 800; margin: 10px 0 4px; }
     .gender-verdict.boy   { color: #3b82f6; }
     .gender-verdict.girl  { color: #be185d; }
@@ -625,7 +654,7 @@
     .gender-meter-track {
       height: 18px; background: #f1f5f9; border-radius: 999px;
       overflow: hidden; margin: 12px 0; display: flex;
-    }
+  }
     .gender-meter-boy  { background: linear-gradient(90deg,#60a5fa,#3b82f6); transition: width 0.8s ease; }
     .gender-meter-girl { background: linear-gradient(90deg,#f9a8d4,#be185d); transition: width 0.8s ease; }
     .gender-breakdown  { font-size: 0.78rem; color: var(--text-muted); }
@@ -634,24 +663,44 @@
       font-size: 0.74rem; color: var(--text-muted); font-style: italic;
       margin-top: 12px; padding: 10px 12px;
       background: var(--bg); border-radius: 8px; line-height: 1.55;
-    }
+  }
     .india-callout {
       background: #fff8f0; border: 1px solid #fed7aa;
       border-radius: 10px; padding: 12px 16px; margin-top: 16px;
       font-size: 0.78rem; color: var(--text); line-height: 1.65;
-    }
+  }
     @media (max-width: 640px) {
       .gender-inputs-grid { grid-template-columns: 1fr; }
       .gender-section { padding: 20px 16px; }
-    }
+      .glass-card { padding: 24px 16px; }
+  }
 
-    /* ── TOOLS SECTION (Kick Counter & Contraction Timer) ── */
+    /* ── GLASS CARDS ── */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: var(--radius);
+      padding: 40px;
+      box-shadow: var(--shadow);
+      margin-bottom: 48px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      z-index: 1;
+  }
+
+    /* ── TOOLS SECTION ── */
+    .tools-wrapper {
+      margin-bottom: 48px;
+  }
     .tools-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin: 0 0 40px;
-    }
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+  }
     .tool-card {
       background: #fff;
       border-radius: var(--radius);
@@ -663,25 +712,25 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
+  }
     .tool-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 15px 35px rgba(190, 24, 93, 0.1);
-    }
+  }
     .tool-card h2 {
       font-family: 'Outfit', sans-serif;
       font-size: 1.5rem;
       font-weight: 800;
       color: var(--primary);
       margin-bottom: 12px;
-    }
+  }
     .tool-desc {
       font-size: 0.9rem;
       color: var(--text-muted);
       margin-bottom: 24px;
       line-height: 1.6;
       max-width: 400px;
-    }
+  }
     
     /* Progress Circle for Kick Counter */
     .kc-visual {
@@ -689,18 +738,18 @@
       width: 180px; height: 180px;
       margin-bottom: 24px;
       display: flex; align-items: center; justify-content: center;
-    }
+  }
     .kc-svg { transform: rotate(-90deg); }
     .kc-bg { fill: none; stroke: var(--bg); stroke-width: 10; }
     .kc-progress {
       fill: none; stroke: var(--success); stroke-width: 10;
       stroke-linecap: round; stroke-dasharray: 502.6;
       stroke-dashoffset: 502.6; transition: stroke-dashoffset 0.6s ease;
-    }
+  }
     .kc-center {
       position: absolute;
       display: flex; flex-direction: column; align-items: center;
-    }
+  }
     .kc-val { font-size: 2.8rem; font-weight: 800; color: var(--text); line-height: 1; }
     .kc-lbl { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-top: 2px; }
 
@@ -711,26 +760,26 @@
       transition: all 0.2s; user-select: none;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       font-family: 'Outfit', sans-serif;
-    }
+  }
     .tool-btn-main:active { transform: scale(0.96); }
     
     .btn-kick-pulse {
       background: linear-gradient(135deg, var(--success), #059669);
       color: white;
-    }
-    .btn-contraction-start {
+  }
+    .btn-contraction-pulse {
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
       color: white;
-    }
+  }
     .btn-contraction-end {
       background: linear-gradient(135deg, var(--danger), #dc2626);
       color: white;
-    }
+  }
     
     .tool-timer-wrap {
       display: flex; align-items: center; gap: 8px; margin-bottom: 20px;
       font-weight: 700; color: var(--text); font-size: 1.2rem;
-    }
+  }
     .tool-timer-wrap span { font-variant-numeric: tabular-nums; }
 
     .tool-history-list {
@@ -741,13 +790,13 @@
       margin-top: 24px;
       max-height: 250px;
       overflow-y: auto;
-    }
+  }
     .history-card {
       background: white; border-radius: 8px; padding: 12px;
       margin-bottom: 8px; box-shadow: var(--shadow-sm);
       display: flex; justify-content: space-between; align-items: center;
       animation: slideIn 0.3s ease-out;
-    }
+  }
     @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
     .hc-left { display: flex; flex-direction: column; text-align: left; }
     .hc-time { font-size: 0.85rem; font-weight: 700; color: var(--text); }
@@ -759,18 +808,18 @@
       color: var(--danger); border-radius: 12px; padding: 16px;
       margin-bottom: 24px; font-weight: 800; text-align: center;
       animation: alertShake 0.5s ease infinite alternate;
-    }
+  }
     @keyframes alertShake { from { transform: scale(1); } to { transform: scale(1.02); } }
 
     .encouragement {
       font-size: 1rem; font-weight: 700; color: var(--success);
       margin-bottom: 16px; display: none;
-    }
+  }
 
     @media (max-width: 768px) {
       .tools-section { grid-template-columns: 1fr; }
       .tool-card { padding: 32px 16px; }
-    }
+  }
   </style>
 </head>
 <body>
@@ -778,16 +827,9 @@
   <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-inner">
-      <a href="/" class="nav-brand">
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="currentColor" opacity="0.12" stroke="none"/>
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" opacity="0.6"/>
-          <circle cx="9.5" cy="10" r="2.5" fill="currentColor" stroke="none"/>
-          <path d="M9.5 13.5c-2.3 0-4.5 1.5-4.5 4.5v1h9v-1c0-3-2.2-4.5-4.5-4.5z" fill="currentColor" stroke="none"/>
-          <circle cx="15.5" cy="14" r="1.8" fill="currentColor" stroke="none"/>
-          <path d="M15.5 16.5c-1.5 0-2.5 1-2.5 2.5v0h5v0c0-1.5-1-2.5-2.5-2.5z" fill="currentColor" stroke="none"/>
-        </svg>
-        Pregnancy<span style="color:var(--accent)">Week</span>Tracker
+      <a href="index.html" class="nav-brand" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+        <img src="pwt_premium_logo_v8_minimalist_1778363009996.png" alt="PWT Logo" style="height:38px; width:auto; border-radius:8px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));" />
+        <div style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.45rem; color:var(--text); letter-spacing:-0.03em;">Pregnancy<span style="color:var(--accent)">Week</span>Tracker</div>
       </a>
       <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
       <div class="nav-links">
@@ -836,32 +878,36 @@
         </div>
       </div>
 
-      <button class="btn-calc" onclick="calculate()">Calculate My Pregnancy Week →</button>
+      <button class="btn-calc" id="calcBtn" onclick="calculate()">Calculate My Pregnancy Week →</button>
     </div>
   </section>
 
   <!-- RESULT PANEL -->
-  <div class="container">
+  <div class="container" style="max-width:900px; margin:0 auto;">
     <div id="resultPanel">
+      <div class="glass-card">
+        <div class="result-headline" id="resultHeadline"></div>
+        <div id="milestoneBanner" class="milestone-banner" style="display:none"></div>
 
-      <!-- Celebratory headline -->
-      <div id="resultHeadline" class="result-headline"></div>
+        <!-- Growth Curve -->
+        <div style="padding:20px 0; margin-bottom:24px; text-align:center; background:rgba(255,255,255,0.3); border-radius:16px;">
+          <h3 style="font-family:'Outfit',sans-serif; font-size:1rem; font-weight:800; color:var(--primary); margin-bottom:12px;">📈 Baby's Growth Curve</h3>
+          <div id="growthGraph" style="position:relative; width:100%; height:120px; background:rgba(0,0,0,0.02); border-radius:12px; padding:10px;">
+            <!-- SVG injected here -->
+          </div>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin-top:10px;">Visualizing baby's length week-by-week (mm)</p>
+        </div>
 
-      <!-- Milestone banner (shown at key weeks only) -->
-      <div id="milestoneBanner" class="milestone-banner" style="display:none"></div>
+        <div class="result-grid" id="statGrid"></div>
 
-      <!-- Stats -->
-      <div class="result-grid" id="statGrid"></div>
-
-      <!-- Share row -->
-      <div class="share-row" id="shareRow" style="display:none">
-        <button class="share-btn" id="shareBtn" onclick="shareResult()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-          Share Your News
-        </button>
+        <div class="share-row" id="shareRow" style="display:none">
+          <button class="share-btn" id="shareBtn" onclick="shareResult()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Share Your News
+          </button>
+        </div>
       </div>
 
-      <!-- Trimester progress -->
       <div class="trimester-bar-wrap" id="trimBar"></div>
 
       <!-- Week detail card -->
@@ -901,93 +947,96 @@
     </div>
 
     <!-- ── EVERYDAY TOOLS ── -->
-    <section class="tools-section" id="daily-tools">
-      
-      <!-- KICK COUNTER -->
-      <div class="tool-card" id="kick-counter">
-        <h2>🦶 Baby Kick Counter</h2>
-        <p class="tool-desc">Standard medical advice is 10 kicks in 2 hours. Start counting when baby is active.</p>
+    <div class="tools-wrapper glass-card">
+      <section class="tools-section" id="daily-tools">
         
-        <div id="kcEncourage" class="encouragement">🎉 All 10 kicks counted! Baby is doing great.</div>
+        <!-- KICK COUNTER -->
+        <div class="tool-card" id="kick-counter">
+          <h2>🦶 Baby Kick Counter</h2>
+          <p class="tool-desc">Standard medical advice is 10 kicks in 2 hours. Start counting when baby is active.</p>
+          
+          <div id="kcEncourage" class="encouragement">🎉 All 10 kicks counted! Baby is doing great.</div>
 
-        <div class="kc-visual">
-          <svg class="kc-svg" width="180" height="180">
-            <circle class="kc-bg" cx="90" cy="90" r="80"></circle>
-            <circle id="kcProgressRing" class="kc-progress" cx="90" cy="90" r="80"></circle>
-          </svg>
-          <div class="kc-center">
-            <span id="kcCount" class="kc-val">0</span>
-            <span class="kc-lbl">Kicks</span>
+          <div class="kc-visual">
+            <svg class="kc-svg" width="180" height="180">
+              <circle class="kc-bg" cx="90" cy="90" r="80"></circle>
+              <circle id="kcProgressRing" class="kc-progress" cx="90" cy="90" r="80"></circle>
+            </svg>
+            <div class="kc-center">
+              <span id="kcCount" class="kc-val">0</span>
+              <span class="kc-lbl">Kicks</span>
+            </div>
+          </div>
+
+          <div class="tool-timer-wrap">
+            <span>⏱️</span> <span id="kcTimer">00:00</span>
+          </div>
+
+          <button class="tool-btn-main btn-kick-pulse" id="kcBtn" title="Start a new kick counting session" onclick="kcRecord()">Start Counting Kicks 🦶</button>
+          <button class="tool-btn-main btn-stop" id="kcStopBtn" style="display:none; padding:12px; margin-top:8px; opacity:0.8; font-size:0.9rem" onclick="kcStop()">Stop &amp; Save Session</button>
+
+          <div class="tool-history-list" id="kcHistory">
+            <!-- History injected here -->
+          </div>
+
+          <div style="font-size:0.85rem;color:var(--text-muted);margin-top:24px;text-align:left;background:rgba(0,0,0,0.03);padding:18px;border-radius:14px;border-left:4px solid var(--success)">
+            <strong style="color:var(--text)">Actionable Guide:</strong> 
+            <ul style="margin-top:10px;padding-left:20px;margin-bottom:0">
+              <li style="margin-bottom:6px"><strong>Daily Tracking:</strong> Start daily counts from 28 weeks.</li>
+              <li style="margin-bottom:6px"><strong>Goal:</strong> Reaching 10 movements (kicks, swishes, or rolls) in under 2 hours.</li>
+              <li><strong style="color:var(--danger)">Urgent:</strong> If you don't feel 10 movements in 2 hours, or notice a significant decrease in pattern, <strong>call your maternity unit immediately</strong>.</li>
+            </ul>
           </div>
         </div>
 
-        <div class="tool-timer-wrap">
-          <span>⏱️</span> <span id="kcTimer">00:00</span>
-        </div>
-
-        <button class="tool-btn-main btn-kick-pulse" id="kcBtn" onclick="kcRecord()">Start Counting</button>
-        <button class="tool-btn-main btn-stop" id="kcStopBtn" style="display:none; padding:12px; margin-top:8px; opacity:0.8; font-size:0.9rem" onclick="kcStop()">Stop &amp; Save Session</button>
-
-        <div class="tool-history-list" id="kcHistory">
-          <!-- History injected here -->
-        </div>
-
-        <div style="font-size:0.85rem;color:var(--text-muted);margin-top:24px;text-align:left;background:rgba(0,0,0,0.03);padding:18px;border-radius:14px;border-left:4px solid var(--success)">
-          <strong style="color:var(--text)">Actionable Guide:</strong> 
-          <ul style="margin-top:10px;padding-left:20px;margin-bottom:0">
-            <li style="margin-bottom:6px"><strong>Daily Tracking:</strong> Start daily counts from 28 weeks.</li>
-            <li style="margin-bottom:6px"><strong>Goal:</strong> Reaching 10 movements (kicks, swishes, or rolls) in under 2 hours.</li>
-            <li><strong style="color:var(--danger)">Urgent:</strong> If you don't feel 10 movements in 2 hours, or notice a significant decrease in pattern, <strong>call your maternity unit immediately</strong>.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- CONTRACTION TIMER -->
-      <div class="tool-card" id="contraction-timer">
-        <h2>⏱️ Contraction Timer</h2>
-        <p class="tool-desc">Track the frequency and duration of your contractions to know when it's time.</p>
-        
-        <div id="ctAlert" class="contraction-banner" style="display:none">
-          🚨 5-1-1 Rule Met: It may be time to go to the hospital!
-        </div>
-
-        <div class="tool-stats" style="width:100%; gap:12px; background:none; padding:0; margin-bottom:24px;">
-          <div class="stat-box" style="flex:1; background:var(--bg); padding:16px; border-radius:14px;">
-            <span class="stat-val" id="ctDuration" style="font-size:1.8rem; color:var(--primary)">0s</span>
-            <span class="stat-lbl">Duration</span>
+        <!-- CONTRACTION TIMER -->
+        <div class="tool-card" id="contraction-timer">
+          <h2>⏱️ Contraction Timer</h2>
+          <p class="tool-desc">Track frequency and duration. <strong>How to use:</strong> Tap when a contraction starts, then tap again when it ends. We'll calculate the intervals for you.</p>
+          
+          <div id="ctAlert" class="contraction-banner" style="display:none">
+            🚨 5-1-1 Rule Met: It may be time to go to the hospital!
           </div>
-          <div class="stat-box" style="flex:1; background:var(--bg); padding:16px; border-radius:14px;">
-            <span class="stat-val" id="ctInterval" style="font-size:1.8rem; color:var(--accent)">--</span>
-            <span class="stat-lbl">Interval</span>
+
+          <div class="tool-stats" style="width:100%; display:flex; gap:12px; background:none; padding:0; margin-bottom:24px;">
+            <div class="stat-box" style="flex:1; background:var(--bg); padding:16px; border-radius:14px; text-align:center;">
+              <span class="stat-val" id="ctDuration" style="font-size:1.8rem; color:var(--primary); font-weight:800; display:block;">0s</span>
+              <span class="stat-lbl" style="font-size:0.75rem; color:var(--text-muted); font-weight:700; text-transform:uppercase;">Duration</span>
+            </div>
+            <div class="stat-box" style="flex:1; background:var(--bg); padding:16px; border-radius:14px; text-align:center;">
+              <span class="stat-val" id="ctInterval" style="font-size:1.8rem; color:var(--accent); font-weight:800; display:block;">--</span>
+              <span class="stat-lbl" style="font-size:0.75rem; color:var(--text-muted); font-weight:700; text-transform:uppercase;">Interval</span>
+            </div>
+          </div>
+
+          <button class="tool-btn-main btn-contraction-pulse" id="ctBtn" title="Start tracking your contraction duration and frequency" onclick="ctToggle()">Start Timer (Contraction Started) ⏱️</button>
+          <button class="tool-btn-main btn-stop" id="ctResetBtn" title="Clear your contraction history" style="padding:12px; margin-top:8px; opacity:0.8; font-size:0.9rem" onclick="ctReset()">Reset Timer History</button>
+
+          <div class="tool-history-list" id="ctHistory">
+            <!-- History injected here -->
+          </div>
+
+          <div style="font-size:0.85rem;color:var(--text-muted);margin-top:24px;text-align:left;background:rgba(0,0,0,0.03);padding:18px;border-radius:14px;border-left:4px solid var(--primary)">
+            <strong style="color:var(--text)">Actionable Guide (The 5-1-1 Rule):</strong> 
+            <ul style="margin-top:10px;padding-left:20px;margin-bottom:0">
+              <li style="margin-bottom:6px"><strong>5:</strong> Contractions are <strong>5 mins apart</strong>.</li>
+              <li style="margin-bottom:6px"><strong>1:</strong> Each lasts for <strong>1 full minute</strong>.</li>
+              <li style="margin-bottom:6px"><strong>1:</strong> Pattern is consistent for <strong>1 hour</strong>.</li>
+              <li><strong style="color:var(--danger)">Urgent:</strong> If water breaks or you are bleeding, head to the hospital regardless of the 5-1-1 rule.</li>
+            </ul>
           </div>
         </div>
-
-        <button class="tool-btn-main btn-contraction-start" id="ctBtn" onclick="ctToggle()">Contraction Started</button>
-        <button class="tool-btn-main btn-stop" id="ctResetBtn" style="padding:12px; margin-top:8px; opacity:0.8; font-size:0.9rem" onclick="ctReset()">Reset History</button>
-
-        <div class="tool-history-list" id="ctHistory">
-          <!-- History injected here -->
-        </div>
-
-        <div style="font-size:0.85rem;color:var(--text-muted);margin-top:24px;text-align:left;background:rgba(0,0,0,0.03);padding:18px;border-radius:14px;border-left:4px solid var(--primary)">
-          <strong style="color:var(--text)">The 5-1-1 Rule:</strong> 
-          <ul style="margin-top:10px;padding-left:20px;margin-bottom:0">
-            <li style="margin-bottom:6px"><strong>5:</strong> Contractions are <strong>5 mins apart</strong>.</li>
-            <li style="margin-bottom:6px"><strong>1:</strong> Each lasts for <strong>1 full minute</strong>.</li>
-            <li style="margin-bottom:6px"><strong>1:</strong> Pattern is consistent for <strong>1 hour</strong>.</li>
-            <li><strong style="color:var(--danger)">Urgent:</strong> If water breaks or you are bleeding, head to the hospital regardless of the 5-1-1 rule.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
     <!-- ── GENDER PREDICTION QUIZ ── -->
     <section class="gender-section" id="gender-prediction">
-      <h2>🔮 Fun Gender Predictor</h2>
-      <p class="gender-intro">Try the old wives' tales from around the world. Answer what you know — skip the rest. The more you fill in, the more fun the result!</p>
-      <div class="gender-disclaimer">
-        ⚠️ <strong>For entertainment only.</strong> None of these methods are scientifically proven — most have ~50% accuracy, the same as a coin flip. In India, it is illegal for doctors to reveal a baby's sex under the PC-PNDT Act 1994. This tool exists purely for fun.
-      </div>
+      <div class="glass-card">
+        <h2>🔮 Fun Gender Predictor</h2>
+        <p class="gender-intro">Try the old wives' tales from around the world. Answer what you know — skip the rest. The more you fill in, the more fun the result!</p>
+        <div class="gender-disclaimer">
+          ⚠️ <strong>For entertainment only.</strong> None of these methods are scientifically proven — most have ~50% accuracy, the same as a coin flip. In India, it is illegal for doctors to reveal a baby's sex under the PC-PNDT Act 1994. This tool exists purely for fun.
+        </div>
 
       <div class="gender-inputs-grid">
         <!-- Heart Rate -->
@@ -1091,70 +1140,77 @@
         </div>
       </div>
 
-      <button class="btn-predict" onclick="predictGender()">🔮 Reveal My Prediction</button>
-      <div id="genderResult" class="gender-result" style="display:none"></div>
+        <button class="btn-predict" title="Calculate the probable gender based on traditional methods" onclick="predictGender()">🔮 Predict Baby's Gender</button>
+        <div id="genderResult" class="gender-result" style="display:none"></div>
 
-      <div class="india-callout">
-        🇮🇳 <strong>For Indian parents:</strong> Under the PC-PNDT Act 1994, it is illegal for doctors or sonographers to reveal a baby's sex in India — with penalties up to 3 years imprisonment. That's why Indian parents use fun prediction methods more than anywhere else in the world. This tool is provided purely for entertainment — the same way people worldwide use it before their 20-week scan.
+        <div class="india-callout">
+          🇮🇳 <strong>For Indian parents:</strong> Under the PC-PNDT Act 1994, it is illegal for doctors or sonographers to reveal a baby's sex in India — with penalties up to 3 years imprisonment. That's why Indian parents use fun prediction methods more than anywhere else in the world. This tool is provided purely for entertainment — the same way people worldwide use it before their 20-week scan.
+        </div>
       </div>
     </section>
 
     <!-- ── SEO CONTENT ── -->
     <section class="content-section">
-      <h2>Understanding Your Pregnancy Weeks</h2>
-      <p>Pregnancy is measured in weeks from the first day of your last menstrual period (LMP) — even though fertilisation actually occurs about two weeks later. This means that when your period is "late" by one week, you are technically already 5 weeks pregnant.</p>
-      <p>A full-term pregnancy lasts between 37 and 42 weeks. Your estimated due date (EDD) is calculated as 280 days (40 weeks) from your LMP. The due date is based on Naegele's rule, which adds 9 months and 7 days to your LMP.</p>
+      <div class="glass-card">
+        <h2>Understanding Your Pregnancy Weeks</h2>
+        <p>Pregnancy is measured in weeks from the first day of your last menstrual period (LMP) — even though fertilisation actually occurs about two weeks later. This means that when your period is "late" by one week, you are technically already 5 weeks pregnant.</p>
+        <p>A full-term pregnancy lasts between 37 and 42 weeks. Your estimated due date (EDD) is calculated as 280 days (40 weeks) from your LMP. The due date is based on Naegele's rule, which adds 9 months and 7 days to your LMP.</p>
 
-      <div class="content-grid">
-        <div class="content-card">
-          <h3>🌱 First Trimester (Weeks 1–12)</h3>
-          <ul>
-            <li>All major organs begin forming</li>
-            <li>Morning sickness often peaks at week 8–10</li>
-            <li>Miscarriage risk is highest — but drops sharply after week 12</li>
-            <li>12-week scan (dating scan) confirms due date</li>
-            <li>Most couples share news publicly after week 12</li>
-          </ul>
-        </div>
-        <div class="content-card">
-          <h3>🌸 Second Trimester (Weeks 13–26)</h3>
-          <ul>
-            <li>Nausea usually eases — the "golden trimester"</li>
-            <li>Baby movements felt from around week 18–20</li>
-            <li>20-week anomaly scan checks all organs in detail</li>
-            <li>Gender can often be determined at the 20-week scan</li>
-            <li>Bump becomes clearly visible</li>
-          </ul>
-        </div>
-        <div class="content-card">
-          <h3>🎀 Third Trimester (Weeks 27–40)</h3>
-          <ul>
-            <li>Baby gains most of its weight in these weeks</li>
-            <li>Braxton Hicks contractions become more frequent</li>
-            <li>Sleep becomes more difficult — use a pregnancy pillow</li>
-            <li>Baby "drops" (engages into pelvis) around week 35–36</li>
-            <li>Weekly midwife checks from week 36</li>
-          </ul>
-        </div>
-        <div class="content-card">
-          <h3>📋 Key Antenatal Appointments</h3>
-          <ul>
-            <li><strong>Week 8–10:</strong> First midwife appointment (booking appointment)</li>
-            <li><strong>Week 12:</strong> Dating scan + blood tests</li>
-            <li><strong>Week 16:</strong> Midwife check + blood results</li>
-            <li><strong>Week 20:</strong> Anomaly scan</li>
-            <li><strong>Week 28:</strong> Blood tests + anti-D if Rh negative</li>
-            <li><strong>Week 34–36:</strong> Midwife checks, position check</li>
-            <li><strong>Week 38–40+:</strong> Weekly midwife checks</li>
-          </ul>
+        <div class="content-grid">
+          <div class="content-card">
+            <h3>🌱 First Trimester (Weeks 1–12)</h3>
+            <ul>
+              <li>All major organs begin forming</li>
+              <li>Morning sickness often peaks at week 8–10</li>
+              <li>Miscarriage risk is highest — but drops sharply after week 12</li>
+              <li>12-week scan (dating scan) confirms due date</li>
+              <li>Most couples share news publicly after week 12</li>
+            </ul>
+          </div>
+          <div class="content-card">
+            <h3>🌸 Second Trimester (Weeks 13–26)</h3>
+            <ul>
+              <li>Nausea usually eases — the "golden trimester"</li>
+              <li>Baby movements felt from around week 18–20</li>
+              <li>20-week anomaly scan checks all organs in detail</li>
+              <li>Gender can often be determined at the 20-week scan</li>
+              <li>Bump becomes clearly visible</li>
+            </ul>
+          </div>
+          <div class="content-card">
+            <h3>🎀 Third Trimester (Weeks 27–40)</h3>
+            <ul>
+              <li>Baby gains most of its weight in these weeks</li>
+              <li>Braxton Hicks contractions become more frequent</li>
+              <li>Sleep becomes more difficult — use a pregnancy pillow</li>
+              <li>Baby "drops" (engages into pelvis) around week 35–36</li>
+              <li>Weekly midwife checks from week 36</li>
+            </ul>
+          </div>
+          <div class="content-card">
+            <h3>📋 Key Antenatal Appointments</h3>
+            <ul>
+              <li><strong>Week 8–10:</strong> First midwife appointment (booking appointment)</li>
+              <li><strong>Week 12:</strong> Dating scan + blood tests</li>
+              <li><strong>Week 16:</strong> Midwife check + blood results</li>
+              <li><strong>Week 20:</strong> Anomaly scan</li>
+              <li><strong>Week 28:</strong> Blood tests + anti-D if Rh negative</li>
+              <li><strong>Week 34–36:</strong> Midwife checks, position check</li>
+              <li><strong>Week 38–40+:</strong> Weekly midwife checks</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ── FAQ ── -->
     <section class="faq-section" id="faq">
-      <h2>Frequently Asked Questions</h2>
-      <div id="faqList"></div>
+      <div class="glass-card">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-wrapper">
+          <div id="faqList"></div>
+        </div>
+      </div>
     </section>
 
   </div><!-- /container -->
@@ -1173,6 +1229,7 @@
           <li><a href="index.html#all-weeks">Week by Week Guide</a></li>
           <li><a href="index.html#kick-counter">Baby Kick Counter</a></li>
           <li><a href="index.html#contraction-timer">Contraction Timer</a></li>
+          <li><a href="index.html#gender-prediction">Fun Gender Predictor</a></li>
         </ul>
       </div>
       <div class="footer-links">
@@ -1221,7 +1278,7 @@
     37: 'Rhubarb',             38: 'Winter melon',
     39: 'Watermelon',          40: 'Pumpkin',
     41: 'Jackfruit',           42: 'Durian'
-  };
+};
 
   // Cache: week number → confirmed thumbnail URL (populated by loadWeekImages)
   var WIKI_IMGS = {};
@@ -1239,7 +1296,7 @@
       var seen = {};
       Object.values(WEEK_WIKI).forEach(function(t) {
         if (!seen[t]) { seen[t] = true; uniqueTitles.push(t); }
-      });
+    });
 
       var url = 'https://en.wikipedia.org/w/api.php?action=query&titles=' +
         uniqueTitles.map(encodeURIComponent).join('|') +
@@ -1255,13 +1312,13 @@
           var norm = {};
           if (data.query.normalized) {
             data.query.normalized.forEach(function(n) { norm[n.from] = n.to; });
-          }
+        }
           if (data.query.redirects) {
             data.query.redirects.forEach(function(rd) { norm[rd.from] = rd.to; });
-          }
+        }
           Object.values(pages).forEach(function(pg) {
             if (pg.thumbnail) titleMap[pg.title] = pg.thumbnail.source;
-          });
+        });
 
           // Populate WIKI_IMGS by week
           Object.keys(WEEK_WIKI).forEach(function(wk) {
@@ -1269,19 +1326,19 @@
             var resolvedTitle = norm[rawTitle] || rawTitle;
             if (titleMap[resolvedTitle]) {
               WIKI_IMGS[wk] = titleMap[resolvedTitle];
-            } else if (titleMap[rawTitle]) {
+          } else if (titleMap[rawTitle]) {
               WIKI_IMGS[wk] = titleMap[rawTitle];
-            }
-          });
-        })
+          }
+        });
+      })
         .catch(function() { /* Silently fall back to emoji on network error */ })
         .finally(function() {
           _wikiLoaded = true;
           _wikiPending.forEach(function(cb) { cb(); });
           _wikiPending = [];
-        });
-    });
-  }
+      });
+  });
+}
 
   // Call once on page load so images are ready before user taps a week
   // Wikipedia loading disabled
@@ -1299,10 +1356,10 @@
       var code = emoji.codePointAt(i);
       if (code !== 0xFE0F) points.push(code.toString(16).toUpperCase());
       i += code > 0xFFFF ? 2 : 1;
-    }
+  }
     var cp = points.join('-');
     return '<img class="emoji-img" src="https://cdn.jsdelivr.net/npm/openmoji@14.0.0/color/svg/' + cp + '.svg" alt="' + emoji + '" loading="lazy" draggable="false" onerror="this.parentNode.innerHTML=\'<span style=font-size:3.5rem>\'+\'' + emoji + '\'+ \'</span>\'">';
-  }
+}
 
   // Keep tw() as legacy alias so nothing breaks
   function tw(emoji) { return weekImg(0, emoji); }
@@ -1368,21 +1425,21 @@
     'en-AU': { domain: 'amazon.com.au', tag: 'pregnancywe08-20' },
     'en-CA': { domain: 'amazon.ca',  tag: 'pregnancywe08-20' },
     'default': { domain: 'amazon.com', tag: 'pregnancywe08-20' }
-  };
+};
 
   function getAmazonLocale() {
     var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
     // Check Indian locales first (highest priority for this site)
     if (lang === 'en-in' || lang === 'hi' || lang === 'hi-in' || lang.startsWith('hi')) {
       return AMAZON_LOCALES['en-IN'];
-    }
+  }
     // Check timezone as fallback for India
     try {
       var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
       if (tz.startsWith('Asia/Kolkata') || tz.startsWith('Asia/Calcutta')) {
         return AMAZON_LOCALES['en-IN'];
-      }
-    } catch(e) {}
+    }
+  } catch(e) {}
     // UK visitors
     if (lang === 'en-gb') return AMAZON_LOCALES['en-GB'];
     // Australia
@@ -1391,13 +1448,13 @@
     if (lang === 'en-ca') return AMAZON_LOCALES['en-CA'];
     // Everyone else → amazon.com
     return AMAZON_LOCALES['default'];
-  }
+}
 
   var USER_LOCALE = getAmazonLocale();
 
   function amzLink(keyword) {
     return 'https://www.' + USER_LOCALE.domain + '/s?k=' + encodeURIComponent(keyword) + '&tag=' + USER_LOCALE.tag;
-  }
+}
 
   // ─────────────────────────────────────────────────────────
   //  PRODUCT RECOMMENDATIONS BY TRIMESTER
@@ -1422,7 +1479,7 @@
       { icon: '🤱', name: 'Nursing Bra Set (3-pack)', why: 'Essential for postpartum — whether breastfeeding or not', keyword: 'nursing bra set' },
       { icon: '🍼', name: 'Muslin Swaddle Blankets', why: 'Swaddling calms newborns — you will go through 6+ per day', keyword: 'muslin swaddle blankets' }
     ]
-  };
+};
 
   // ─────────────────────────────────────────────────────────
   //  FAQ DATA
@@ -1458,7 +1515,7 @@
     // Wait for Wikipedia images to load, then render timeline with real photos
     loadWeekImages().then(function() {
       renderWeeksTimeline(null);
-    });
+  });
     // Also render immediately with fallback emojis (will be replaced once images load)
     renderWeeksTimeline(null);
     renderFAQ();
@@ -1469,8 +1526,8 @@
     if (lmpParam) {
       document.getElementById('lmpDate').value = lmpParam;
       calculate();
-    }
-  });
+  }
+});
 
   // ─────────────────────────────────────────────────────────
   //  MODE SWITCH
@@ -1481,7 +1538,7 @@
     document.getElementById('dueMode').style.display = mode === 'due' ? '' : 'none';
     document.getElementById('btnLMP').classList.toggle('active', mode === 'lmp');
     document.getElementById('btnDD').classList.toggle('active', mode === 'due');
-  }
+}
 
   // ─────────────────────────────────────────────────────────
   //  CALCULATE
@@ -1495,13 +1552,13 @@
       var lmpVal = document.getElementById('lmpDate').value;
       if (!lmpVal) { alert('Please enter the first day of your last period.'); return; }
       lmpDate = new Date(lmpVal + 'T00:00:00');
-    } else {
+  } else {
       var dueDateVal = document.getElementById('dueDate').value;
       if (!dueDateVal) { alert('Please enter your due date.'); return; }
       var dueDate = new Date(dueDateVal + 'T00:00:00');
       // LMP = dueDate - 280 days (adjusted for cycle length deviation)
       lmpDate = new Date(dueDate.getTime() - (280 + (cycleLen - 28)) * 24 * 60 * 60 * 1000);
-    }
+  }
 
     if (lmpDate > today) { alert('The first day of your last period cannot be in the future.'); return; }
 
@@ -1532,19 +1589,25 @@
 
     renderResult(currentResult);
     renderWeeksTimeline(weekNum);
+    renderGrowthCurve(weekNum);
+
+    // Hide manual detail when calculation is active to prevent duplication
+    var detailSec = document.getElementById('weekDetailSection');
+    detailSec.classList.remove('visible');
+    detailSec.innerHTML = ''; // Clear it completely
 
     var rp = document.getElementById('resultPanel');
     rp.style.display = 'block';
     rp.classList.remove('reveal');
     void rp.offsetWidth; // force reflow so animation replays on recalculate
     rp.classList.add('reveal');
-    document.querySelector('.btn-calc').textContent = 'Update My Week →';
+    document.querySelector('.btn-calc').textContent = 'See My Progress →';
     requestAnimationFrame(function() {
       requestAnimationFrame(function() {
         rp.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
     });
-  }
+  });
+}
 
   // ─────────────────────────────────────────────────────────
   //  MILESTONE HELPER
@@ -1561,7 +1624,7 @@
     if (w === 40)              return { icon: '✨', title: 'Due date week!', sub: 'Your estimated due date is this week. Only 5% of babies arrive exactly on time — stay calm and trust your body.' };
     if (w > 40)                return { icon: '🤗', title: 'Baby is taking their time!', sub: 'Completely normal — babies often arrive up to 2 weeks after their due date. Your midwife will monitor you closely.' };
     return null;
-  }
+}
 
   // ─────────────────────────────────────────────────────────
   //  SHARE RESULT
@@ -1574,14 +1637,14 @@
     var btn = document.getElementById('shareBtn');
     if (navigator.share) {
       navigator.share({ title: 'My Pregnancy Week', text: txt }).catch(function() {});
-    } else {
+  } else {
       var svgIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>';
       navigator.clipboard.writeText(txt).then(function() {
         btn.innerHTML = '✓ Copied to clipboard!';
         setTimeout(function() { btn.innerHTML = svgIcon + ' Share Your News'; }, 2500);
-      }).catch(function() { prompt('Copy this to share:', txt); });
-    }
+    }).catch(function() { prompt('Copy this to share:', txt); });
   }
+}
 
   function copyGenderResult(encodedText) {
     var txt = decodeURIComponent(encodedText);
@@ -1589,8 +1652,8 @@
     navigator.clipboard.writeText(txt).then(function() {
       btn.textContent = '✓ Copied!';
       setTimeout(function() { btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy &amp; Share'; }, 2500);
-    }).catch(function() { prompt('Copy this:', txt); });
-  }
+  }).catch(function() { prompt('Copy this:', txt); });
+}
 
   // ─────────────────────────────────────────────────────────
   //  RENDER RESULT
@@ -1617,9 +1680,9 @@
     if (ms) {
       msBanner.innerHTML = '<span class="ms-icon">' + ms.icon + '</span><div class="ms-title">' + ms.title + '</div><div class="ms-sub">' + ms.sub + '</div>';
       msBanner.style.display = 'block';
-    } else {
+  } else {
       msBanner.style.display = 'none';
-    }
+  }
 
     // ── Show share row ────────────────────────────────────
     document.getElementById('shareRow').style.display = 'flex';
@@ -1671,9 +1734,9 @@
           '<div class="product-icon">' + p.icon + '</div>' +
           '<div><div class="product-name">' + p.name + '</div><div class="product-why">' + p.why + '</div></div>' +
           '</a>';
-      }).join('') +
+    }).join('') +
       '</div>';
-  }
+}
 
   // ─────────────────────────────────────────────────────────
   //  RENDER WEEKS TIMELINE
@@ -1693,16 +1756,16 @@
         var wd = WEEKS.find(function(x) { return x.week === w; });
         if (!wd) continue;
         var isCurrent = currentWeek !== null && w === currentWeek;
-        html += '<div class="week-chip' + (isCurrent ? ' current' : '') + '" data-week="' + w + '" onclick="showWeekDetail(' + w + ')">' +
+        html += '<div class="week-chip' + (isCurrent ? ' current' : '') + '" data-week="' + w + '" title="View Week ' + w + ' development details" onclick="showWeekDetail(' + w + ')">' +
           '<div class="week-chip-num">Week ' + w + (isCurrent ? ' ◀ You' : '') + '</div>' +
           '<div class="week-chip-emoji">' + weekImg(w, wd.emoji) + '</div>' +
           '<div class="week-chip-size">' + wd.size + '</div>' +
           '</div>';
-      }
+    }
       html += '</div></div>';
-    });
+  });
     document.getElementById('weeksTimeline').innerHTML = html;
-  }
+}
 
   function showWeekDetail(weekNum) {
     var wd = WEEKS.find(function(w) { return w.week === weekNum; });
@@ -1712,6 +1775,9 @@
     document.querySelectorAll('.week-chip').forEach(function(c) { c.classList.remove('active-detail'); });
     var chip = document.querySelector('.week-chip[data-week="' + weekNum + '"]');
     if (chip) chip.classList.add('active-detail');
+
+    // Hide the calculator result when viewing a specific manual week to prevent confusion
+    document.getElementById('resultPanel').style.display = 'none';
 
     var isIndia = USER_LOCALE.domain === 'amazon.in';
     var indiaNote = (wd.size_in && isIndia)
@@ -1733,7 +1799,7 @@
           '<div class="product-icon">' + p.icon + '</div>' +
           '<div><div class="product-name">' + p.name + '</div><div class="product-why">' + p.why + '</div></div>' +
           '</a>';
-      }).join('') +
+    }).join('') +
       '</div></div>';
 
     var detailSection = document.getElementById('weekDetailSection');
@@ -1762,9 +1828,9 @@
     requestAnimationFrame(function() {
       requestAnimationFrame(function() {
         detailSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
     });
-  }
+  });
+}
 
   // ─────────────────────────────────────────────────────────
   //  RENDER FAQ
@@ -1778,149 +1844,161 @@
         '</div>' +
         '<div class="faq-a" id="fa' + i + '">' + f.a + '</div>' +
         '</div>';
-    }).join('');
-  }
+  }).join('');
+}
 
   function toggleFAQ(i) {
     var q = document.getElementById('fq' + i);
     var a = document.getElementById('fa' + i);
     q.classList.toggle('open');
     a.classList.toggle('open');
-  }
+}
 
-  // ─────────────────────────────────────────────────────────
-  //  GENDER PREDICTION
-  // ─────────────────────────────────────────────────────────
   function selectGenderOpt(el) {
     var group = el.dataset.group;
     document.querySelectorAll('.gender-opt[data-group="' + group + '"]').forEach(function(o) {
       o.classList.remove('selected');
-    });
+  });
     el.classList.add('selected');
-  }
+}
 
   function predictGender() {
     var votes = { boy: 0, girl: 0 };
     var details = [];
-
-    // Heart rate — HCG link: girls average 18% higher hCG → more nausea (1 real science point)
     var bpm = parseInt(document.getElementById('gBpm').value);
     if (!isNaN(bpm) && bpm >= 100 && bpm <= 200) {
       if (bpm > 140)      { votes.girl++; details.push('Heart rate ' + bpm + ' bpm → Girl'); }
       else if (bpm < 140) { votes.boy++;  details.push('Heart rate ' + bpm + ' bpm → Boy'); }
-    }
-
-    // Option groups — now includes ramzi, ring, dream
-    var groupNames = { bump: 'Bump shape', sick: 'Morning sickness', crav: 'Cravings', skin: 'Skin changes', ramzi: 'Ramzi theory', ring: 'Ring test', dream: 'Dreams' };
+  }
     ['bump', 'sick', 'crav', 'skin', 'ramzi', 'ring', 'dream'].forEach(function(g) {
       var sel = document.querySelector('.gender-opt[data-group="' + g + '"].selected');
       if (sel && sel.dataset.val !== 'skip') {
         votes[sel.dataset.val]++;
-        details.push(groupNames[g] + ' → ' + (sel.dataset.val === 'girl' ? 'Girl' : 'Boy'));
-      }
-    });
-
-    // Chinese calendar — lunar age + month formula
-    var age   = parseInt(document.getElementById('gAge').value);
-    var month = parseInt(document.getElementById('gMonth').value);
-    if (!isNaN(age) && !isNaN(month) && age >= 18 && month >= 1 && month <= 12) {
-      var lunarAge = age + 1; // traditional Chinese calendar adds 1 year
-      var chResult = ((lunarAge + month) % 2 === 0) ? 'girl' : 'boy';
-      votes[chResult]++;
-      details.push('Chinese calendar → ' + (chResult === 'girl' ? 'Girl' : 'Boy'));
+        details.push(g + ' → ' + (sel.dataset.val === 'girl' ? 'Girl' : 'Boy'));
     }
-
-    var total   = votes.boy + votes.girl;
+  });
+    var age = parseInt(document.getElementById('gAge').value);
+    var month = parseInt(document.getElementById('gMonth').value);
+    if (!isNaN(age) && !isNaN(month)) {
+      var chResult = ((age + month + 1) % 2 === 0) ? 'girl' : 'boy';
+      votes[chResult]++;
+      details.push('Chinese calendar → ' + chResult);
+  }
+    var total = votes.boy + votes.girl;
     var resultEl = document.getElementById('genderResult');
     resultEl.style.display = '';
-
-    if (total === 0) {
-      resultEl.innerHTML = '<p style="color:var(--text-muted);font-size:0.9rem">Please answer at least one question above to see a prediction.</p>';
-      return;
-    }
-
+    if (total === 0) return;
     var girlPct = Math.round((votes.girl / total) * 100);
     var boyPct  = 100 - girlPct;
     var verdict = votes.girl > votes.boy ? 'girl' : votes.boy > votes.girl ? 'boy' : 'tie';
-
-    var html = '';
-    if (verdict === 'tie') {
-      html += '<div class="gender-verdict tie">🤷 Perfectly Tied!</div>';
-      html += '<p style="font-size:0.875rem;color:var(--text-muted);margin:8px 0">The signs are equally split. Try answering more questions.</p>';
-    } else {
-      html += '<div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:4px">The old wives\' tales say…</div>';
-      html += '<div class="gender-verdict ' + verdict + '">' + (verdict === 'girl' ? '👧 Girl' : '👦 Boy') + '</div>';
-    }
-
-    html += '<div class="gender-meter-track">'
-          + '<div class="gender-meter-boy"  style="width:' + boyPct  + '%"></div>'
-          + '<div class="gender-meter-girl" style="width:' + girlPct + '%"></div>'
-          + '</div>';
-    html += '<div class="gender-breakdown">👦 Boy signals: ' + boyPct + '% &nbsp;·&nbsp; 👧 Girl signals: ' + girlPct + '%</div>';
-    if (details.length) {
-      html += '<div class="gender-methods">Based on: ' + details.join(' · ') + '</div>';
-    }
-
-    // ── When can you find out for real? ──────────────────────────────────────
-    var scanNote = '';
-    if (currentResult) {
-      var wk = currentResult.weekNum;
-      if (wk < 12) {
-        var weeksTo12 = 12 - wk;
-        scanNote = '🔬 <strong>Nub Theory</strong> possible at your 12-week scan (in ~' + weeksTo12 + ' week' + (weeksTo12 !== 1 ? 's' : '') + ') — an experienced sonographer can sometimes read the angle of the genital tubercle.';
-      } else if (wk >= 12 && wk < 20) {
-        var weeksTo20 = 20 - wk;
-        scanNote = '🩺 Your <strong>20-week anatomy scan</strong> is in ~' + weeksTo20 + ' week' + (weeksTo20 !== 1 ? 's' : '') + ' — this is when sex is confirmed visually (where legally permitted).';
-      } else if (wk >= 20) {
-        scanNote = '✅ You\'ve passed your 20-week scan! Your sonographer should have been able to confirm sex at that point (where legally permitted).';
-      }
-    } else {
-      scanNote = '🩺 Your <strong>20-week anatomy scan</strong> is when sex can be confirmed visually — the most reliable non-invasive method (where legally permitted).';
-    }
-    html += '<div style="background:var(--primary-light);border-radius:10px;padding:12px 14px;margin-top:14px;font-size:0.82rem;color:var(--primary);line-height:1.6">' + scanNote + '</div>';
-
-    // ── Science fact ──────────────────────────────────────────────────────────
-    html += '<div class="gender-fun-note"><strong>🧬 How it actually works:</strong> Your baby\'s sex (XX or XY) was decided at fertilisation — Week 3. But external genitalia look identical until <strong>Week 9</strong> when testosterone kicks in for XY babies. That\'s why symptoms like morning sickness (linked to higher hCG in girl pregnancies — the one old wives\' tale with real science behind it) appear in Weeks 6–10, right when the hormonal differences first emerge.<br><br>These methods have no scientific basis and are no more accurate than a coin flip. Only a scan or NIPT blood test can tell you for sure.</div>';
-
-    // ── Share buttons ─────────────────────────────────────────────────────────
-    var shareText = verdict !== 'tie'
-      ? 'Old wives\' tales say I\'m having a ' + (verdict === 'girl' ? 'girl 👧' : 'boy 👦') + '! (' + (verdict === 'girl' ? girlPct : boyPct) + '% of signals agree). What do you think? Try it: https://www.pregnancyweektracker.com'
-      : 'The old wives\' tales are perfectly split on my baby\'s gender! Try the predictor: https://www.pregnancyweektracker.com';
-
-    html += '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px">';
-    // WhatsApp (huge for India audience)
-    html += '<a href="https://wa.me/?text=' + encodeURIComponent(shareText) + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:#25D366;color:#fff;border-radius:999px;font-size:0.85rem;font-weight:600;text-decoration:none;">'
-          + '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.555 4.103 1.523 5.824L.057 23.885l6.244-1.637A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.868 9.868 0 01-5.034-1.378l-.36-.214-3.742.98 1.001-3.648-.234-.374A9.831 9.831 0 012.106 12C2.106 6.533 6.533 2.106 12 2.106c5.467 0 9.894 4.427 9.894 9.894 0 5.467-4.427 9.894-9.894 9.894z"/></svg>'
-          + 'Share on WhatsApp</a>';
-    // Copy link
-    html += '<button onclick="copyGenderResult(\'' + encodeURIComponent(shareText) + '\')" style="display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:var(--primary-light);color:var(--primary);border:2px solid var(--primary);border-radius:999px;font-size:0.85rem;font-weight:600;cursor:pointer;font-family:inherit" id="gCopyBtn">'
-          + '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>'
-          + 'Copy &amp; Share</button>';
-    html += '</div>';
-
+    var html = '<div class="gender-verdict ' + verdict + '">' + (verdict === 'girl' ? '👧 Girl' : '👦 Boy') + '</div>';
+    html += '<div class="gender-meter-track"><div class="gender-meter-boy" style="width:'+boyPct+'%"></div><div class="gender-meter-girl" style="width:'+girlPct+'%"></div></div>';
+    html += '<div class="gender-breakdown">Boy: ' + boyPct + '% · Girl: ' + girlPct + '%</div>';
+    
+    var shareText = 'Old wives\' tales say I\'m having a ' + (verdict === 'girl' ? 'girl 👧' : 'boy 👦') + '! Try it: https://www.pregnancyweektracker.com';
+    html += '<div style="display:flex;gap:10px;justify-content:center;margin-top:16px">';
+    html += '<a href="https://wa.me/?text=' + encodeURIComponent(shareText) + '" target="_blank" class="tool-btn-main" style="background:#25D366;text-decoration:none">WhatsApp</a>';
+    html += '<button onclick="copyGenderResult(\'' + encodeURIComponent(shareText) + '\')" class="tool-btn-main">Copy</button></div>';
     resultEl.innerHTML = html;
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() {
-        resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      });
-    });
+}
+
+  function renderGrowthCurve(currentWeek) {
+    try {
+      var container = document.getElementById('growthGraph');
+      if (!container) return;
+      
+      var W = 1000; 
+      var H = 240;
+      var padding = { top: 30, right: 40, bottom: 80, left: 80 };
+      var chartW = W - padding.left - padding.right;
+      var chartH = H - padding.top - padding.bottom;
+      
+      var displayWeek = Math.max(1, Math.min(42, currentWeek || 1));
+      var unit = chartW / 41;
+      var points = [];
+
+      for (var wk = 1; wk <= 42; wk++) {
+        var data = null;
+        for (var i = 0; i < WEEKS.length; i++) {
+          if (WEEKS[i].week === wk) { data = WEEKS[i]; break; }
+        }
+        if (!data) continue;
+        
+        var x = padding.left + (wk - 1) * unit;
+        var y = padding.top + chartH - (Math.min(data.size_mm || 0, 520) / 520) * chartH;
+        points.push({ x: x, y: y, week: wk });
+      }
+
+      if (points.length === 0) return;
+
+      var pathData = "M" + points[0].x + "," + points[0].y;
+      var activePathData = "M" + points[0].x + "," + points[0].y;
+      for (var i = 1; i < points.length; i++) {
+        pathData += " L" + points[i].x + "," + points[i].y;
+        if (points[i].week <= displayWeek) {
+          activePathData += " L" + points[i].x + "," + points[i].y;
+        }
+      }
+
+      var currentPoint = points[0];
+      for (var i = 0; i < points.length; i++) {
+        if (points[i].week === displayWeek) { currentPoint = points[i]; break; }
+      }
+
+      var svg = '<svg width="100%" height="100%" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="xMidYMid meet" style="overflow:visible">' +
+        '<line x1="'+padding.left+'" y1="'+(padding.top+chartH)+'" x2="'+(padding.left+chartW)+'" y2="'+(padding.top+chartH)+'" stroke="#ddd" stroke-width="2" />' +
+        '<line x1="'+padding.left+'" y1="'+padding.top+'" x2="'+padding.left+'" y2="'+(padding.top+chartH)+'" stroke="#ddd" stroke-width="2" />' +
+        '<text x="'+(padding.left + chartW/2)+'" y="'+(H - 15)+'" text-anchor="middle" font-size="16" font-weight="800" fill="#444">PREGNANCY WEEKS (1—42)</text>';
+        
+        for(var i=0; i<42; i++) {
+          var wkNum = i + 1;
+          var tx = padding.left + i * unit;
+          var isMilestone = wkNum === 1 || wkNum % 5 === 0 || wkNum === 42;
+          
+          svg += '<line x1="'+tx+'" y1="'+(padding.top+chartH)+'" x2="'+tx+'" y2="'+(padding.top+chartH + (isMilestone ? 12 : 6))+'" stroke="#ccc" stroke-width="'+(isMilestone ? 2 : 1)+'" />';
+          if(isMilestone) {
+            svg += '<text x="'+tx+'" y="'+(padding.top+chartH+35)+'" text-anchor="middle" font-size="12" font-weight="700" fill="#888">' + wkNum + '</text>';
+          }
+        }
+        
+        svg += 
+        '<text x="25" y="'+(padding.top + chartH/2)+'" transform="rotate(-90, 25, '+(padding.top + chartH/2)+')" text-anchor="middle" font-size="16" font-weight="800" fill="#444">SIZE (mm)</text>' +
+        '<text x="'+(padding.left-15)+'" y="'+(padding.top+chartH)+'" text-anchor="end" font-size="12" font-weight="700" fill="#888">0</text>' +
+        '<text x="'+(padding.left-15)+'" y="'+padding.top+'" text-anchor="end" font-size="12" font-weight="700" fill="#888">520</text>' +
+        '<path d="' + pathData + '" fill="none" stroke="#f4f4f4" stroke-width="4" stroke-dasharray="6" />' +
+        '<path d="' + activePathData + '" fill="none" stroke="var(--primary)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />' +
+        '<circle cx="' + currentPoint.x + '" cy="' + currentPoint.y + '" r="9" fill="var(--primary)" stroke="#fff" stroke-width="3">' +
+          '<animate attributeName="r" values="9;12;9" dur="2s" repeatCount="indefinite" />' +
+        '</circle>' +
+        '</svg>';
+
+      container.innerHTML = svg;
+    } catch (e) { console.error("Graph Error:", e); }
   }
 
-  // ─────────────────────────────────────────────────────────
-  //  UTILITIES
-  // ─────────────────────────────────────────────────────────
+  function showGraphTooltip(e, week, mm) {
+    var tt = document.getElementById('graphTooltip');
+    tt.style.display = 'block';
+    tt.style.left = (e.clientX + 10) + 'px';
+    tt.style.top = (e.clientY - 30) + 'px';
+    tt.innerHTML = 'Week ' + week + ': ' + mm + ' mm';
+}
+
+  function hideGraphTooltip() {
+    document.getElementById('graphTooltip').style.display = 'none';
+}
   function formatDateInput(d) {
     var y = d.getFullYear();
     var m = String(d.getMonth() + 1).padStart(2, '0');
     var day = String(d.getDate()).padStart(2, '0');
     return y + '-' + m + '-' + day;
-  }
+}
 
   var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   function formatDisplayDate(d) {
     if (!d) return '—';
     return d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
-  }
+}
   // ─────────────────────────────────────────────────────────
   //  KICK COUNTER LOGIC
   // ─────────────────────────────────────────────────────────
@@ -1935,7 +2013,7 @@
     var m = Math.floor(totalSec / 60);
     var s = totalSec % 60;
     return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
-  }
+}
 
   function kcUpdateDisplay() {
     var count = kcHits.length;
@@ -1947,12 +2025,12 @@
       var pct = Math.min(count / 10, 1);
       var offset = 502.6 - (pct * 502.6);
       ring.style.strokeDashoffset = offset;
-    }
+  }
 
     if (kcStartTime) {
       document.getElementById('kcTimer').innerText = kcFormatTime(Date.now() - kcStartTime);
-    }
   }
+}
 
   function kcRecord() {
     if (!kcActive) {
@@ -1966,7 +2044,7 @@
       kcInterval = setInterval(kcUpdateDisplay, 1000);
       document.getElementById('kcHistory').innerHTML = '<div style="text-align:center;padding:10px;color:var(--text-muted);font-size:0.85rem">Session started. Tap when you feel a movement.</div>';
       return;
-    }
+  }
     
     // Record kick
     kcHits.push(Date.now());
@@ -1980,7 +2058,6 @@
     // Show in history
     var d = new Date();
     var timeStr = d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'});
-    var dateStr = d.toLocaleDateString([], {day: 'numeric', month: 'short'});
     
     var itemHtml = '<div class="history-card">' +
       '<div class="hc-left"><span class="hc-time">Kick #' + kcHits.length + '</span><span class="hc-date">' + timeStr + '</span></div>' +
@@ -1996,8 +2073,8 @@
       document.getElementById('kcEncourage').style.display = 'block';
       // Optional: stop timer or keep going if mum wants to count more? 
       // Medical advice is "10 kicks in 2 hours", so we let her keep going if she wants, but celebrate the milestone.
-    }
   }
+}
 
   function kcStop() {
     kcActive = false;
@@ -2007,7 +2084,7 @@
     // Keep history visible but show it's ended
     var hist = document.getElementById('kcHistory');
     hist.insertAdjacentHTML('afterbegin', '<div style="text-align:center;padding:8px;font-size:0.75rem;color:var(--text-muted);border-bottom:1px dashed #ccc;margin-bottom:10px">Session ended. Total: ' + kcHits.length + ' kicks.</div>');
-  }
+}
 
   // ─────────────────────────────────────────────────────────
   //  CONTRACTION TIMER LOGIC
@@ -2024,13 +2101,15 @@
     var m = Math.floor(totalSec / 60);
     var s = totalSec % 60;
     return (m > 0 ? m + 'm ' : '') + s + 's';
-  }
+}
 
   function ctUpdateDisplay() {
     if (ctActive && ctStartTime) {
-      document.getElementById('ctDuration').innerText = ctFormatDuration(Date.now() - ctStartTime);
-    }
+      var dur = ctFormatDuration(Date.now() - ctStartTime);
+      document.getElementById('ctDuration').innerText = dur;
+      document.getElementById('ctBtn').innerText = 'STOP TIMER (' + dur + ') 🛑';
   }
+}
 
   function check511Rule() {
     if (ctHistoryList.length < 3) return;
@@ -2046,17 +2125,17 @@
     
     if (allGoodDuration && allGoodInterval) {
       document.getElementById('ctAlert').style.display = 'block';
-    } else {
+  } else {
       document.getElementById('ctAlert').style.display = 'none';
-    }
   }
+}
 
   function ctRenderHistory() {
     var hist = document.getElementById('ctHistory');
     if (ctHistoryList.length === 0) {
       hist.innerHTML = '<div style="text-align:center;padding:10px;color:var(--text-muted);font-size:0.85rem">No history yet. Tap the button to start.</div>';
       return;
-    }
+  }
     
     var html = ctHistoryList.map(function(c, i) {
       var d = new Date(c.start);
@@ -2068,10 +2147,10 @@
         '<div class="hc-left"><span class="hc-time">' + timeStr + '</span><span class="hc-date">' + intStr + '</span></div>' +
         '<div class="hc-right" style="color:var(--primary)">' + durStr + '</div>' +
       '</div>';
-    }).join('');
+  }).join('');
     
     hist.innerHTML = html;
-  }
+}
 
   function ctToggle() {
     var btn = document.getElementById('ctBtn');
@@ -2080,8 +2159,8 @@
       // Start contraction
       ctActive = true;
       ctStartTime = Date.now();
-      btn.innerText = 'Stop Contraction';
-      btn.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)'; // Red
+      btn.innerText = 'STOP TIMER (Contraction Ended) 🛑';
+      btn.className = 'tool-btn-main btn-contraction-end';
       
       var intervalSinceLast = ctLastStart ? (ctStartTime - ctLastStart) : null;
       document.getElementById('ctInterval').innerText = intervalSinceLast ? ctFormatDuration(intervalSinceLast) : '--';
@@ -2089,12 +2168,12 @@
       ctLastStart = ctStartTime;
       ctInterval = setInterval(ctUpdateDisplay, 1000);
       
-    } else {
+  } else {
       // Stop contraction
       ctActive = false;
       clearInterval(ctInterval);
-      btn.innerText = 'Start Contraction';
-      btn.style.background = 'linear-gradient(135deg, #6366f1, #4f46e5)'; // Indigo back
+      btn.innerText = 'Start Timer (Contraction Started) ⏱️';
+      btn.className = 'tool-btn-main btn-contraction-pulse';
       
       var duration = Date.now() - ctStartTime;
       document.getElementById('ctDuration').innerText = ctFormatDuration(duration);
@@ -2105,12 +2184,12 @@
         end: Date.now(),
         duration: duration,
         interval: ctHistoryList.length > 0 ? (ctStartTime - ctHistoryList[0].start) : null
-      });
+    });
       
       ctRenderHistory();
       check511Rule();
-    }
   }
+}
 
   function ctReset() {
     if(ctActive) ctToggle(); // stop if running
@@ -2120,7 +2199,7 @@
     document.getElementById('ctInterval').innerText = '--';
     document.getElementById('ctHistory').innerHTML = '';
     document.getElementById('ctAlert').style.display = 'none';
-  }
+}
 
   // Modal logic
   function openImgModal(src, alt) {
@@ -2129,10 +2208,10 @@
     modal.style.display = 'flex';
     modalImg.src = src;
     modalImg.alt = alt;
-  }
+}
   function closeImgModal() {
     document.getElementById('imgModal').style.display = 'none';
-  }
+}
   </script>
 
   <!-- Image Modal -->

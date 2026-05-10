@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://js.sentry-cdn.com/d62024e9014b97cc89780c4a0051997e.min.js" crossorigin="anonymous"></script>
+  <script>
+    Sentry.onLoad(function() {
+      Sentry.init({
+        tracesSampleRate: 1.0,
+        replaysSessionSampleRate: 0.1,
+        replaysOnErrorSampleRate: 1.0,
+      });
+    });
+  </script>
   <title>Pregnancy Week Tracker - Track Baby's Development</title>
   <meta name="description" content="Free pregnancy week tracker. Enter your last period date to instantly find out how many weeks pregnant you are, your due date, baby's size and development this week. No sign-up required.">
   <link rel="canonical" href="https://www.pregnancyweektracker.com/">

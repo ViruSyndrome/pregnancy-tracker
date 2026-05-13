@@ -357,11 +357,17 @@
       gap: 18px;
       align-items: start;
   }
-    .week-image-box { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+    .week-image-box { display: flex; flex-direction: column; gap: 8px; align-items: center; }
     .week-emoji { font-size: 3.5rem; line-height: 1; }
     .week-emoji img.emoji-img { 
       width: 150px; height: 150px; display: block; object-fit: contain; 
   }
+    .week-emoji img.emoji-img.week-photo { transition: transform 0.2s, box-shadow 0.2s; border-radius: 12px; }
+    .week-emoji[style*="cursor:zoom-in"]:hover img.emoji-img { transform: scale(1.04); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+    .enlarge-hint {
+      font-size: 0.7rem; color: rgba(255,255,255,0.6);
+      letter-spacing: 0.04em; margin-top: -4px;
+    }
     .week-image-label {
       text-transform: uppercase; letter-spacing: 0.08em;
       font-size: 0.78rem; color: rgba(255,255,255,0.85);
@@ -1760,13 +1766,16 @@
 
     // Week detail card
     var headerImageEmoji = weekData[currentImageTab + 'Emoji'] || weekData.emoji;
-    var headerImageLabel = weekData[currentImageTab + 'Label'] || weekData[currentImageTab] || (currentImageTab === 'fruit' ? 'Fruit comparison' : 'Object comparison');
+    var headerImageLabel = weekData[currentImageTab + 'Label'] || weekData[currentImageTab] || (currentImageTab === 'fruit' ? 'Food comparison' : 'Object comparison');
+    var imgSrc = localWeekPhoto(r.weekNum, currentImageTab);
+    var imgClickAttr = imgSrc ? ' onclick="openImgModal(\''+imgSrc+'\',\'Week '+r.weekNum+' '+currentImageTab+' size comparison\')" style="cursor:zoom-in" title="Click to enlarge"' : '';
     document.getElementById('weekCard').innerHTML =
       '<div class="week-card-header">' +
         '<div class="week-image-box">' +
-          '<div class="week-emoji">' + weekImg(r.weekNum, headerImageEmoji, currentImageTab) + '</div>' +
+          '<div class="week-emoji"' + imgClickAttr + '>' + weekImg(r.weekNum, headerImageEmoji, currentImageTab) + '</div>' +
+          (imgSrc ? '<div class="enlarge-hint">🔍 Tap to enlarge</div>' : '') +
           '<div class="week-image-tabs">' +
-            '<button class="week-image-tab' + (currentImageTab === 'fruit' ? ' active' : '') + '" type="button" onclick="setWeekImageTab(\'fruit\', ' + r.weekNum + ')">Fruit</button>' +
+            '<button class="week-image-tab' + (currentImageTab === 'fruit' ? ' active' : '') + '" type="button" onclick="setWeekImageTab(\'fruit\', ' + r.weekNum + ')">Food</button>' +
             '<button class="week-image-tab' + (currentImageTab === 'object' ? ' active' : '') + '" type="button" onclick="setWeekImageTab(\'object\', ' + r.weekNum + ')">Object</button>' +
           '</div>' +
         '</div>' +
@@ -1904,14 +1913,17 @@
 
     var weekCard = document.getElementById('weekCard');
     var headerImageEmoji = wd[currentImageTab + 'Emoji'] || wd.emoji;
-    var headerImageLabel = wd[currentImageTab + 'Label'] || wd[currentImageTab] || (currentImageTab === 'fruit' ? 'Fruit comparison' : 'Object comparison');
+    var headerImageLabel = wd[currentImageTab + 'Label'] || wd[currentImageTab] || (currentImageTab === 'fruit' ? 'Food comparison' : 'Object comparison');
+    var imgSrc2 = localWeekPhoto(weekNum, currentImageTab);
+    var imgClickAttr2 = imgSrc2 ? ' onclick="openImgModal(\''+imgSrc2+'\',\'Week '+weekNum+' '+currentImageTab+' size comparison\')" style="cursor:zoom-in" title="Click to enlarge"' : '';
     weekCard.innerHTML =
       '<div class="week-card" style="margin-bottom:0">' +
         '<div class="week-card-header">' +
           '<div class="week-image-box">' +
-            '<div class="week-emoji">' + weekImg(weekNum, headerImageEmoji, currentImageTab) + '</div>' +
+            '<div class="week-emoji"' + imgClickAttr2 + '>' + weekImg(weekNum, headerImageEmoji, currentImageTab) + '</div>' +
+            (imgSrc2 ? '<div class="enlarge-hint">🔍 Tap to enlarge</div>' : '') +
             '<div class="week-image-tabs">' +
-              '<button class="week-image-tab' + (currentImageTab === 'fruit' ? ' active' : '') + '" type="button" onclick="setWeekImageTab(\'fruit\', ' + weekNum + ')">Fruit</button>' +
+              '<button class="week-image-tab' + (currentImageTab === 'fruit' ? ' active' : '') + '" type="button" onclick="setWeekImageTab(\'fruit\', ' + weekNum + ')">Food</button>' +
               '<button class="week-image-tab' + (currentImageTab === 'object' ? ' active' : '') + '" type="button" onclick="setWeekImageTab(\'object\', ' + weekNum + ')">Object</button>' +
             '</div>' +
           '</div>' +

@@ -1,0 +1,6 @@
+# Ignore temporary files created during local edits
+/tmp_script*.js
+diff-index.txt
+
+# Ignore VS Code workspace files if any
+.vscode/

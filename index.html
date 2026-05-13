@@ -1397,7 +1397,7 @@
   const AI_SCALE_WEEKS = [];
 
   // Render a week's image: local week photo → OpenMoji SVG fallback
-  const LOCAL_WEEK_PHOTO_MAX = 12;
+  const LOCAL_WEEK_PHOTO_MAX = 26;
   function localWeekPhoto(wkNum, type) {
     if (!type || (type !== 'fruit' && type !== 'object')) return null;
     if (wkNum < 1 || wkNum > LOCAL_WEEK_PHOTO_MAX) return null;

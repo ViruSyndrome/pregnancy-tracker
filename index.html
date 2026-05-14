@@ -1560,8 +1560,14 @@
   ];
 
   // ─────────────────────────────────────────────────────────
-  //  STATE
+  //  STATE & ANALYTICS
   // ─────────────────────────────────────────────────────────
+  function trackEvent(eventName, params) {
+    if (typeof gtag === 'function') {
+      gtag('event', eventName, params || {});
+    }
+  }
+
   var currentMode = 'lmp';
   var currentResult = null;
   var currentImageTab = 'fruit';
@@ -1668,6 +1674,8 @@
         rp.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+    
+    trackEvent('calculate_week', { mode: currentMode });
 }
 
   // ─────────────────────────────────────────────────────────
@@ -2043,6 +2051,8 @@
     html += '<div class="gender-meter-track"><div class="gender-meter-boy" style="width:'+boyPct+'%"></div><div class="gender-meter-girl" style="width:'+girlPct+'%"></div></div>';
     html += '<div class="gender-breakdown">Boy: ' + boyPct + '% · Girl: ' + girlPct + '%</div>';
     
+    trackEvent('gender_quiz_result', { verdict: verdict });
+    
     var shareText = 'Old wives\' tales say I\'m having a ' + (verdict === 'girl' ? 'girl 👧' : 'boy 👦') + '! Try it: https://www.pregnancyweektracker.com';
     html += '<div style="display:flex;gap:10px;justify-content:center;margin-top:16px">';
     html += '<a href="https://wa.me/?text=' + encodeURIComponent(shareText) + '" target="_blank" class="tool-btn-main" style="background:#25D366;text-decoration:none">WhatsApp</a>';
@@ -2191,6 +2201,7 @@
       document.getElementById('kcEncourage').style.display = 'none';
       kcInterval = setInterval(kcUpdateDisplay, 1000);
       document.getElementById('kcHistory').innerHTML = '<div style="text-align:center;padding:10px;color:var(--text-muted);font-size:0.85rem">Session started. Tap when you feel a movement.</div>';
+      trackEvent('start_kick_counter');
       return;
   }
     
@@ -2219,6 +2230,7 @@
     // Goal reached?
     if (kcHits.length === 10) {
       document.getElementById('kcEncourage').style.display = 'block';
+      trackEvent('complete_kick_session');
       // Optional: stop timer or keep going if mum wants to count more? 
       // Medical advice is "10 kicks in 2 hours", so we let her keep going if she wants, but celebrate the milestone.
   }
@@ -2315,6 +2327,7 @@
       
       ctLastStart = ctStartTime;
       ctInterval = setInterval(ctUpdateDisplay, 1000);
+      trackEvent('record_contraction', { type: 'start' });
       
   } else {
       // Stop contraction

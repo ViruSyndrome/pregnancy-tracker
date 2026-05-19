@@ -890,6 +890,70 @@
       .hamburger { margin-right: 0px; }
       .gender-section { padding: 20px 16px; width: 100%; box-sizing: border-box; }
     }
+
+    /* Scroll Reveal animations */
+    .reveal-scroll {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
+    }
+
+    .reveal-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Styled language selector and Google Translate toolbar overrides */
+    .lang-selector-wrap {
+      display: flex;
+      align-items: center;
+      margin-left: 1rem;
+    }
+
+    .lang-selector-wrap select {
+      background: #fff;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .lang-selector-wrap select:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      background: var(--bg);
+    }
+
+    /* Hide default Google Translate banner frame & branding */
+    .skiptranslate, iframe.skiptranslate, .goog-te-banner-frame {
+      display: none !important;
+    }
+
+    body {
+      top: 0px !important;
+    }
+
+    @media (max-width: 640px) {
+      .lang-selector-wrap {
+        margin-left: 0;
+        margin-top: 0.5rem;
+        padding: 10px 24px;
+        box-sizing: border-box;
+        width: 100%;
+      }
+      .lang-selector-wrap select {
+        width: 100%;
+        padding: 10px;
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -911,6 +975,16 @@
         <a href="#faq">FAQ</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
+        <div class="lang-selector-wrap">
+          <select id="langSelect" onchange="changeLanguage(this.value)" aria-label="Select Language">
+            <option value="">Translate</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="hi">हिन्दी</option>
+            <option value="zh-CN">中文</option>
+          </select>
+        </div>
       </div>
     </div>
   </nav>
@@ -2441,5 +2515,51 @@
     <img id="imgModalContent" class="img-modal-content" src="" alt="">
   </div>
 
+  <script>
+    // ── Google Translate Helper ──
+    function changeLanguage(langCode) {
+      const select = document.querySelector('.goog-te-combo');
+      if (select) {
+        select.value = langCode;
+        select.dispatchEvent(new Event('change'));
+      }
+    }
+    window.changeLanguage = changeLanguage;
+
+    // ── Native High-Performance Scroll-Reveal ──
+    window.addEventListener('load', () => {
+      const targets = document.querySelectorAll('.calc-card, .result-stat, .trimester-bar-wrap, .week-card, .products-section, .tool-card, .faq-item, .content-card, .footer');
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            entry.target.addEventListener('transitionend', function handler() {
+              entry.target.classList.remove('reveal-scroll', 'visible');
+              entry.target.removeEventListener('transitionend', handler);
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.05,
+        rootMargin: '0px 0px -20px 0px'
+      });
+      targets.forEach(target => {
+        target.classList.add('reveal-scroll');
+        observer.observe(target);
+      });
+    });
+  </script>
+  <div id="google_translate_element" style="display:none;"></div>
+  <script>
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script async src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

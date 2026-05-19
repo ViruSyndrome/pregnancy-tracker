@@ -34,6 +34,29 @@
     p, li{font-size:1rem;color:#374151;margin-bottom:16px;}
     ul{padding-left:18px;}
     .support-box{background:rgba(252,231,243,0.7);border:1px solid rgba(251,207,232,0.9);border-radius:18px;padding:22px;margin-top:20px;}
+    .donate-button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 20px rgba(190, 24, 93, 0.15);
+      font-family: 'Outfit', sans-serif;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .donate-button:hover {
+      transform: translateY(-2px) scale(1.02);
+      filter: brightness(1.1);
+      box-shadow: 0 12px 24px rgba(190, 24, 93, 0.25);
+    }
+    .donate-button:active {
+      transform: translateY(0) scale(0.97);
+    }
     .footer{background:#fff;padding:50px 24px 30px;border-top:1px solid var(--border);margin-top:48px;}
     .footer-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;}
     .footer-links{display:flex;flex-direction:column;gap:10px;}

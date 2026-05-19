@@ -17,6 +17,7 @@
   <meta name="description" content="Free pregnancy week tracker. Enter your last period date to instantly find out how many weeks pregnant you are, your due date, baby's size and development this week. No sign-up required.">
   <link rel="canonical" href="https://www.pregnancyweektracker.com/">
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=9">
+  <meta name="msvalidate.01" content="FA7405A0B7623E8A404F74AE4952777C" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Pregnancy Week Tracker — How Many Weeks Pregnant Am I?">
@@ -161,6 +162,7 @@
       color: var(--text-muted); transition: color 0.2s;
   }
     .nav-links a:hover { color: var(--primary); }
+    .nav-links a.active { color: var(--primary); font-weight: 700; }
 
     /* ── HERO ── */
     .hero {
@@ -1452,7 +1454,7 @@
     { week: 4,  size: 'Poppy seed', size_mm: 1.0, emoji: '🌺', fruitEmoji: '🌺', fruitLabel: 'Poppy Seed', objectEmoji: '📌', objectLabel: 'Grain of Sand', baby: "Neural tube (future brain & spine) begins forming. Baby is now an embryo.", mom: "A home pregnancy test can now give a positive result! You might feel early bloating or breast tenderness.", tip: "Positive test? Congratulations! Book your first appointment with a Doctor or Midwife." },
     { week: 5,  size: 'Appleseed', size_mm: 3.0, emoji: '🌻', fruitEmoji: '🌻', fruitLabel: 'Appleseed', objectEmoji: '⚫', objectLabel: 'BB Pellet', baby: "The heart begins to beat! Major organs like the kidneys and liver start developing.", mom: "Morning sickness and fatigue may start to kick in as pregnancy hormones (hCG) double rapidly.", tip: "Sip ginger tea or eat small, frequent meals to help manage early nausea and morning sickness." },
     { week: 6,  size: 'Sweet pea', size_mm: 5.0, emoji: '🫘', fruitEmoji: '🫘', fruitLabel: 'Sweet Pea', objectEmoji: '🟡', objectLabel: 'Pencil Eraser', baby: "Tiny arm and leg buds are appearing. The face is beginning to take shape.", mom: "Nausea and 'pregnancy brain' (forgetfulness) may peak. You might feel very sensitive to certain smells.", tip: "Stay hydrated! If plain water is hard to stomach, try adding a slice of lemon or cucumber." },
-    { week: 7,  size: 'Blueberry', size_mm: 10, emoji: '🫐', fruitEmoji: '🫐', fruitLabel: 'Blueberry', objectEmoji: '☕', objectLabel: 'Coffee Bean', baby: "Brain grows rapidly—producing 100 new brain cells every minute! Tiny nostrils appear.", mom: "You may feel frequent urges to urinate as your uterus expands and presses on your bladder.", tip: "Keep plain crackers by your bed. Eating one before getting up can prevent morning nausea." },
+    { week: 7,  size: 'Blueberry', size_mm: 10, emoji: '🫐', fruitEmoji: '🫐', fruitLabel: 'Blueberry', objectEmoji: '☕', objectLabel: 'Coffee Bean', baby: "Brain grows rapidly—producing 250,000 new brain cells (neurons) every minute! Tiny nostrils appear.", mom: "You may feel frequent urges to urinate as your uterus expands and presses on your bladder.", tip: "Keep plain crackers by your bed. Eating one before getting up can prevent morning nausea." },
     { week: 8,  size: 'Raspberry', size_mm: 16, emoji: '🍒', fruitEmoji: '🍒', fruitLabel: 'Raspberry', objectEmoji: '📎', objectLabel: 'Paperclip', baby: "Major organs are now in place. Baby's fingers and toes are losing their webbing.", mom: "Your clothes might start feeling a bit snug. You may experience vivid 'pregnancy dreams'.", tip: "Start a pregnancy journal! It’s a great way to track your feelings and milestones during this journey." },
     { week: 9,  size: 'Green Olive', size_mm: 23, emoji: '🟢', fruitEmoji: '🟢', fruitLabel: 'Green Olive', objectEmoji: '🔵', objectLabel: 'Glass Marble', baby: "Muscles are connecting and baby is starting to make tiny, jerky movements.", mom: "Mood swings are common now (thanks, hormones!). You may notice your skin is clearer or more sensitive.", tip: "Time to plan ahead! Set a reminder to book your important 12-week 'dating' scan." },
     { week: 10, size: 'Kumquat', size_mm: 31, emoji: '🍊', fruitEmoji: '🍊', fruitLabel: 'Kumquat', objectEmoji: '🧱', objectLabel: 'Lego Brick (2x2)', baby: "Critical development is done. Baby is now a fetus and will focus on growing rapidly.", mom: "You might feel 'round ligament pain'—sharp twinges in your abdomen as your muscles stretch.", tip: "Discuss NIPT (Non-Invasive Prenatal Testing) with your doctor. It's a simple blood test to check baby's health." },
@@ -1651,7 +1653,8 @@
 
     // Cycle-length adjusted ovulation offset
     var ovulationOffset = cycleLen - 14;
-    var conceptualLMP = new Date(lmpDate.getTime() - ovulationOffset * 24 * 60 * 60 * 1000 + ovulationOffset * 24 * 60 * 60 * 1000);
+    // conceptualLMP = lmpDate (simplified from redundant math offset)
+    var conceptualLMP = lmpDate;
     // Due date: LMP + 280 days (standard), adjusted for cycle
     var adjustedDays = 280 + (cycleLen - 28);
     var dueDate = new Date(lmpDate.getTime() + adjustedDays * 24 * 60 * 60 * 1000);
@@ -2384,14 +2387,57 @@
     modal.style.display = 'flex';
     modalImg.src = src;
     modalImg.alt = alt;
+    modal.focus();
 }
   function closeImgModal() {
     document.getElementById('imgModal').style.display = 'none';
 }
+
+  // Close modal on Escape key press
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const modal = document.getElementById('imgModal');
+      if (modal && modal.style.display === 'flex') {
+        closeImgModal();
+      }
+    }
+  });
+
+  // Scroll Spy for sticky navbar highlights
+  document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('#tracker, #all-weeks, #kick-counter, #contraction-timer, #gender-prediction, #faq');
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    
+    if (sections.length > 0 && navLinks.length > 0) {
+      const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: 0
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            navLinks.forEach(link => {
+              const href = link.getAttribute('href');
+              if (href === '#' + id || (id === 'tracker' && href === '#tracker')) {
+                link.classList.add('active');
+              } else {
+                link.classList.remove('active');
+              }
+            });
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach(section => observer.observe(section));
+    }
+  });
   </script>
 
   <!-- Image Modal -->
-  <div id="imgModal" class="img-modal" onclick="closeImgModal()">
+  <div id="imgModal" class="img-modal" tabindex="-1" role="dialog" aria-modal="true" onclick="closeImgModal()">
     <img id="imgModalContent" class="img-modal-content" src="" alt="">
   </div>
 

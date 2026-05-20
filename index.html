@@ -892,68 +892,113 @@
     }
 
     /* Scroll Reveal animations */
-    .reveal-scroll {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
-                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: transform, opacity;
-    }
+.reveal-scroll {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 1.0s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
 
-    .reveal-scroll.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+.reveal-scroll.visible {
+  opacity: 1;
+}
 
-    /* Styled language selector and Google Translate toolbar overrides */
-    .lang-selector-wrap {
-      display: flex;
-      align-items: center;
-      margin-left: 1rem;
-    }
+.reveal-scroll.visible:not(:hover) {
+  transform: translateY(0);
+}
 
-    .lang-selector-wrap select {
-      background: #fff;
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      outline: none;
-      transition: all 0.2s ease;
-    }
+/* Premium Custom Tooltips for Pregnancy-Tracker */
+[data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+span[data-tooltip],
+label[data-tooltip],
+a[data-tooltip] {
+  display: inline-block;
+}
+[data-tooltip]:hover {
+  z-index: 50;
+}
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translate(-50%, 6px);
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(244, 63, 94, 0.25);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.5;
+  padding: 8px 12px;
+  border-radius: 8px;
+  min-width: 180px;
+  max-width: 280px;
+  width: max-content;
+  white-space: normal;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 200;
+  box-shadow: 0 8px 24px rgba(244, 63, 94, 0.12), 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+[data-tooltip]::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translate(-50%, 6px);
+  border-width: 6px 6px 0;
+  border-style: solid;
+  border-color: rgba(15, 23, 42, 0.95) transparent transparent;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 200;
+}
+[data-tooltip]:hover::after,
+[data-tooltip]:hover::before {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
 
-    .lang-selector-wrap select:hover {
-      color: var(--primary);
-      border-color: var(--primary);
-      background: var(--bg);
-    }
-
-    /* Hide default Google Translate banner frame & branding */
-    .skiptranslate, iframe.skiptranslate, .goog-te-banner-frame {
-      display: none !important;
-    }
-
-    body {
-      top: 0px !important;
-    }
-
-    @media (max-width: 640px) {
-      .lang-selector-wrap {
-        margin-left: 0;
-        margin-top: 0.5rem;
-        padding: 10px 24px;
-        box-sizing: border-box;
-        width: 100%;
-      }
-      .lang-selector-wrap select {
-        width: 100%;
-        padding: 10px;
-        font-size: 0.9rem;
-      }
-    }
+/* Tooltip placements: below the button for large interactive targets */
+.btn-kick-pulse[data-tooltip]::after,
+.btn-contraction-pulse[data-tooltip]::after,
+.btn-stop[data-tooltip]::after,
+.btn-predict[data-tooltip]::after {
+  bottom: auto;
+  top: calc(100% + 8px);
+  transform: translate(-50%, -6px);
+}
+.btn-kick-pulse[data-tooltip]::before,
+.btn-contraction-pulse[data-tooltip]::before,
+.btn-stop[data-tooltip]::before,
+.btn-predict[data-tooltip]::before {
+  bottom: auto;
+  top: calc(100% + 2px);
+  border-width: 0 6px 6px;
+  border-color: transparent transparent rgba(15, 23, 42, 0.95);
+  transform: translate(-50%, -6px);
+}
+.btn-kick-pulse[data-tooltip]:hover::after,
+.btn-kick-pulse[data-tooltip]:hover::before,
+.btn-contraction-pulse[data-tooltip]:hover::after,
+.btn-contraction-pulse[data-tooltip]:hover::before,
+.btn-stop[data-tooltip]:hover::after,
+.btn-stop[data-tooltip]:hover::before,
+.btn-predict[data-tooltip]:hover::after,
+.btn-predict[data-tooltip]:hover::before {
+  transform: translate(-50%, 0);
+}
   </style>
 </head>
 <body>
@@ -975,16 +1020,6 @@
         <a href="#faq">FAQ</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
-        <div class="lang-selector-wrap">
-          <select id="langSelect" onchange="changeLanguage(this.value)" aria-label="Select Language">
-            <option value="">Translate</option>
-            <option value="es">Español</option>
-            <option value="fr">Français</option>
-            <option value="de">Deutsch</option>
-            <option value="hi">हिन्दी</option>
-            <option value="zh-CN">中文</option>
-          </select>
-        </div>
       </div>
     </div>
   </nav>
@@ -1105,7 +1140,7 @@
             <span>⏱️</span> <span id="kcTimer">00:00</span>
           </div>
 
-          <button class="tool-btn-main btn-kick-pulse" id="kcBtn" title="Start a new kick counting session" onclick="kcRecord()">Start Counting Kicks 🦶</button>
+          <button class="tool-btn-main btn-kick-pulse" id="kcBtn" data-tooltip="Start a new kick counting session" onclick="kcRecord()">Start Counting Kicks 🦶</button>
           <button class="tool-btn-main btn-stop" id="kcStopBtn" style="display:none; padding:12px; margin-top:8px; opacity:0.8; font-size:0.9rem" onclick="kcStop()">Stop &amp; Save Session</button>
 
           <div class="tool-history-list" id="kcHistory">
@@ -1142,8 +1177,8 @@
             </div>
           </div>
 
-          <button class="tool-btn-main btn-contraction-pulse" id="ctBtn" title="Start tracking your contraction duration and frequency" onclick="ctToggle()">Start Timer (Contraction Started) ⏱️</button>
-          <button class="tool-btn-main btn-stop" id="ctResetBtn" title="Clear your contraction history" style="padding:12px; margin-top:8px; opacity:0.8; font-size:0.9rem" onclick="ctReset()">Reset Timer History</button>
+          <button class="tool-btn-main btn-contraction-pulse" id="ctBtn" data-tooltip="Start tracking your contraction duration and frequency" onclick="ctToggle()">Start Timer (Contraction Started) ⏱️</button>
+          <button class="tool-btn-main btn-stop" id="ctResetBtn" data-tooltip="Clear your contraction history" style="padding:12px; margin-top:8px; opacity:0.8; font-size:0.9rem" onclick="ctReset()">Reset Timer History</button>
 
           <div class="tool-history-list" id="ctHistory">
             <!-- History injected here -->
@@ -1224,7 +1259,7 @@
             </div>
             <div>
               <div style="font-size:0.68rem;color:var(--text-muted);margin-bottom:3px">Month of conception</div>
-              <select class="gender-select" id="gMonth" title="Month of conception" style="width:110px">
+              <select class="gender-select" id="gMonth" style="width:110px">
                 <option value="">Select…</option>
                 <option value="1">January</option><option value="2">February</option>
                 <option value="3">March</option><option value="4">April</option>
@@ -1273,7 +1308,7 @@
         </div>
       </div>
 
-        <button class="btn-predict" title="Calculate the probable gender based on traditional methods" onclick="predictGender()">🔮 Predict Baby's Gender</button>
+        <button class="btn-predict" data-tooltip="Calculate the probable gender based on traditional methods" onclick="predictGender()">🔮 Predict Baby's Gender</button>
         <div id="genderResult" class="gender-result" style="display:none"></div>
 
         <div class="india-callout">
@@ -1610,6 +1645,25 @@
     return 'https://www.' + USER_LOCALE.domain + '/s?k=' + encodeURIComponent(keyword) + '&tag=' + USER_LOCALE.tag;
 }
 
+  function smoothScrollTo(element) {
+    if (!element) return;
+    setTimeout(function() {
+      var navbarHeight = 64;
+      var padding = 20;
+      var top = 0;
+      var temp = element;
+      while (temp) {
+        top += temp.offsetTop;
+        temp = temp.offsetParent;
+      }
+      var targetY = top - navbarHeight - padding;
+      window.scrollTo({
+        top: Math.max(0, targetY),
+        behavior: 'smooth'
+      });
+    }, 120);
+  }
+
   // ─────────────────────────────────────────────────────────
   //  PRODUCT RECOMMENDATIONS BY TRIMESTER
   //  Links auto-switch between amazon.in / .com / .co.uk / .ca / .com.au
@@ -1761,11 +1815,7 @@
     void rp.offsetWidth; // force reflow so animation replays on recalculate
     rp.classList.add('reveal');
     document.querySelector('.btn-calc').textContent = 'See My Progress →';
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() {
-        rp.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
+    smoothScrollTo(rp);
     
     trackEvent('calculate_week', { mode: currentMode });
 }
@@ -1877,7 +1927,7 @@
     var modalAlt = isSingleMode
       ? 'Week ' + r.weekNum + ' — ' + headerImageLabel
       : 'Week ' + r.weekNum + ' ' + cardImgTab + ' size comparison';
-    var imgClickAttr = imgSrc ? ' onclick="openImgModal(\''+imgSrc+'\',\'' + modalAlt + '\')" style="cursor:zoom-in" title="Click to enlarge"' : '';
+    var imgClickAttr = imgSrc ? ' onclick="openImgModal(\''+imgSrc+'\',\'' + modalAlt + '\')" style="cursor:zoom-in" data-tooltip="Click to enlarge"' : '';
     document.getElementById('weekCard').innerHTML =
       '<div class="week-card-header">' +
         '<div class="week-image-box">' +
@@ -1940,7 +1990,7 @@
         // Weeks 1-2 are single-mode: always show fruit image, ignore object tab
         var chipTab = (w <= 2) ? 'fruit' : currentImageTab;
         var weekChipLabel = wd.singleLabel || wd[chipTab + 'Label'] || wd.size;
-        html += '<div class="week-chip' + (isCurrent ? ' current' : '') + '" data-week="' + w + '" title="View Week ' + w + ' development details" onclick="showWeekDetail(' + w + ')">' +
+        html += '<div class="week-chip' + (isCurrent ? ' current' : '') + '" data-week="' + w + '" data-tooltip="View Week ' + w + ' development details" onclick="showWeekDetail(' + w + ')">' +
           '<div class="week-chip-num">Week ' + w + (isCurrent ? ' ◀ You' : '') + '</div>' +
           '<div class="week-chip-emoji">' + weekImg(w, wd[chipTab + 'Emoji'] || wd.emoji, chipTab) + '</div>' +
           '<div class="week-chip-size">' + weekChipLabel + '</div>' +
@@ -2033,7 +2083,7 @@
     var modalAlt2 = isSingleMode2
       ? 'Week ' + weekNum + ' — ' + headerImageLabel
       : 'Week ' + weekNum + ' ' + cardImgTab2 + ' size comparison';
-    var imgClickAttr2 = imgSrc2 ? ' onclick="openImgModal(\''+imgSrc2+'\',\'' + modalAlt2 + '\')" style="cursor:zoom-in" title="Click to enlarge"' : '';
+    var imgClickAttr2 = imgSrc2 ? ' onclick="openImgModal(\''+imgSrc2+'\',\'' + modalAlt2 + '\')" style="cursor:zoom-in" data-tooltip="Click to enlarge"' : '';
     weekCard.innerHTML =
       '<div class="week-card" style="margin-bottom:0">' +
         '<div class="week-card-header">' +
@@ -2063,11 +2113,7 @@
         '</div>' +
       '</div>';
 
-    requestAnimationFrame(function() {
-      requestAnimationFrame(function() {
-        weekCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
+    smoothScrollTo(weekCard);
 }
 
   function setWeekImageTab(tab, weekNum) {
@@ -2516,33 +2562,21 @@
   </div>
 
   <script>
-    // ── Google Translate Helper ──
-    function changeLanguage(langCode) {
-      const select = document.querySelector('.goog-te-combo');
-      if (select) {
-        select.value = langCode;
-        select.dispatchEvent(new Event('change'));
-      }
-    }
-    window.changeLanguage = changeLanguage;
 
     // ── Native High-Performance Scroll-Reveal ──
     window.addEventListener('load', () => {
-      const targets = document.querySelectorAll('.calc-card, .result-stat, .trimester-bar-wrap, .week-card, .products-section, .tool-card, .faq-item, .content-card, .footer');
-      const observer = new IntersectionObserver((entries, observer) => {
+      const targets = document.querySelectorAll('.calc-card, #all-weeks, .tool-card, #gender-prediction, #faq, .footer');
+      const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            entry.target.addEventListener('transitionend', function handler() {
-              entry.target.classList.remove('reveal-scroll', 'visible');
-              entry.target.removeEventListener('transitionend', handler);
-            });
-            observer.unobserve(entry.target);
+          } else {
+            entry.target.classList.remove('visible');
           }
         });
       }, {
         threshold: 0.05,
-        rootMargin: '0px 0px -20px 0px'
+        rootMargin: '0px 0px -10px 0px'
       });
       targets.forEach(target => {
         target.classList.add('reveal-scroll');
@@ -2550,16 +2584,5 @@
       });
     });
   </script>
-  <div id="google_translate_element" style="display:none;"></div>
-  <script>
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-      }, 'google_translate_element');
-    }
-  </script>
-  <script async src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

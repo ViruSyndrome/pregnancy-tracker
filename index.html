@@ -889,6 +889,7 @@
       .nav-inner { justify-content: space-between; padding: 0; box-sizing: border-box; width: 100%; }
       .hamburger { margin-right: 0px; }
       .gender-section { padding: 20px 16px; width: 100%; box-sizing: border-box; }
+      [data-tooltip]::after, [data-tooltip]::before { display: none !important; } /* Hide tooltips on touch devices to avoid layout stickiness */
     }
 
     /* Scroll Reveal animations */

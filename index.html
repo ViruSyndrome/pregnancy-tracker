@@ -2006,6 +2006,8 @@ a[data-tooltip] {
     var wd = WEEKS.find(function(w) { return w.week === weekNum; });
     if (!wd) return;
 
+    trackEvent('select_pregnancy_week', { week: weekNum });
+
     // Highlight the tapped chip, clear previous highlight
     document.querySelectorAll('.week-chip').forEach(function(c) { c.classList.remove('active-detail'); });
     var chip = document.querySelector('.week-chip[data-week="' + weekNum + '"]');
@@ -2488,6 +2490,7 @@ a[data-tooltip] {
       
       ctRenderHistory();
       check511Rule();
+      trackEvent('record_contraction', { type: 'stop', duration_ms: duration });
   }
 }
 

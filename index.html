@@ -1095,8 +1095,8 @@ a[data-tooltip] {
 
       <!-- AdSense slot 1 -->
       <div class="ad-slot">
-        <!-- Replace with your AdSense ad unit -->
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2959862133855422" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
+        <ins class="adsbygoogle" id="adsenseSlot1" style="display:block" data-ad-client="ca-pub-2959862133855422" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <!-- push() called after panel is visible, in calculate() -->
       </div>
 
     </div><!-- /resultPanel -->
@@ -1816,7 +1816,15 @@ a[data-tooltip] {
     rp.classList.add('reveal');
     document.querySelector('.btn-calc').textContent = 'See My Progress →';
     smoothScrollTo(rp);
-    
+
+    // Push AdSense only once, after the panel is visible and has a real width
+    if (!window._adSlot1Pushed) {
+      window._adSlot1Pushed = true;
+      setTimeout(function() {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      }, 200);
+    }
+
     trackEvent('calculate_week', { mode: currentMode });
 }
 

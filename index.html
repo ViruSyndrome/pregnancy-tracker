@@ -925,9 +925,10 @@ a[data-tooltip] {
 [data-tooltip]::after {
   content: attr(data-tooltip);
   position: absolute;
-  bottom: calc(100% + 8px);
+  top: calc(100% + 8px);
+  bottom: auto;
   left: 50%;
-  transform: translate(-50%, 6px);
+  transform: translate(-50%, -6px);
   background: rgba(15, 23, 42, 0.95);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -938,9 +939,12 @@ a[data-tooltip] {
   line-height: 1.5;
   padding: 8px 12px;
   border-radius: 8px;
-  max-width: 240px;
+  max-width: min(220px, 90vw);
   width: max-content;
   white-space: normal;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
   text-align: center;
   pointer-events: none;
   opacity: 0;
@@ -952,12 +956,13 @@ a[data-tooltip] {
 [data-tooltip]::before {
   content: '';
   position: absolute;
-  bottom: calc(100% + 2px);
+  top: calc(100% + 2px);
+  bottom: auto;
   left: 50%;
-  transform: translate(-50%, 6px);
-  border-width: 6px 6px 0;
+  transform: translate(-50%, -6px);
+  border-width: 0 6px 6px;
   border-style: solid;
-  border-color: rgba(15, 23, 42, 0.95) transparent transparent;
+  border-color: transparent transparent rgba(15, 23, 42, 0.95);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), 
@@ -970,41 +975,13 @@ a[data-tooltip] {
   transform: translate(-50%, 0);
 }
 
-/* Tooltip placements: below the button for large interactive targets */
-.btn-kick-pulse[data-tooltip]::after,
-.btn-contraction-pulse[data-tooltip]::after,
-.btn-stop[data-tooltip]::after,
-.btn-predict[data-tooltip]::after {
-  bottom: auto;
-  top: calc(100% + 8px);
-  transform: translate(-50%, -6px);
-}
-.btn-kick-pulse[data-tooltip]::before,
-.btn-contraction-pulse[data-tooltip]::before,
-.btn-stop[data-tooltip]::before,
-.btn-predict[data-tooltip]::before {
-  bottom: auto;
-  top: calc(100% + 2px);
-  border-width: 0 6px 6px;
-  border-color: transparent transparent rgba(15, 23, 42, 0.95);
-  transform: translate(-50%, -6px);
-}
-.btn-kick-pulse[data-tooltip]:hover::after,
-.btn-kick-pulse[data-tooltip]:hover::before,
-.btn-contraction-pulse[data-tooltip]:hover::after,
-.btn-contraction-pulse[data-tooltip]:hover::before,
-.btn-stop[data-tooltip]:hover::after,
-.btn-stop[data-tooltip]:hover::before,
-.btn-predict[data-tooltip]:hover::after,
-.btn-predict[data-tooltip]:hover::before {
-  transform: translate(-50%, 0);
-}
-
 /* Compact Tooltips for Timeline Chips */
 .week-chip[data-tooltip]::after {
   min-width: auto;
-  max-width: 120px;
-  white-space: nowrap;
+  width: max-content;
+  max-width: 150px;
+  white-space: normal;
+  word-wrap: break-word;
   font-size: 0.72rem;
   padding: 6px 10px;
 }
@@ -1126,7 +1103,8 @@ a[data-tooltip] {
           <div id="growthGraph" style="position:relative; width:100%; height:120px; background:rgba(0,0,0,0.02); border-radius:12px; padding:10px;">
             <!-- SVG injected here -->
           </div>
-          <p style="font-size:0.75rem; color:var(--text-muted); margin-top:10px;">Visualizing baby's length week-by-week (mm)</p>
+          <p style="font-size:0.75rem; color:var(--text-muted); margin-top:10px; margin-bottom:20px;">Visualizing baby's length week-by-week (mm)</p>
+          <div id="sizeVisualizerContainer" style="padding:0 10px;"></div>
         </div>
 
         <div class="result-grid" id="statGrid"></div>
@@ -1143,6 +1121,13 @@ a[data-tooltip] {
 
       <!-- Week detail card -->
       <div class="week-card" id="weekCard"></div>
+
+      <!-- Global Disclaimer Card -->
+      <div class="week-card" id="disclaimerCard" style="margin-top:24px;margin-bottom:24px;background:var(--bg-card);box-shadow:var(--shadow);border-radius:var(--radius);border:1px solid var(--border);">
+        <div class="products-disclaimer" style="padding:16px;font-size:0.75rem;color:var(--text-muted);line-height:1.4;text-align:center;">
+          <strong>Disclaimer:</strong> This tool is for informational purposes only and is not medical advice. Always consult your doctor or healthcare provider for medical guidance. Due dates are estimates — only about 5% of babies are born on their exact due date. Product links marked <span class="affiliate-badge">Affiliate</span> may earn a small commission at no extra cost to you.
+        </div>
+      </div>
 
       <!-- AdSense slot 1 -->
       <div class="ad-slot">
@@ -1231,7 +1216,7 @@ a[data-tooltip] {
           <!-- Contraction Breathing Coach & Visual Wave -->
           <div id="ctCoach" class="contraction-coach" style="display:none; margin-bottom: 20px;">
             <div class="coach-pulse-circle">
-              <span id="coachText">Breathe In... 🌬️</span>
+              <span id="coachText">Breathe In...</span>
             </div>
             <p style="font-size:0.85rem;color:var(--text-muted);margin-top:10px;text-align:center;margin-bottom:15px;">Follow the circle to regulate your breathing during the contraction.</p>
             
@@ -2540,6 +2525,9 @@ a[data-tooltip] {
     // ── Show share row ────────────────────────────────────
     document.getElementById('shareRow').style.display = 'flex';
 
+    // ── Size Visualizer ───────────────────────────────────
+    updateSizeVisualizer(r.weekNum);
+
     // Stats grid
     document.getElementById('statGrid').innerHTML = [
       '<div class="result-stat"><div class="stat-value">Week ' + r.weekNum + '</div><div class="stat-label">Pregnancy Week</div><div class="stat-sub">' + r.daysExtra + ' day' + (r.daysExtra !== 1 ? 's' : '') + ' into this week</div></div>',
@@ -2603,9 +2591,7 @@ a[data-tooltip] {
               '<div class="product-icon">' + p.icon + '</div>' +
               '<div><div class="product-name">' + p.name + '</div><div class="product-why">' + p.why + '</div></div>' +
               '</a>';
-          }).join('') +
           '</div>' +
-          '<div class="products-disclaimer"><strong>Disclaimer:</strong> This tool is for informational purposes only and is not medical advice. Always consult your doctor, obstetrician, or healthcare provider for medical guidance. Due dates are estimates — only about 5% of babies are born on their exact due date. Product links marked <span class="affiliate-badge">Affiliate</span> may earn a small commission at no extra cost to you.</div>' +
         '</div>' +
       '</div>';
 
@@ -2730,6 +2716,7 @@ a[data-tooltip] {
       '<div class="progress-track"><div class="progress-fill" style="width:' + (Math.min((weekNum / 40) * 100, 100)).toFixed(1) + '%"></div></div>' +
       '<div class="trimester-dividers"><span class="tri-div">Week 1</span><span class="tri-div">Week 13</span><span class="tri-div">Week 27</span><span class="tri-div">Week 40</span></div>';
     renderGrowthCurve(weekNum);
+    updateSizeVisualizer(weekNum);
     renderWeeksTimeline(weekNum);
     var products = PRODUCTS[prodKey];
     var productsHtml =
@@ -2743,8 +2730,7 @@ a[data-tooltip] {
           '<div><div class="product-name">' + p.name + '</div><div class="product-why">' + p.why + '</div></div>' +
           '</a>';
       }).join('') +
-      '<div class="products-disclaimer"><strong>Disclaimer:</strong> This tool is for informational purposes only and is not medical advice. Always consult your doctor or healthcare provider for medical guidance. Due dates are estimates — only about 5% of babies are born on their exact due date. Product links marked <span class="affiliate-badge">Affiliate</span> may earn a small commission at no extra cost to you.</div>' +
-      '</div>';
+      '</div></div>';
 
     var weekCard = document.getElementById('weekCard');
     var isSingleMode2 = wd.singleMode || weekNum <= 2;
@@ -2764,40 +2750,7 @@ a[data-tooltip] {
       ? ' <span class="ttc-badge" style="background:#fdf2f8;color:#db2777;border:1px solid #fbcfe8;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-left:8px;vertical-align:middle;display:inline-block;">Pre-Conception / TTC Phase</span>' 
       : '';
 
-    // Interactive Size Visualizer HTML
-    var cm = wd.size_mm / 10;
-    var inches = (wd.size_mm / 25.4).toFixed(1);
-    var pct = Math.min((cm / 50) * 100, 100);
-    var visualizerHtml = '';
-    if (wd.size_mm > 0.1) {
-      visualizerHtml =
-        '<div class="visualizer-container" style="margin-top:20px;background:rgba(0,0,0,0.02);padding:16px;border-radius:12px;border:1px dashed var(--border)">' +
-          '<div style="font-size:0.85rem;font-weight:700;color:var(--text);margin-bottom:8px;display:flex;justify-content:space-between">' +
-            '<span>📏 Size Visualizer:</span>' +
-            '<span style="color:var(--primary)">' + cm.toFixed(1) + ' cm / ' + inches + ' inches (' + Math.round(pct) + '% of full term size)</span>' +
-          '</div>' +
-          '<div class="visualizer-track" style="position:relative;height:12px;background:#e2e8f0;border-radius:6px;margin:24px 0 10px 0;">' +
-            '<div class="visualizer-fill" style="width:' + pct + '%;height:100%;background:linear-gradient(90deg, var(--primary-light) 0%, var(--primary) 100%);border-radius:6px;"></div>' +
-            '<div class="visualizer-pin" style="position:absolute;left:' + pct + '%;top:-8px;transform:translateX(-50%);width:16px;height:16px;background:var(--primary);border:3px solid #fff;border-radius:50%;box-shadow:0 2px 4px rgba(0,0,0,0.2)"></div>' +
-            '<div class="visualizer-marker" style="position:absolute;left:17%;top:18px;transform:translateX(-50%);text-align:center;font-size:0.68rem;color:var(--text-muted);font-weight:700;">' +
-              '<div style="height:6px;width:1px;background:#cbd5e1;margin:0 auto 2px auto;"></div>' +
-              'Card (8.5cm)' +
-            '</div>' +
-            '<div class="visualizer-marker" style="position:absolute;left:30%;top:18px;transform:translateX(-50%);text-align:center;font-size:0.68rem;color:var(--text-muted);font-weight:700;">' +
-              '<div style="height:6px;width:1px;background:#cbd5e1;margin:0 auto 2px auto;"></div>' +
-              'Phone (15cm)' +
-            '</div>' +
-            '<div class="visualizer-marker" style="position:absolute;left:60%;top:18px;transform:translateX(-50%);text-align:center;font-size:0.68rem;color:var(--text-muted);font-weight:700;">' +
-              '<div style="height:6px;width:1px;background:#cbd5e1;margin:0 auto 2px auto;"></div>' +
-              'Ruler (30cm)' +
-            '</div>' +
-            '<div class="visualizer-marker" style="position:absolute;left:100%;top:18px;transform:translateX(-100%);text-align:center;font-size:0.68rem;color:var(--text-muted);font-weight:700;">' +
-              '<div style="height:6px;width:1px;background:#cbd5e1;margin:0 auto 2px auto;"></div>' +
-              'Newborn (50cm)' +
-            '</div>' +
-          '</div>' +
-        '</div>';
-    }
+    // Interactive Size Visualizer removed from here.
 
     // Weekly Checklist HTML
     var checklistHtml = '';
@@ -2879,7 +2832,6 @@ a[data-tooltip] {
         '</div>' +
         '<div class="week-card-body">' +
           '<div class="week-tip"><span>💡</span><span><strong>This week\'s tip:</strong> ' + wd.tip + '</span></div>' +
-          visualizerHtml +
           checklistHtml +
           privacySealHtml +
           referencesHtml +
@@ -2971,6 +2923,45 @@ a[data-tooltip] {
     html += '<button onclick="copyGenderResult(\'' + encodeURIComponent(shareText) + '\')" class="tool-btn-main">Copy</button></div>';
     resultEl.innerHTML = html;
 }
+
+  function updateSizeVisualizer(weekNum) {
+    var safeW = Math.min(Math.max(weekNum - 1, 0), WEEKS_DATA.length - 1);
+    var wd = WEEKS_DATA[safeW];
+    var cm = wd.size_mm / 10;
+    var inches = (wd.size_mm / 25.4).toFixed(1);
+    var pct = Math.min((cm / 50) * 100, 100);
+    var visHtml = '';
+    
+    var sizeStr = wd.size_mm < 1 ? 'Microscopic' : (cm.toFixed(1) + ' cm / ' + inches + ' in');
+    var pctStr = wd.size_mm < 1 ? '0%' : (Math.round(pct) + '%');
+
+    visHtml =
+      '<div style="text-align:left;font-size:0.85rem;font-weight:700;color:var(--text);margin-bottom:8px;display:flex;justify-content:space-between">' +
+        '<span>📏 Size Visualizer:</span>' +
+        '<span style="color:var(--primary)">' + sizeStr + ' (' + pctStr + ')</span>' +
+      '</div>' +
+      '<div style="position:relative;height:12px;background:#e2e8f0;border-radius:6px;margin:28px 0 36px 0;">' +
+        '<div style="width:' + pct + '%;height:100%;background:linear-gradient(90deg, var(--primary-light) 0%, var(--primary) 100%);border-radius:6px;"></div>' +
+        '<div style="position:absolute;left:' + pct + '%;top:-8px;transform:translateX(-50%);width:16px;height:16px;background:var(--primary);border:3px solid #fff;border-radius:50%;box-shadow:0 2px 4px rgba(0,0,0,0.2)"></div>' +
+        '<div style="position:absolute;left:17%;top:18px;transform:translateX(-50%);text-align:center;font-size:0.65rem;color:var(--text-muted);font-weight:700;white-space:nowrap;">' +
+          '<div style="height:6px;width:1px;background:#cbd5e1;margin:0 auto 2px auto;"></div>Card<br>(8.5cm)' +
+        '</div>' +
+        '<div style="position:absolute;left:30%;top:18px;transform:translateX(-50%);text-align:center;font-size:0.65rem;color:var(--text-muted);font-weight:700;white-space:nowrap;">' +
+          '<div style="height:6px;width:1px;background:#cbd5e1;margin:0 auto 2px auto;"></div>Phone<br>(15cm)' +
+        '</div>' +
+        '<div style="position:absolute;left:60%;top:18px;transform:translateX(-50%);text-align:center;font-size:0.65rem;color:var(--text-muted);font-weight:700;white-space:nowrap;">' +
+          '<div style="height:6px;width:1px;background:#cbd5e1;margin:0 auto 2px auto;"></div>Ruler<br>(30cm)' +
+        '</div>' +
+        '<div style="position:absolute;right:0;top:18px;text-align:right;font-size:0.65rem;color:var(--text-muted);font-weight:700;white-space:nowrap;padding-right:2px;">' +
+          '<div style="height:6px;width:1px;background:#cbd5e1;margin:0 4px 2px auto;"></div>Newborn<br>(50cm)' +
+        '</div>' +
+      '</div>';
+      
+    var container = document.getElementById('sizeVisualizerContainer');
+    if (container) {
+      container.innerHTML = visHtml;
+    }
+  }
 
   function renderGrowthCurve(currentWeek) {
     try {
@@ -3250,9 +3241,9 @@ a[data-tooltip] {
       var coachTextEl = document.getElementById('coachText');
       if (coachTextEl) {
         if (cycleSec < 4) {
-          coachTextEl.innerText = 'Breathe In... 🌬️';
+          coachTextEl.innerText = 'Breathe In...';
         } else {
-          coachTextEl.innerText = 'Breathe Out... 💨';
+          coachTextEl.innerText = 'Breathe Out...';
         }
       }
 

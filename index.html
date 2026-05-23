@@ -938,8 +938,7 @@ a[data-tooltip] {
   line-height: 1.5;
   padding: 8px 12px;
   border-radius: 8px;
-  min-width: 180px;
-  max-width: 280px;
+  max-width: 240px;
   width: max-content;
   white-space: normal;
   text-align: center;
@@ -999,6 +998,58 @@ a[data-tooltip] {
 .btn-predict[data-tooltip]:hover::after,
 .btn-predict[data-tooltip]:hover::before {
   transform: translate(-50%, 0);
+}
+
+/* Compact Tooltips for Timeline Chips */
+.week-chip[data-tooltip]::after {
+  min-width: auto;
+  max-width: 120px;
+  white-space: nowrap;
+  font-size: 0.72rem;
+  padding: 6px 10px;
+}
+
+/* Contraction Calming Coach styles */
+#contraction-timer.active-contraction {
+  border: 2px solid var(--primary) !important;
+  box-shadow: 0 10px 25px rgba(190, 24, 93, 0.15) !important;
+  background: linear-gradient(180deg, #ffffff 0%, var(--primary-light) 100%) !important;
+  transition: all 0.3s ease;
+}
+.contraction-coach {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+  margin-top: 10px;
+  margin-bottom: 24px;
+}
+@keyframes coachBreath {
+  0%, 100% {
+    transform: scale(0.9);
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+  }
+  50% {
+    transform: scale(1.25);
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0 0 25px rgba(190, 24, 93, 0.4);
+  }
+}
+.coach-pulse-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 15px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.5s ease;
+  animation: coachBreath 8s infinite ease-in-out;
 }
   </style>
 </head>
@@ -1177,6 +1228,28 @@ a[data-tooltip] {
             </div>
           </div>
 
+          <!-- Contraction Breathing Coach & Visual Wave -->
+          <div id="ctCoach" class="contraction-coach" style="display:none; margin-bottom: 20px;">
+            <div class="coach-pulse-circle">
+              <span id="coachText">Breathe In... 🌬️</span>
+            </div>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin-top:10px;text-align:center;margin-bottom:15px;">Follow the circle to regulate your breathing during the contraction.</p>
+            
+            <!-- Contraction Wave Visualizer -->
+            <div id="ctWaveContainer" style="height:60px; position:relative; overflow:hidden; border-radius:10px; background:rgba(244, 63, 94, 0.03); border:1px solid rgba(244, 63, 94, 0.1); margin: 0 10px 10px 10px;">
+              <svg id="ctWaveSvg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute; bottom:0; left:0; width:100%; height:100%;">
+                <path id="ctWavePath" d="M0,100 Q25,100 50,100 T100,100 L100,100 L0,100 Z" fill="url(#waveGrad)" opacity="0.8"></path>
+                <defs>
+                  <linearGradient id="waveGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="var(--primary)" stop-opacity="0.8"></stop>
+                    <stop offset="100%" stop-color="var(--primary-light)" stop-opacity="0.1"></stop>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div id="ctIntensityLabel" style="position:absolute; top:8px; left:50%; transform:translateX(-50%); font-size:0.75rem; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:0.5px; white-space:nowrap;">Intensity: Preparing...</div>
+            </div>
+          </div>
+
           <button class="tool-btn-main btn-contraction-pulse" id="ctBtn" data-tooltip="Start tracking your contraction duration and frequency" onclick="ctToggle()">Start Timer (Contraction Started) ⏱️</button>
           <button class="tool-btn-main btn-stop" id="ctResetBtn" data-tooltip="Clear your contraction history" style="padding:12px; margin-top:8px; opacity:0.8; font-size:0.9rem" onclick="ctReset()">Reset Timer History</button>
 
@@ -1352,19 +1425,19 @@ a[data-tooltip] {
               <li>Braxton Hicks contractions become more frequent</li>
               <li>Sleep becomes more difficult — use a pregnancy pillow</li>
               <li>Baby "drops" (engages into pelvis) around week 35–36</li>
-              <li>Weekly midwife checks from week 36</li>
+              <li>Weekly OB-GYN or doctor checkups from week 36</li>
             </ul>
           </div>
           <div class="content-card">
             <h3>📋 Key Antenatal Appointments</h3>
             <ul>
-              <li><strong>Week 8–10:</strong> First midwife appointment (booking appointment)</li>
+              <li><strong>Week 8–10:</strong> First prenatal appointment (booking checkup)</li>
               <li><strong>Week 12:</strong> Dating scan + blood tests</li>
-              <li><strong>Week 16:</strong> Midwife check + blood results</li>
+              <li><strong>Week 16:</strong> Routine doctor checkup + blood results</li>
               <li><strong>Week 20:</strong> Anomaly scan</li>
               <li><strong>Week 28:</strong> Blood tests + anti-D if Rh negative</li>
-              <li><strong>Week 34–36:</strong> Midwife checks, position check</li>
-              <li><strong>Week 38–40+:</strong> Weekly midwife checks</li>
+              <li><strong>Week 34–36:</strong> Prenatal checkup, position check</li>
+              <li><strong>Week 38–40+:</strong> Weekly OB-GYN or doctor checkups</li>
             </ul>
           </div>
         </div>
@@ -2256,12 +2329,12 @@ a[data-tooltip] {
   // ─────────────────────────────────────────────────────────
   const FAQS = [
     { q: 'How is my pregnancy due date calculated?', a: 'Your estimated due date (EDD) is calculated as 280 days (40 weeks) from the first day of your last menstrual period (LMP). This is called Naegele\'s rule. The calculation assumes a 28-day cycle — if your cycle is longer or shorter, your actual due date may differ slightly. Your 12-week dating scan gives a more accurate estimate based on baby\'s actual measurements.' },
-    { q: 'Why does pregnancy start from the last period, not conception?', a: 'Doctors and midwives count pregnancy from the LMP because it\'s a known, consistent date — the exact moment of ovulation and conception varies and can\'t be pinpointed. So when your period is one week late, you\'re technically already 5 weeks pregnant (2 weeks before ovulation + 3 weeks since). It\'s a convention, not biology.' },
+    { q: 'Why does pregnancy start from the last period, not conception?', a: 'Doctors and obstetricians count pregnancy from the LMP because it\'s a known, consistent date — the exact moment of ovulation and conception varies and can\'t be pinpointed. So when your period is one week late, you\'re technically already 5 weeks pregnant (2 weeks before ovulation + 3 weeks since). It\'s a convention, not biology.' },
     { q: 'How accurate is this due date calculator?', a: 'This calculator uses the standard obstetric formula (Naegele\'s rule). However, due dates are estimates — only about 5% of babies arrive on their exact due date. Most are born within 2 weeks before or after. Your 12-week dating scan, which measures your baby\'s crown-rump length, gives a more accurate estimate and supersedes the LMP calculation if there\'s a significant difference.' },
-    { q: 'What is the 5-1-1 rule for contractions?', a: 'The 5-1-1 rule is a standard guideline for when to head to the hospital. It means: your contractions are <strong>5 minutes apart</strong> (measured from the start of one to the start of the next), each one lasts for <strong>1 full minute</strong>, and this pattern has been consistent for <strong>1 full hour</strong>. Always call your midwife or hospital before leaving to confirm they are ready for you.' },
-    { q: 'How should I use the Baby Kick Counter?', a: 'Standard medical advice is to start counting kicks daily from 28 weeks. Find a time when your baby is usually active (often after a meal or in the evening). You should aim to feel 10 movements (kicks, flutters, swishes, or rolls) within 2 hours. If you don\'t reach 10 in 2 hours, or if you notice a significant decrease in your baby\'s normal movement pattern, contact your maternity unit immediately.' },
+    { q: 'What is the 5-1-1 rule for contractions?', a: 'The 5-1-1 rule is a standard guideline for when to head to the hospital. It means: your contractions are <strong>5 minutes apart</strong> (measured from the start of one to the start of the next), each one lasts for <strong>1 full minute</strong>, and this pattern has been consistent for <strong>1 full hour</strong>. Always call your doctor, healthcare provider, or hospital before leaving to confirm they are ready for you.' },
+    { q: 'How should I use the Baby Kick Counter?', a: 'Standard medical advice is to start counting kicks daily from 28 weeks. Find a time when your baby is usually active (often after a meal or in the evening). You should aim to feel 10 movements (kicks, flutters, swishes, or rolls) within 2 hours. If you don\'t reach 10 in 2 hours, or if you notice a significant decrease in your baby\'s normal movement pattern, contact your maternity unit or doctor immediately.' },
     { q: 'Are the size comparison photos real?', a: 'Yes! We use custom-shot scale reference photos that show common fruits and vegetables in a real human hand. This gives you a much more accurate sense of your baby\'s actual size and volume compared to generic stock photos or icons used in other apps.' },
-    { q: 'When will I feel my baby move for the first time?', a: 'First movements (called quickening) are typically felt between weeks 16 and 20. First-time mothers often feel them later (around week 20) as they may not recognise the sensation at first. Women who have been pregnant before often recognise the flutter-like movements sooner. From around week 28, your midwife will ask you to monitor movements daily.' },
+    { q: 'When will I feel my baby move for the first time?', a: 'First movements (called quickening) are typically felt between weeks 16 and 20. First-time mothers often feel them later (around week 20) as they may not recognise the sensation at first. Women who have been pregnant before often recognise the flutter-like movements sooner. From around week 28, your doctor or healthcare provider will ask you to monitor movements daily.' },
     { q: 'Is this tool safe to use? Does it store my data?', a: 'All calculations happen entirely in your browser — no data is sent to any server. We do not store your dates, results, or any personal information. This tool respects your privacy completely. The URL sharing feature only works if you choose to copy and share it; we do not record who visits or what dates they enter.' }
   ];
 
@@ -2402,9 +2475,9 @@ a[data-tooltip] {
     if (w === 27)              return { icon: '👶', title: 'Third trimester begins!', sub: 'Baby is gaining weight rapidly now. You can feel strong movements every day. Start preparing your hospital bag.' };
     if (w >= 37 && w < 40)    return { icon: '🎀', title: 'Full term!', sub: 'Baby is fully developed and ready to arrive any day. Pack your hospital bag, install the car seat, and rest!' };
     if (w === 40)              return { icon: '✨', title: 'Due date week!', sub: 'Your estimated due date is this week. Only 5% of babies arrive exactly on time — stay calm and trust your body.' };
-    if (w > 40)                return { icon: '🤗', title: 'Baby is taking their time!', sub: 'Completely normal — babies often arrive up to 2 weeks after their due date. Your midwife will monitor you closely.' };
+    if (w > 40)                return { icon: '🤗', title: 'Baby is taking their time!', sub: 'Completely normal — babies often arrive up to 2 weeks after their due date. Your doctor or healthcare provider will monitor you closely.' };
     return null;
-}
+  }
 
   // ─────────────────────────────────────────────────────────
   //  SHARE RESULT
@@ -2532,7 +2605,7 @@ a[data-tooltip] {
               '</a>';
           }).join('') +
           '</div>' +
-          '<div class="products-disclaimer"><strong>Disclaimer:</strong> This tool is for informational purposes only and is not medical advice. Always consult your midwife, obstetrician, or GP for medical guidance. Due dates are estimates — only about 5% of babies are born on their exact due date. Product links marked <span class="affiliate-badge">Affiliate</span> may earn a small commission at no extra cost to you.</div>' +
+          '<div class="products-disclaimer"><strong>Disclaimer:</strong> This tool is for informational purposes only and is not medical advice. Always consult your doctor, obstetrician, or healthcare provider for medical guidance. Due dates are estimates — only about 5% of babies are born on their exact due date. Product links marked <span class="affiliate-badge">Affiliate</span> may earn a small commission at no extra cost to you.</div>' +
         '</div>' +
       '</div>';
 
@@ -2765,7 +2838,7 @@ a[data-tooltip] {
       '</div>';
 
     var referencesHtml = 
-      '<details class="medical-sources-accordion" style="margin-top:16px;background:rgba(0,0,0,0.01);border:1px solid var(--border);border-radius:10px;padding:8px 12px;cursor:pointer;font-size:0.8rem;color:var(--text-muted)">' +
+      '<details open class="medical-sources-accordion" style="margin-top:16px;background:rgba(0,0,0,0.01);border:1px solid var(--border);border-radius:10px;padding:8px 12px;cursor:pointer;font-size:0.8rem;color:var(--text-muted)">' +
         '<summary style="font-weight:700;color:var(--text);outline:none;user-select:none;list-style:none;">🩺 Clinical Evidence & Medical References</summary>' +
         '<div style="margin-top:10px;line-height:1.5;cursor:default;">' +
           'This week\'s development and clinical guidance are verified against standard global medical guidelines:' +
@@ -3182,6 +3255,40 @@ a[data-tooltip] {
           coachTextEl.innerText = 'Breathe Out... 💨';
         }
       }
+
+      // Dynamic wave and intensity calculation (typical contraction peaks at 30s of a 60s window)
+      var totalWindow = 60; // 60 seconds typical duration window
+      var progress = Math.min(elapsedMs / (totalWindow * 1000), 1);
+      // Bell curve formula: sin(pi * progress)
+      var intensity = Math.sin(Math.PI * progress);
+      var peakHeight = 85; // Max height of wave peak in SVG coordinate space (0-100)
+      var currentHeight = peakHeight * intensity;
+      var controlY = 100 - currentHeight;
+      
+      var wavePath = document.getElementById('ctWavePath');
+      if (wavePath) {
+        // Draw a smooth quadratic Bezier curve that rises and falls
+        wavePath.setAttribute('d', 'M0,100 Q50,' + controlY + ' 100,100 Z');
+      }
+      
+      var label = document.getElementById('ctIntensityLabel');
+      if (label) {
+        var labelText = 'Intensity: ';
+        if (progress >= 1) {
+          labelText += 'Rest & breathe easy 🧘';
+        } else {
+          if (intensity < 0.2) {
+            labelText += (progress < 0.5 ? 'Gentle / Starting... 📈' : 'Fading / Almost done... ✨');
+          } else if (intensity < 0.6) {
+            labelText += (progress < 0.5 ? 'Building... 📈' : 'Subsiding... 📉');
+          } else if (intensity < 0.9) {
+            labelText += (progress < 0.5 ? 'Strong / Rising... ⚡' : 'Strong / Easing... 📉');
+          } else {
+            labelText += 'PEAKING (Breathe through it!) 🏔️';
+          }
+        }
+        label.innerText = labelText;
+      }
     }
   }
 
@@ -3306,8 +3413,14 @@ a[data-tooltip] {
     } catch (e) {}
     if (!kcActive) releaseWakeLock();
     
+    // Reset visual displays
     document.getElementById('ctDuration').innerText = '0s';
     document.getElementById('ctInterval').innerText = '--';
+    var wavePath = document.getElementById('ctWavePath');
+    if (wavePath) wavePath.setAttribute('d', 'M0,100 Q50,100 100,100 Z');
+    var label = document.getElementById('ctIntensityLabel');
+    if (label) label.innerText = 'Intensity: Gentle / Starting... 📈';
+    
     document.getElementById('ctHistory').innerHTML = '';
     document.getElementById('ctAlert').style.display = 'none';
   }

@@ -909,81 +909,10 @@
   transform: translateY(0);
 }
 
-/* Premium Custom Tooltips for Pregnancy-Tracker */
+/* Custom Tooltips for Pregnancy-Tracker disabled (moved to dynamic JS) */
+/* Retained hover style for cursor */
 [data-tooltip] {
-  position: relative;
   cursor: help;
-}
-span[data-tooltip],
-label[data-tooltip],
-a[data-tooltip] {
-  display: inline-block;
-}
-[data-tooltip]:hover {
-  z-index: 50;
-}
-[data-tooltip]::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  top: calc(100% + 8px);
-  bottom: auto;
-  left: 50%;
-  transform: translate(-50%, -6px);
-  background: rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(244, 63, 94, 0.25);
-  color: #fff;
-  font-size: 0.78rem;
-  font-weight: 500;
-  line-height: 1.5;
-  padding: 8px 12px;
-  border-radius: 8px;
-  max-width: min(220px, 90vw);
-  width: max-content;
-  white-space: normal;
-  word-wrap: break-word;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  text-align: center;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 200;
-  box-shadow: 0 8px 24px rgba(244, 63, 94, 0.12), 0 4px 12px rgba(0, 0, 0, 0.25);
-}
-[data-tooltip]::before {
-  content: '';
-  position: absolute;
-  top: calc(100% + 2px);
-  bottom: auto;
-  left: 50%;
-  transform: translate(-50%, -6px);
-  border-width: 0 6px 6px;
-  border-style: solid;
-  border-color: transparent transparent rgba(15, 23, 42, 0.95);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 200;
-}
-[data-tooltip]:hover::after,
-[data-tooltip]:hover::before {
-  opacity: 1;
-  transform: translate(-50%, 0);
-}
-
-/* Compact Tooltips for Timeline Chips */
-.week-chip[data-tooltip]::after {
-  min-width: auto;
-  width: max-content;
-  max-width: 150px;
-  white-space: normal;
-  word-wrap: break-word;
-  font-size: 0.72rem;
-  padding: 6px 10px;
 }
 
 /* Contraction Calming Coach styles */
@@ -2269,18 +2198,14 @@ a[data-tooltip] {
     setTimeout(function() {
       var navbarHeight = 64;
       var padding = 20;
-      var top = 0;
-      var temp = element;
-      while (temp) {
-        top += temp.offsetTop;
-        temp = temp.offsetParent;
-      }
-      var targetY = top - navbarHeight - padding;
+      var elementRect = element.getBoundingClientRect();
+      var absoluteElementTop = elementRect.top + window.scrollY;
+      var targetY = absoluteElementTop - navbarHeight - padding;
       window.scrollTo({
         top: Math.max(0, targetY),
         behavior: 'smooth'
       });
-    }, 120);
+    }, 50);
   }
 
   // ─────────────────────────────────────────────────────────
@@ -2557,11 +2482,11 @@ a[data-tooltip] {
     var modalAlt = isSingleMode
       ? 'Week ' + r.weekNum + ' — ' + headerImageLabel
       : 'Week ' + r.weekNum + ' ' + cardImgTab + ' size comparison';
-    var imgClickAttr = imgSrc ? ' onclick="openImgModal(\''+imgSrc+'\',\'' + modalAlt + '\')" style="cursor:zoom-in" data-tooltip="Click to enlarge"' : '';
+    
     document.getElementById('weekCard').innerHTML =
       '<div class="week-card-header">' +
         '<div class="week-image-box">' +
-          '<div class="week-emoji"' + imgClickAttr + '>' + weekImg(r.weekNum, headerImageEmoji, cardImgTab) + '</div>' +
+          '<div class="week-emoji"' + (imgSrc ? ' onclick="openImgModal(\''+imgSrc+'\',\'' + modalAlt + '\')" style="cursor:zoom-in" data-tooltip="Click to enlarge"' : '') + '>' + weekImg(r.weekNum, headerImageEmoji, cardImgTab) + '</div>' +
           (imgSrc ? '<div class="enlarge-hint">🔍 Tap to enlarge</div>' : '') +
           (!isSingleMode ? '<div class="week-image-tabs">' +
             '<button class="week-image-tab' + (currentImageTab === 'fruit' ? ' active' : '') + '" type="button" onclick="setWeekImageTab(\'fruit\', ' + r.weekNum + ')">Food</button>' +
@@ -2744,14 +2669,11 @@ a[data-tooltip] {
     var modalAlt2 = isSingleMode2
       ? 'Week ' + weekNum + ' — ' + headerImageLabel
       : 'Week ' + weekNum + ' ' + cardImgTab2 + ' size comparison';
-    var imgClickAttr2 = imgSrc2 ? ' onclick="openImgModal(\''+imgSrc2+'\',\'' + modalAlt2 + '\')" style="cursor:zoom-in" data-tooltip="Click to enlarge"' : '';
     
     // TTC Phase Badge
     var ttcBadge = (weekNum <= 3) 
       ? ' <span class="ttc-badge" style="background:#fdf2f8;color:#db2777;border:1px solid #fbcfe8;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-left:8px;vertical-align:middle;display:inline-block;">Pre-Conception / TTC Phase</span>' 
       : '';
-
-    // Interactive Size Visualizer removed from here.
 
     // Weekly Checklist HTML
     var checklistHtml = '';
@@ -2808,7 +2730,7 @@ a[data-tooltip] {
       '<div class="week-card" style="margin-bottom:0">' +
         '<div class="week-card-header">' +
           '<div class="week-image-box">' +
-            '<div class="week-emoji"' + imgClickAttr2 + '>' + weekImg(weekNum, headerImageEmoji, cardImgTab2) + '</div>' +
+            '<div class="week-emoji"' + (imgSrc2 ? ' onclick="openImgModal(\''+imgSrc2+'\',\'' + modalAlt2 + '\')" style="cursor:zoom-in" data-tooltip="Click to enlarge"' : '') + '>' + weekImg(weekNum, headerImageEmoji, cardImgTab2) + '</div>' +
             (imgSrc2 ? '<div class="enlarge-hint">🔍 Tap to enlarge</div>' : '') +
             (!isSingleMode2 ? '<div class="week-image-tabs">' +
               '<button class="week-image-tab' + (currentImageTab === 'fruit' ? ' active' : '') + '" type="button" onclick="setWeekImageTab(\'fruit\', ' + weekNum + ')">Food</button>' +
@@ -3026,7 +2948,7 @@ a[data-tooltip] {
         svg += 
         '<text x="25" y="'+(padding.top + chartH/2)+'" transform="rotate(-90, 25, '+(padding.top + chartH/2)+')" text-anchor="middle" font-size="16" font-weight="800" fill="#444">SIZE (mm)</text>' +
         '<text x="'+(padding.left-15)+'" y="'+(padding.top+chartH)+'" text-anchor="end" font-size="12" font-weight="700" fill="#888">0</text>' +
-        '<text x="'+(padding.left-15)+'" y="'+padding.top+'" text-anchor="end" font-size="12" font-weight="700" fill="#888">520</text>' +
+        '<text x="'+(padding.left-15)+'" y="'+padding.top+'" text-anchor="end" font-size="12" font-weight="700" fill="#520">520</text>' +
         '<path d="' + pathData + '" fill="none" stroke="#f4f4f4" stroke-width="4" stroke-dasharray="6" />' +
         '<path d="' + activePathData + '" fill="none" stroke="var(--primary)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />' +
         '<circle cx="' + currentPoint.x + '" cy="' + currentPoint.y + '" r="9" fill="var(--primary)" stroke="#fff" stroke-width="3">' +
@@ -3038,17 +2960,6 @@ a[data-tooltip] {
     } catch (e) { console.error("Graph Error:", e); }
   }
 
-  function showGraphTooltip(e, week, mm) {
-    var tt = document.getElementById('graphTooltip');
-    tt.style.display = 'block';
-    tt.style.left = (e.clientX + 10) + 'px';
-    tt.style.top = (e.clientY - 30) + 'px';
-    tt.innerHTML = 'Week ' + week + ': ' + mm + ' mm';
-}
-
-  function hideGraphTooltip() {
-    document.getElementById('graphTooltip').style.display = 'none';
-}
   function formatDateInput(d) {
     var y = d.getFullYear();
     var m = String(d.getMonth() + 1).padStart(2, '0');
@@ -3061,6 +2972,86 @@ a[data-tooltip] {
     if (!d) return '—';
     return d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
 }
+
+  function openImgModal(src, alt) {
+    var modal = document.getElementById('imgModal');
+    var img = document.getElementById('imgModalContent');
+    if (!modal || !img) return;
+    img.src = src;
+    img.alt = alt || '';
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeImgModal() {
+    var modal = document.getElementById('imgModal');
+    if (!modal) return;
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  // --- Dynamic Vanilla JS Tooltips ---
+  (function() {
+    var tooltipEl = document.createElement('div');
+    tooltipEl.style.position = 'absolute';
+    tooltipEl.style.background = 'rgba(15, 23, 42, 0.95)';
+    tooltipEl.style.color = '#fff';
+    tooltipEl.style.padding = '8px 12px';
+    tooltipEl.style.borderRadius = '8px';
+    tooltipEl.style.fontSize = '0.78rem';
+    tooltipEl.style.fontWeight = '500';
+    tooltipEl.style.pointerEvents = 'none';
+    tooltipEl.style.opacity = '0';
+    tooltipEl.style.transition = 'opacity 0.2s, transform 0.2s';
+    tooltipEl.style.zIndex = '1000';
+    tooltipEl.style.whiteSpace = 'normal';
+    tooltipEl.style.maxWidth = 'min(220px, 90vw)';
+    tooltipEl.style.width = 'max-content';
+    tooltipEl.style.textAlign = 'center';
+    tooltipEl.style.border = '1px solid rgba(244, 63, 94, 0.25)';
+    tooltipEl.style.boxShadow = '0 8px 24px rgba(244, 63, 94, 0.12), 0 4px 12px rgba(0, 0, 0, 0.25)';
+    document.body.appendChild(tooltipEl);
+
+    var currentTarget = null;
+
+    document.addEventListener('mouseover', function(e) {
+      var target = e.target.closest('[data-tooltip]');
+      if (!target) return;
+      currentTarget = target;
+      tooltipEl.innerHTML = target.getAttribute('data-tooltip');
+      
+      var rect = target.getBoundingClientRect();
+      var scrollY = window.scrollY;
+      var scrollX = window.scrollX;
+      
+      // Calculate position (default: above)
+      var tooltipTop = rect.top + scrollY - tooltipEl.offsetHeight - 8;
+      var tooltipLeft = rect.left + scrollX + (rect.width / 2) - (tooltipEl.offsetWidth / 2);
+      
+      // If it overflows the top, put it below
+      if (rect.top - tooltipEl.offsetHeight - 8 < 64) {
+        tooltipTop = rect.bottom + scrollY + 8;
+      }
+      
+      // Prevent horizontal overflow
+      if (tooltipLeft < 10) tooltipLeft = 10;
+      if (tooltipLeft + tooltipEl.offsetWidth > window.innerWidth - 10) {
+        tooltipLeft = window.innerWidth - tooltipEl.offsetWidth - 10;
+      }
+
+      tooltipEl.style.left = tooltipLeft + 'px';
+      tooltipEl.style.top = tooltipTop + 'px';
+      tooltipEl.style.opacity = '1';
+    });
+
+    document.addEventListener('mouseout', function(e) {
+      if (currentTarget && !e.relatedTarget?.closest('[data-tooltip]')) {
+        tooltipEl.style.opacity = '0';
+        currentTarget = null;
+      }
+    });
+  })();
+
   // ─────────────────────────────────────────────────────────
   //  WAKE LOCK & LOCAL MEMORY INITIALIZATION
   // ─────────────────────────────────────────────────────────

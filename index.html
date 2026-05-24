@@ -261,7 +261,7 @@
   }
 
     /* ── RESULT PANEL ── */
-    #resultPanel { display: none; padding: 40px 0 0; }
+    #resultPanel { scroll-margin-top: 90px; display: none; padding: 40px 0 0; }
     @keyframes fadeSlideUp {
       from { opacity: 0; transform: translateY(28px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -354,7 +354,7 @@
     .tri-div { font-size: 0.7rem; color: var(--text-muted); }
 
     /* ── WEEK DETAIL CARD ── */
-    .week-card {
+    .week-card { scroll-margin-top: 90px;
       background: var(--bg-card); border-radius: var(--radius);
       box-shadow: var(--shadow); overflow: hidden;
       margin-bottom: 24px;
@@ -423,35 +423,33 @@
   }
     .week-tip strong { color: var(--accent); }
 
-    /* ✨ PRODUCT RECOMMENDATIONS ✨ */
-    .curated-section {
+    /* ── PRODUCT RECOMMENDATIONS ── */
+    .ui-curated-section {
       background: var(--bg-card); border-radius: var(--radius);
       box-shadow: var(--shadow-sm); padding: 24px;
       margin-bottom: 24px; border: 1px solid var(--border);
   }
-    .curated-section h2 {
+    .ui-curated-section h2 {
       font-size: 1rem; font-weight: 700; color: var(--text);
       margin-bottom: 4px;
   }
-    .curated-section .products-sub {
-      font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px;
-  }
-    .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .product-card {
+    .ui-grid-layout { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .ui-grid-card {
       border: 1px solid var(--border); border-radius: 10px;
       padding: 14px; display: flex; gap: 12px; align-items: flex-start;
       text-decoration: none; color: var(--text);
       transition: box-shadow 0.2s, border-color 0.2s; background: var(--bg);
-  }
-    .product-card:hover { box-shadow: var(--shadow-sm); border-color: var(--primary); }
-    .products-disclaimer {
+    }
+    .ui-grid-card:hover { box-shadow: var(--shadow-sm); border-color: var(--primary); }
+    .tip-sub {
       font-size: 0.8rem; color: var(--text-muted); line-height: 1.65;
       margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(59,130,246,0.08);
-    }
-    .product-icon { font-size: 1.6rem; flex-shrink: 0; }
-    .product-name { font-size: 0.82rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
-    .product-why { font-size: 0.75rem; color: var(--text-muted); }
-    .partner-badge {
+      font-style: italic; text-align: center;
+  }
+    .ui-grid-icon { font-size: 1.6rem; flex-shrink: 0; }
+    .ui-grid-title { font-size: 0.82rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+    .ui-grid-desc { font-size: 0.75rem; color: var(--text-muted); }
+    .affiliate-badge {
       display: inline-block; font-size: 0.65rem; font-weight: 600;
       background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0;
       padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;
@@ -612,7 +610,7 @@
     }
       .result-grid { grid-template-columns: 1fr 1fr; }
       .week-sections { grid-template-columns: 1fr; }
-      .products-grid { grid-template-columns: 1fr; }
+      .ui-grid-layout { grid-template-columns: 1fr; }
       .content-grid { grid-template-columns: 1fr; }
       .hero { padding: 36px 20px 28px; }
       .hero h1 { font-size: 1.75rem; }
@@ -909,10 +907,86 @@
   transform: translateY(0);
 }
 
-/* Custom Tooltips for Pregnancy-Tracker disabled (moved to dynamic JS) */
-/* Retained hover style for cursor */
+/* Premium Custom Tooltips for Pregnancy-Tracker */
 [data-tooltip] {
+  position: relative;
   cursor: help;
+}
+span[data-tooltip],
+label[data-tooltip],
+a[data-tooltip] {
+  display: inline-block;
+}
+[data-tooltip]:hover {
+  z-index: 50;
+}
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: calc(100% + 8px);
+  bottom: auto;
+  left: 50%;
+  transform: translate(-50%, -6px);
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(244, 63, 94, 0.25);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.5;
+  padding: 8px 12px;
+  border-radius: 8px;
+  max-width: min(220px, 90vw);
+  width: max-content;
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 200;
+  box-shadow: 0 8px 24px rgba(244, 63, 94, 0.12), 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+[data-tooltip]::before {
+  content: '';
+  position: absolute;
+  top: calc(100% + 2px);
+  bottom: auto;
+  left: 50%;
+  transform: translate(-50%, -6px);
+  border-width: 0 6px 6px;
+  border-style: solid;
+  border-color: transparent transparent rgba(15, 23, 42, 0.95);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 200;
+}
+[data-tooltip]:hover::after,
+[data-tooltip]:hover::before {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.tooltip-js [data-tooltip]::after,
+.tooltip-js [data-tooltip]::before {
+  display: none !important;
+}
+
+/* Compact Tooltips for Timeline Chips */
+.week-chip[data-tooltip]::after {
+  min-width: auto;
+  width: max-content;
+  max-width: 150px;
+  white-space: normal;
+  word-wrap: break-word;
+  font-size: 0.72rem;
+  padding: 6px 10px;
 }
 
 /* Contraction Calming Coach styles */
@@ -1054,7 +1128,7 @@
       <!-- Global Disclaimer Card -->
       <div class="week-card" id="disclaimerCard" style="margin-top:24px;margin-bottom:24px;background:var(--bg-card);box-shadow:var(--shadow);border-radius:var(--radius);border:1px solid var(--border);">
         <div class="products-disclaimer" style="padding:16px;font-size:0.75rem;color:var(--text-muted);line-height:1.4;text-align:center;">
-          <strong>Disclaimer:</strong> This tool is for informational purposes only and is not medical advice. Always consult your doctor or healthcare provider for medical guidance. Due dates are estimates — only about 5% of babies are born on their exact due date. Product links marked <span class="partner-badge">Partner</span> may earn a small commission at no extra cost to you.
+          <strong>Disclaimer:</strong> This tool is for informational purposes only and is not medical advice. Always consult your doctor or healthcare provider for medical guidance. Due dates are estimates — only about 5% of babies are born on their exact due date. Product links marked <span class="affiliate-badge">Affiliate</span> may earn a small commission at no extra cost to you.
         </div>
       </div>
 
@@ -2114,7 +2188,7 @@
       objectEmoji: '🏀', 
       objectLabel: 'Basketball', 
       size_in: 'Kaddu (Indian pumpkin)', 
-      baby: "This is your due date week! Baby is around 51cm and 3.4kg on average. Only about 5% of babies arrive exactly on time — stay calm and trust your body.", 
+      baby: "This is your due date week! Baby is around 51cm and 3.4kg on average. Only about 5% of babies are born on their exact due date.", 
       mom: "If labour hasn't started, your doctor or healthcare provider will discuss membrane sweep or induction. Most babies arrive within 2 weeks of their due date.", 
       tip: "Rest. Trust your body. You are ready. However labour starts — you've got this.",
       checklist: ["Perform daily kick counts and stay active with walking", "Verify diaper changing station is fully stocked", "Schedule your 41-week sweep or checkup appointment"]
@@ -2196,16 +2270,15 @@
   function smoothScrollTo(element) {
     if (!element) return;
     setTimeout(function() {
-      var navbarHeight = 64;
-      var padding = 20;
-      var elementRect = element.getBoundingClientRect();
-      var absoluteElementTop = elementRect.top + window.scrollY;
-      var targetY = absoluteElementTop - navbarHeight - padding;
+      var navbarHeight = 84; 
+      var rect = element.getBoundingClientRect();
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      var targetY = rect.top + scrollTop - navbarHeight;
       window.scrollTo({
         top: Math.max(0, targetY),
         behavior: 'smooth'
       });
-    }, 50);
+    }, 150);
   }
 
   // ─────────────────────────────────────────────────────────
@@ -2365,8 +2438,12 @@
     if (!window._adSlot1Pushed) {
       window._adSlot1Pushed = true;
       setTimeout(function() {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      }, 200);
+        try {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+          console.error('AdSense push failed');
+        }
+      }, 500);
     }
 
     trackEvent('calculate_week', { mode: currentMode });
@@ -2469,59 +2546,121 @@
       '<div class="progress-track"><div class="progress-fill" style="width:' + r.progress.toFixed(1) + '%"></div></div>' +
       '<div class="trimester-dividers"><span class="tri-div">Week 1</span><span class="tri-div">Week 13</span><span class="tri-div">Week 27</span><span class="tri-div">Week 40</span></div>';
 
-    var prodKey = r.trimester === 1 ? 't1' : r.trimester === 2 ? 't2' : 't3';
+    var products = PRODUCTS[r.trimester === 1 ? 't1' : r.trimester === 2 ? 't2' : 't3'];
 
     // Week detail card
-    var isSingleMode = weekData.singleMode || r.weekNum <= 2;
-    var cardImgTab   = isSingleMode ? 'fruit' : currentImageTab;
+    document.getElementById('weekCard').innerHTML = generateWeekCardHtml(r.weekNum, weekData, products, trimLabel, currentImageTab);
+}
+
+  function generateWeekCardHtml(weekNum, weekData, products, trimLabel, currentImageTab) {
+    var isSingleMode = weekData.singleMode || weekNum <= 2;
+    var cardImgTab = isSingleMode ? 'fruit' : currentImageTab;
     var headerImageEmoji = weekData[cardImgTab + 'Emoji'] || weekData.emoji;
     var headerImageLabel = isSingleMode
       ? (weekData.singleLabel || weekData.fruitLabel || weekData.size)
       : (weekData[cardImgTab + 'Label'] || weekData.size);
-    var imgSrc = localWeekPhoto(r.weekNum, cardImgTab);
+    var imgSrc = localWeekPhoto(weekNum, cardImgTab);
     var modalAlt = isSingleMode
-      ? 'Week ' + r.weekNum + ' — ' + headerImageLabel
-      : 'Week ' + r.weekNum + ' ' + cardImgTab + ' size comparison';
+      ? 'Week ' + weekNum + ' — ' + headerImageLabel
+      : 'Week ' + weekNum + ' ' + cardImgTab + ' size comparison';
     
-    document.getElementById('weekCard').innerHTML =
-      '<div class="week-card-header">' +
+    var imgClickAttr = imgSrc ? ' onclick="openImgModal(\'' + imgSrc + '\', \'' + modalAlt + '\')" style="cursor:zoom-in" data-tooltip="Click to enlarge"' : '';
+
+    var ttcBadge = (weekNum <= 3)
+      ? ' <span class="ttc-badge" style="background:#fdf2f8;color:#db2777;border:1px solid #fbcfe8;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-left:8px;vertical-align:middle;display:inline-block;">Pre-Conception / TTC Phase</span>'
+      : '';
+
+    var checklistHtml = '';
+    if (weekData.checklist && weekData.checklist.length > 0) {
+      checklistHtml += '<div class="week-checklist-section" style="margin-top:24px;border-top:1px solid var(--border);padding-top:20px;">' +
+        '<h3 style="font-size:1.1rem;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:6px"><span>📝</span> Week ' + weekNum + ' Interactive Checklist</h3>' +
+        '<p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:14px">Cross off tasks as you complete them. Your progress saves automatically.</p>' +
+        '<div class="week-checklist-list" style="display:flex;flex-direction:column;gap:10px">';
+
+      var checkState = {};
+      try {
+        var storedState = localStorage.getItem('pwtChecklistState');
+        if (storedState) checkState = JSON.parse(storedState);
+      } catch (e) {}
+
+      weekData.checklist.forEach(function(item, idx) {
+        var key = 'w' + weekNum + '_t' + idx;
+        var checked = checkState[key] ? ' checked' : '';
+        var completedStyle = checkState[key] ? 'text-decoration:line-through;opacity:0.6;' : '';
+
+        checklistHtml += '<label class="week-checklist-item" style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:0.9rem;color:var(--text);line-height:1.4">' +
+          '<input type="checkbox" class="week-checklist-checkbox" data-key="' + key + '" onchange="toggleChecklistItem(' + weekNum + ', ' + idx + ')"' + checked + ' style="margin-top:3px;accent-color:var(--primary);width:16px;height:16px;cursor:pointer;">' +
+          '<span class="week-checklist-text" id="lbl_' + key + '" style="' + completedStyle + '">' + item + '</span>' +
+          '</label>';
+      });
+      checklistHtml += '</div></div>';
+    }
+
+    var privacySealHtml = 
+      '<div class="privacy-trust-seal" style="margin-top:24px;display:flex;align-items:center;gap:8px;background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.2);padding:12px 14px;border-radius:10px;font-size:0.8rem;color:#065f46;line-height:1.4">' +
+        '<span style="font-size:1.2rem">🔒</span>' +
+        '<div><strong>100% Privacy Guaranteed:</strong> Your pregnancy data is stored locally in your browser. We have no databases, require no login, and never track or sell your health history.</div>' +
+      '</div>';
+
+    var referencesHtml = 
+      '<details open class="medical-sources-accordion" style="margin-top:16px;background:rgba(0,0,0,0.01);border:1px solid var(--border);border-radius:10px;padding:8px 12px;cursor:pointer;font-size:0.8rem;color:var(--text-muted)">' +
+        '<summary style="font-weight:700;color:var(--text);outline:none;user-select:none;list-style:none;">🩺 Clinical Evidence & Medical References</summary>' +
+        '<div style="margin-top:10px;line-height:1.5;cursor:default;">' +
+          'This week&apos;s development and clinical guidance are verified against standard global medical guidelines:' +
+          '<ul style="margin-top:6px;padding-left:18px;margin-bottom:0">' +
+            '<li><strong>WHO (World Health Organization):</strong> Standards for pregnancy progression, gestational measurements, and pre-conception/prenatal nutritional recommendations.</li>' +
+            '<li><strong>ACOG (American College of Obstetricians and Gynecologists):</strong> Clinical standards for prenatal screenings, genetic testing, and lifestyle boundaries (exercise, safe foods).</li>' +
+            '<li><strong>NHS (National Health Service, UK):</strong> Pregnancy development milestones, fetal movement safety practices, and induction scheduling protocols.</li>' +
+          '</ul>' +
+        '</div>' +
+      '</details>';
+
+    var productsHtml = 
+      '<div class="ui-curated-section" style="margin-top:24px">' +
+      '<h2>Recommended for ' + trimLabel + ' <span class="ui-badge" style="background:#eef2ff;color:#4f46e5;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:700;text-transform:uppercase;margin-left:8px;border:1px solid #c7d2fe;">Featured</span></h2>' +
+      '<p class="tip-sub" style="font-size:0.8rem;color:var(--text-muted);line-height:1.65;margin-top:10px;margin-bottom:16px;font-style:italic;"><strong>This week&apos;s tip:</strong> ' + weekData.tip + ' These curated essentials help with this stage of pregnancy.</p>' +
+      '<div class="ui-grid-layout">' +
+      (products && products.length > 0 ? products.map(function(p) {
+        return '<a class="ui-grid-card" href="' + amzLink(p.keyword) + '" target="_blank" rel="noopener noreferrer">' +
+          '<div class="ui-grid-icon">' + p.icon + '</div>' +
+          '<div><div class="ui-grid-title">' + p.name + '</div><div class="ui-grid-desc">' + p.why + '</div></div>' +
+          '</a>';
+      }).join('') : '') +
+      '</div></div>';
+
+    return '<div class="week-card-header">' +
         '<div class="week-image-box">' +
-          '<div class="week-emoji"' + (imgSrc ? ' onclick="openImgModal(\''+imgSrc+'\',\'' + modalAlt + '\')" style="cursor:zoom-in" data-tooltip="Click to enlarge"' : '') + '>' + weekImg(r.weekNum, headerImageEmoji, cardImgTab) + '</div>' +
+          '<div class="week-emoji"' + imgClickAttr + '>' + weekImg(weekNum, headerImageEmoji, cardImgTab) + '</div>' +
           (imgSrc ? '<div class="enlarge-hint">🔍 Tap to enlarge</div>' : '') +
           (!isSingleMode ? '<div class="week-image-tabs">' +
-            '<button class="week-image-tab' + (currentImageTab === 'fruit' ? ' active' : '') + '" type="button" onclick="setWeekImageTab(\'fruit\', ' + r.weekNum + ')">Food</button>' +
-            '<button class="week-image-tab' + (currentImageTab === 'object' ? ' active' : '') + '" type="button" onclick="setWeekImageTab(\'object\', ' + r.weekNum + ')">Object</button>' +
+            '<button class="week-image-tab' + (currentImageTab === 'fruit' ? ' active' : '') + '" type="button" onclick="setWeekImageTab(&apos;fruit&apos;, ' + weekNum + ')">Food</button>' +
+            '<button class="week-image-tab' + (currentImageTab === 'object' ? ' active' : '') + '" type="button" onclick="setWeekImageTab(&apos;object&apos;, ' + weekNum + ')">Object</button>' +
           '</div>' : '') +
         '</div>' +
         '<div class="week-header-content">' +
           '<div class="week-title-wrap">' +
-            '<div class="week-number">Week ' + r.weekNum + ' of 40</div>' +
+            '<div class="week-number">Week ' + weekNum + ' of 40' + ttcBadge + '</div>' +
             '<div class="week-size">' + headerImageLabel + '</div>' +
-            '<div class="week-size-sub">Baby\'s approximate size this week</div>' +
+            '<div class="week-size-sub">' + 
+                (weekData.size_mm > 0 
+                  ? 'Approx. ' + (weekData.size_mm / 10).toFixed(1) + ' cm / ' + (weekData.size_mm / 25.4).toFixed(1) + ' inches long' 
+                  : 'Microscopic — not yet visible') + 
+            '</div>' +
           '</div>' +
           '<div class="week-header-grid">' +
-            '<div class="week-section"><h3><span>👶</span> Baby\'s Development</h3><p>' + weekData.baby + '</p></div>' +
+            '<div class="week-section"><h3><span>👶</span> Baby&apos;s Development</h3><p>' + weekData.baby + '</p></div>' +
             '<div class="week-section"><h3><span>🤰</span> What You May Feel</h3><p>' + weekData.mom + '</p></div>' +
           '</div>' +
         '</div>' +
       '</div>' +
       '<div class="week-card-body">' +
-        '<div class="week-tip"><span>💡</span><span><strong>This week\'s tip:</strong> ' + weekData.tip + '</span></div>' +
-        '<div class="curated-section" style="margin-top:24px">' +
-          '<h2>Recommended for Your ' + trimLabel + ' <span class="partner-badge" style="background:#eef2ff;color:#4f46e5;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:700;text-transform:uppercase;margin-left:8px;border:1px solid #c7d2fe;">Partner</span></h2>' +
-          '<p class="products-sub"><strong>This week\'s tip:</strong> ' + weekData.tip + ' Shop curated products for this stage of pregnancy. Partner links support this free tool at no extra cost to you.</p>' +
-          '<div class="products-grid">' +
-          PRODUCTS[prodKey].map(function(p) {
-            return '<a class="product-card" href="' + amzLink(p.keyword) + '" target="_blank" rel="noopener noreferrer">' +
-              '<div class="product-icon">' + p.icon + '</div>' +
-              '<div><div class="product-name">' + p.name + '</div><div class="product-why">' + p.why + '</div></div>' +
-              '</a>';
-          }).join('') +
-          '</div>' +
-        '</div>' +
+        '<div class="week-tip"><span>💡</span><span><strong>This week&apos;s tip:</strong> ' + weekData.tip + '</span></div>' +
+        checklistHtml +
+        privacySealHtml +
+        referencesHtml +
+        productsHtml +
       '</div>';
-
-}
+  }
 
   // ─────────────────────────────────────────────────────────
   //  RENDER WEEKS TIMELINE
@@ -2646,121 +2785,20 @@
     renderWeeksTimeline(weekNum);
     var products = PRODUCTS[prodKey];
     var productsHtml =
-      '<div class="curated-section" style="margin-top:24px">' +
-      '<h2>Recommended for ' + trimLabel + ' <span class="partner-badge" style="background:#eef2ff;color:#4f46e5;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:700;text-transform:uppercase;margin-left:8px;border:1px solid #c7d2fe;">Partner</span></h2>' +
+      '<div class="products-section" style="margin-top:24px">' +
+      '<h2>Recommended for ' + trimLabel + ' <span class="affiliate-badge">Affiliate</span></h2>' +
       '<p class="products-sub"><strong>This week\'s tip:</strong> ' + wd.tip + ' Shop curated products for this stage of pregnancy. Clicking and purchasing supports this free tool at no extra cost to you.</p>' +
       '<div class="products-grid">' +
-      (products && products.length > 0 ? products.map(function(p) {
+      products.map(function(p) {
         return '<a class="product-card" href="' + amzLink(p.keyword) + '" target="_blank" rel="noopener noreferrer">' +
           '<div class="product-icon">' + p.icon + '</div>' +
           '<div><div class="product-name">' + p.name + '</div><div class="product-why">' + p.why + '</div></div>' +
           '</a>';
-      }).join('') : '') +
+      }).join('') +
       '</div></div>';
 
     var weekCard = document.getElementById('weekCard');
-    var isSingleMode2 = wd.singleMode || weekNum <= 2;
-    var cardImgTab2   = isSingleMode2 ? 'fruit' : currentImageTab;
-    var headerImageEmoji = wd[cardImgTab2 + 'Emoji'] || wd.emoji;
-    var headerImageLabel = isSingleMode2
-      ? (wd.singleLabel || wd.fruitLabel || wd.size)
-      : (wd[cardImgTab2 + 'Label'] || wd.size);
-    var imgSrc2 = localWeekPhoto(weekNum, cardImgTab2);
-    var modalAlt2 = isSingleMode2
-      ? 'Week ' + weekNum + ' — ' + headerImageLabel
-      : 'Week ' + weekNum + ' ' + cardImgTab2 + ' size comparison';
-    
-    // TTC Phase Badge
-    var ttcBadge = (weekNum <= 3) 
-      ? ' <span class="ttc-badge" style="background:#fdf2f8;color:#db2777;border:1px solid #fbcfe8;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-left:8px;vertical-align:middle;display:inline-block;">Pre-Conception / TTC Phase</span>' 
-      : '';
-
-    // Weekly Checklist HTML
-    var checklistHtml = '';
-    if (wd.checklist && wd.checklist.length > 0) {
-      checklistHtml += '<div class="week-checklist-section" style="margin-top:24px;border-top:1px solid var(--border);padding-top:20px;">' +
-        '<h3 style="font-size:1.1rem;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:6px"><span>📝</span> Week ' + weekNum + ' Interactive Checklist</h3>' +
-        '<p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:14px">Cross off tasks as you complete them. Your progress saves automatically.</p>' +
-        '<div class="week-checklist-list" style="display:flex;flex-direction:column;gap:10px">';
-      
-      var checkState = {};
-      try {
-        var storedState = localStorage.getItem('pwtChecklistState');
-        if (storedState) {
-          checkState = JSON.parse(storedState);
-        }
-      } catch (e) {}
-
-      wd.checklist.forEach(function(item, idx) {
-        var key = 'w' + weekNum + '_t' + idx;
-        var checked = checkState[key] ? ' checked' : '';
-        var completedStyle = checkState[key] ? 'text-decoration:line-through;opacity:0.6;' : '';
-        
-        checklistHtml += '<label class="week-checklist-item" style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:0.9rem;color:var(--text);line-height:1.4">' +
-          '<input type="checkbox" class="week-checklist-checkbox" data-key="' + key + '" onchange="toggleChecklistItem(' + weekNum + ', ' + idx + ')"' + checked + ' style="margin-top:3px;accent-color:var(--primary);width:16px;height:16px;cursor:pointer;">' +
-          '<span class="week-checklist-text" id="lbl_' + key + '" style="' + completedStyle + '">' + item + '</span>' +
-          '</label>';
-      });
-      checklistHtml += '</div></div>';
-    }
-
-    // Trust seal and medical accordion
-    var privacySealHtml = 
-      '<div class="privacy-trust-seal" style="margin-top:24px;display:flex;align-items:center;gap:8px;background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.2);padding:12px 14px;border-radius:10px;font-size:0.8rem;color:#065f46;line-height:1.4">' +
-        '<span style="font-size:1.2rem">🔒</span>' +
-        '<div>' +
-          '<strong>100% Privacy Guaranteed:</strong> Your pregnancy data is stored locally in your browser. We have no databases, require no login, and never track or sell your health history.' +
-        '</div>' +
-      '</div>';
-
-    var referencesHtml = 
-      '<details open class="medical-sources-accordion" style="margin-top:16px;background:rgba(0,0,0,0.01);border:1px solid var(--border);border-radius:10px;padding:8px 12px;cursor:pointer;font-size:0.8rem;color:var(--text-muted)">' +
-        '<summary style="font-weight:700;color:var(--text);outline:none;user-select:none;list-style:none;">🩺 Clinical Evidence & Medical References</summary>' +
-        '<div style="margin-top:10px;line-height:1.5;cursor:default;">' +
-          'This week\'s development and clinical guidance are verified against standard global medical guidelines:' +
-          '<ul style="margin-top:6px;padding-left:18px;margin-bottom:0">' +
-            '<li><strong>WHO (World Health Organization):</strong> Standards for pregnancy progression, gestational measurements, and pre-conception/prenatal nutritional recommendations.</li>' +
-            '<li><strong>ACOG (American College of Obstetricians and Gynecologists):</strong> Clinical standards for prenatal screenings, genetic testing, and lifestyle boundaries (exercise, safe foods).</li>' +
-            '<li><strong>NHS (National Health Service, UK):</strong> Pregnancy development milestones, fetal movement safety practices, and induction scheduling protocols.</li>' +
-          '</ul>' +
-        '</div>' +
-      '</details>';
-
-    weekCard.innerHTML =
-      '<div class="week-card" style="margin-bottom:0">' +
-        '<div class="week-card-header">' +
-          '<div class="week-image-box">' +
-            '<div class="week-emoji"' + (imgSrc2 ? ' onclick="openImgModal(\''+imgSrc2+'\',\'' + modalAlt2 + '\')" style="cursor:zoom-in" data-tooltip="Click to enlarge"' : '') + '>' + weekImg(weekNum, headerImageEmoji, cardImgTab2) + '</div>' +
-            (imgSrc2 ? '<div class="enlarge-hint">🔍 Tap to enlarge</div>' : '') +
-            (!isSingleMode2 ? '<div class="week-image-tabs">' +
-              '<button class="week-image-tab' + (currentImageTab === 'fruit' ? ' active' : '') + '" type="button" onclick="setWeekImageTab(\'fruit\', ' + weekNum + ')">Food</button>' +
-              '<button class="week-image-tab' + (currentImageTab === 'object' ? ' active' : '') + '" type="button" onclick="setWeekImageTab(\'object\', ' + weekNum + ')">Object</button>' +
-            '</div>' : '') +
-          '</div>' +
-          '<div class="week-header-content">' +
-            '<div class="week-title-wrap">' +
-              '<div class="week-number">Week ' + weekNum + ' of 40' + ttcBadge + '</div>' +
-              '<div class="week-size">' + headerImageLabel + '</div>' +
-              '<div class="week-size-sub">' + 
-                (wd.size_mm > 0 
-                  ? 'Approx. ' + (wd.size_mm / 10).toFixed(1) + ' cm / ' + (wd.size_mm / 25.4).toFixed(1) + ' inches long' 
-                  : 'Microscopic — not yet visible') + 
-              '</div>' +
-            '</div>' +
-            '<div class="week-header-grid">' +
-              '<div class="week-section"><h3><span>👶</span> Baby\'s Development</h3><p>' + wd.baby + '</p></div>' +
-              '<div class="week-section"><h3><span>🤰</span> What You May Feel</h3><p>' + wd.mom + '</p></div>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-        '<div class="week-card-body">' +
-          '<div class="week-tip"><span>💡</span><span><strong>This week\'s tip:</strong> ' + wd.tip + '</span></div>' +
-          checklistHtml +
-          privacySealHtml +
-          referencesHtml +
-          productsHtml +
-        '</div>' +
-      '</div>';
+    weekCard.innerHTML = generateWeekCardHtml(weekNum, wd, products, trimLabel, currentImageTab);
 
     smoothScrollTo(weekCard);
   }
@@ -2948,7 +2986,7 @@
         svg += 
         '<text x="25" y="'+(padding.top + chartH/2)+'" transform="rotate(-90, 25, '+(padding.top + chartH/2)+')" text-anchor="middle" font-size="16" font-weight="800" fill="#444">SIZE (mm)</text>' +
         '<text x="'+(padding.left-15)+'" y="'+(padding.top+chartH)+'" text-anchor="end" font-size="12" font-weight="700" fill="#888">0</text>' +
-        '<text x="'+(padding.left-15)+'" y="'+padding.top+'" text-anchor="end" font-size="12" font-weight="700" fill="#520">520</text>' +
+        '<text x="'+(padding.left-15)+'" y="'+padding.top+'" text-anchor="end" font-size="12" font-weight="700" fill="#888">520</text>' +
         '<path d="' + pathData + '" fill="none" stroke="#f4f4f4" stroke-width="4" stroke-dasharray="6" />' +
         '<path d="' + activePathData + '" fill="none" stroke="var(--primary)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />' +
         '<circle cx="' + currentPoint.x + '" cy="' + currentPoint.y + '" r="9" fill="var(--primary)" stroke="#fff" stroke-width="3">' +
@@ -2960,6 +2998,17 @@
     } catch (e) { console.error("Graph Error:", e); }
   }
 
+  function showGraphTooltip(e, week, mm) {
+    var tt = document.getElementById('graphTooltip');
+    tt.style.display = 'block';
+    tt.style.left = (e.clientX + 10) + 'px';
+    tt.style.top = (e.clientY - 30) + 'px';
+    tt.innerHTML = 'Week ' + week + ': ' + mm + ' mm';
+}
+
+  function hideGraphTooltip() {
+    document.getElementById('graphTooltip').style.display = 'none';
+}
   function formatDateInput(d) {
     var y = d.getFullYear();
     var m = String(d.getMonth() + 1).padStart(2, '0');
@@ -2972,86 +3021,6 @@
     if (!d) return '—';
     return d.getDate() + ' ' + MONTHS[d.getMonth()] + ' ' + d.getFullYear();
 }
-
-  function openImgModal(src, alt) {
-    var modal = document.getElementById('imgModal');
-    var img = document.getElementById('imgModalContent');
-    if (!modal || !img) return;
-    img.src = src;
-    img.alt = alt || '';
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeImgModal() {
-    var modal = document.getElementById('imgModal');
-    if (!modal) return;
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
-  }
-
-  // --- Dynamic Vanilla JS Tooltips ---
-  (function() {
-    var tooltipEl = document.createElement('div');
-    tooltipEl.style.position = 'absolute';
-    tooltipEl.style.background = 'rgba(15, 23, 42, 0.95)';
-    tooltipEl.style.color = '#fff';
-    tooltipEl.style.padding = '8px 12px';
-    tooltipEl.style.borderRadius = '8px';
-    tooltipEl.style.fontSize = '0.78rem';
-    tooltipEl.style.fontWeight = '500';
-    tooltipEl.style.pointerEvents = 'none';
-    tooltipEl.style.opacity = '0';
-    tooltipEl.style.transition = 'opacity 0.2s, transform 0.2s';
-    tooltipEl.style.zIndex = '1000';
-    tooltipEl.style.whiteSpace = 'normal';
-    tooltipEl.style.maxWidth = 'min(220px, 90vw)';
-    tooltipEl.style.width = 'max-content';
-    tooltipEl.style.textAlign = 'center';
-    tooltipEl.style.border = '1px solid rgba(244, 63, 94, 0.25)';
-    tooltipEl.style.boxShadow = '0 8px 24px rgba(244, 63, 94, 0.12), 0 4px 12px rgba(0, 0, 0, 0.25)';
-    document.body.appendChild(tooltipEl);
-
-    var currentTarget = null;
-
-    document.addEventListener('mouseover', function(e) {
-      var target = e.target.closest('[data-tooltip]');
-      if (!target) return;
-      currentTarget = target;
-      tooltipEl.innerHTML = target.getAttribute('data-tooltip');
-      
-      var rect = target.getBoundingClientRect();
-      var scrollY = window.scrollY;
-      var scrollX = window.scrollX;
-      
-      // Calculate position (default: above)
-      var tooltipTop = rect.top + scrollY - tooltipEl.offsetHeight - 8;
-      var tooltipLeft = rect.left + scrollX + (rect.width / 2) - (tooltipEl.offsetWidth / 2);
-      
-      // If it overflows the top, put it below
-      if (rect.top - tooltipEl.offsetHeight - 8 < 64) {
-        tooltipTop = rect.bottom + scrollY + 8;
-      }
-      
-      // Prevent horizontal overflow
-      if (tooltipLeft < 10) tooltipLeft = 10;
-      if (tooltipLeft + tooltipEl.offsetWidth > window.innerWidth - 10) {
-        tooltipLeft = window.innerWidth - tooltipEl.offsetWidth - 10;
-      }
-
-      tooltipEl.style.left = tooltipLeft + 'px';
-      tooltipEl.style.top = tooltipTop + 'px';
-      tooltipEl.style.opacity = '1';
-    });
-
-    document.addEventListener('mouseout', function(e) {
-      if (currentTarget && !e.relatedTarget?.closest('[data-tooltip]')) {
-        tooltipEl.style.opacity = '0';
-        currentTarget = null;
-      }
-    });
-  })();
-
   // ─────────────────────────────────────────────────────────
   //  WAKE LOCK & LOCAL MEMORY INITIALIZATION
   // ─────────────────────────────────────────────────────────
@@ -3486,6 +3455,49 @@
   function closeImgModal() {
     document.getElementById('imgModal').style.display = 'none';
 }
+
+  function initTooltipLayer() {
+    var tooltip = document.createElement('div');
+    tooltip.id = 'pwtTooltip';
+    tooltip.style.cssText = 'position:fixed;top:0;left:0;z-index:10001;pointer-events:none;display:none;max-width:280px;padding:10px 14px;background:rgba(15,23,42,0.94);color:#fff;border-radius:12px;box-shadow:0 20px 45px rgba(0,0,0,0.25);font-size:0.78rem;line-height:1.5;white-space:normal;word-break:break-word;';
+    document.body.appendChild(tooltip);
+    document.documentElement.classList.add('tooltip-js');
+
+    var posTooltip = function(e) {
+      var text = this.getAttribute('data-tooltip');
+      if (!text) return;
+      tooltip.innerText = text;
+      tooltip.style.display = 'block';
+      var padding = 12;
+      var rect = tooltip.getBoundingClientRect();
+      var x = e.clientX + 16;
+      var y = e.clientY + 18;
+      if (x + rect.width + padding > window.innerWidth) {
+        x = e.clientX - rect.width - 16;
+      }
+      if (x < padding) x = padding;
+      if (y + rect.height + padding > window.innerHeight) {
+        y = e.clientY - rect.height - 18;
+      }
+      if (y < padding) y = padding;
+      tooltip.style.left = x + 'px';
+      tooltip.style.top = y + 'px';
+    };
+
+    var hideTooltip = function() {
+      tooltip.style.display = 'none';
+    };
+
+    document.querySelectorAll('[data-tooltip]').forEach(function(el) {
+      el.addEventListener('mouseenter', posTooltip);
+      el.addEventListener('mousemove', posTooltip);
+      el.addEventListener('mouseleave', hideTooltip);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    initTooltipLayer();
+  });
 
   // Close modal on Escape key press
   document.addEventListener('keydown', function(e) {

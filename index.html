@@ -228,6 +228,7 @@
   }
     .input-group input:focus { border-color: var(--primary); background: #fff; }
     .input-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 6px; }
+    .calc-error { margin-top: 18px; padding: 12px 14px; border-radius: 14px; background: rgba(254, 202, 202, 0.36); border: 1px solid #fecaca; color: #991b1b; font-size: 0.95rem; }
     .btn-calc {
       width: 100%; padding: 14px;
       background: linear-gradient(135deg, var(--primary), var(--primary-dark));
@@ -1051,6 +1052,7 @@ a[data-tooltip] {
         <a href="#gender-prediction">Gender Predictor</a>
         <a href="#faq">FAQ</a>
         <a href="about.html">About</a>
+        <a href="pregnancy-guide.html">Guide</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>
@@ -1061,6 +1063,11 @@ a[data-tooltip] {
     <div class="hero-eyebrow">Free · No Sign-Up · Private</div>
     <h1>How Many Weeks<br>Pregnant Am I?</h1>
     <p class="hero-sub">Enter your last period date and instantly see your pregnancy week, due date, baby size, and what's happening right now.</p>
+
+    <div class="hero-note" style="max-width:760px; margin: 0 auto 28px; padding: 18px 20px; border: 1px solid rgba(190,24,93,0.18); border-radius: 18px; background: rgba(255, 240, 246, 0.8); color: var(--text); font-size: 0.95rem; line-height: 1.7;">
+      <strong>New pregnancy guide:</strong> Learn how weeks are counted, what each trimester means, and how to interpret your calculator results for better preparation and planning.
+      <a href="pregnancy-guide.html" style="color: var(--primary); font-weight: 700; text-decoration: none; margin-left: 8px;">Read the full guide</a>
+    </div>
 
     <div class="calc-card">
       <div class="calc-toggle">
@@ -1090,6 +1097,7 @@ a[data-tooltip] {
       </div>
 
       <button class="btn-calc" id="calcBtn" type="button" onclick="calculate()">Calculate My Pregnancy Week →</button>
+      <div class="calc-error" id="calcError" role="alert" aria-live="assertive" style="display:none;"></div>
     </div>
   </section>
 
@@ -2342,7 +2350,7 @@ a[data-tooltip] {
     var today = new Date();
     var maxLMP = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000); // at least 1 week ago
     document.getElementById('lmpDate').max = formatDateInput(today);
-    document.getElementById('dueDate').min = formatDateInput(today);
+    document.getElementById('dueDate').min = formatDateInput(new Date(today.getTime() - 28 * 24 * 60 * 60 * 1000));
     document.getElementById('dueDate').max = formatDateInput(new Date(today.getTime() + 308 * 24 * 60 * 60 * 1000));
 
     // Wait for Wikipedia images to load, then render timeline with real photos
@@ -2373,28 +2381,56 @@ a[data-tooltip] {
     document.getElementById('btnDD').classList.toggle('active', mode === 'due');
 }
 
+  function setCalcError(message) {
+    var error = document.getElementById('calcError');
+    if (!error) return;
+    if (message) {
+      error.textContent = message;
+      error.style.display = 'block';
+    } else {
+      error.textContent = '';
+      error.style.display = 'none';
+    }
+  }
+
+  function clearCalcError() {
+    setCalcError('');
+  }
+
   // ─────────────────────────────────────────────────────────
   //  CALCULATE
   // ─────────────────────────────────────────────────────────
   function calculate() {
+    clearCalcError();
     console.log('calculate button pressed');
     var lmpDate;
     var cycleLen = parseInt(document.getElementById('cycleLen').value) || 28;
     var today = new Date(); today.setHours(0,0,0,0);
 
+    if (cycleLen < 20 || cycleLen > 45) {
+      document.getElementById('cycleLen').focus();
+      setCalcError('Please enter a realistic cycle length between 20 and 45 days.');
+      return;
+    }
+
     if (currentMode === 'lmp') {
       var lmpVal = document.getElementById('lmpDate').value;
-      if (!lmpVal) { document.getElementById('lmpDate').focus(); alert('Please enter the first day of your last period.'); return; }
+      if (!lmpVal) { document.getElementById('lmpDate').focus(); setCalcError('Please enter the first day of your last period.'); return; }
       lmpDate = new Date(lmpVal + 'T00:00:00');
   } else {
       var dueDateVal = document.getElementById('dueDate').value;
-      if (!dueDateVal) { document.getElementById('dueDate').focus(); alert('Please enter your due date.'); return; }
+      if (!dueDateVal) { document.getElementById('dueDate').focus(); setCalcError('Please enter your due date.'); return; }
       var dueDate = new Date(dueDateVal + 'T00:00:00');
+      if (dueDate > new Date(today.getTime() + 315 * 24 * 60 * 60 * 1000)) {
+        document.getElementById('dueDate').focus();
+        setCalcError('Please enter a due date within the next 45 weeks.');
+        return;
+      }
       // LMP = dueDate - 280 days (adjusted for cycle length deviation)
       lmpDate = new Date(dueDate.getTime() - (280 + (cycleLen - 28)) * 24 * 60 * 60 * 1000);
   }
 
-    if (lmpDate > today) { alert('The first day of your last period cannot be in the future.'); return; }
+    if (lmpDate > today) { setCalcError('The first day of your last period cannot be in the future.'); return; }
 
     // Cycle-length adjusted ovulation offset
     var ovulationOffset = cycleLen - 14;
@@ -2405,11 +2441,11 @@ a[data-tooltip] {
     var dueDate = new Date(lmpDate.getTime() + adjustedDays * 24 * 60 * 60 * 1000);
 
     var daysSinceLMP = Math.floor((today - lmpDate) / (24 * 60 * 60 * 1000));
-    var weekNum = Math.floor(daysSinceLMP / 7);
+    var weekNum = Math.max(1, Math.floor(daysSinceLMP / 7) + 1);
     var daysExtra = daysSinceLMP % 7;
 
-    if (weekNum < 0) { alert('Your last period date appears to be in the future. Please check the date.'); return; }
-    if (weekNum > 45) { alert('The date you entered is more than 45 weeks ago. Please check it.'); return; }
+    if (weekNum < 1) { setCalcError('Your last period date appears to be in the future. Please check the date.'); return; }
+    if (weekNum > 45) { setCalcError('The date you entered is more than 45 weeks ago. Please check it.'); return; }
 
     var daysUntilDue = Math.ceil((dueDate - today) / (24 * 60 * 60 * 1000));
     var trimester = weekNum <= 12 ? 1 : weekNum <= 26 ? 2 : 3;

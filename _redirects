@@ -1,4 +1,0 @@
-# Cloudflare Pages _redirects
-# Prevents /index.html from being a separate URL in Google
-
-/index.html     /     301

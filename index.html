@@ -1131,6 +1131,7 @@ a[data-tooltip] {
       <div class="trimester-bar-wrap" id="trimBar"></div>
 
       <!-- Week detail card -->
+      <div id="debugOutput" style="margin-bottom:12px;font-size:0.85rem;font-family:monospace;word-break:break-all;"></div>
       <div class="week-card" id="weekCard"></div>
 
       <!-- Global Disclaimer Card -->
@@ -2278,14 +2279,26 @@ a[data-tooltip] {
   function smoothScrollTo(element) {
     if (!element) return;
     setTimeout(function() {
-      var navbarHeight = 84; 
-      var rect = element.getBoundingClientRect();
-      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      var targetY = rect.top + scrollTop - navbarHeight;
-      window.scrollTo({
-        top: Math.max(0, targetY),
-        behavior: 'smooth'
-      });
+      try {
+        var navbarHeight = 84; 
+        var rect = element.getBoundingClientRect();
+        var scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+        var targetY = rect.top + scrollTop - navbarHeight;
+        if ('scrollBehavior' in document.documentElement.style) {
+          window.scrollTo({
+            top: Math.max(0, targetY),
+            behavior: 'smooth'
+          });
+        } else {
+          window.scrollTo(0, Math.max(0, targetY));
+        }
+      } catch(e) {
+        try {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } catch(e2) {
+          try { element.scrollIntoView(); } catch(e3) {}
+        }
+      }
     }, 150);
   }
 
@@ -2653,8 +2666,8 @@ a[data-tooltip] {
 
     var productsHtml = 
       '<div class="ui-curated-section" style="margin-top:24px">' +
-      '<h2>Recommended for ' + trimLabel + ' <span class="ui-badge" style="background:#eef2ff;color:#4f46e5;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:700;text-transform:uppercase;margin-left:8px;border:1px solid #c7d2fe;">Featured</span></h2>' +
-      '<p class="tip-sub" style="font-size:0.8rem;color:var(--text-muted);line-height:1.65;margin-top:10px;margin-bottom:16px;font-style:italic;"><strong>This week&apos;s tip:</strong> ' + weekData.tip + ' These curated essentials help with this stage of pregnancy.</p>' +
+      '<h2>Recommended for ' + trimLabel + ' <span class="ui-badge" style="background:rgba(255,107,152,0.1);color:var(--accent);padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:700;text-transform:uppercase;margin-left:8px;border:1px solid rgba(255,107,152,0.2);">Affiliate</span></h2>' +
+      '<p class="tip-sub" style="font-size:0.8rem;color:var(--text-muted);line-height:1.65;margin-top:10px;margin-bottom:16px;font-style:italic;"><strong>This week&apos;s tip:</strong> ' + weekData.tip + ' Shop curated products for this stage of pregnancy. Clicking and purchasing supports this free tool at no extra cost to you.</p>' +
       '<div class="ui-grid-layout">' +
       (products && products.length > 0 ? products.map(function(p) {
         return '<a class="ui-grid-card" href="' + amzLink(p.keyword) + '" target="_blank" rel="noopener noreferrer">' +
@@ -2762,81 +2775,95 @@ a[data-tooltip] {
   };
 
   function showWeekDetail(weekNum) {
-    var wd = WEEKS.find(function(w) { return w.week === weekNum; });
-    if (!wd) return;
+    try {
+      var debug = document.getElementById('debugOutput');
+      if (debug) debug.innerHTML = "Starting showWeekDetail for week: " + weekNum;
 
-    trackEvent('select_pregnancy_week', { week: weekNum });
+      var wd = WEEKS.find(function(w) { return w.week === weekNum; });
+      if (!wd) return;
 
-    // Highlight the tapped chip, clear previous highlight
-    document.querySelectorAll('.week-chip').forEach(function(c) { c.classList.remove('active-detail'); });
-    var chip = document.querySelector('.week-chip[data-week="' + weekNum + '"]');
-    if (chip) chip.classList.add('active-detail');
+      trackEvent('select_pregnancy_week', { week: weekNum });
 
-    // Show the calculator-style result panel for a consistent week experience
-    var resultPanel = document.getElementById('resultPanel');
-    resultPanel.style.display = 'block';
-    resultPanel.classList.add('reveal');
-    document.getElementById('shareRow').style.display = 'none';
+      // Highlight the tapped chip, clear previous highlight
+      document.querySelectorAll('.week-chip').forEach(function(c) { c.classList.remove('active-detail'); });
+      var chip = document.querySelector('.week-chip[data-week="' + weekNum + '"]');
+      if (chip) chip.classList.add('active-detail');
 
-    var isIndia = USER_LOCALE.domain === 'amazon.in';
-    var indiaNote = (wd.size_in && isIndia)
-      ? '<div style="font-size:0.78rem;background:var(--accent-light);border-radius:8px;padding:8px 12px;margin-top:12px;border-left:3px solid var(--accent)">🇮🇳 Indian size equivalent: <strong>' + wd.size_in + '</strong></div>'
-      : '';
+      // Show the calculator-style result panel for a consistent week experience
+      var resultPanel = document.getElementById('resultPanel');
+      resultPanel.style.display = 'block';
+      resultPanel.classList.add('reveal');
+      document.getElementById('shareRow').style.display = 'none';
 
-    // Update headline when manually selecting a week so previous calc results don't stay visible
-    document.getElementById('resultHeadline').innerHTML =
-      '<div class="rh-week">Week ' + weekNum + ' selected</div>' +
-      '<div class="rh-baby">Baby is the size of a <strong>' + wd.size.toLowerCase() + '</strong>' +
-        (wd.size_mm > 0 ? ' — about ' + (wd.size_mm >= 10 ? (wd.size_mm / 10).toFixed(1) + ' cm long' : wd.size_mm + ' mm') : '') +
-      '</div>' +
-      '<div class="rh-sub">This is the week you tapped. The headline is now synced to the week card above.</div>';
+      var isIndia = USER_LOCALE.domain === 'amazon.in';
+      var indiaNote = (wd.size_in && isIndia)
+        ? '<div style="font-size:0.78rem;background:var(--accent-light);border-radius:8px;padding:8px 12px;margin-top:12px;border-left:3px solid var(--accent)">🇮🇳 Indian size equivalent: <strong>' + wd.size_in + '</strong></div>'
+        : '';
 
-    var ms = getMilestone(weekNum);
-    var msBanner = document.getElementById('milestoneBanner');
-    if (ms) {
-      msBanner.innerHTML = '<span class="ms-icon">' + ms.icon + '</span><div class="ms-title">' + ms.title + '</div><div class="ms-sub">' + ms.sub + '</div>';
-      msBanner.style.display = 'block';
-    } else {
-      msBanner.style.display = 'none';
+      // Update headline when manually selecting a week so previous calc results don't stay visible
+      document.getElementById('resultHeadline').innerHTML =
+        '<div class="rh-week">Week ' + weekNum + ' selected</div>' +
+        '<div class="rh-baby">Baby is the size of a <strong>' + wd.size.toLowerCase() + '</strong>' +
+          (wd.size_mm > 0 ? ' — about ' + (wd.size_mm >= 10 ? (wd.size_mm / 10).toFixed(1) + ' cm long' : wd.size_mm + ' mm') : '') +
+        '</div>' +
+        '<div class="rh-sub">This is the week you tapped. The headline is now synced to the week card above.</div>';
+
+      var ms = getMilestone(weekNum);
+      var msBanner = document.getElementById('milestoneBanner');
+      if (ms) {
+        msBanner.innerHTML = '<span class="ms-icon">' + ms.icon + '</span><div class="ms-title">' + ms.title + '</div><div class="ms-sub">' + ms.sub + '</div>';
+        msBanner.style.display = 'block';
+      } else {
+        msBanner.style.display = 'none';
+      }
+
+      // Determine trimester from week number for product recommendations
+      var trimester = weekNum <= 12 ? 1 : weekNum <= 26 ? 2 : 3;
+      var prodKey = trimester === 1 ? 't1' : trimester === 2 ? 't2' : 't3';
+      var trimLabel = trimester === 1 ? 'First Trimester' : trimester === 2 ? 'Second Trimester' : 'Third Trimester';
+      // Sync result panel stats and trimester bar to the selected week
+      var daysSinceLMP = weekNum * 7;
+      var daysExtra = 0;
+      document.getElementById('statGrid').innerHTML = [
+        '<div class="result-stat"><div class="stat-value">Week ' + weekNum + '</div><div class="stat-label">Pregnancy Week</div><div class="stat-sub">' + daysExtra + ' days into this week</div></div>',
+        '<div class="result-stat"><div class="stat-value">—</div><div class="stat-label">Due Date (EDD)</div><div class="stat-sub">Estimate only</div></div>',
+        '<div class="result-stat"><div class="stat-value">' + trimLabel.split(' ')[0] + '</div><div class="stat-label">Trimester</div><div class="stat-sub">Weeks ' + (trimester === 1 ? '1–12' : trimester === 2 ? '13–26' : '27–40') + '</div></div>'
+      ].join('');
+      document.getElementById('trimBar').innerHTML =
+        '<div class="trimester-labels"><span' + (trimester===1?' style="font-weight:700;color:var(--primary)"':'') + '>1st Trimester</span><span' + (trimester===2?' style="font-weight:700;color:var(--primary)"':'') + '>2nd Trimester</span><span' + (trimester===3?' style="font-weight:700;color:var(--primary)"':'') + '>3rd Trimester</span></div>' +
+        '<div class="progress-track"><div class="progress-fill" style="width:' + (Math.min((weekNum / 40) * 100, 100)).toFixed(1) + '%"></div></div>' +
+        '<div class="trimester-dividers"><span class="tri-div">Week 1</span><span class="tri-div">Week 13</span><span class="tri-div">Week 27</span><span class="tri-div">Week 40</span></div>';
+      
+      renderGrowthCurve(weekNum);
+      updateSizeVisualizer(weekNum);
+      renderWeeksTimeline(weekNum);
+      
+      var products = PRODUCTS[prodKey];
+
+      var weekCard = document.getElementById('weekCard');
+      if (debug) debug.innerHTML += "<br>Generating HTML...";
+      
+      var htmlContent = generateWeekCardHtml(weekNum, wd, products, trimLabel, currentImageTab);
+      
+      console.log("DEBUG: weekCard element in DOM:", weekCard);
+      console.log("DEBUG: length of generated HTML:", htmlContent ? htmlContent.length : 0);
+      console.log("DEBUG: generated HTML preview:", htmlContent ? htmlContent.substring(0, 100) + '...' : 'null');
+      
+      if (weekCard) {
+        weekCard.innerHTML = htmlContent;
+        console.log("DEBUG: innerHTML set. New child element count:", weekCard.childElementCount);
+        weekCard.style.display = 'block'; // Ensure it's visible
+        if (debug) debug.innerHTML += "<br>Successfully assigned innerHTML. Content length: " + htmlContent.length;
+      } else {
+        if (debug) debug.innerHTML += "<br>weekCard element not found!";
+      }
+
+      smoothScrollTo(weekCard);
+    } catch (err) {
+      var debug = document.getElementById('debugOutput');
+      if (debug) debug.innerHTML = "<div style='color:red;font-weight:bold;background:#fee;padding:10px;border-radius:8px;'><b>Error in showWeekDetail:</b><br>" + err.message + "<br><pre>" + err.stack + "</pre></div>";
+      console.error(err);
     }
-
-    // Determine trimester from week number for product recommendations
-    var trimester = weekNum <= 12 ? 1 : weekNum <= 26 ? 2 : 3;
-    var prodKey = trimester === 1 ? 't1' : trimester === 2 ? 't2' : 't3';
-    var trimLabel = trimester === 1 ? 'First Trimester' : trimester === 2 ? 'Second Trimester' : 'Third Trimester';
-    // Sync result panel stats and trimester bar to the selected week
-    var daysSinceLMP = weekNum * 7;
-    var daysExtra = 0;
-    document.getElementById('statGrid').innerHTML = [
-      '<div class="result-stat"><div class="stat-value">Week ' + weekNum + '</div><div class="stat-label">Pregnancy Week</div><div class="stat-sub">' + daysExtra + ' days into this week</div></div>',
-      '<div class="result-stat"><div class="stat-value">—</div><div class="stat-label">Due Date (EDD)</div><div class="stat-sub">Estimate only</div></div>',
-      '<div class="result-stat"><div class="stat-value">' + trimLabel.split(' ')[0] + '</div><div class="stat-label">Trimester</div><div class="stat-sub">Weeks ' + (trimester === 1 ? '1–12' : trimester === 2 ? '13–26' : '27–40') + '</div></div>'
-    ].join('');
-    document.getElementById('trimBar').innerHTML =
-      '<div class="trimester-labels"><span' + (trimester===1?' style="font-weight:700;color:var(--primary)"':'') + '>1st Trimester</span><span' + (trimester===2?' style="font-weight:700;color:var(--primary)"':'') + '>2nd Trimester</span><span' + (trimester===3?' style="font-weight:700;color:var(--primary)"':'') + '>3rd Trimester</span></div>' +
-      '<div class="progress-track"><div class="progress-fill" style="width:' + (Math.min((weekNum / 40) * 100, 100)).toFixed(1) + '%"></div></div>' +
-      '<div class="trimester-dividers"><span class="tri-div">Week 1</span><span class="tri-div">Week 13</span><span class="tri-div">Week 27</span><span class="tri-div">Week 40</span></div>';
-    renderGrowthCurve(weekNum);
-    updateSizeVisualizer(weekNum);
-    renderWeeksTimeline(weekNum);
-    var products = PRODUCTS[prodKey];
-    var productsHtml =
-      '<div class="products-section" style="margin-top:24px">' +
-      '<h2>Recommended for ' + trimLabel + ' <span class="affiliate-badge">Affiliate</span></h2>' +
-      '<p class="products-sub"><strong>This week\'s tip:</strong> ' + wd.tip + ' Shop curated products for this stage of pregnancy. Clicking and purchasing supports this free tool at no extra cost to you.</p>' +
-      '<div class="products-grid">' +
-      products.map(function(p) {
-        return '<a class="product-card" href="' + amzLink(p.keyword) + '" target="_blank" rel="noopener noreferrer">' +
-          '<div class="product-icon">' + p.icon + '</div>' +
-          '<div><div class="product-name">' + p.name + '</div><div class="product-why">' + p.why + '</div></div>' +
-          '</a>';
-      }).join('') +
-      '</div></div>';
-
-    var weekCard = document.getElementById('weekCard');
-    weekCard.innerHTML = generateWeekCardHtml(weekNum, wd, products, trimLabel, currentImageTab);
-
-    smoothScrollTo(weekCard);
   }
 
   function setWeekImageTab(tab, weekNum) {

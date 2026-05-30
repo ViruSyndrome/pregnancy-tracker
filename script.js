@@ -1139,6 +1139,10 @@
 
     // Week detail card
     document.getElementById('weekCard').innerHTML = generateWeekCardHtml(r.weekNum, weekData, products, trimLabel, currentImageTab);
+    
+    renderGrowthCurve(r.weekNum);
+    updateSizeVisualizer(r.weekNum);
+    renderWeeksTimeline(r.weekNum);
 }
 
   function generateWeekCardHtml(weekNum, weekData, products, trimLabel, currentImageTab) {

@@ -863,9 +863,15 @@
     // Set max date for LMP input to today
     var today = new Date();
     var maxLMP = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000); // at least 1 week ago
-    document.getElementById('lmpDate').max = formatDateInput(today);
-    document.getElementById('dueDate').min = formatDateInput(new Date(today.getTime() - 28 * 24 * 60 * 60 * 1000));
-    document.getElementById('dueDate').max = formatDateInput(new Date(today.getTime() + 308 * 24 * 60 * 60 * 1000));
+    var lmpDateEl = document.getElementById('lmpDate');
+    var dueDateEl = document.getElementById('dueDate');
+    if (lmpDateEl) {
+      lmpDateEl.max = formatDateInput(today);
+    }
+    if (dueDateEl) {
+      dueDateEl.min = formatDateInput(new Date(today.getTime() - 28 * 24 * 60 * 60 * 1000));
+      dueDateEl.max = formatDateInput(new Date(today.getTime() + 308 * 24 * 60 * 60 * 1000));
+    }
 
     // Wait for Wikipedia images to load, then render timeline with real photos
     loadWeekImages().then(function() {

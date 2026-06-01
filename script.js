@@ -885,9 +885,31 @@
     var params = new URLSearchParams(window.location.search);
     var lmpParam = params.get('lmp');
     if (lmpParam) {
-      document.getElementById('lmpDate').value = lmpParam;
-      calculate();
-  }
+      if (document.getElementById('lmpDate')) {
+        document.getElementById('lmpDate').value = lmpParam;
+        calculate();
+      }
+    } else {
+      // Load from localStorage if returning user
+      var savedMode = localStorage.getItem('pwtSavedMode');
+      if (savedMode) {
+        if (savedMode === 'lmp') {
+          var sLMP = localStorage.getItem('pwtSavedLMP');
+          var sCy = localStorage.getItem('pwtSavedCycle');
+          if (sLMP && document.getElementById('lmpDate')) {
+            document.getElementById('lmpDate').value = sLMP;
+            if (sCy) document.getElementById('cycleLen').value = sCy;
+            switchMode('lmp');
+          }
+        } else {
+          var sDue = localStorage.getItem('pwtSavedDue');
+          if (sDue && document.getElementById('dueDate')) {
+            document.getElementById('dueDate').value = sDue;
+            switchMode('due');
+          }
+        }
+      }
+    }
 });
 
   // ─────────────────────────────────────────────────────────
@@ -951,6 +973,17 @@
   }
 
     if (lmpDate > today) { setCalcError('The first day of your last period cannot be in the future.'); return; }
+
+    // Save to localStorage so returning users don't have to re-enter
+    try {
+      localStorage.setItem('pwtSavedMode', currentMode);
+      if (currentMode === 'lmp') {
+        localStorage.setItem('pwtSavedLMP', document.getElementById('lmpDate').value);
+        localStorage.setItem('pwtSavedCycle', document.getElementById('cycleLen').value);
+      } else {
+        localStorage.setItem('pwtSavedDue', document.getElementById('dueDate').value);
+      }
+    } catch(e) {}
 
     // Cycle-length adjusted ovulation offset
     var ovulationOffset = cycleLen - 14;
@@ -1437,7 +1470,9 @@
   //  RENDER FAQ
   // ─────────────────────────────────────────────────────────
   function renderFAQ() {
-    document.getElementById('faqList').innerHTML = FAQS.map(function(f, i) {
+    var faqList = document.getElementById('faqList');
+    if (!faqList) return;
+    faqList.innerHTML = FAQS.map(function(f, i) {
       return '<div class="faq-item">' +
         '<div class="faq-q" id="fq' + i + '" onclick="toggleFAQ(' + i + ')">' +
           '<span>' + f.q + '</span>' +

@@ -1005,15 +1005,9 @@
     // Update currentResult object globally
     currentResult = { weekNum, daysExtra, dueDate, daysUntilDue, trimester, progress, lmpDate };
 
-    if (window.isMainPage) {
-        // Redirect to the pSEO static page, passing the date in the URL
-        var lmpValFormatted = lmpDate.getFullYear() + '-' + String(lmpDate.getMonth() + 1).padStart(2, '0') + '-' + String(lmpDate.getDate()).padStart(2, '0');
-        window.location.href = weekNum + "-weeks-pregnant.html?lmp=" + lmpValFormatted;
-        return;
-    } else {
-        // We are already on a pSEO page, so render directly
-        renderResult(currentResult);
-    }
+    // Always render inline — pSEO pages are for Google, not for the user flow
+    renderResult(currentResult);
+
 
     // Push AdSense only once, after the panel is visible and has a real width
     if (!window._adSlot1Pushed) {

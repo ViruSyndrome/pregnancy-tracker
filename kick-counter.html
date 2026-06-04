@@ -1046,9 +1046,10 @@ a[data-tooltip] {
       <div class="nav-links">
         <a href="#tracker">Calculator</a>
         <a href="#all-weeks">Timeline</a>
-        <a href="#kick-counter">Tools</a>
+        <a href="kick-counter.html">Kick Counter</a>
+        <a href="contraction-timer.html">Contraction Timer</a>
+        <a href="gender-predictor.html">Gender Predictor</a>
         <a href="#faq">FAQ</a>
-        <a href="about.html">About</a>
       </div>
     </div>
   </nav>
@@ -1114,7 +1115,63 @@ a[data-tooltip] {
               <span id="kcCount" class="kc-val">0</span>
               <span class="kc-lbl">Kicks</span>
             </div>
-          </div></section></div>
+          </div>
+
+          <div class="tool-timer-wrap">
+            <span>⏱️</span> <span id="kcTimer">00:00</span>
+          </div>
+
+          <button class="tool-btn-main btn-kick-pulse" id="kcBtn" data-tooltip="Start a new kick counting session" onclick="kcRecord()">Start Counting Kicks 🦶</button>
+          <button class="tool-btn-main btn-stop" id="kcStopBtn" style="display:none; padding:12px; margin-top:8px; opacity:0.8; font-size:0.9rem" onclick="kcStop()">Stop &amp; Save Session</button>
+
+          <div class="tool-history-list" id="kcHistory">
+            <!-- History injected here -->
+          </div>
+
+          <div style="font-size:0.85rem;color:var(--text-muted);margin-top:24px;text-align:left;background:rgba(0,0,0,0.03);padding:18px;border-radius:14px;border-left:4px solid var(--success)">
+            <strong style="color:var(--text)">Actionable Guide:</strong> 
+            <ul style="margin-top:10px;padding-left:20px;margin-bottom:0">
+              <li style="margin-bottom:6px"><strong>Daily Tracking:</strong> Start daily counts from 28 weeks.</li>
+              <li style="margin-bottom:6px"><strong>Goal:</strong> Reaching 10 movements (kicks, swishes, or rolls) in under 2 hours.</li>
+              <li><strong style="color:var(--danger)">Urgent:</strong> If you don't feel 10 movements in 2 hours, or notice a significant decrease in pattern, <strong>call your maternity unit immediately</strong>.</li>
+            </ul>
+          </div>
+        </div></section></div>
+    <section class="faq-section" id="faq" style="margin-bottom:40px;">
+      <div class="glass-card">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-wrapper">
+          <div class="faq-item">
+            <div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+              <span>When should I start counting kicks?</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg>
+            </div>
+            <div class="faq-a"><div style="padding-top:10px;">Standard medical advice is to start counting your baby's kicks and movements daily starting at 28 weeks of pregnancy.</div></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+              <span>What counts as a kick?</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg>
+            </div>
+            <div class="faq-a"><div style="padding-top:10px;">Any movement you feel—kicks, flutters, swishes, jabs, or rolls—counts as a movement. Hiccups do not count.</div></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+              <span>How many kicks is normal?</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg>
+            </div>
+            <div class="faq-a"><div style="padding-top:10px;">You should aim to feel 10 movements within a 2-hour window. Most women reach this goal in less than 30 minutes when the baby is active.</div></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+              <span>What if I don't feel 10 kicks in 2 hours?</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg>
+            </div>
+            <div class="faq-a"><div style="padding-top:10px;">Drink something very cold or eat a sugary snack, lie down on your left side in a quiet room, and try again. If you still don't feel 10 movements, or if you notice a significant decrease in your baby's normal movement pattern, contact your doctor or maternity unit immediately.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
   <footer class="footer">
     <div class="footer-inner">
@@ -1127,9 +1184,9 @@ a[data-tooltip] {
         <ul>
           <li><a href="/">Pregnancy Week Tracker</a></li>
           <li><a href="index.html#all-weeks">Week by Week Guide</a></li>
-          <li><a href="index.html#kick-counter">Baby Kick Counter</a></li>
-          <li><a href="index.html#contraction-timer">Contraction Timer</a></li>
-          <li><a href="index.html#gender-prediction">Fun Gender Predictor</a></li>
+          <li><a href="kick-counter.html">Baby Kick Counter</a></li>
+          <li><a href="contraction-timer.html">Contraction Timer</a></li>
+          <li><a href="gender-predictor.html">Fun Gender Predictor</a></li>
         </ul>
       </div>
       <div class="footer-links">

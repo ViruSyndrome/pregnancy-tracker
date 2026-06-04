@@ -13,8 +13,8 @@
       });
     });
   </script>
-  <title>Pregnancy Week Tracker - Track Baby's Development</title>
-  <meta name="description" content="Free pregnancy week tracker. Enter your last period date to instantly find out how many weeks pregnant you are, your due date, baby's size and development this week. No sign-up required.">
+  <title>Online Contraction Timer & 5-1-1 Rule - Pregnancy Week Tracker</title>
+  <meta name="description" content="Free contraction timer. Track duration and frequency of contractions to know when it's time to go to the hospital.. Enter your last period date to instantly find out how many weeks pregnant you are, your due date, baby's size and development this week. No sign-up required.">
   <meta name="msvalidate.01" content="FA7405A0B7623E8A404F74AE4952777C" />
   <link rel="canonical" href="https://www.pregnancyweektracker.com/">
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=9">
@@ -52,13 +52,13 @@
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Pregnancy Week Tracker",
-    "url": "https://www.pregnancyweektracker.com/",
-    "description": "Free pregnancy week tracker. Calculates how many weeks pregnant you are and shows week-by-week fetal development, due date, and baby size.",
+    "name": "Contraction Timer",
+    "url": "https://www.pregnancyweektracker.com/contraction-timer.html",
+    "description": "Free online contraction timer. Track duration and frequency of contractions to know when it's time to go to the hospital using the 5-1-1 rule.",
     "applicationCategory": "HealthApplication",
     "operatingSystem": "All",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "featureList": ["Due date calculator", "Week-by-week fetal development", "Baby size guide", "Trimester tracker", "Pregnancy product guide"]
+    "featureList": ["Contraction duration tracking", "Contraction frequency tracking", "5-1-1 rule alert"]
 }
   </script>
 
@@ -1098,86 +1098,65 @@ a[data-tooltip] {
 
   <!-- RESULT PANEL -->
 <!-- resultPanel moved to pSEO pages -->
-  <div class="container" style="max-width:900px; margin:0 auto;">
-    <section class="timeline-section" id="all-weeks">
-      <h2>Pregnancy Week by Week</h2>
-      <p class="section-sub">Tap any week to see baby's development, size, and what to expect. Your current week is highlighted.</p>
-      <div id="weeksTimeline"></div>
-    </section>
+    <div class="container" style="max-width:900px; margin:0 auto; padding-top:40px;">
+    <div class="tools-wrapper glass-card"><section class="tools-section"><div class="tool-card" id="contraction-timer">
+          <h2>⏱️ Contraction Timer</h2>
+          <p class="tool-desc">Track frequency and duration. <strong>How to use:</strong> Tap when a contraction starts, then tap again when it ends. We'll calculate the intervals for you.</p>
+          
+          <div id="ctAlert" class="contraction-banner" style="display:none">
+            🚨 5-1-1 Rule Met: It may be time to go to the hospital!
+          </div>
 
-    <!-- AdSense slot 2 -->
-    <div class="ad-slot">
-      <!-- Replace with your AdSense ad unit -->
-      Advertisement
-    </div>
+          <div class="tool-stats" style="width:100%; display:flex; gap:12px; background:none; padding:0; margin-bottom:24px;">
+            <div class="stat-box" style="flex:1; background:var(--bg); padding:16px; border-radius:14px; text-align:center;">
+              <span class="stat-val" id="ctDuration" style="font-size:1.8rem; color:var(--primary); font-weight:800; display:block;">0s</span>
+              <span class="stat-lbl" style="font-size:0.75rem; color:var(--text-muted); font-weight:700; text-transform:uppercase;">Duration</span>
+            </div>
+            <div class="stat-box" style="flex:1; background:var(--bg); padding:16px; border-radius:14px; text-align:center;">
+              <span class="stat-val" id="ctInterval" style="font-size:1.8rem; color:var(--accent); font-weight:800; display:block;">--</span>
+              <span class="stat-lbl" style="font-size:0.75rem; color:var(--text-muted); font-weight:700; text-transform:uppercase;">Interval</span>
+            </div>
+          </div>
 
-    <!-- ── SEO CONTENT ── -->
-    <section class="content-section">
-      <div class="glass-card">
-        <h2>Understanding Your Pregnancy Weeks</h2>
-        <p>Pregnancy is measured in weeks from the first day of your last menstrual period (LMP) — even though fertilisation actually occurs about two weeks later. This means that when your period is "late" by one week, you are technically already 5 weeks pregnant.</p>
-        <p>A full-term pregnancy lasts between 37 and 42 weeks. Your estimated due date (EDD) is calculated as 280 days (40 weeks) from your LMP. The due date is based on Naegele's rule, which adds 9 months and 7 days to your LMP.</p>
+          <!-- Contraction Breathing Coach & Visual Wave -->
+          <div id="ctCoach" class="contraction-coach" style="display:none; margin-bottom: 20px;">
+            <div class="coach-pulse-circle">
+              <span id="coachText">Breathe In...</span>
+            </div>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin-top:10px;text-align:center;margin-bottom:15px;">Follow the circle to regulate your breathing during the contraction.</p>
+            
+            <!-- Contraction Wave Visualizer -->
+            <div id="ctWaveContainer" style="height:60px; position:relative; overflow:hidden; border-radius:10px; background:rgba(244, 63, 94, 0.03); border:1px solid rgba(244, 63, 94, 0.1); margin: 0 10px 10px 10px;">
+              <svg id="ctWaveSvg" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute; bottom:0; left:0; width:100%; height:100%;">
+                <path id="ctWavePath" d="M0,100 Q25,100 50,100 T100,100 L100,100 L0,100 Z" fill="url(#waveGrad)" opacity="0.8"></path>
+                <defs>
+                  <linearGradient id="waveGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="var(--primary)" stop-opacity="0.8"></stop>
+                    <stop offset="100%" stop-color="var(--primary-light)" stop-opacity="0.1"></stop>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div id="ctIntensityLabel" style="position:absolute; top:8px; left:50%; transform:translateX(-50%); font-size:0.75rem; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:0.5px; white-space:nowrap;">Intensity: Preparing...</div>
+            </div>
+          </div>
 
-        <div class="content-grid">
-          <div class="content-card">
-            <h3>🌱 First Trimester (Weeks 1–12)</h3>
-            <ul>
-              <li>All major organs begin forming</li>
-              <li>Morning sickness often peaks at week 8–10</li>
-              <li>Miscarriage risk is highest — but drops sharply after week 12</li>
-              <li>12-week scan (dating scan) confirms due date</li>
-              <li>Most couples share news publicly after week 12</li>
+          <button class="tool-btn-main btn-contraction-pulse" id="ctBtn" data-tooltip="Start tracking your contraction duration and frequency" onclick="ctToggle()">Start Timer (Contraction Started) ⏱️</button>
+          <button class="tool-btn-main btn-stop" id="ctResetBtn" data-tooltip="Clear your contraction history" style="padding:12px; margin-top:8px; opacity:0.8; font-size:0.9rem" onclick="ctReset()">Reset Timer History</button>
+
+          <div class="tool-history-list" id="ctHistory">
+            <!-- History injected here -->
+          </div>
+
+          <div style="font-size:0.85rem;color:var(--text-muted);margin-top:24px;text-align:left;background:rgba(0,0,0,0.03);padding:18px;border-radius:14px;border-left:4px solid var(--primary)">
+            <strong style="color:var(--text)">Actionable Guide (The 5-1-1 Rule):</strong> 
+            <ul style="margin-top:10px;padding-left:20px;margin-bottom:0">
+              <li style="margin-bottom:6px"><strong>5:</strong> Contractions are <strong>5 mins apart</strong>.</li>
+              <li style="margin-bottom:6px"><strong>1:</strong> Each lasts for <strong>1 full minute</strong>.</li>
+              <li style="margin-bottom:6px"><strong>1:</strong> Pattern is consistent for <strong>1 hour</strong>.</li>
+              <li><strong style="color:var(--danger)">Urgent:</strong> If water breaks or you are bleeding, head to the hospital regardless of the 5-1-1 rule.</li>
             </ul>
           </div>
-          <div class="content-card">
-            <h3>🌸 Second Trimester (Weeks 13–26)</h3>
-            <ul>
-              <li>Nausea usually eases — the "golden trimester"</li>
-              <li>Baby movements felt from around week 18–20</li>
-              <li>20-week anomaly scan checks all organs in detail</li>
-              <li>Gender can often be determined at the 20-week scan</li>
-              <li>Bump becomes clearly visible</li>
-            </ul>
-          </div>
-          <div class="content-card">
-            <h3>🎀 Third Trimester (Weeks 27–40)</h3>
-            <ul>
-              <li>Baby gains most of its weight in these weeks</li>
-              <li>Braxton Hicks contractions become more frequent</li>
-              <li>Sleep becomes more difficult — use a pregnancy pillow</li>
-              <li>Baby "drops" (engages into pelvis) around week 35–36</li>
-              <li>Weekly OB-GYN or doctor checkups from week 36</li>
-            </ul>
-          </div>
-          <div class="content-card">
-            <h3>📋 Key Antenatal Appointments</h3>
-            <ul>
-              <li><strong>Week 8–10:</strong> First prenatal appointment (booking checkup)</li>
-              <li><strong>Week 12:</strong> Dating scan + blood tests</li>
-              <li><strong>Week 16:</strong> Routine doctor checkup + blood results</li>
-              <li><strong>Week 20:</strong> Anomaly scan</li>
-              <li><strong>Week 28:</strong> Blood tests + anti-D if Rh negative</li>
-              <li><strong>Week 34–36:</strong> Prenatal checkup, position check</li>
-              <li><strong>Week 38–40+:</strong> Weekly OB-GYN or doctor checkups</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── FAQ ── -->
-    <section class="faq-section" id="faq">
-      <div class="glass-card">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-wrapper">
-          <div id="faqList"></div>
-        </div>
-      </div>
-    </section>
-
-  </div><!-- /container -->
-
-  <!-- FOOTER -->
+        </div></section></div>
   </div>
   <footer class="footer">
     <div class="footer-inner">
@@ -1190,9 +1169,9 @@ a[data-tooltip] {
         <ul>
           <li><a href="/">Pregnancy Week Tracker</a></li>
           <li><a href="index.html#all-weeks">Week by Week Guide</a></li>
-          <li><a href="kick-counter.html">Baby Kick Counter</a></li>
-          <li><a href="contraction-timer.html">Contraction Timer</a></li>
-          <li><a href="gender-predictor.html">Fun Gender Predictor</a></li>
+          <li><a href="index.html#kick-counter">Baby Kick Counter</a></li>
+          <li><a href="index.html#contraction-timer">Contraction Timer</a></li>
+          <li><a href="index.html#gender-prediction">Fun Gender Predictor</a></li>
         </ul>
       </div>
       <div class="footer-links">

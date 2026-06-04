@@ -1499,6 +1499,7 @@
 }
 
   function predictGender() {
+    if (!document.getElementById('genderResult')) return;
     var votes = { boy: 0, girl: 0 };
     var details = [];
     var bpm = parseInt(document.getElementById('gBpm').value);
@@ -1730,7 +1731,9 @@
 
   function kcUpdateDisplay() {
     var count = kcHits.length;
-    document.getElementById('kcCount').innerText = count;
+    var kcCountEl = document.getElementById('kcCount');
+    if (!kcCountEl) return;
+    kcCountEl.innerText = count;
     
     // Update Progress Ring (Circumference is 502.6 for r=80)
     var ring = document.getElementById('kcProgressRing');
@@ -1849,7 +1852,9 @@
     if (ctActive && ctStartTime) {
       var elapsedMs = Date.now() - ctStartTime;
       var dur = ctFormatDuration(elapsedMs);
-      document.getElementById('ctDuration').innerText = dur;
+      var ctDurEl = document.getElementById('ctDuration');
+      if (!ctDurEl) return;
+      ctDurEl.innerText = dur;
       document.getElementById('ctBtn').innerText = 'STOP TIMER (' + dur + ') 🛑';
       
       var elapsedSec = Math.floor(elapsedMs / 1000);

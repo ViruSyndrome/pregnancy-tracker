@@ -13,8 +13,8 @@
       });
     });
   </script>
-  <title>Pregnancy Week Tracker - Track Baby's Development</title>
-  <meta name="description" content="Free pregnancy week tracker. Enter your last period date to instantly find out how many weeks pregnant you are, your due date, baby's size and development this week. No sign-up required.">
+  <title>Fun Baby Gender Predictor Quiz - Pregnancy Week Tracker</title>
+  <meta name="description" content="Try the old wives tales! Chinese gender calendar, Ramzi theory, cravings and more in one fun baby gender predictor.. Enter your last period date to instantly find out how many weeks pregnant you are, your due date, baby's size and development this week. No sign-up required.">
   <meta name="msvalidate.01" content="FA7405A0B7623E8A404F74AE4952777C" />
   <link rel="canonical" href="https://www.pregnancyweektracker.com/">
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=9">
@@ -52,13 +52,13 @@
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Pregnancy Week Tracker",
-    "url": "https://www.pregnancyweektracker.com/",
-    "description": "Free pregnancy week tracker. Calculates how many weeks pregnant you are and shows week-by-week fetal development, due date, and baby size.",
+    "name": "Fun Baby Gender Predictor",
+    "url": "https://www.pregnancyweektracker.com/gender-predictor.html",
+    "description": "Fun baby gender predictor quiz combining old wives tales like Chinese calendar, Ramzi theory, cravings and more.",
     "applicationCategory": "HealthApplication",
     "operatingSystem": "All",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "featureList": ["Due date calculator", "Week-by-week fetal development", "Baby size guide", "Trimester tracker", "Pregnancy product guide"]
+    "featureList": ["Chinese gender calendar", "Ramzi theory", "Old wives tales"]
 }
   </script>
 
@@ -1098,86 +1098,125 @@ a[data-tooltip] {
 
   <!-- RESULT PANEL -->
 <!-- resultPanel moved to pSEO pages -->
-  <div class="container" style="max-width:900px; margin:0 auto;">
-    <section class="timeline-section" id="all-weeks">
-      <h2>Pregnancy Week by Week</h2>
-      <p class="section-sub">Tap any week to see baby's development, size, and what to expect. Your current week is highlighted.</p>
-      <div id="weeksTimeline"></div>
-    </section>
-
-    <!-- AdSense slot 2 -->
-    <div class="ad-slot">
-      <!-- Replace with your AdSense ad unit -->
-      Advertisement
-    </div>
-
-    <!-- ── SEO CONTENT ── -->
-    <section class="content-section">
+    <div class="container" style="max-width:900px; margin:0 auto; padding-top:40px;">
+    <section class="gender-section" id="gender-prediction">
       <div class="glass-card">
-        <h2>Understanding Your Pregnancy Weeks</h2>
-        <p>Pregnancy is measured in weeks from the first day of your last menstrual period (LMP) — even though fertilisation actually occurs about two weeks later. This means that when your period is "late" by one week, you are technically already 5 weeks pregnant.</p>
-        <p>A full-term pregnancy lasts between 37 and 42 weeks. Your estimated due date (EDD) is calculated as 280 days (40 weeks) from your LMP. The due date is based on Naegele's rule, which adds 9 months and 7 days to your LMP.</p>
+        <h2>🔮 Fun Gender Predictor</h2>
+        <p class="gender-intro">Try the old wives' tales from around the world. Answer what you know — skip the rest. The more you fill in, the more fun the result!</p>
+        <div class="gender-disclaimer">
+          ⚠️ <strong>For entertainment only.</strong> None of these methods are scientifically proven — most have ~50% accuracy, the same as a coin flip. In India, it is illegal for doctors to reveal a baby's sex under the PC-PNDT Act 1994. This tool exists purely for fun.
+        </div>
 
-        <div class="content-grid">
-          <div class="content-card">
-            <h3>🌱 First Trimester (Weeks 1–12)</h3>
-            <ul>
-              <li>All major organs begin forming</li>
-              <li>Morning sickness often peaks at week 8–10</li>
-              <li>Miscarriage risk is highest — but drops sharply after week 12</li>
-              <li>12-week scan (dating scan) confirms due date</li>
-              <li>Most couples share news publicly after week 12</li>
-            </ul>
+      <div class="gender-inputs-grid">
+        <!-- Heart Rate -->
+        <div class="gender-input-card">
+          <label>💓 Baby's Heart Rate (bpm)</label>
+          <input type="number" class="gender-num-input" id="gBpm" placeholder="e.g. 148" min="100" max="200">
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:5px">&gt;140 bpm = Girl theory · &lt;140 bpm = Boy theory · No scientific proof</div>
+        </div>
+        <!-- Bump Shape -->
+        <div class="gender-input-card">
+          <label>🤰 Bump Shape</label>
+          <div class="gender-options">
+            <div class="gender-opt" data-group="bump" data-val="girl" onclick="selectGenderOpt(this)">Round / High</div>
+            <div class="gender-opt" data-group="bump" data-val="boy"  onclick="selectGenderOpt(this)">Pointy / Low</div>
+            <div class="gender-opt" data-group="bump" data-val="skip" onclick="selectGenderOpt(this)">Not sure</div>
           </div>
-          <div class="content-card">
-            <h3>🌸 Second Trimester (Weeks 13–26)</h3>
-            <ul>
-              <li>Nausea usually eases — the "golden trimester"</li>
-              <li>Baby movements felt from around week 18–20</li>
-              <li>20-week anomaly scan checks all organs in detail</li>
-              <li>Gender can often be determined at the 20-week scan</li>
-              <li>Bump becomes clearly visible</li>
-            </ul>
+        </div>
+        <!-- Morning Sickness -->
+        <div class="gender-input-card">
+          <label>🤢 Morning Sickness</label>
+          <div class="gender-options">
+            <div class="gender-opt" data-group="sick" data-val="boy"  onclick="selectGenderOpt(this)">None / Mild</div>
+            <div class="gender-opt" data-group="sick" data-val="girl" onclick="selectGenderOpt(this)">Moderate</div>
+            <div class="gender-opt" data-group="sick" data-val="girl" onclick="selectGenderOpt(this)">Severe / All day</div>
           </div>
-          <div class="content-card">
-            <h3>🎀 Third Trimester (Weeks 27–40)</h3>
-            <ul>
-              <li>Baby gains most of its weight in these weeks</li>
-              <li>Braxton Hicks contractions become more frequent</li>
-              <li>Sleep becomes more difficult — use a pregnancy pillow</li>
-              <li>Baby "drops" (engages into pelvis) around week 35–36</li>
-              <li>Weekly OB-GYN or doctor checkups from week 36</li>
-            </ul>
+        </div>
+        <!-- Cravings -->
+        <div class="gender-input-card">
+          <label>🍭 Food Cravings</label>
+          <div class="gender-options">
+            <div class="gender-opt" data-group="crav" data-val="girl" onclick="selectGenderOpt(this)">Sweet / Fruity</div>
+            <div class="gender-opt" data-group="crav" data-val="boy"  onclick="selectGenderOpt(this)">Salty / Sour</div>
+            <div class="gender-opt" data-group="crav" data-val="skip" onclick="selectGenderOpt(this)">Both / Neither</div>
           </div>
-          <div class="content-card">
-            <h3>📋 Key Antenatal Appointments</h3>
-            <ul>
-              <li><strong>Week 8–10:</strong> First prenatal appointment (booking checkup)</li>
-              <li><strong>Week 12:</strong> Dating scan + blood tests</li>
-              <li><strong>Week 16:</strong> Routine doctor checkup + blood results</li>
-              <li><strong>Week 20:</strong> Anomaly scan</li>
-              <li><strong>Week 28:</strong> Blood tests + anti-D if Rh negative</li>
-              <li><strong>Week 34–36:</strong> Prenatal checkup, position check</li>
-              <li><strong>Week 38–40+:</strong> Weekly OB-GYN or doctor checkups</li>
-            </ul>
+        </div>
+        <!-- Skin -->
+        <div class="gender-input-card">
+          <label>✨ Skin Changes</label>
+          <div class="gender-options">
+            <div class="gender-opt" data-group="skin" data-val="boy"  onclick="selectGenderOpt(this)">Glowing / Clear</div>
+            <div class="gender-opt" data-group="skin" data-val="girl" onclick="selectGenderOpt(this)">Dull / Acne</div>
+            <div class="gender-opt" data-group="skin" data-val="skip" onclick="selectGenderOpt(this)">No change</div>
+          </div>
+        </div>
+        <!-- Chinese Calendar -->
+        <div class="gender-input-card">
+          <label>🍯 Chinese Gender Calendar</label>
+          <div style="display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap">
+            <div>
+              <div style="font-size:0.68rem;color:var(--text-muted);margin-bottom:3px">Your age when conceived</div>
+              <input type="number" class="gender-num-input" id="gAge" placeholder="e.g. 28" min="18" max="45" style="width:95px">
+            </div>
+            <div>
+              <div style="font-size:0.68rem;color:var(--text-muted);margin-bottom:3px">Month of conception</div>
+              <select class="gender-select" id="gMonth" style="width:110px">
+                <option value="">Select…</option>
+                <option value="1">January</option><option value="2">February</option>
+                <option value="3">March</option><option value="4">April</option>
+                <option value="5">May</option><option value="6">June</option>
+                <option value="7">July</option><option value="8">August</option>
+                <option value="9">September</option><option value="10">October</option>
+                <option value="11">November</option><option value="12">December</option>
+              </select>
+            </div>
+          </div>
+          <div style="font-size:0.7rem;color:var(--text-muted)">Ancient Chinese folk method · ~50% accurate</div>
+        </div>
+      </div>
+
+        <!-- Ramzi Theory -->
+        <div class="gender-input-card">
+          <label>🩺 Ramzi Theory (Week 6–10)</label>
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:7px">From your early ultrasound: which side is the placenta on?</div>
+          <div class="gender-options">
+            <div class="gender-opt" data-group="ramzi" data-val="girl" onclick="selectGenderOpt(this)">Left side → Girl</div>
+            <div class="gender-opt" data-group="ramzi" data-val="boy"  onclick="selectGenderOpt(this)">Right side → Boy</div>
+            <div class="gender-opt" data-group="ramzi" data-val="skip" onclick="selectGenderOpt(this)">Not sure / N/A</div>
+          </div>
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:5px">Based on placental location in early scans · Not proven</div>
+        </div>
+        <!-- Ring Test -->
+        <div class="gender-input-card">
+          <label>💍 Wedding Ring Test</label>
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:7px">Hang your wedding ring on a hair/string over your bump. What does it do?</div>
+          <div class="gender-options">
+            <div class="gender-opt" data-group="ring" data-val="girl" onclick="selectGenderOpt(this)">Circles → Girl</div>
+            <div class="gender-opt" data-group="ring" data-val="boy"  onclick="selectGenderOpt(this)">Back &amp; forth → Boy</div>
+            <div class="gender-opt" data-group="ring" data-val="skip" onclick="selectGenderOpt(this)">Not tried</div>
+          </div>
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:5px">Ancient folk test · Pure fun · No science</div>
+        </div>
+        <!-- Dreams -->
+        <div class="gender-input-card">
+          <label>💤 Dreams</label>
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:7px">Old wives' tale: you dream about the <em>opposite</em> of what you're having</div>
+          <div class="gender-options">
+            <div class="gender-opt" data-group="dream" data-val="boy"  onclick="selectGenderOpt(this)">Dreaming of a Girl → Boy</div>
+            <div class="gender-opt" data-group="dream" data-val="girl" onclick="selectGenderOpt(this)">Dreaming of a Boy → Girl</div>
+            <div class="gender-opt" data-group="dream" data-val="skip" onclick="selectGenderOpt(this)">No strong dreams</div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- ── FAQ ── -->
-    <section class="faq-section" id="faq">
-      <div class="glass-card">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-wrapper">
-          <div id="faqList"></div>
+        <button class="btn-predict" data-tooltip="Calculate the probable gender based on traditional methods" onclick="predictGender()">🔮 Predict Baby's Gender</button>
+        <div id="genderResult" class="gender-result" style="display:none"></div>
+
+        <div class="india-callout">
+          🇮🇳 <strong>For Indian parents:</strong> Under the PC-PNDT Act 1994, it is illegal for doctors or sonographers to reveal a baby's sex in India — with penalties up to 3 years imprisonment. That's why Indian parents use fun prediction methods more than anywhere else in the world. This tool is provided purely for entertainment — the same way people worldwide use it before their 20-week scan.
         </div>
       </div>
     </section>
-
-  </div><!-- /container -->
-
-  <!-- FOOTER -->
   </div>
   <footer class="footer">
     <div class="footer-inner">
@@ -1190,9 +1229,9 @@ a[data-tooltip] {
         <ul>
           <li><a href="/">Pregnancy Week Tracker</a></li>
           <li><a href="index.html#all-weeks">Week by Week Guide</a></li>
-          <li><a href="kick-counter.html">Baby Kick Counter</a></li>
-          <li><a href="contraction-timer.html">Contraction Timer</a></li>
-          <li><a href="gender-predictor.html">Fun Gender Predictor</a></li>
+          <li><a href="index.html#kick-counter">Baby Kick Counter</a></li>
+          <li><a href="index.html#contraction-timer">Contraction Timer</a></li>
+          <li><a href="index.html#gender-prediction">Fun Gender Predictor</a></li>
         </ul>
       </div>
       <div class="footer-links">

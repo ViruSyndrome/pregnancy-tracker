@@ -13,8 +13,8 @@
       });
     });
   </script>
-  <title>Pregnancy Week Tracker - Track Baby's Development</title>
-  <meta name="description" content="Free pregnancy week tracker. Enter your last period date to instantly find out how many weeks pregnant you are, your due date, baby's size and development this week. No sign-up required.">
+  <title>Baby Kick Counter Online - Pregnancy Week Tracker</title>
+  <meta name="description" content="Free online baby kick counter. Track your baby's movements easily to meet the standard 10 kicks in 2 hours.. Enter your last period date to instantly find out how many weeks pregnant you are, your due date, baby's size and development this week. No sign-up required.">
   <meta name="msvalidate.01" content="FA7405A0B7623E8A404F74AE4952777C" />
   <link rel="canonical" href="https://www.pregnancyweektracker.com/">
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=9">
@@ -52,13 +52,13 @@
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Pregnancy Week Tracker",
-    "url": "https://www.pregnancyweektracker.com/",
-    "description": "Free pregnancy week tracker. Calculates how many weeks pregnant you are and shows week-by-week fetal development, due date, and baby size.",
+    "name": "Baby Kick Counter",
+    "url": "https://www.pregnancyweektracker.com/kick-counter.html",
+    "description": "Free online baby kick counter. Track your baby's movements easily to meet the standard 10 kicks in 2 hours.",
     "applicationCategory": "HealthApplication",
     "operatingSystem": "All",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "featureList": ["Due date calculator", "Week-by-week fetal development", "Baby size guide", "Trimester tracker", "Pregnancy product guide"]
+    "featureList": ["Kick tracking", "Movement history", "Timer"]
 }
   </script>
 
@@ -1098,86 +1098,23 @@ a[data-tooltip] {
 
   <!-- RESULT PANEL -->
 <!-- resultPanel moved to pSEO pages -->
-  <div class="container" style="max-width:900px; margin:0 auto;">
-    <section class="timeline-section" id="all-weeks">
-      <h2>Pregnancy Week by Week</h2>
-      <p class="section-sub">Tap any week to see baby's development, size, and what to expect. Your current week is highlighted.</p>
-      <div id="weeksTimeline"></div>
-    </section>
+    <div class="container" style="max-width:900px; margin:0 auto; padding-top:40px;">
+    <div class="tools-wrapper glass-card"><section class="tools-section"><div class="tool-card" id="kick-counter">
+          <h2>🦶 Baby Kick Counter</h2>
+          <p class="tool-desc">Standard medical advice is 10 kicks in 2 hours. Start counting when baby is active.</p>
+          
+          <div id="kcEncourage" class="encouragement">🎉 All 10 kicks counted! Baby is doing great.</div>
 
-    <!-- AdSense slot 2 -->
-    <div class="ad-slot">
-      <!-- Replace with your AdSense ad unit -->
-      Advertisement
-    </div>
-
-    <!-- ── SEO CONTENT ── -->
-    <section class="content-section">
-      <div class="glass-card">
-        <h2>Understanding Your Pregnancy Weeks</h2>
-        <p>Pregnancy is measured in weeks from the first day of your last menstrual period (LMP) — even though fertilisation actually occurs about two weeks later. This means that when your period is "late" by one week, you are technically already 5 weeks pregnant.</p>
-        <p>A full-term pregnancy lasts between 37 and 42 weeks. Your estimated due date (EDD) is calculated as 280 days (40 weeks) from your LMP. The due date is based on Naegele's rule, which adds 9 months and 7 days to your LMP.</p>
-
-        <div class="content-grid">
-          <div class="content-card">
-            <h3>🌱 First Trimester (Weeks 1–12)</h3>
-            <ul>
-              <li>All major organs begin forming</li>
-              <li>Morning sickness often peaks at week 8–10</li>
-              <li>Miscarriage risk is highest — but drops sharply after week 12</li>
-              <li>12-week scan (dating scan) confirms due date</li>
-              <li>Most couples share news publicly after week 12</li>
-            </ul>
-          </div>
-          <div class="content-card">
-            <h3>🌸 Second Trimester (Weeks 13–26)</h3>
-            <ul>
-              <li>Nausea usually eases — the "golden trimester"</li>
-              <li>Baby movements felt from around week 18–20</li>
-              <li>20-week anomaly scan checks all organs in detail</li>
-              <li>Gender can often be determined at the 20-week scan</li>
-              <li>Bump becomes clearly visible</li>
-            </ul>
-          </div>
-          <div class="content-card">
-            <h3>🎀 Third Trimester (Weeks 27–40)</h3>
-            <ul>
-              <li>Baby gains most of its weight in these weeks</li>
-              <li>Braxton Hicks contractions become more frequent</li>
-              <li>Sleep becomes more difficult — use a pregnancy pillow</li>
-              <li>Baby "drops" (engages into pelvis) around week 35–36</li>
-              <li>Weekly OB-GYN or doctor checkups from week 36</li>
-            </ul>
-          </div>
-          <div class="content-card">
-            <h3>📋 Key Antenatal Appointments</h3>
-            <ul>
-              <li><strong>Week 8–10:</strong> First prenatal appointment (booking checkup)</li>
-              <li><strong>Week 12:</strong> Dating scan + blood tests</li>
-              <li><strong>Week 16:</strong> Routine doctor checkup + blood results</li>
-              <li><strong>Week 20:</strong> Anomaly scan</li>
-              <li><strong>Week 28:</strong> Blood tests + anti-D if Rh negative</li>
-              <li><strong>Week 34–36:</strong> Prenatal checkup, position check</li>
-              <li><strong>Week 38–40+:</strong> Weekly OB-GYN or doctor checkups</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── FAQ ── -->
-    <section class="faq-section" id="faq">
-      <div class="glass-card">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-wrapper">
-          <div id="faqList"></div>
-        </div>
-      </div>
-    </section>
-
-  </div><!-- /container -->
-
-  <!-- FOOTER -->
+          <div class="kc-visual">
+            <svg class="kc-svg" width="180" height="180">
+              <circle class="kc-bg" cx="90" cy="90" r="80"></circle>
+              <circle id="kcProgressRing" class="kc-progress" cx="90" cy="90" r="80"></circle>
+            </svg>
+            <div class="kc-center">
+              <span id="kcCount" class="kc-val">0</span>
+              <span class="kc-lbl">Kicks</span>
+            </div>
+          </div></section></div>
   </div>
   <footer class="footer">
     <div class="footer-inner">
@@ -1190,9 +1127,9 @@ a[data-tooltip] {
         <ul>
           <li><a href="/">Pregnancy Week Tracker</a></li>
           <li><a href="index.html#all-weeks">Week by Week Guide</a></li>
-          <li><a href="kick-counter.html">Baby Kick Counter</a></li>
-          <li><a href="contraction-timer.html">Contraction Timer</a></li>
-          <li><a href="gender-predictor.html">Fun Gender Predictor</a></li>
+          <li><a href="index.html#kick-counter">Baby Kick Counter</a></li>
+          <li><a href="index.html#contraction-timer">Contraction Timer</a></li>
+          <li><a href="index.html#gender-prediction">Fun Gender Predictor</a></li>
         </ul>
       </div>
       <div class="footer-links">

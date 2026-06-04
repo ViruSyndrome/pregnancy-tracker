@@ -1005,8 +1005,15 @@
     // Update currentResult object globally
     currentResult = { weekNum, daysExtra, dueDate, daysUntilDue, trimester, progress, lmpDate };
 
-    // Always render inline — pSEO pages are for Google, not for the user flow
-    renderResult(currentResult);
+    if (window.isMainPage) {
+        // Redirect to the pSEO static page, passing the date in the URL
+        var lmpValFormatted = lmpDate.getFullYear() + '-' + String(lmpDate.getMonth() + 1).padStart(2, '0') + '-' + String(lmpDate.getDate()).padStart(2, '0');
+        window.location.href = weekNum + "-weeks-pregnant.html?lmp=" + lmpValFormatted;
+        return;
+    } else {
+        // We are already on a pSEO page, so render directly
+        renderResult(currentResult);
+    }
 
 
     // Push AdSense only once, after the panel is visible and has a real width
@@ -1308,21 +1315,11 @@
         // Weeks 1-2 are single-mode: always show fruit image, ignore object tab
         var chipTab = (w <= 2) ? 'fruit' : currentImageTab;
         var weekChipLabel = wd.singleLabel || wd[chipTab + 'Label'] || wd.size;
-        if (onMainPage) {
-          // On the homepage: clicking a tile shows the full rich week detail INLINE
-          html += '<div role="button" tabindex="0" onclick="showWeekDetail(' + w + ')" onkeydown="if(event.key===\'Enter\'||event.key===\' \')showWeekDetail(' + w + ')" class="week-chip' + (isCurrent ? ' current' : '') + (currentWeek === w ? ' active-detail' : '') + '" data-week="' + w + '" data-tooltip="View Week ' + w + ' development details" style="cursor:pointer;">' +
-            '<div class="week-chip-num">Week ' + w + (isCurrent ? ' ◀ You' : '') + '</div>' +
-            '<div class="week-chip-emoji">' + weekImg(w, wd[chipTab + 'Emoji'] || wd.emoji, chipTab) + '</div>' +
-            '<div class="week-chip-size">' + weekChipLabel + '</div>' +
-            '</div>';
-        } else {
-          // On pSEO pages: link to the dedicated week page for SEO
-          html += '<a href="' + w + '-weeks-pregnant.html" class="week-chip' + (isCurrent ? ' current' : '') + '" data-week="' + w + '" data-tooltip="View Week ' + w + ' development details" style="text-decoration: none; color: inherit;">' +
-            '<div class="week-chip-num">Week ' + w + (isCurrent ? ' ◀ You' : '') + '</div>' +
-            '<div class="week-chip-emoji">' + weekImg(w, wd[chipTab + 'Emoji'] || wd.emoji, chipTab) + '</div>' +
-            '<div class="week-chip-size">' + weekChipLabel + '</div>' +
-            '</a>';
-        }
+        html += '<a href="' + w + '-weeks-pregnant.html" class="week-chip' + (isCurrent ? ' current' : '') + '" data-week="' + w + '" data-tooltip="View Week ' + w + ' development details" style="text-decoration: none; color: inherit;">' +
+          '<div class="week-chip-num">Week ' + w + (isCurrent ? ' ◀ You' : '') + '</div>' +
+          '<div class="week-chip-emoji">' + weekImg(w, wd[chipTab + 'Emoji'] || wd.emoji, chipTab) + '</div>' +
+          '<div class="week-chip-size">' + weekChipLabel + '</div>' +
+          '</a>';
     }
       html += '</div></div>';
   });

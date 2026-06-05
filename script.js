@@ -458,11 +458,11 @@
     },
     { 
       week: 24, 
-      size: 'Papaya', 
+      size: 'Corn on the Cob', 
       size_mm: 295.0, 
-      emoji: '🍈', 
-      fruitEmoji: '🍈', 
-      fruitLabel: 'Papaya', 
+      emoji: '🌽', 
+      fruitEmoji: '🌽', 
+      fruitLabel: 'Corn on the Cob', 
       objectEmoji: '📖', 
       objectLabel: 'School Dictionary', 
       baby: "Baby reaches viability — a critical milestone. Born at 24 weeks, a baby has a chance of survival with intensive care. Lungs produce surfactant to work after birth.", 
@@ -472,11 +472,11 @@
     },
     { 
       week: 25, 
-      size: 'Cauliflower', 
+      size: 'Large Turnip', 
       size_mm: 340.0, 
-      emoji: '🥦', 
-      fruitEmoji: '🥦', 
-      fruitLabel: 'Cauliflower', 
+      emoji: '🫚', 
+      fruitEmoji: '🫚', 
+      fruitLabel: 'Large Turnip', 
       objectEmoji: '👟', 
       objectLabel: 'Shoebox', 
       baby: "Baby responds to touch and sound consistently. Hair shows pigmentation. Hands are fully formed with well-developed fingerprints unique to your baby.", 
@@ -501,11 +501,11 @@
     },
     { 
       week: 27, 
-      size: 'Cauliflower', 
+      size: 'Head of Lettuce', 
       size_mm: 370.0, 
-      emoji: '🥦', 
-      fruitEmoji: '🥦', 
-      fruitLabel: 'Cauliflower', 
+      emoji: '🥬', 
+      fruitEmoji: '🥬', 
+      fruitLabel: 'Head of Lettuce', 
       objectEmoji: '🍼', 
       objectLabel: '2-Litre Bottle', 
       baby: "Welcome to the third trimester! Baby weighs about 900g. Lungs are maturing but still need more time. Baby practises breathing by inhaling amniotic fluid.", 
@@ -572,11 +572,11 @@
     },
     { 
       week: 32, 
-      size: 'Butternut Squash', 
+      size: 'Large Turnip', 
       size_mm: 420.0, 
-      emoji: '🍈', 
-      fruitEmoji: '🍈', 
-      fruitLabel: 'Butternut Squash', 
+      emoji: '🫚', 
+      fruitEmoji: '🫚', 
+      fruitLabel: 'Large Turnip', 
       objectEmoji: '🧰', 
       objectLabel: '17-inch Tool Box', 
       baby: "Baby weighs about 1.8kg. Survival rate if born now is over 95% with good neonatal care. Baby often moves into the head-down position this week.", 
@@ -1316,21 +1316,12 @@
         // Weeks 1-2 are single-mode: always show fruit image, ignore object tab
         var chipTab = (w <= 2) ? 'fruit' : currentImageTab;
         var weekChipLabel = wd.singleLabel || wd[chipTab + 'Label'] || wd.size;
-        if (onMainPage) {
-          // On the homepage: clicking a tile shows the full rich week detail INLINE
-          html += '<div role="button" tabindex="0" onclick="showWeekDetail(' + w + ')" onkeydown="if(event.key===\'Enter\'||event.key===\' \')showWeekDetail(' + w + ')" class="week-chip' + (isCurrent ? ' current' : '') + (currentWeek === w ? ' active-detail' : '') + '" data-week="' + w + '" data-tooltip="View Week ' + w + ' development details" style="cursor:pointer;">' +
-            '<div class="week-chip-num">Week ' + w + (isCurrent ? ' ◀ You' : '') + '</div>' +
-            '<div class="week-chip-emoji">' + weekImg(w, wd[chipTab + 'Emoji'] || wd.emoji, chipTab) + '</div>' +
-            '<div class="week-chip-size">' + weekChipLabel + '</div>' +
-            '</div>';
-        } else {
-          // On pSEO pages: link to the dedicated week page for SEO
-          html += '<a href="' + w + '-weeks-pregnant.html" class="week-chip' + (isCurrent ? ' current' : '') + '" data-week="' + w + '" data-tooltip="View Week ' + w + ' development details" style="text-decoration: none; color: inherit;">' +
-            '<div class="week-chip-num">Week ' + w + (isCurrent ? ' ◀ You' : '') + '</div>' +
-            '<div class="week-chip-emoji">' + weekImg(w, wd[chipTab + 'Emoji'] || wd.emoji, chipTab) + '</div>' +
-            '<div class="week-chip-size">' + weekChipLabel + '</div>' +
-            '</a>';
-        }
+        // All tiles link to the dedicated week page (MPA architecture)
+        html += '<a href="' + w + '-weeks-pregnant.html" class="week-chip' + (isCurrent ? ' current' : '') + '" data-week="' + w + '" data-tooltip="View Week ' + w + ' development details" style="text-decoration: none; color: inherit;">' +
+          '<div class="week-chip-num">Week ' + w + (isCurrent ? ' ◀ You' : '') + '</div>' +
+          '<div class="week-chip-emoji">' + weekImg(w, wd[chipTab + 'Emoji'] || wd.emoji, chipTab) + '</div>' +
+          '<div class="week-chip-size">' + weekChipLabel + '</div>' +
+          '</a>';
     }
       html += '</div></div>';
   });

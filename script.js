@@ -1378,9 +1378,12 @@
 
       // Show the calculator-style result panel for a consistent week experience
       var resultPanel = document.getElementById('resultPanel');
-      resultPanel.style.display = 'block';
-      resultPanel.classList.add('reveal');
-      document.getElementById('shareRow').style.display = 'none';
+      if (resultPanel) {
+        resultPanel.style.display = 'block';
+        resultPanel.classList.add('reveal');
+      }
+      var shareRow = document.getElementById('shareRow');
+      if (shareRow) shareRow.style.display = 'none';
 
       var isIndia = USER_LOCALE.domain === 'amazon.in';
       var indiaNote = (wd.size_in && isIndia)

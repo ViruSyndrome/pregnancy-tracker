@@ -2205,3 +2205,16 @@
       sections.forEach(section => observer.observe(section));
     }
   });
+
+  // Expose key functions globally so inline onclick handlers and MPA pages can call them
+  // regardless of when script.js finishes loading relative to the DOM.
+  window.calculate = calculate;
+  window.showWeekDetail = showWeekDetail;
+  window.switchMode = switchMode;
+  window.shareResult = shareResult;
+  window.closeImgModal = closeImgModal;
+  window.openImgModal = openImgModal;
+  window.setWeekImageTab = setWeekImageTab;
+  window.predictGender = predictGender;
+  window.selectGenderOpt = selectGenderOpt;
+  window.toggleFAQ = toggleFAQ;

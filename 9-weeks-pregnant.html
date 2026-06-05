@@ -3,24 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://js.sentry-cdn.com/d62024e9014b97cc89780c4a0051997e.min.js" crossorigin="anonymous"></script>
+  <script>
+    Sentry.onLoad(function() {
+      Sentry.init({ tracesSampleRate: 1.0, replaysSessionSampleRate: 0.1, replaysOnErrorSampleRate: 1.0 });
+    });
+  </script>
   <title>9 Weeks Pregnant: Baby Size, Symptoms & Development | Pregnancy Week Tracker</title>
   <meta name="description" content="At 9 weeks pregnant, your baby is the size of a Green Olive. Learn about week 9 fetal development, pregnancy symptoms, and calculate your exact due date.">
+  <meta name="msvalidate.01" content="FA7405A0B7623E8A404F74AE4952777C" />
   <link rel="canonical" href="https://www.pregnancyweektracker.com/9-weeks-pregnant.html">
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=9">
-  
+  <!-- Open Graph -->
   <meta property="og:title" content="9 Weeks Pregnant: Symptoms & Baby Size">
   <meta property="og:site_name" content="Pregnancy Week Tracker">
   <meta property="og:description" content="Find out exactly what's happening to your body and your baby at 9 weeks pregnant.">
   <meta property="og:url" content="https://www.pregnancyweektracker.com/9-weeks-pregnant.html">
   <meta property="og:type" content="article">
   <meta property="og:image" content="https://www.pregnancyweektracker.com/og-image.png">
-
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:secure_url" content="https://www.pregnancyweektracker.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="9 Weeks Pregnant: Symptoms & Baby Size | Pregnancy Week Tracker">
+  <meta name="twitter:description" content="At 9 weeks pregnant, your baby is the size of a Green Olive. See fetal development, symptoms and tips.">
+  <meta name="twitter:image" content="https://www.pregnancyweektracker.com/og-image.png">
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
-
-  <script src="script.js"></script>
-
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVGV89T5QG" crossorigin="anonymous"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-LVGV89T5QG');</script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2959862133855422" crossorigin="anonymous"></script>
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "9 Weeks Pregnant: Baby Size, Symptoms & Development",
+    "description": "At 9 weeks pregnant, your baby is the size of a Green Olive. Learn about week 9 fetal development, pregnancy symptoms, and calculate your exact due date.",
+    "url": "https://www.pregnancyweektracker.com/9-weeks-pregnant.html",
+    "image": "https://www.pregnancyweektracker.com/og-image.png",
+    "publisher": {{
+      "@type": "Organization",
+      "name": "Pregnancy Week Tracker",
+      "url": "https://www.pregnancyweektracker.com/"
+    }}
+  }}
+  </script>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -115,54 +147,46 @@
       </div>
     </div>
     <div class="footer-copy">
-      © 2026 PregnancyWeekTracker. For informational purposes only — not medical advice.
-      <span style="margin-left: 12px;">Also try: <a href="https://www.getniftyready.com">GetNiftyReady</a> · <a href="https://www.getatsready.com">GetATSReady</a></span>
+      &copy; 2026 PregnancyWeekTracker. For informational purposes only &mdash; not medical advice.
+      <span style="margin-left: 12px;">Also try: <a href="https://www.getniftyready.com">GetNiftyReady</a> &middot; <a href="https://www.getatsready.com">GetATSReady</a></span>
     </div>
   </footer>
+
+  <!-- Image Modal -->
+  <div id="imgModal" class="img-modal" tabindex="-1" role="dialog" aria-modal="true" onclick="closeImgModal()">
+    <img id="imgModalContent" class="img-modal-content" src="" alt="">
+  </div>
+
+  <script>
+    window.isMainPage = false;
+    window.currentMode = 'lmp';
+    window.currentImageTab = 'fruit';
+  </script>
+  <script src="script.js"></script>
 
   <script>
     // --- MPA ROUTING LOGIC ---
     document.addEventListener('DOMContentLoaded', function() {
-      // 1. Ensure global variables required by script.js exist
-      window.currentMode = 'lmp';
-      window.currentImageTab = 'fruit';
-      
       var params = new URLSearchParams(window.location.search);
       var lmpParam = params.get('lmp');
       
       if (lmpParam) {
-        // User came from index.html calculator!
+        // User came from index.html calculator
         document.getElementById('lmpDate').value = lmpParam;
-        
-        // Let script.js calculate and render personalized due date / stats / trimester bar
-        // We redefine setCalcError here temporarily since we don't have the error UI on this page
         window.setCalcError = function(e) { console.error(e); };
-        
-        calculate(); 
-        
-        // Un-hide the trimester bar
+        calculate();
         document.getElementById('trimBar').style.display = 'block';
-        
-        // Rewrite the next/prev links to carry over the ?lmp parameter!
+        // Carry LMP param to next/prev links
         var navBtns = document.querySelectorAll('.nav-btn');
         navBtns.forEach(function(btn) {
-            if (btn.href) btn.href = btn.href.split('?')[0] + "?lmp=" + lmpParam;
+          if (btn.href) btn.href = btn.href.split('?')[0] + '?lmp=' + lmpParam;
         });
-        
-        // Ensure week card is rendered with the dynamic data!
-        if (typeof showWeekDetail === 'function') {
-            showWeekDetail(9);
-        }
-        
+        if (typeof showWeekDetail === 'function') showWeekDetail(9);
       } else {
-        // User came from Google organically! 
-        // We only render the Week Card (with Fruit/Object toggle) 
-        document.getElementById('statsCard').style.display = 'none';
-        
-        // Inject the generic week detail!
-        if (typeof showWeekDetail === 'function') {
-            showWeekDetail(9);
-        }
+        // Organic Google visitor — show week card only
+        var statsCard = document.getElementById('statsCard');
+        if (statsCard) statsCard.style.display = 'none';
+        if (typeof showWeekDetail === 'function') showWeekDetail(9);
       }
     });
   </script>

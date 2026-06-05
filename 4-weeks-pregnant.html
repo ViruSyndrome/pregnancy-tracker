@@ -60,7 +60,7 @@
         
         <!-- THE MPA RESULT PANEL (Injected dynamically or rendered statically below) -->
         <div id="resultPanel" style="display: block; opacity: 1; transform: translateY(0);">
-            <div class="glass-card">
+            <div class="glass-card" id="statsCard">
                 <div class="result-headline" id="resultHeadline"></div>
                 <div class="milestone-banner" id="milestoneBanner" style="display:none"></div>
                 
@@ -71,6 +71,11 @@
             
             <!-- Week detail card (Will be dynamically populated by JS on load) -->
             <div class="week-card" id="weekCard"></div>
+            
+            <div style="margin-top: 40px; display: flex; justify-content: space-between; gap:20px;">
+               <a href="3-weeks-pregnant.html" class="nav-btn" style="text-decoration:none; padding:10px 20px; background:white; border-radius:12px; border:1px solid var(--border); color:var(--text); font-weight:600; font-size:0.9rem;">&larr; Week 3</a>
+               <a href="5-weeks-pregnant.html" class="nav-btn" style="text-decoration:none; padding:10px 20px; background:linear-gradient(135deg,var(--primary),var(--accent)); color:white; border-radius:12px; font-weight:600; font-size:0.9rem;">Week 5 &rarr;</a>
+            </div>
             
         </div>
 
@@ -121,12 +126,16 @@
         // Un-hide the trimester bar
         document.getElementById('trimBar').style.display = 'block';
         
+        // Rewrite the next/prev links to carry over the ?lmp parameter!
+        var navBtns = document.querySelectorAll('.nav-btn');
+        navBtns.forEach(function(btn) {
+            if (btn.href) btn.href = btn.href.split('?')[0] + "?lmp=" + lmpParam;
+        });
+        
       } else {
         // User came from Google organically! 
         // We only render the Week Card (with Fruit/Object toggle) 
-        // We hide the personalized Due Date stats
-        document.getElementById('statGrid').style.display = 'none';
-        document.getElementById('resultHeadline').style.display = 'none';
+        document.getElementById('statsCard').style.display = 'none';
         
         // Inject the generic week detail!
         if (typeof showWeekDetail === 'function') {

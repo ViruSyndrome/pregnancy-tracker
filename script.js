@@ -421,9 +421,9 @@
       emoji: '🍌', 
       fruitEmoji: '🍌', 
       fruitLabel: 'Large Banana',
-      objectEmoji: '📖', 
-      objectLabel: 'Hardcover Book', 
-      baby: "Movements form a recognisable pattern — you'll start to learn your baby's active times. Rapid eye movements occur during sleep. Fingernails are fully formed.", 
+      objectEmoji: '🌽',
+      objectLabel: 'Corn on the Cob', 
+      baby: "Movements form a recognisable pattern— you'll start to learn your baby's active times. Rapid eye movements occur during sleep. Fingernails are fully formed.", 
       mom: "Heartburn and indigestion may intensify as the uterus pushes against your stomach. Sleeping with your head elevated helps.", 
       tip: "Shop for a maternity bra — your cup size will change significantly during pregnancy and nursing.",
       checklist: ["Eat 5-6 small meals instead of 3 large meals to ease reflux", "Shop for nursing bras (your bust size will continue to adjust)", "Ensure you get enough iron through diet or supplements"]

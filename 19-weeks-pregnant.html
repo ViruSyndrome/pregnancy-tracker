@@ -25,25 +25,23 @@
 </head>
 <body>
 
-  <header class="navbar">
+  <nav class="navbar">
     <div class="nav-inner">
-      <a href="index.html" class="nav-brand">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2a5 5 0 0 0-5 5v2a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5Z"/>
-          <path d="M19 13v-2a7 7 0 0 0-14 0v2"/>
-          <path d="M21 17v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2"/>
-          <path d="M12 17v-4"/>
-        </svg>
-        PregnancyWeekTracker
+      <a href="/" class="nav-brand" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+        <img src="favicon.svg" alt="PWT Logo" style="height:36px; width:auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));" />
+        <div style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.4rem; color:var(--text); letter-spacing:-0.03em; display:flex; align-items:center; height:36px;">Pregnancy<span style="color:var(--accent)">Week</span>Tracker</div>
       </a>
+      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
       <div class="nav-links">
-        <a href="index.html">Calculator</a>
+        <a href="index.html#tracker">Calculator</a>
+        <a href="index.html#all-weeks">Timeline</a>
         <a href="kick-counter.html">Kick Counter</a>
         <a href="contraction-timer.html">Contraction Timer</a>
         <a href="gender-predictor.html">Gender Predictor</a>
+        <a href="index.html#faq">FAQ</a>
       </div>
     </div>
-  </header>
+  </nav>
 
   <main>
     <section class="hero">
@@ -85,21 +83,32 @@
   <footer class="footer">
     <div class="footer-inner">
       <div>
-        <div style="color: white; font-weight: 700; font-size: 1.2rem; margin-bottom: 12px;">PregnancyWeekTracker</div>
-        <p style="font-size: 0.9rem;">Free pregnancy tools for expectant parents. No sign-up. No data stored. Just answers.</p>
+        <div class="footer-brand">PregnancyWeekTracker</div>
+        <p class="footer-desc">Free pregnancy tools for expectant parents. No sign-up. No data stored. Just answers.</p>
       </div>
-      <div>
-        <h4 style="color: white; margin-bottom: 16px;">Tools</h4>
-        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
-          <li><a href="index.html">Pregnancy Calculator</a></li>
+      <div class="footer-links">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="/">Pregnancy Week Tracker</a></li>
+          <li><a href="index.html#all-weeks">Week by Week Guide</a></li>
           <li><a href="kick-counter.html">Baby Kick Counter</a></li>
           <li><a href="contraction-timer.html">Contraction Timer</a></li>
           <li><a href="gender-predictor.html">Fun Gender Predictor</a></li>
         </ul>
       </div>
+      <div class="footer-links">
+        <h4>Info</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Use</a></li>
+        </ul>
+      </div>
     </div>
-    <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; font-size: 0.85rem;">
+    <div class="footer-copy">
       © 2026 PregnancyWeekTracker. For informational purposes only — not medical advice.
+      <span style="margin-left: 12px;">Also try: <a href="https://www.getniftyready.com">GetNiftyReady</a> · <a href="https://www.getatsready.com">GetATSReady</a></span>
     </div>
   </footer>
 
@@ -131,6 +140,11 @@
         navBtns.forEach(function(btn) {
             if (btn.href) btn.href = btn.href.split('?')[0] + "?lmp=" + lmpParam;
         });
+        
+        // Ensure week card is rendered with the dynamic data!
+        if (typeof showWeekDetail === 'function') {
+            showWeekDetail(19);
+        }
         
       } else {
         // User came from Google organically! 

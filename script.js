@@ -1152,7 +1152,8 @@
   }
 
     // ── Show share row ────────────────────────────────────
-    document.getElementById('shareRow').style.display = 'flex';
+    var shareRow = document.getElementById('shareRow');
+    if (shareRow) shareRow.style.display = 'flex';
 
     // ── Size Visualizer ───────────────────────────────────
     updateSizeVisualizer(r.weekNum);

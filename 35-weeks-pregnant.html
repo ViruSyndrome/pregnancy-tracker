@@ -82,7 +82,7 @@
       <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Your baby is the size of a Honeydew Melon. Discover exactly what is happening to your body and your baby this week.</p>
     </section>
 
-    <div class="container" style="padding-top: 30px;">
+    <div class="container" style="max-width:900px; margin:0 auto; padding-top: 30px;">
         
         <!-- HIDDEN INPUTS FOR JS CALCULATION TO WORK ON THIS PAGE -->
         <input type="hidden" id="lmpDate" value="">
@@ -174,16 +174,15 @@
         // User came from index.html calculator
         document.getElementById('lmpDate').value = lmpParam;
         window.setCalcError = function(e) { console.error(e); };
+        // calculate() renders everything: EDD, stats, trimester bar, weekCard, growth curve
         calculate();
-        document.getElementById('trimBar').style.display = 'block';
         // Carry LMP param to next/prev links
         var navBtns = document.querySelectorAll('.nav-btn');
         navBtns.forEach(function(btn) {
           if (btn.href) btn.href = btn.href.split('?')[0] + '?lmp=' + lmpParam;
         });
-        if (typeof showWeekDetail === 'function') showWeekDetail(35);
       } else {
-        // Organic Google visitor — show week card only
+        // Organic Google visitor — no LMP known, show week card only
         var statsCard = document.getElementById('statsCard');
         if (statsCard) statsCard.style.display = 'none';
         if (typeof showWeekDetail === 'function') showWeekDetail(35);

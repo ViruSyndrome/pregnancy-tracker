@@ -472,11 +472,11 @@
     },
     { 
       week: 25, 
-      size: 'Large Turnip', 
+      size: 'Turnip', 
       size_mm: 340.0, 
       emoji: '🫚', 
       fruitEmoji: '🫚', 
-      fruitLabel: 'Large Turnip', 
+      fruitLabel: 'Turnip', 
       objectEmoji: '👟', 
       objectLabel: 'Shoebox', 
       baby: "Baby responds to touch and sound consistently. Hair shows pigmentation. Hands are fully formed with well-developed fingerprints unique to your baby.", 

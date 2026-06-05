@@ -753,6 +753,7 @@
     /* ── TOOLS SECTION ── */
     .tools-wrapper {
       margin-bottom: 48px;
+      scroll-margin-top: 80px;
   }
     .tools-section {
       display: flex;
@@ -1237,6 +1238,16 @@ a[data-tooltip] {
   </div>
 
   <script>
+
+    // ── Auto-scroll to tool on page load ──
+    document.addEventListener('DOMContentLoaded', function() {
+      var tool = document.getElementById('contraction-timer');
+      if (tool) {
+        setTimeout(function() {
+          tool.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    });
 
     // ── Native High-Performance Scroll-Reveal ──
     window.addEventListener('load', () => {

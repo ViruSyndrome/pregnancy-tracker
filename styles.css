@@ -403,10 +403,10 @@
     .timeline-section { padding: 40px 0; }
     .timeline-section h2 {
       font-size: 1.5rem; font-weight: 800; color: var(--text);
-      margin-bottom: 8px;
+      margin-bottom: 8px; text-align: center;
   }
     .timeline-section .section-sub {
-      font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px;
+      font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px; text-align: center;
   }
     .tri-group { margin-bottom: 32px; }
     .tri-group-title {
@@ -426,30 +426,33 @@
       gap: 8px;
   }
     .week-chip {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 14px; padding: 16px;
-      min-height: 160px; justify-content: space-between;
-      cursor: pointer; transition: all 0.18s;
-      display: flex; flex-direction: column; gap: 10px; align-items: center;
+      background: rgba(255, 255, 255, 0.4); border: 1px solid rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      border-radius: 16px; padding: 18px 14px;
+      min-height: 170px; justify-content: space-between;
+      cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex; flex-direction: column; gap: 12px; align-items: center;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
   }
-    .week-chip:hover { border-color: var(--primary); box-shadow: var(--shadow-sm); transform: translateY(-1px); }
+    .week-chip:hover { border-color: var(--primary); background: rgba(255,255,255,0.75); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); transform: translateY(-3px); }
     @keyframes chipPulse {
       0%, 100% { box-shadow: 0 0 0 0 rgba(190,24,93,0.28); }
       50%       { box-shadow: 0 0 0 8px rgba(190,24,93,0); }
   }
     .week-chip.current {
       border-color: var(--primary); background: var(--primary-light);
+      box-shadow: 0 0 0 2px var(--primary);
       animation: chipPulse 2.5s ease infinite;
   }
-    .week-chip-num { font-size: 0.7rem; font-weight: 700; color: var(--primary); letter-spacing: 0.05em; text-transform: uppercase; }
-    .week-chip-emoji { width: 100%; height: 90px; display: flex; align-items: center; justify-content: center; }
+    .week-chip-num { font-size: 0.75rem; font-weight: 800; color: var(--primary); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 2px; }
+    .week-chip-emoji { width: 100%; height: 95px; display: flex; align-items: center; justify-content: center; }
     .week-chip-emoji img.emoji-img, .week-photo {
       width: 100%; max-width: 100%; height: 100%; max-height: 100%; display: block; object-fit: contain;
   }
     .week-card-header .week-image-box .week-photo {
       max-width: 260px; max-height: 260px;
   }
-    .week-chip-size { font-size: 0.78rem; font-weight: 600; color: var(--text); text-align: center; margin-top: 6px; line-height: 1.2; }
+    .week-chip-size { font-size: 0.82rem; font-weight: 700; color: var(--text); text-align: center; margin-top: 6px; line-height: 1.3; }
 
     /* ── SEO CONTENT ── */
     .content-section { padding: 48px 0 24px; text-align: center; }

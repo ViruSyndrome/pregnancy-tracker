@@ -69,9 +69,9 @@
   <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-inner">
-      <a href="/" class="nav-brand" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
-        <img src="favicon.svg" alt="PWT Logo" style="height:36px; width:auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));" />
-        <div style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.4rem; color:var(--text); letter-spacing:-0.03em; display:flex; align-items:center; height:36px;">Pregnancy<span style="color:var(--accent)">Week</span>Tracker</div>
+      <a href="/" class="nav-brand nav-brand-link">
+        <img src="favicon.svg" alt="PWT Logo" class="nav-brand-img" />
+        <div class="nav-brand-text">Pregnancy<span class="text-accent">Week</span>Tracker</div>
       </a>
       <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
       <div class="nav-links">
@@ -91,9 +91,9 @@
     <h1>How Many Weeks<br>Pregnant Am I?</h1>
     <p class="hero-sub">Enter your last period date and instantly see your pregnancy week, due date, baby size, and what's happening right now.</p>
 
-    <div class="hero-note" style="max-width:760px; margin: 0 auto 28px; padding: 18px 20px; border: 1px solid rgba(190,24,93,0.18); border-radius: 18px; background: rgba(255, 240, 246, 0.8); color: var(--text); font-size: 0.95rem; line-height: 1.7;">
+    <div class="hero-note hero-note-box">
       <strong>New pregnancy guide:</strong> Learn how weeks are counted, what each trimester means, and how to interpret your calculator results for better preparation and planning.
-      <a href="pregnancy-guide.html" style="color: var(--primary); font-weight: 700; text-decoration: none; margin-left: 8px;">Read the full guide</a>
+      <a href="pregnancy-guide.html" class="hero-note-link">Read the full guide</a>
     </div>
 
     <div class="calc-card">
@@ -115,7 +115,7 @@
         </div>
       </div>
 
-      <div id="dueMode" style="display:none">
+      <div id="dueMode" hidden>
         <div class="input-group">
           <label for="dueDate">Your due date</label>
           <input type="date" id="dueDate">
@@ -124,30 +124,30 @@
       </div>
 
       <button class="btn-calc" id="calcBtn" type="button" onclick="calculate()">Calculate My Pregnancy Week →</button>
-      <div class="calc-error" id="calcError" role="alert" aria-live="assertive" style="display:none;"></div>
+      <div class="calc-error" id="calcError" role="alert" aria-live="assertive" hidden></div>
     </div>
   </section>
 
   <!-- RESULT PANEL -->
-  <div id="resultPanel" class="container" style="max-width:900px; margin:0 auto; display:none;">
+  <div id="resultPanel" class="container result-panel-container" hidden>
     <div class="glass-card">
       <div class="result-headline" id="resultHeadline"></div>
       <div class="result-grid" id="statGrid"></div>
     </div>
-    <div class="milestone-banner" id="milestoneBanner" style="display:none"></div>
-    <div class="trimester-bar-wrap" id="trimBar" style="display:none;"></div>
+    <div class="milestone-banner" id="milestoneBanner" hidden></div>
+    <div class="trimester-bar-wrap" id="trimBar" hidden></div>
     <div class="week-card" id="weekCard"></div>
     
     <!-- ── Growth Curve & Size Visualizer ── -->
-    <div class="ui-curated-section" style="margin-top:24px; display:block;">
+    <div class="ui-curated-section section-spaced">
       <div id="sizeVisualizerContainer"></div>
       <h2>Baby Growth Curve</h2>
-      <p class="tip-sub" style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">This chart visualizes the average length of the baby from week 1 to 40. Values are based on standard clinical averages.</p>
-      <div class="growth-graph" id="growthGraph" style="position:relative; width:100%; height:180px;"></div>
+      <p class="tip-sub tip-sub-growth">This chart visualizes the average length of the baby from week 1 to 40. Values are based on standard clinical averages.</p>
+      <div class="growth-graph growth-graph-wrap" id="growthGraph"></div>
     </div>
   </div>
 
-  <div class="container" style="max-width:900px; margin:0 auto;">
+  <div class="container content-container">
 
     <section class="timeline-section" id="all-weeks">
       <h2>Pregnancy Week by Week</h2>
@@ -257,7 +257,7 @@
     </div>
     <div class="footer-copy">
       © 2026 PregnancyWeekTracker. For informational purposes only — not medical advice.
-      <span style="margin-left: 12px;">Also try: <a href="https://www.getniftyready.com">GetNiftyReady</a> · <a href="https://www.getatsready.com">GetATSReady</a></span>
+      <span class="footer-also-try">Also try: <a href="https://www.getniftyready.com">GetNiftyReady</a> · <a href="https://www.getatsready.com">GetATSReady</a></span>
     </div>
   </footer>
 

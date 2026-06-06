@@ -921,8 +921,8 @@
   // ─────────────────────────────────────────────────────────
   function switchMode(mode) {
     currentMode = mode;
-    document.getElementById('lmpMode').style.display = mode === 'lmp' ? '' : 'none';
-    document.getElementById('dueMode').style.display = mode === 'due' ? '' : 'none';
+    document.getElementById('lmpMode').style.display = mode === 'lmp' ? 'block' : 'none';
+    document.getElementById('dueMode').style.display = mode === 'due' ? 'block' : 'none';
     document.getElementById('btnLMP').classList.toggle('active', mode === 'lmp');
     document.getElementById('btnDD').classList.toggle('active', mode === 'due');
 }
@@ -1536,7 +1536,7 @@
   }
     var total = votes.boy + votes.girl;
     var resultEl = document.getElementById('genderResult');
-    resultEl.style.display = '';
+    resultEl.style.display = 'block';
     if (total === 0) return;
     var girlPct = Math.round((votes.girl / total) * 100);
     var boyPct  = 100 - girlPct;

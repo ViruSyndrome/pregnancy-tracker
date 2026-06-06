@@ -1190,7 +1190,7 @@
     var headerImageEmoji = weekData[cardImgTab + 'Emoji'] || weekData.emoji;
     var headerImageLabel = isSingleMode
       ? (weekData.singleLabel || weekData.fruitLabel || weekData.size)
-      : (weekData[cardImgTab + 'Label'] || weekData.size);
+      : (weekData[cardImgTab] || weekData.size);
     var imgSrc = localWeekPhoto(weekNum, cardImgTab);
     var modalAlt = isSingleMode
       ? 'Week ' + weekNum + ' — ' + headerImageLabel
@@ -1315,7 +1315,7 @@
         var isCurrent = currentWeek !== null && w === currentWeek;
         // Weeks 1-2 are single-mode: always show fruit image, ignore object tab
         var chipTab = (w <= 2) ? 'fruit' : currentImageTab;
-        var weekChipLabel = wd.singleLabel || wd[chipTab + 'Label'] || wd.size;
+        var weekChipLabel = wd.singleLabel || wd[chipTab] || wd.size;
         // All tiles link to the dedicated week page (MPA architecture)
         html += '<a href="' + w + '-weeks-pregnant.html" class="week-chip' + (isCurrent ? ' current' : '') + '" data-week="' + w + '" data-tooltip="View Week ' + w + ' development details" style="text-decoration: none; color: inherit;">' +
           '<div class="week-chip-num">Week ' + w + (isCurrent ? ' ◀ You' : '') + '</div>' +

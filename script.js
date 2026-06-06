@@ -321,8 +321,8 @@
       emoji: '🍋', 
       fruitEmoji: '🍋', 
       fruitLabel: 'Lemon', 
-      objectEmoji: '🖱️', 
-      objectLabel: 'Computer Mouse', 
+      objectEmoji: '🏓', 
+      objectLabel: 'Table Tennis Paddle', 
       baby: "Baby makes sucking movements. Fine hair called lanugo covers the body for warmth. The liver produces bile; the spleen produces red blood cells.", 
       mom: "Round ligament pains may continue as your belly grows. Appetite often increases. Constipation and heartburn can begin now.", 
       tip: "A pregnancy pillow can dramatically improve sleep quality. Invest in one now before you really need it in the third trimester.",
@@ -853,6 +853,12 @@
   var currentMode = 'lmp';
   var currentResult = null;
   var currentImageTab = 'fruit';
+  try {
+    var storedTab = localStorage.getItem('pwtImageTabPref');
+    if (storedTab === 'fruit' || storedTab === 'object') {
+      currentImageTab = storedTab;
+    }
+  } catch(e) {}
 
   // ─────────────────────────────────────────────────────────
   //  INIT
@@ -1464,6 +1470,7 @@
 
   function setWeekImageTab(tab, weekNum) {
     currentImageTab = tab;
+    try { localStorage.setItem('pwtImageTabPref', tab); } catch(e) {}
     if (currentResult && currentResult.weekNum === weekNum) {
       renderResult(currentResult);
       renderWeeksTimeline(weekNum);

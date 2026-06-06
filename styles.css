@@ -410,7 +410,7 @@
   }
     .tri-group { margin-bottom: 32px; }
     .tri-group-title {
-      display: flex; align-items: center; gap: 12px;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
       font-size: 1rem; font-weight: 700; color: var(--primary);
       margin-bottom: 12px; padding-bottom: 8px;
       border-bottom: 2px solid var(--primary-light);

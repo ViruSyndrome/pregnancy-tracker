@@ -125,6 +125,31 @@
       font-size: 1.05rem; color: var(--text-muted);
       max-width: 520px; margin: 0 auto 36px;
   }
+    .hero-note-box {
+      max-width: 600px;
+      margin: -10px auto 36px;
+      padding: 16px 20px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-size: 0.9rem;
+      text-align: left;
+      line-height: 1.5;
+      color: var(--text-muted);
+      box-shadow: 0 4px 20px rgba(190, 24, 93, 0.02);
+  }
+    .hero-note-link {
+      color: var(--primary);
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      margin-left: 4px;
+  }
+    .hero-note-link:hover {
+      text-decoration: underline;
+  }
 
     /* ── CALCULATOR CARD ── */
     .calc-card {

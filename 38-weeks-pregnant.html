@@ -10,7 +10,7 @@
     });
   </script>
   <title>38 Weeks Pregnant: Baby Size, Symptoms & Development | Pregnancy Week Tracker</title>
-  <meta name="description" content="At 38 weeks pregnant, your baby is the size of a Winter Melon. Learn about week 38 fetal development, pregnancy symptoms, and calculate your exact due date.">
+  <meta name="description" content="At 38 weeks pregnant, your baby is the size of a Large Carving Pumpkin. Learn about week 38 fetal development, pregnancy symptoms, and calculate your exact due date.">
   <meta name="msvalidate.01" content="FA7405A0B7623E8A404F74AE4952777C" />
   <link rel="canonical" href="https://www.pregnancyweektracker.com/38-weeks-pregnant.html">
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=9">
@@ -26,7 +26,7 @@
   <meta property="og:image:secure_url" content="https://www.pregnancyweektracker.com/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="38 Weeks Pregnant: Symptoms & Baby Size | Pregnancy Week Tracker">
-  <meta name="twitter:description" content="At 38 weeks pregnant, your baby is the size of a Winter Melon. See fetal development, symptoms and tips.">
+  <meta name="twitter:description" content="At 38 weeks pregnant, your baby is the size of a Large Carving Pumpkin. See fetal development, symptoms and tips.">
   <meta name="twitter:image" content="https://www.pregnancyweektracker.com/og-image.png">
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,7 +43,7 @@
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": "38 Weeks Pregnant: Baby Size, Symptoms & Development",
-    "description": "At 38 weeks pregnant, your baby is the size of a Winter Melon. Learn about week 38 fetal development, pregnancy symptoms, and calculate your exact due date.",
+    "description": "At 38 weeks pregnant, your baby is the size of a Large Carving Pumpkin. Learn about week 38 fetal development, pregnancy symptoms, and calculate your exact due date.",
     "url": "https://www.pregnancyweektracker.com/38-weeks-pregnant.html",
     "image": "https://www.pregnancyweektracker.com/og-image.png",
     "publisher": {
@@ -79,10 +79,15 @@
     <section class="hero">
       <span style="background: var(--primary-light); color: var(--primary); padding: 4px 12px; border-radius: 99px; font-weight: 600; font-size: 0.8rem; text-transform: uppercase;">Pregnancy Guide</span>
       <h1>38 Weeks Pregnant</h1>
-      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Your baby is the size of a Winter Melon. Discover exactly what is happening to your body and your baby this week.</p>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 24px;">Your baby is the size of a Large Carving Pumpkin. Discover exactly what is happening to your body and your baby this week.</p>
+      
+      <div class="hero-note hero-note-box">
+        <strong>New pregnancy guide:</strong> Learn how weeks are counted, what each trimester means, and how to interpret your calculator results for better preparation and planning.
+        <a href="pregnancy-guide.html" class="hero-note-link">Read the full guide</a>
+      </div>
     </section>
 
-    <div class="container" style="max-width:900px; margin:0 auto; padding-top: 30px;">
+    <div class="container" style="max-width:900px; margin:0 auto; padding-top: 10px;">
         
         <!-- HIDDEN INPUTS FOR JS CALCULATION TO WORK ON THIS PAGE -->
         <input type="hidden" id="lmpDate" value="">
@@ -184,6 +189,8 @@
         // Organic Google visitor — no LMP known, show week card only
         var statsCard = document.getElementById('statsCard');
         if (statsCard) statsCard.style.display = 'none';
+        var resultPanel = document.getElementById('resultPanel');
+        if (resultPanel) resultPanel.style.paddingTop = '10px';
         if (typeof showWeekDetail === 'function') showWeekDetail(38);
       }
     });

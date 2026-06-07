@@ -79,10 +79,15 @@
     <section class="hero">
       <span style="background: var(--primary-light); color: var(--primary); padding: 4px 12px; border-radius: 99px; font-weight: 600; font-size: 0.8rem; text-transform: uppercase;">Pregnancy Guide</span>
       <h1>15 Weeks Pregnant</h1>
-      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">Your baby is the size of a Apple. Discover exactly what is happening to your body and your baby this week.</p>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 24px;">Your baby is the size of a Apple. Discover exactly what is happening to your body and your baby this week.</p>
+      
+      <div class="hero-note hero-note-box">
+        <strong>New pregnancy guide:</strong> Learn how weeks are counted, what each trimester means, and how to interpret your calculator results for better preparation and planning.
+        <a href="pregnancy-guide.html" class="hero-note-link">Read the full guide</a>
+      </div>
     </section>
 
-    <div class="container" style="max-width:900px; margin:0 auto; padding-top: 30px;">
+    <div class="container" style="max-width:900px; margin:0 auto; padding-top: 10px;">
         
         <!-- HIDDEN INPUTS FOR JS CALCULATION TO WORK ON THIS PAGE -->
         <input type="hidden" id="lmpDate" value="">
@@ -184,6 +189,8 @@
         // Organic Google visitor — no LMP known, show week card only
         var statsCard = document.getElementById('statsCard');
         if (statsCard) statsCard.style.display = 'none';
+        var resultPanel = document.getElementById('resultPanel');
+        if (resultPanel) resultPanel.style.paddingTop = '10px';
         if (typeof showWeekDetail === 'function') showWeekDetail(15);
       }
     });

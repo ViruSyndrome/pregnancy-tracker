@@ -1929,12 +1929,12 @@
         
       svg += 
         '<text x="25" y="' + (padding.top + chartH/2) + '" transform="rotate(-90, 25, ' + (padding.top + chartH/2) + ')" text-anchor="middle" font-size="14" font-weight="700" fill="var(--primary)">LENGTH (cm)</text>' +
-        '<text x="' + (padding.left - 12) + '" y="' + (padding.top + chartH + 4) + '" text-anchor="end" font-size="11" font-weight="600" fill="var(--text-muted)">0</text>' +
-        '<text x="' + (padding.left - 12) + '" y="' + (padding.top + 4) + '" text-anchor="end" font-size="11" font-weight="600" fill="var(--text-muted)">53 cm</text>' +
+        '<text x="' + (padding.left - 12) + '" y="' + (padding.top + chartH + 4) + '" text-anchor="end" font-size="11" font-weight="600" fill="var(--primary)">0</text>' +
+        '<text x="' + (padding.left - 12) + '" y="' + (padding.top + 4) + '" text-anchor="end" font-size="11" font-weight="600" fill="var(--primary)">53 cm</text>' +
         
         '<text x="' + (W - 15) + '" y="' + (padding.top + chartH/2) + '" transform="rotate(90, ' + (W - 15) + ', ' + (padding.top + chartH/2) + ')" text-anchor="middle" font-size="14" font-weight="700" fill="var(--accent)">VOLUME (mL) / WEIGHT (kg)</text>' +
-        '<text x="' + (padding.left + chartW + 12) + '" y="' + (padding.top + chartH + 4) + '" text-anchor="start" font-size="11" font-weight="600" fill="var(--text-muted)">0</text>' +
-        '<text x="' + (padding.left + chartW + 12) + '" y="' + (padding.top + 4) + '" text-anchor="start" font-size="11" font-weight="600" fill="var(--text-muted)">4.0 L (4 kg)</text>';
+        '<text x="' + (padding.left + chartW + 12) + '" y="' + (padding.top + chartH + 4) + '" text-anchor="start" font-size="11" font-weight="600" fill="var(--accent)">0</text>' +
+        '<text x="' + (padding.left + chartW + 12) + '" y="' + (padding.top + 4) + '" text-anchor="start" font-size="11" font-weight="600" fill="var(--accent)">4.0 L (4 kg)</text>';
 
       svg += 
         '<path d="' + pathLenData + '" fill="none" stroke="#f4e6ec" stroke-width="4" stroke-dasharray="5,5" />' +

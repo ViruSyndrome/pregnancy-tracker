@@ -27,6 +27,7 @@
     .navbar { background: #fff; border-bottom: 1px solid #ede9f2; position: sticky; top: 0; z-index: 100; }
     .nav-inner { max-width: 1200px; margin: 0 auto; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; gap: 18px; }
     .nav-brand { font-family: 'Outfit', sans-serif; text-decoration: none; color: var(--primary); font-size: 1.35rem; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; }
+    .nav-brand span { color: var(--accent); }
     .nav-links { display: flex; flex-wrap: wrap; gap: 16px; }
     .nav-links a { text-decoration: none; color: var(--text); font-weight: 600; font-size: 0.95rem; }
     .nav-links a:hover, .nav-links a.active { color: var(--primary); }
@@ -38,6 +39,10 @@
     p { margin-bottom: 20px; color: var(--text-muted); font-size: 1rem; }
     .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 22px; margin-top: 24px; }
     .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05); }
+    .card-spaced { margin-top: 32px; }
+    .card-ul { margin-bottom: 20px; padding-left: 20px; color: var(--text-muted); }
+    .card-h3-spaced { margin-top: 30px; }
+    .table-scroll { overflow-x: auto; }
     .card ul { margin: 0; padding-left: 20px; color: var(--text-muted); }
     .card li { margin-bottom: 10px; }
     .note { background: rgba(248, 113, 113, 0.08); border-left: 4px solid #f97316; padding: 18px 20px; border-radius: 18px; margin: 36px 0; color: #581c87; }
@@ -56,7 +61,7 @@
 <body>
   <nav class="navbar">
     <div class="nav-inner">
-      <a href="/" class="nav-brand">Pregnancy<span style="color: var(--accent);">Week</span>Tracker</a>
+      <a href="/" class="nav-brand">Pregnancy<span>Week</span>Tracker</a>
       <div class="nav-links">
         <a href="/">Home</a>
         <a href="about.html">About</a>
@@ -87,18 +92,18 @@
       </ul>
     </section>
 
-    <section class="card" style="margin-top: 32px;">
+    <section class="card card-spaced">
       <h3>📏 Understanding Baby Sizes: Length vs. Volume</h3>
       <p>When tracking baby development week-by-week, you might notice a sudden jump in size around <strong>Week 20</strong> (from about 15 cm to over 25 cm). This is not an overnight growth spurt! Rather, it is a transition in how medical professionals measure fetal size:</p>
-      <ul style="margin-bottom: 20px; padding-left: 20px; color: var(--text-muted);">
+      <ul class="card-ul">
         <li><strong>Weeks 1–19 (Crown-to-Rump Length):</strong> Because the baby's legs are curled up against their body, they are measured from the top of the head (crown) to the bottom (rump).</li>
         <li><strong>Weeks 20–42 (Crown-to-Heel Length):</strong> Once the baby grows large enough and stretches out, doctors measure from the top of the head to the heel of the foot.</li>
       </ul>
       <p>To prevent size confusion, our pregnancy tracker focuses on <strong>displacement/3D volume</strong> alongside length. For example, a banana matches the 25cm length of a Week 20 baby, but a zucchini has the matching 3D volume (or weight of ~300g) which represents their true bulk much better.</p>
       
-      <h3 style="margin-top: 30px;">👶 Fetal Growth Reference & Volume Chart</h3>
+      <h3 class="card-h3-spaced">👶 Fetal Growth Reference &amp; Volume Chart</h3>
       <p>Here is the standard clinical progression of baby size, weight, and volume week by week:</p>
-      <div style="overflow-x: auto;">
+      <div class="table-scroll">
         <table>
           <thead>
             <tr>

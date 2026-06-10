@@ -125,6 +125,7 @@
       align-items: center;
       justify-content: center;
       cursor: zoom-out;
+      -webkit-backdrop-filter: blur(5px);
       backdrop-filter: blur(5px);
   }
     .img-modal-content {
@@ -140,8 +141,8 @@
     .navbar {
       position: sticky; top: 0; z-index: 100;
       background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 0 24px;
   }
@@ -151,7 +152,7 @@
       height: 64px;
   }
     .nav-brand {
-      display: flex; align-items: center; gap: 10px;
+      display: flex; align-items: center; gap: 12px;
       text-decoration: none; font-weight: 700; font-size: 1rem; color: var(--primary);
   }
     .nav-brand svg { color: var(--primary); }
@@ -530,7 +531,7 @@
     .content-card li { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; line-height: 1.5; }
 
     /* ── FAQ ── */
-    .faq-section { padding: 40px 0; text-align: center; }
+    .faq-section { padding: 40px 0; text-align: center; margin-bottom: 40px; }
     .faq-section h2 { font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 800; margin-bottom: 32px; color: var(--primary); }
     .faq-wrapper { max-width: 800px; margin: 0 auto; text-align: left; }
     .faq-item {
@@ -540,6 +541,7 @@
     .faq-q {
       padding: 16px 20px; font-weight: 600; font-size: 0.9rem; cursor: pointer;
       display: flex; justify-content: space-between; align-items: center;
+      -webkit-user-select: none;
       user-select: none;
   }
     .faq-q:hover { background: var(--primary-light); }
@@ -674,7 +676,7 @@
     .gender-opt {
       padding: 5px 10px; border: 1.5px solid #e9d5ff; border-radius: 6px;
       font-size: 0.76rem; font-weight: 500; cursor: pointer; background: #fff;
-      transition: all 0.15s; color: var(--text); user-select: none; -webkit-user-select: none;
+      transition: all 0.15s; color: var(--text); -webkit-user-select: none; user-select: none;
   }
     .gender-opt:hover  { border-color: #7c3aed; background: #f5f3ff; }
     .gender-opt.selected { background: #7c3aed; color: #fff; border-color: #7c3aed; }
@@ -705,6 +707,7 @@
     .gender-result {
       background: #fff; border-radius: 12px; padding: 24px;
       border: 2px solid #e9d5ff; text-align: center; margin-top: 16px;
+      display: none;
   }
     .gender-verdict       { font-size: 2.2rem; font-weight: 800; margin: 10px 0 4px; }
     .gender-verdict.boy   { color: #3b82f6; }
@@ -737,8 +740,8 @@
     /* ── GLASS CARDS ── */
     .glass-card {
       background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.4);
       border-radius: var(--radius);
       padding: 40px;
@@ -816,7 +819,7 @@
       width: 100%; max-width: 320px;
       padding: 18px; font-size: 1.15rem; font-weight: 800;
       border: none; border-radius: 16px; cursor: pointer;
-      transition: all 0.2s; user-select: none;
+      transition: all 0.2s; -webkit-user-select: none; user-select: none;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       font-family: 'Outfit', sans-serif;
   }
@@ -929,8 +932,8 @@ a[data-tooltip] {
   left: 50%;
   transform: translate(-50%, -6px);
   background: rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   border: 1px solid rgba(244, 63, 94, 0.25);
   color: #fff;
   font-size: 0.78rem;
@@ -1032,6 +1035,21 @@ a[data-tooltip] {
   transition: all 0.5s ease;
   animation: coachBreath 8s infinite ease-in-out;
 }
+.nav-brand-logo { height: 36px; width: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+.nav-brand-text { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.4rem; color: var(--text); letter-spacing: -0.03em; display: flex; align-items: center; height: 36px; }
+.nav-brand-accent { color: var(--accent); }
+.calc-link-banner { background: var(--primary-light); border-bottom: 1px solid var(--border); padding: 14px 20px; text-align: center; font-size: 0.9rem; }
+.calc-link-text { color: var(--text-muted); }
+.calc-link-anchor { color: var(--primary); font-weight: 700; text-decoration: none; }
+.tool-page-container { max-width: 900px; margin: 0 auto; padding-top: 32px; }
+.gp-hint { font-size: 0.7rem; color: var(--text-muted); margin-top: 5px; }
+.gp-hint-mb { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 7px; }
+.gp-hint-mb3 { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 3px; }
+.gp-row { display: flex; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+.gp-input-sm { width: 95px; }
+.gp-select-sm { width: 110px; }
+.faq-answer-inner { padding-top: 10px; }
+.footer-copy-extra { margin-left: 12px; }
   </style>
 </head>
 <body>
@@ -1039,9 +1057,9 @@ a[data-tooltip] {
   <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-inner">
-      <a href="/" class="nav-brand" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
-        <img src="favicon.svg" alt="PWT Logo" style="height:36px; width:auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));" />
-        <div style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.4rem; color:var(--text); letter-spacing:-0.03em; display:flex; align-items:center; height:36px;">Pregnancy<span style="color:var(--accent)">Week</span>Tracker</div>
+      <a href="/" class="nav-brand">
+        <img src="favicon.svg" alt="PWT Logo" class="nav-brand-logo" />
+        <div class="nav-brand-text">Pregnancy<span class="nav-brand-accent">Week</span>Tracker</div>
       </a>
       <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
       <div class="nav-links">
@@ -1056,12 +1074,12 @@ a[data-tooltip] {
   </nav>
 
   <!-- CALCULATOR LINK BANNER -->
-  <div style="background: var(--primary-light); border-bottom: 1px solid var(--border); padding: 14px 20px; text-align: center; font-size: 0.9rem;">
-    <span style="color: var(--text-muted);">Don't know your pregnancy week? </span>
-    <a href="/" style="color: var(--primary); font-weight: 700; text-decoration: none;">Use the free pregnancy calculator →</a>
+  <div class="calc-link-banner">
+    <span class="calc-link-text">Don't know your pregnancy week? </span>
+    <a href="/" class="calc-link-anchor">Use the free pregnancy calculator →</a>
   </div>
 
-  <div class="container" style="max-width:900px; margin:0 auto; padding-top:32px;">
+  <div class="container tool-page-container">
     <section class="gender-section" id="gender-prediction">
       <div class="glass-card">
         <h2>🔮 Fun Gender Predictor</h2>
@@ -1075,7 +1093,7 @@ a[data-tooltip] {
         <div class="gender-input-card">
           <label>💓 Baby's Heart Rate (bpm)</label>
           <input type="number" class="gender-num-input" id="gBpm" placeholder="e.g. 148" min="100" max="200">
-          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:5px">&gt;140 bpm = Girl theory · &lt;140 bpm = Boy theory · No scientific proof</div>
+          <div class="gp-hint">&gt;140 bpm = Girl theory · &lt;140 bpm = Boy theory · No scientific proof</div>
         </div>
         <!-- Bump Shape -->
         <div class="gender-input-card">
@@ -1116,14 +1134,14 @@ a[data-tooltip] {
         <!-- Chinese Calendar -->
         <div class="gender-input-card">
           <label>🍯 Chinese Gender Calendar</label>
-          <div style="display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap">
+          <div class="gp-row">
             <div>
-              <div style="font-size:0.68rem;color:var(--text-muted);margin-bottom:3px">Your age when conceived</div>
-              <input type="number" class="gender-num-input" id="gAge" placeholder="e.g. 28" min="18" max="45" style="width:95px">
+              <div class="gp-hint-mb3">Your age when conceived</div>
+              <input type="number" class="gender-num-input gp-input-sm" id="gAge" placeholder="e.g. 28" min="18" max="45">
             </div>
             <div>
-              <div style="font-size:0.68rem;color:var(--text-muted);margin-bottom:3px">Month of conception</div>
-              <select class="gender-select" id="gMonth" style="width:110px">
+              <div class="gp-hint-mb3">Month of conception</div>
+              <select class="gender-select gp-select-sm" id="gMonth" title="Month of conception">
                 <option value="">Select…</option>
                 <option value="1">January</option><option value="2">February</option>
                 <option value="3">March</option><option value="4">April</option>
@@ -1134,36 +1152,36 @@ a[data-tooltip] {
               </select>
             </div>
           </div>
-          <div style="font-size:0.7rem;color:var(--text-muted)">Ancient Chinese folk method · ~50% accurate</div>
+          <div class="gp-hint">Ancient Chinese folk method · ~50% accurate</div>
         </div>
       </div>
 
         <!-- Ramzi Theory -->
         <div class="gender-input-card">
           <label>🩺 Ramzi Theory (Week 6–10)</label>
-          <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:7px">From your early ultrasound: which side is the placenta on?</div>
+          <div class="gp-hint-mb">From your early ultrasound: which side is the placenta on?</div>
           <div class="gender-options">
             <div class="gender-opt" data-group="ramzi" data-val="girl" onclick="selectGenderOpt(this)">Left side → Girl</div>
             <div class="gender-opt" data-group="ramzi" data-val="boy"  onclick="selectGenderOpt(this)">Right side → Boy</div>
             <div class="gender-opt" data-group="ramzi" data-val="skip" onclick="selectGenderOpt(this)">Not sure / N/A</div>
           </div>
-          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:5px">Based on placental location in early scans · Not proven</div>
+          <div class="gp-hint">Based on placental location in early scans · Not proven</div>
         </div>
         <!-- Ring Test -->
         <div class="gender-input-card">
           <label>💍 Wedding Ring Test</label>
-          <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:7px">Hang your wedding ring on a hair/string over your bump. What does it do?</div>
+          <div class="gp-hint-mb">Hang your wedding ring on a hair/string over your bump. What does it do?</div>
           <div class="gender-options">
             <div class="gender-opt" data-group="ring" data-val="girl" onclick="selectGenderOpt(this)">Circles → Girl</div>
             <div class="gender-opt" data-group="ring" data-val="boy"  onclick="selectGenderOpt(this)">Back &amp; forth → Boy</div>
             <div class="gender-opt" data-group="ring" data-val="skip" onclick="selectGenderOpt(this)">Not tried</div>
           </div>
-          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:5px">Ancient folk test · Pure fun · No science</div>
+          <div class="gp-hint">Ancient folk test · Pure fun · No science</div>
         </div>
         <!-- Dreams -->
         <div class="gender-input-card">
           <label>💤 Dreams</label>
-          <div style="font-size:0.7rem;color:var(--text-muted);margin-bottom:7px">Old wives' tale: you dream about the <em>opposite</em> of what you're having</div>
+          <div class="gp-hint-mb">Old wives' tale: you dream about the <em>opposite</em> of what you're having</div>
           <div class="gender-options">
             <div class="gender-opt" data-group="dream" data-val="boy"  onclick="selectGenderOpt(this)">Dreaming of a Girl → Boy</div>
             <div class="gender-opt" data-group="dream" data-val="girl" onclick="selectGenderOpt(this)">Dreaming of a Boy → Girl</div>
@@ -1173,14 +1191,14 @@ a[data-tooltip] {
       </div>
 
         <button class="btn-predict" data-tooltip="Calculate the probable gender based on traditional methods" onclick="predictGender()">🔮 Predict Baby's Gender</button>
-        <div id="genderResult" class="gender-result" style="display:none"></div>
+        <div id="genderResult" class="gender-result"></div>
 
         <div class="india-callout">
           🇮🇳 <strong>For Indian parents:</strong> Under the PC-PNDT Act 1994, it is illegal for doctors or sonographers to reveal a baby's sex in India — with penalties up to 3 years imprisonment. That's why Indian parents use fun prediction methods more than anywhere else in the world. This tool is provided purely for entertainment — the same way people worldwide use it before their 20-week scan.
         </div>
       </div>
     </section>
-    <section class="faq-section" id="faq" style="margin-bottom:40px;">
+    <section class="faq-section" id="faq">
       <div class="glass-card">
         <h2>Frequently Asked Questions</h2>
         <div class="faq-wrapper">
@@ -1189,21 +1207,21 @@ a[data-tooltip] {
               <span>Are these gender prediction methods scientifically proven?</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg>
             </div>
-            <div class="faq-a"><div style="padding-top:10px;">No. All of the methods included in this predictor (like the Chinese Calendar, Ramzi theory, and symptom-based old wives' tales) are for entertainment purposes only and have roughly a 50% accuracy rate—the same as flipping a coin.</div></div>
+            <div class="faq-a"><div class="faq-answer-inner">No. All of the methods included in this predictor (like the Chinese Calendar, Ramzi theory, and symptom-based old wives' tales) are for entertainment purposes only and have roughly a 50% accuracy rate—the same as flipping a coin.</div></div>
           </div>
           <div class="faq-item">
             <div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
               <span>When can a doctor actually tell my baby's gender?</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg>
             </div>
-            <div class="faq-a"><div style="padding-top:10px;">Through an ultrasound, a sonographer can usually determine fetal sex starting around 18-20 weeks, provided the baby is in a cooperative position. A blood test (NIPT) can determine sex as early as 10 weeks.</div></div>
+            <div class="faq-a"><div class="faq-answer-inner">Through an ultrasound, a sonographer can usually determine fetal sex starting around 18-20 weeks, provided the baby is in a cooperative position. A blood test (NIPT) can determine sex as early as 10 weeks.</div></div>
           </div>
           <div class="faq-item">
             <div class="faq-q" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
               <span>Why can't doctors in India reveal the gender?</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg>
             </div>
-            <div class="faq-a"><div style="padding-top:10px;">Under the Pre-Conception and Pre-Natal Diagnostic Techniques (PC-PNDT) Act, 1994, it is strictly illegal for any medical professional in India to disclose the sex of a fetus. This law was enacted to prevent female feticide. This is why prediction tools are used purely for fun and entertainment.</div></div>
+            <div class="faq-a"><div class="faq-answer-inner">Under the Pre-Conception and Pre-Natal Diagnostic Techniques (PC-PNDT) Act, 1994, it is strictly illegal for any medical professional in India to disclose the sex of a fetus. This law was enacted to prevent female feticide. This is why prediction tools are used purely for fun and entertainment.</div></div>
           </div>
         </div>
       </div>
@@ -1237,7 +1255,7 @@ a[data-tooltip] {
     </div>
     <div class="footer-copy">
       © 2026 PregnancyWeekTracker. For informational purposes only — not medical advice.
-      <span style="margin-left: 12px;">Also try: <a href="https://www.getniftyready.com">GetNiftyReady</a> · <a href="https://www.getatsready.com">GetATSReady</a></span>
+      <span class="footer-copy-extra">Also try: <a href="https://www.getniftyready.com">GetNiftyReady</a> · <a href="https://www.getatsready.com">GetATSReady</a></span>
     </div>
   </footer>
 

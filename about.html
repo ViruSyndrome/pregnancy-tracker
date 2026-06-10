@@ -35,7 +35,7 @@
     body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; margin: 0; }
     .navbar { background: #fff; padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
     .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-    .nav-brand { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--primary); text-decoration: none; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; }
+    .nav-brand { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--primary); text-decoration: none; font-size: 1.2rem; display: flex; align-items: center; gap: 12px; }
     .nav-links a { margin-left: 20px; text-decoration: none; color: var(--text); font-weight: 500; font-size: 0.9rem; }
     .nav-links a:hover { color: var(--primary); }
     
@@ -87,15 +87,23 @@
   transform: translateY(0);
 }
 
+.nav-brand-logo { height: 36px; width: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
+.nav-brand-text { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.4rem; color: var(--text); letter-spacing: -0.03em; display: flex; align-items: center; height: 36px; }
+.nav-brand-accent { color: var(--accent); }
+.contribute-box { margin-top: 40px; padding: 30px; background: #fff5f5; border-radius: 16px; text-align: center; border: 1px dashed var(--primary); }
+.contribute-box h2 { margin-top: 0; }
+.btn-support-pwt { display: inline-block; font-size: 1.1rem; padding: 12px 30px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff; border-radius: 12px; font-weight: 700; text-decoration: none; transition: opacity 0.2s; }
+.footer-info-p { margin-top: 32px; text-align: center; }
+.footer-copy-extra { margin-left: 12px; }
     
   </style>
 </head>
 <body>
   <nav class="navbar">
     <div class="nav-inner">
-      <a href="/" class="nav-brand" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
-        <img src="favicon.svg" alt="PWT Logo" style="height:36px; width:auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));" />
-        <div style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.4rem; color:var(--text); letter-spacing:-0.03em; display:flex; align-items:center; height:36px;">Pregnancy<span style="color:var(--accent)">Week</span>Tracker</div>
+      <a href="/" class="nav-brand">
+        <img src="favicon.svg" alt="PWT Logo" class="nav-brand-logo" />
+        <div class="nav-brand-text">Pregnancy<span class="nav-brand-accent">Week</span>Tracker</div>
       </a>
       <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
       <div class="nav-links">
@@ -146,13 +154,13 @@
       </ul>
     </div>
 
-    <div style="margin-top: 40px; padding: 30px; background: #fff5f5; border-radius: 16px; text-align: center; border: 1px dashed var(--primary);">
-      <h2 style="margin-top: 0;">Support Our Work</h2>
+    <div class="contribute-box">
+      <h2>Support Our Work</h2>
       <p>If this tool has helped you during your pregnancy journey, consider supporting the project. Every contribution helps keep it running ad-free.</p>
-      <a href="https://paypal.me/virusyndrome" target="_blank" rel="noopener noreferrer" style="display:inline-block; font-size: 1.1rem; padding: 12px 30px; background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;border-radius:12px;font-weight:700;text-decoration:none;transition:opacity 0.2s;">Support Us ♥</a>
+      <a href="https://paypal.me/virusyndrome" target="_blank" rel="noopener noreferrer" class="btn-support-pwt">Support Us ♥</a>
     </div>
 
-    <p style="margin-top: 32px; text-align: center;">If you have any feedback or suggestions, please feel free to reach out via our <a href="contact.html">contact page</a>.</p>
+    <p class="footer-info-p">If you have any feedback or suggestions, please feel free to reach out via our <a href="contact.html">contact page</a>.</p>
   </div>
 
   <footer class="footer">
@@ -183,7 +191,7 @@
     </div>
     <div class="footer-copy">
       © 2026 PregnancyWeekTracker. For informational purposes only — not medical advice.
-      <span style="margin-left: 12px;">Also try: <a href="https://www.getniftyready.com">GetNiftyReady</a> · <a href="https://www.getatsready.com">GetATSReady</a></span>
+      <span class="footer-copy-extra">Also try: <a href="https://www.getniftyready.com">GetNiftyReady</a> · <a href="https://www.getatsready.com">GetATSReady</a></span>
     </div>
   </footer>
 

@@ -53,6 +53,19 @@
     .footer-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
     .footer-links a:hover { color: var(--primary); }
     .footer-copy { max-width: 1200px; margin: 40px auto 0; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+.nav-brand-accent { color: var(--accent); }
+.legal-date-muted { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 28px; }
+.footer-dark { background: var(--text); color: #e5e7eb; padding: 60px 24px 32px; border-top: none; margin-top: 80px; }
+.footer-dark-inner { max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between; text-align: left; }
+.footer-dark-col { flex: 1; min-width: 250px; }
+.footer-dark-brand { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.2rem; color: #fff; margin-bottom: 16px; }
+.footer-dark-brand span { color: var(--accent); }
+.footer-dark-desc { color: #9ca3af; font-size: 0.875rem; line-height: 1.6; }
+.footer-dark-h4 { font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: #9ca3af; margin-bottom: 20px; letter-spacing: 0.05em; }
+.footer-dark-ul { list-style: none; }
+.footer-dark-li { margin-bottom: 12px; }
+.footer-dark-link { text-decoration: none; font-size: 0.9rem; color: #d1d5db; }
+.footer-dark-copy { max-width: 1000px; margin: 60px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.82rem; color: #6b7280; text-align: center; }
 
     @media (max-width: 768px) {
       .nav-inner { flex-direction: column; gap: 10px; text-align: center; }
@@ -86,7 +99,7 @@
 <body>
   <nav class="navbar">
     <div class="nav-inner">
-      <a href="/" class="nav-brand">Pregnancy<span style="color:var(--accent)">Week</span>Tracker</a>
+      <a href="/" class="nav-brand">Pregnancy<span class="nav-brand-accent">Week</span>Tracker</a>
       <div class="nav-links">
         <a href="/">Home</a>
         <a href="about.html">About</a>
@@ -98,7 +111,7 @@
 
   <div class="container">
     <h1>Terms of Use</h1>
-    <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:28px;">Last updated: May 7, 2026</p>
+    <p class="legal-date-muted">Last updated: May 7, 2026</p>
     
     <div class="warning-box">
       <strong>Medical Disclaimer:</strong> This website is for informational and educational purposes only. It is NOT a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.
@@ -117,33 +130,33 @@
     <p>Under no circumstances shall Pregnancy Week Tracker be liable for any direct or indirect damages resulting from the use of this website.</p>
   </div>
 
-  <footer class="footer" style="background: var(--text); color: #e5e7eb; padding: 60px 24px 32px; border-top: none; margin-top: 80px;">
-    <div class="footer-inner" style="max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between; text-align: left;">
-      <div style="flex: 1; min-width: 250px;">
-        <div class="footer-brand" style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.2rem; color: #fff; margin-bottom: 16px;">Pregnancy<span style="color:var(--accent)">Week</span>Tracker</div>
-        <p style="color:#9ca3af; font-size:0.875rem; line-height: 1.6;">Free pregnancy tools for expectant parents. No sign-up. No data stored. Just answers.</p>
+  <footer class="footer-dark">
+    <div class="footer-dark-inner">
+      <div class="footer-dark-col">
+        <div class="footer-dark-brand">Pregnancy<span>Week</span>Tracker</div>
+        <p class="footer-dark-desc">Free pregnancy tools for expectant parents. No sign-up. No data stored. Just answers.</p>
       </div>
       <div class="footer-links">
-        <h4 style="font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: #9ca3af; margin-bottom: 20px; letter-spacing: 0.05em;">Tools</h4>
-        <ul style="list-style: none;">
-          <li style="margin-bottom: 12px;"><a href="/" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">Pregnancy Week Tracker</a></li>
-          <li style="margin-bottom: 12px;"><a href="index.html#all-weeks" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">Week by Week Guide</a></li>
-          <li style="margin-bottom: 12px;"><a href="index.html#kick-counter" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">Baby Kick Counter</a></li>
-          <li style="margin-bottom: 12px;"><a href="index.html#contraction-timer" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">Contraction Timer</a></li>
-          <li style="margin-bottom: 12px;"><a href="index.html#gender-prediction" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">Fun Gender Predictor</a></li>
+        <h4 class="footer-dark-h4">Tools</h4>
+        <ul class="footer-dark-ul">
+          <li class="footer-dark-li"><a href="/" class="footer-dark-link">Pregnancy Week Tracker</a></li>
+          <li class="footer-dark-li"><a href="index.html#all-weeks" class="footer-dark-link">Week by Week Guide</a></li>
+          <li class="footer-dark-li"><a href="index.html#kick-counter" class="footer-dark-link">Baby Kick Counter</a></li>
+          <li class="footer-dark-li"><a href="index.html#contraction-timer" class="footer-dark-link">Contraction Timer</a></li>
+          <li class="footer-dark-li"><a href="index.html#gender-prediction" class="footer-dark-link">Fun Gender Predictor</a></li>
         </ul>
       </div>
       <div class="footer-links">
-        <h4 style="font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: #9ca3af; margin-bottom: 20px; letter-spacing: 0.05em;">Info</h4>
-        <ul style="list-style: none;">
-          <li style="margin-bottom: 12px;"><a href="about.html" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">About</a></li>
-          <li style="margin-bottom: 12px;"><a href="contact.html" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">Contact</a></li>
-          <li style="margin-bottom: 12px;"><a href="privacy.html" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">Privacy Policy</a></li>
-          <li style="margin-bottom: 12px;"><a href="terms.html" style="text-decoration: none; font-size: 0.9rem; color: #d1d5db;">Terms of Use</a></li>
+        <h4 class="footer-dark-h4">Info</h4>
+        <ul class="footer-dark-ul">
+          <li class="footer-dark-li"><a href="about.html" class="footer-dark-link">About</a></li>
+          <li class="footer-dark-li"><a href="contact.html" class="footer-dark-link">Contact</a></li>
+          <li class="footer-dark-li"><a href="privacy.html" class="footer-dark-link">Privacy Policy</a></li>
+          <li class="footer-dark-li"><a href="terms.html" class="footer-dark-link">Terms of Use</a></li>
         </ul>
       </div>
     </div>
-    <div style="max-width: 1000px; margin: 60px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.82rem; color: #6b7280; text-align: center;">
+    <div class="footer-dark-copy">
       © 2026 PregnancyWeekTracker. For informational purposes only — not medical advice.
     </div>
   </footer>

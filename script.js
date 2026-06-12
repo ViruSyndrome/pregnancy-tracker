@@ -1519,18 +1519,18 @@
           '</div>' +
         '</div>';
       } else if (weekNum < 20) {
-        measurementNoticeHtml = '<div class="crl-chl-notice" style="margin-top:16px;background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.15);padding:14px 16px;border-radius:12px;font-size:0.85rem;color:#1e3a8a;line-height:1.5;display:flex;gap:10px;align-items:flex-start;text-align:left;">' +
+        measurementNoticeHtml = '<div class="crl-chl-notice" style="margin-top:16px;background:rgba(100,116,139,0.07);border:1px solid rgba(100,116,139,0.18);padding:14px 16px;border-radius:12px;font-size:0.85rem;color:#475569;line-height:1.5;display:flex;gap:10px;align-items:flex-start;text-align:left;">' +
           '<span style="font-size:1.3rem;line-height:1.2;">📏</span>' +
           '<div>' +
-            '<strong style="color:#1d4ed8;display:block;margin-bottom:4px;">Size Measurement: Crown-to-Rump Length (CRL)</strong> ' +
+            '<strong style="color:#334155;display:block;margin-bottom:4px;">Size Measurement: Crown-to-Rump Length (CRL)</strong> ' +
             'Because the baby\'s legs are curled up against their body, fetal length at this stage is measured from the top of the head (crown) to the bottom (rump). This is the standard clinical method until Week 20.' +
           '</div>' +
         '</div>';
       } else {
-        measurementNoticeHtml = '<div class="crl-chl-notice" style="margin-top:16px;background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.15);padding:14px 16px;border-radius:12px;font-size:0.85rem;color:#065f46;line-height:1.5;display:flex;gap:10px;align-items:flex-start;text-align:left;">' +
+        measurementNoticeHtml = '<div class="crl-chl-notice" style="margin-top:16px;background:rgba(100,116,139,0.07);border:1px solid rgba(100,116,139,0.18);padding:14px 16px;border-radius:12px;font-size:0.85rem;color:#475569;line-height:1.5;display:flex;gap:10px;align-items:flex-start;text-align:left;">' +
           '<span style="font-size:1.3rem;line-height:1.2;">📏</span>' +
           '<div>' +
-            '<strong style="color:#047857;display:block;margin-bottom:4px;">Size Measurement: Crown-to-Heel Length (CHL)</strong> ' +
+            '<strong style="color:#334155;display:block;margin-bottom:4px;">Size Measurement: Crown-to-Heel Length (CHL)</strong> ' +
             'From Week 20 onward, as the baby stretches out, length is measured from the top of the head (crown) to the heel of the foot (CHL). This is why length measurements after Week 20 appear significantly larger.' +
           '</div>' +
         '</div>';

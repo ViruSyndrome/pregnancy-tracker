@@ -1,3 +1,50 @@
+// ── Safe localStorage Wrapper ──────────────────────────────────────────────
+// Catches QuotaExceededError and private-browsing SecurityError silently.
+// Usage: lsSet('key', value)  lsGet('key', fallback)  lsDel('key')
+// ──────────────────────────────────────────────────────────────────────────
+const _ls = (() => {
+  const _ok = (() => { try { _ls.setRaw('__ls_test__', '1'); _ls.del('__ls_test__'); return true; } catch { return false; } })();
+  return {
+    get(key, fallback = null) {
+      if (!_ok) return fallback;
+      try { const v = _ls.getRaw(key); return v !== null ? JSON.parse(v) : fallback; } catch { return fallback; }
+    },
+    set(key, val) {
+      if (!_ok) return false;
+      try { _ls.setRaw(key, JSON.stringify(val)); return true; }
+      catch (e) {
+        if (e.name === 'QuotaExceededError' || e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+          console.warn('[Storage] Quota exceeded — clearing old data to make room.');
+          try { _ls.clear(); _ls.setRaw(key, JSON.stringify(val)); } catch { return false; }
+        }
+        return false;
+      }
+    },
+    setRaw(key, val) {
+      if (!_ok) return false;
+      try { _ls.setRaw(key, val); return true; }
+      catch (e) {
+        if (e.name === 'QuotaExceededError' || e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+          console.warn('[Storage] Quota exceeded — clearing old data to make room.');
+          try { _ls.clear(); _ls.setRaw(key, val); } catch { return false; }
+        }
+        return false;
+      }
+    },
+    getRaw(key, fallback = null) {
+      if (!_ok) return fallback;
+      try { const v = _ls.getRaw(key); return v !== null ? v : fallback; } catch { return fallback; }
+    },
+    del(key)   { if (!_ok) return; try { _ls.del(key); } catch {} },
+    clear()    { if (!_ok) return; try { _ls.clear(); } catch {} },
+  };
+})();
+// Convenience aliases
+function lsGet(key, fallback = null) { return _ls.get(key, fallback); }
+function lsSet(key, val)             { return _ls.set(key, val); }
+function lsDel(key)                  { return _ls.del(key); }
+// ──────────────────────────────────────────────────────────────────────────
+
   // ─────────────────────────────────────────────────────────
   //  REAL PHOTO IMAGE SYSTEM — Wikipedia thumbnails via API
   //  Falls back to OpenMoji SVG → native emoji
@@ -1066,7 +1113,7 @@
   var currentResult = null;
   var currentImageTab = 'fruit';
   try {
-    var storedTab = localStorage.getItem('pwtImageTabPref');
+    var storedTab = _ls.getRaw('pwtImageTabPref');
     if (storedTab === 'fruit' || storedTab === 'object') {
       currentImageTab = storedTab;
     }
@@ -1107,18 +1154,18 @@
       }
     } else {
       // Load from localStorage if returning user
-      var savedMode = localStorage.getItem('pwtSavedMode');
+      var savedMode = _ls.getRaw('pwtSavedMode');
       if (savedMode) {
         if (savedMode === 'lmp') {
-          var sLMP = localStorage.getItem('pwtSavedLMP');
-          var sCy = localStorage.getItem('pwtSavedCycle');
+          var sLMP = _ls.getRaw('pwtSavedLMP');
+          var sCy = _ls.getRaw('pwtSavedCycle');
           if (sLMP && document.getElementById('lmpDate')) {
             document.getElementById('lmpDate').value = sLMP;
             if (sCy) document.getElementById('cycleLen').value = sCy;
             switchMode('lmp');
           }
         } else {
-          var sDue = localStorage.getItem('pwtSavedDue');
+          var sDue = _ls.getRaw('pwtSavedDue');
           if (sDue && document.getElementById('dueDate')) {
             document.getElementById('dueDate').value = sDue;
             switchMode('due');
@@ -1197,12 +1244,12 @@
 
     // Save to localStorage so returning users don't have to re-enter
     try {
-      localStorage.setItem('pwtSavedMode', currentMode);
+      _ls.setRaw('pwtSavedMode', currentMode);
       if (currentMode === 'lmp') {
-        localStorage.setItem('pwtSavedLMP', document.getElementById('lmpDate').value);
-        localStorage.setItem('pwtSavedCycle', document.getElementById('cycleLen').value);
+        _ls.setRaw('pwtSavedLMP', document.getElementById('lmpDate').value);
+        _ls.setRaw('pwtSavedCycle', document.getElementById('cycleLen').value);
       } else {
-        localStorage.setItem('pwtSavedDue', document.getElementById('dueDate').value);
+        _ls.setRaw('pwtSavedDue', document.getElementById('dueDate').value);
       }
     } catch(e) {}
 
@@ -1434,7 +1481,7 @@
 
       var checkState = {};
       try {
-        var storedState = localStorage.getItem('pwtChecklistState');
+        var storedState = _ls.getRaw('pwtChecklistState');
         if (storedState) checkState = JSON.parse(storedState);
       } catch (e) {}
 
@@ -1625,12 +1672,12 @@
       
       try {
         var checkState = {};
-        var storedState = localStorage.getItem('pwtChecklistState');
+        var storedState = _ls.getRaw('pwtChecklistState');
         if (storedState) {
           checkState = JSON.parse(storedState);
         }
         checkState[key] = isChecked;
-        localStorage.setItem('pwtChecklistState', JSON.stringify(checkState));
+        _ls.setRaw('pwtChecklistState', JSON.stringify(checkState));
       } catch (e) {
         console.error('Failed to save checklist state', e);
       }
@@ -1738,7 +1785,7 @@
 
   function setWeekImageTab(tab, weekNum) {
     currentImageTab = tab;
-    try { localStorage.setItem('pwtImageTabPref', tab); } catch(e) {}
+    try { _ls.setRaw('pwtImageTabPref', tab); } catch(e) {}
     if (currentResult && currentResult.weekNum === weekNum) {
       renderResult(currentResult);
       renderWeeksTimeline(weekNum);
@@ -2052,7 +2099,7 @@
   var kcHits = [];
 
   try {
-    var storedKicks = localStorage.getItem('kcHits');
+    var storedKicks = _ls.getRaw('kcHits');
     if (storedKicks) {
       kcHits = JSON.parse(storedKicks);
     }
@@ -2094,9 +2141,9 @@
       kcStartTime = Date.now();
       kcHits = [];
       try {
-        localStorage.setItem('kcActive', 'true');
-        localStorage.setItem('kcStartTime', kcStartTime);
-        localStorage.setItem('kcHits', JSON.stringify(kcHits));
+        _ls.setRaw('kcActive', 'true');
+        _ls.setRaw('kcStartTime', kcStartTime);
+        _ls.setRaw('kcHits', JSON.stringify(kcHits));
       } catch (e) {}
       requestWakeLock();
 
@@ -2112,7 +2159,7 @@
     // Record kick
     kcHits.push(Date.now());
     try {
-      localStorage.setItem('kcHits', JSON.stringify(kcHits));
+      _ls.setRaw('kcHits', JSON.stringify(kcHits));
     } catch (e) {}
     kcUpdateDisplay();
     
@@ -2145,8 +2192,8 @@
     kcActive = false;
     clearInterval(kcInterval);
     try {
-      localStorage.setItem('kcActive', 'false');
-      localStorage.removeItem('kcStartTime');
+      _ls.setRaw('kcActive', 'false');
+      _ls.del('kcStartTime');
     } catch (e) {}
     if (!ctActive) releaseWakeLock();
 
@@ -2167,11 +2214,11 @@
   var ctLastStart = null;
 
   try {
-    var storedContractions = localStorage.getItem('ctHistoryList');
+    var storedContractions = _ls.getRaw('ctHistoryList');
     if (storedContractions) {
       ctHistoryList = JSON.parse(storedContractions);
     }
-    var storedCtLastStart = localStorage.getItem('ctLastStart');
+    var storedCtLastStart = _ls.getRaw('ctLastStart');
     if (storedCtLastStart) {
       ctLastStart = parseInt(storedCtLastStart, 10);
     }
@@ -2296,8 +2343,8 @@
       ctActive = true;
       ctStartTime = Date.now();
       try {
-        localStorage.setItem('ctActive', 'true');
-        localStorage.setItem('ctStartTime', ctStartTime);
+        _ls.setRaw('ctActive', 'true');
+        _ls.setRaw('ctStartTime', ctStartTime);
       } catch (e) {}
       requestWakeLock();
       
@@ -2314,7 +2361,7 @@
       
       ctLastStart = ctStartTime;
       try {
-        localStorage.setItem('ctLastStart', ctLastStart);
+        _ls.setRaw('ctLastStart', ctLastStart);
       } catch (e) {}
       ctInterval = setInterval(ctUpdateDisplay, 1000);
       ctUpdateDisplay(); // Update immediately
@@ -2325,8 +2372,8 @@
       ctActive = false;
       clearInterval(ctInterval);
       try {
-        localStorage.setItem('ctActive', 'false');
-        localStorage.removeItem('ctStartTime');
+        _ls.setRaw('ctActive', 'false');
+        _ls.del('ctStartTime');
       } catch (e) {}
       if (!kcActive) releaseWakeLock();
       
@@ -2349,7 +2396,7 @@
         interval: ctHistoryList.length > 0 ? (ctStartTime - ctHistoryList[0].start) : null
       });
       try {
-        localStorage.setItem('ctHistoryList', JSON.stringify(ctHistoryList));
+        _ls.setRaw('ctHistoryList', JSON.stringify(ctHistoryList));
       } catch (e) {}
       
       ctRenderHistory();
@@ -2363,8 +2410,8 @@
     ctHistoryList = [];
     ctLastStart = null;
     try {
-      localStorage.removeItem('ctHistoryList');
-      localStorage.removeItem('ctLastStart');
+      _ls.del('ctHistoryList');
+      _ls.del('ctLastStart');
     } catch (e) {}
     if (!kcActive) releaseWakeLock();
     
@@ -2402,8 +2449,8 @@
     
     // Resume active kick timer if tab was refreshed while active
     try {
-      var activeKc = localStorage.getItem('kcActive') === 'true';
-      var startKc = localStorage.getItem('kcStartTime');
+      var activeKc = _ls.getRaw('kcActive') === 'true';
+      var startKc = _ls.getRaw('kcStartTime');
       if (activeKc && startKc) {
         kcActive = true;
         kcStartTime = parseInt(startKc, 10);
@@ -2427,8 +2474,8 @@
     
     // Resume active contraction timer if active
     try {
-      var activeCt = localStorage.getItem('ctActive') === 'true';
-      var startCt = localStorage.getItem('ctStartTime');
+      var activeCt = _ls.getRaw('ctActive') === 'true';
+      var startCt = _ls.getRaw('ctStartTime');
       if (activeCt && startCt) {
         ctActive = true;
         ctStartTime = parseInt(startCt, 10);

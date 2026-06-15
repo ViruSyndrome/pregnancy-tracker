@@ -6,11 +6,7 @@
   <script src="https://js.sentry-cdn.com/d62024e9014b97cc89780c4a0051997e.min.js" crossorigin="anonymous"></script>
   <script>
     Sentry.onLoad(function() {
-      Sentry.init({
-        tracesSampleRate: 1.0,
-        replaysSessionSampleRate: 0.1,
-        replaysOnErrorSampleRate: 1.0,
-      });
+      Sentry.init({ tracesSampleRate: 1.0, replaysSessionSampleRate: 0.1, replaysOnErrorSampleRate: 1.0 });
     });
   </script>
   <title>8 Weeks Pregnant: Baby Size, Symptoms & Development | Pregnancy Week Tracker</title>
@@ -23,50 +19,44 @@
   <meta property="og:site_name" content="Pregnancy Week Tracker">
   <meta property="og:description" content="Find out exactly what's happening to your body and your baby at 8 weeks pregnant.">
   <meta property="og:url" content="https://www.pregnancyweektracker.com/8-weeks-pregnant.html">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
   <meta property="og:image" content="https://www.pregnancyweektracker.com/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:secure_url" content="https://www.pregnancyweektracker.com/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pregnancy Week Tracker — How Many Weeks Pregnant Am I?">
-  <meta name="twitter:description" content="Free, instant pregnancy week calculator. Baby development, due date, and what to prepare — week by week. No sign-up needed.">
+  <meta name="twitter:title" content="8 Weeks Pregnant: Symptoms & Baby Size | Pregnancy Week Tracker">
+  <meta name="twitter:description" content="At 8 weeks pregnant, your baby is the size of a Raspberry. See fetal development, symptoms and tips.">
   <meta name="twitter:image" content="https://www.pregnancyweektracker.com/og-image.png">
-
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Twemoji SVG images via CDN (no JS library — pure codepoint conversion in script) -->
-
   <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVGV89T5QG"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVGV89T5QG" crossorigin="anonymous"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-LVGV89T5QG');</script>
-
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2959862133855422" crossorigin="anonymous"></script>
-
   <!-- Schema.org structured data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Pregnancy Week Tracker",
-    "url": "https://www.pregnancyweektracker.com/",
-    "description": "Free pregnancy week tracker. Calculates how many weeks pregnant you are and shows week-by-week fetal development, due date, and baby size.",
-    "applicationCategory": "HealthApplication",
-    "operatingSystem": "All",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "featureList": ["Due date calculator", "Week-by-week fetal development", "Baby size guide", "Trimester tracker", "Pregnancy product guide"]
-}
+    "@type": "Article",
+    "headline": "8 Weeks Pregnant: Baby Size, Symptoms & Development",
+    "description": "At 8 weeks pregnant, your baby is the size of a Raspberry. Learn about week 8 fetal development, pregnancy symptoms, and calculate your exact due date.",
+    "url": "https://www.pregnancyweektracker.com/8-weeks-pregnant.html",
+    "image": "https://www.pregnancyweektracker.com/og-image.png",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Pregnancy Week Tracker",
+      "url": "https://www.pregnancyweektracker.com/"
+    }
+  }
   </script>
-
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-inner">
       <a href="/" class="nav-brand nav-brand-link">
@@ -85,66 +75,73 @@
     </div>
   </nav>
 
-  <main style="background:var(--bg); min-height:80vh;">
-    <section class="hero" style="padding: 40px 24px 20px; text-align:center;">
-      <span style="display: inline-block; line-height: 1.2; background: var(--primary-light); color: var(--primary); padding: 4px 12px; border-radius: 99px; font-weight: 600; font-size: 0.8rem; text-transform: uppercase;">Pregnancy Guide</span>
-      <h1 style="font-family:'Outfit',sans-serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; color:var(--text); margin-top:12px;">8 Weeks Pregnant</h1>
-      <p style="color: var(--text-muted); max-width: 600px; margin: 12px auto 0;">Your baby is the size of a <strong>raspberry</strong>. Discover exactly what is happening to your body and your baby this week.</p>
+  <main>
+    <section class="hero">
+      <span style="background: var(--primary-light); color: var(--primary); padding: 4px 12px; border-radius: 99px; font-weight: 600; font-size: 0.8rem; text-transform: uppercase;">Pregnancy Guide</span>
+      <h1>8 Weeks Pregnant</h1>
+      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 24px;">Your baby is the size of a Raspberry. Discover exactly what is happening to your body and your baby this week.</p>
       
-      <div style="margin-top: 24px;">
-         <a href="index.html" style="display:inline-block; padding:10px 24px; background:white; color:var(--primary); font-weight:700; border-radius:99px; text-decoration:none; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(190,24,93,0.05); font-size:0.9rem;">&#8634; Recalculate Dates</a>
+      <div class="hero-note hero-note-box">
+        <strong>New pregnancy guide:</strong> Learn how weeks are counted, what each trimester means, and how to interpret your calculator results for better preparation and planning.
+        <a href="pregnancy-guide.html" class="hero-note-link">Read the full guide</a>
       </div>
     </section>
 
-    <div class="container" style="max-width:900px; margin:0 auto; padding: 10px 24px 80px;">
+    <div class="container" style="max-width:900px; margin:0 auto; padding-top: 10px;">
+        
+        <!-- HIDDEN INPUTS FOR JS CALCULATION TO WORK ON THIS PAGE -->
         <input type="hidden" id="lmpDate" value="">
         <input type="hidden" id="cycleLen" value="28">
         
-        <div id="resultPanel" class="container result-panel-container" hidden>
-    <div class="glass-card">
-      <div class="result-headline" id="resultHeadline"></div>
-      <div class="result-grid" id="statGrid"></div>
-    </div>
-    <div class="milestone-banner" id="milestoneBanner" hidden></div>
-    <div class="trimester-bar-wrap" id="trimBar" hidden></div>
-    <div class="week-card" id="weekCard"></div>
-    
-    <!-- ── Growth Curve & Size Visualizer ── -->
-    <div class="ui-curated-section section-spaced">
-      <div id="sizeVisualizerContainer"></div>
-      <h2>Baby Growth Curve</h2>
-      <p class="tip-sub tip-sub-growth">This chart visualizes the average length of the baby from week 1 to 40. Values are based on standard clinical averages.</p>
-      <div class="growth-graph growth-graph-wrap" id="growthGraph"></div>
-    </div>
-  </div>
-        
-        <div style="margin-top: 40px; display: flex; justify-content: space-between; gap:20px;">
-           <a href="7-weeks-pregnant.html" class="nav-btn" style="text-decoration:none; padding:10px 20px; background:white; border-radius:12px; border:1px solid var(--border); color:var(--text); font-weight:600; font-size:0.9rem;">&larr; Week 7</a>
-           <a href="9-weeks-pregnant.html" class="nav-btn" style="text-decoration:none; padding:10px 20px; background:linear-gradient(135deg,var(--primary),var(--accent)); color:white; border-radius:12px; font-weight:600; font-size:0.9rem;">Week 9 &rarr;</a>
+        <!-- THE MPA RESULT PANEL (Injected dynamically or rendered statically below) -->
+        <div id="resultPanel" style="display: block; opacity: 1; transform: translateY(0);">
+            <div class="glass-card" id="statsCard">
+                <div class="result-headline" id="resultHeadline"></div>
+                <div class="result-grid" id="statGrid"></div>
+            </div>
+            <div class="milestone-banner" id="milestoneBanner" hidden></div>
+            
+            <div class="trimester-bar-wrap" id="trimBar" hidden></div>
+            
+            <!-- Week detail card (Will be dynamically populated by JS on load) -->
+            <div class="week-card" id="weekCard"></div>
+            
+            <!-- ── Growth Curve & Size Visualizer ── -->
+            <div class="ui-curated-section section-spaced">
+              <div id="sizeVisualizerContainer"></div>
+              <h2>Baby Growth Curve</h2>
+              <p class="tip-sub tip-sub-growth">This chart visualizes the average length of the baby from week 1 to 40. Values are based on standard clinical averages.</p>
+              <div class="growth-graph growth-graph-wrap" id="growthGraph"></div>
+            </div>
+            
+            <div style="margin-top: 40px; display: flex; justify-content: space-between; gap:20px;">
+               <a href="7-weeks-pregnant.html" class="nav-btn" style="text-decoration:none; padding:12px 24px; background:linear-gradient(135deg,var(--primary),var(--accent)); border-radius:12px; color:white; font-weight:700; font-size:0.95rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display:flex; align-items:center; gap:8px; transition:all 0.2s ease;"><span style="font-size:1.2rem">&larr;</span> Week 7</a>
+               <a href="9-weeks-pregnant.html" class="nav-btn" style="text-decoration:none; padding:12px 24px; background:linear-gradient(135deg,var(--primary),var(--accent)); border-radius:12px; color:white; font-weight:700; font-size:0.95rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display:flex; align-items:center; gap:8px; transition:all 0.2s ease;">Week 9 <span style="font-size:1.2rem">&rarr;</span></a>
+            </div>
+            
         </div>
+
     </div>
   </main>
 
-  
-  <!-- Cross-Linking Footer Network -->
+      <!-- Cross-Linking Footer Network -->
   <div class="network-footer">
     <p class="network-title">Explore Our Other Free Tools</p>
     <div class="network-links">
       <a href="https://www.getatsready.com/" title="Free ATS Resume Checker" class="network-link">
-        <span class="network-icon">📄</span> <span class="network-text">ATS Resume Checker</span>
+        <img src="https://www.getatsready.com/favicon.svg" alt="" class="network-icon-img" width="18" height="18" style="vertical-align: middle; border-radius: 4px;"> <span class="network-text">ATS Resume Checker</span>
       </a>
       <a href="https://www.getniftyready.com/" title="Nifty 50 Tracker & SIP Calculator" class="network-link">
-        <span class="network-icon">📈</span> <span class="network-text">Nifty Market Tracker</span>
+        <img src="https://www.getniftyready.com/favicon.svg" alt="" class="network-icon-img" width="18" height="18" style="vertical-align: middle; border-radius: 4px;"> <span class="network-text">Nifty Market Tracker</span>
       </a>
       <a href="https://www.pregnancyweektracker.com/" title="Pregnancy Week by Week Tracker" class="network-link">
-        <span class="network-icon">👶</span> <span class="network-text">Pregnancy Tracker</span>
+        <img src="https://www.pregnancyweektracker.com/favicon.svg" alt="" class="network-icon-img" width="18" height="18" style="vertical-align: middle; border-radius: 4px;"> <span class="network-text">Pregnancy Tracker</span>
       </a>
       <a href="https://www.globalvisamath.com/" title="Schengen Visa & Immigration Calculators" class="network-link">
-        <span class="network-icon">✈️</span> <span class="network-text">Global Visa Math</span>
+        <img src="https://www.globalvisamath.com/favicon.svg" alt="" class="network-icon-img" width="18" height="18" style="vertical-align: middle; border-radius: 4px;"> <span class="network-text">Global Visa Math</span>
       </a>
     </div>
   </div>
-
 <footer class="footer">
     <div class="footer-inner">
       <div>
@@ -172,15 +169,10 @@
       </div>
     </div>
     <div class="footer-copy">
-      © 2026 PregnancyWeekTracker. For informational purposes only — not medical advice.
-      <span class="footer-also-try">Also try: <a href="https://www.getniftyready.com">GetNiftyReady</a> · <a href="https://www.getatsready.com">GetATSReady</a></span>
+      &copy; 2026 PregnancyWeekTracker. For informational purposes only &mdash; not medical advice.
+      <span class="footer-also-try">Also try: <a href="https://www.getniftyready.com">GetNiftyReady</a> &middot; <a href="https://www.getatsready.com">GetATSReady</a></span>
     </div>
   </footer>
-
-<script>
-  window.isMainPage = false;
-</script>
-<script src="script.js"></script>
 
   <!-- Image Modal -->
   <div id="imgModal" class="img-modal" tabindex="-1" role="dialog" aria-modal="true" onclick="closeImgModal()">
@@ -188,72 +180,38 @@
   </div>
 
   <script>
-
-    // ── Native High-Performance Scroll-Reveal ──
-    window.addEventListener('load', () => {
-      const targets = document.querySelectorAll('.calc-card, #all-weeks, .tool-card, #gender-prediction, #faq, .footer');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          } else {
-            entry.target.classList.remove('visible');
-          }
-        });
-      }, {
-        threshold: 0.05,
-        rootMargin: '0px 0px -10px 0px'
-      });
-      targets.forEach(target => {
-        target.classList.add('reveal-scroll');
-        observer.observe(target);
-      });
-    });
+    window.isMainPage = false;
+    window.currentMode = 'lmp';
+    window.currentImageTab = 'fruit';
   </script>
+  <script src="script.js"></script>
 
   <script>
     // --- MPA ROUTING LOGIC ---
     document.addEventListener('DOMContentLoaded', function() {
-      window.currentMode = 'lmp';
-      window.currentImageTab = 'fruit';
-      
       var params = new URLSearchParams(window.location.search);
       var lmpParam = params.get('lmp');
       
       if (lmpParam) {
+        // User came from index.html calculator
         document.getElementById('lmpDate').value = lmpParam;
         window.setCalcError = function(e) { console.error(e); };
-        
-        // Wait a tiny bit for the rest of DOM to be ready
-        setTimeout(function() {
-            calculate();
-            var trimBar = document.getElementById('trimBar');
-            if (trimBar) trimBar.style.display = 'block';
-            
-            // Rewrite the next/prev links to carry over the ?lmp parameter!
-            var navBtns = document.querySelectorAll('.nav-btn');
-            navBtns.forEach(function(btn) {
-                if (btn.href) btn.href = btn.href.split('?')[0] + "?lmp=" + lmpParam;
-            });
-        }, 50);
+        // calculate() renders everything: EDD, stats, trimester bar, weekCard, growth curve
+        calculate();
+        // Carry LMP param to next/prev links
+        var navBtns = document.querySelectorAll('.nav-btn');
+        navBtns.forEach(function(btn) {
+          if (btn.href) btn.href = btn.href.split('?')[0] + '?lmp=' + lmpParam;
+        });
       } else {
-        // Direct organic visit to this week page
-        // We hide the personalized Due Date stats because we don't have an LMP
-        var sg = document.getElementById('statGrid');
-        if (sg) sg.style.display = 'none';
-        
-        var rh = document.getElementById('resultHeadline');
-        if (rh) rh.style.display = 'none';
-        
-        // Inject the generic week detail!
-        setTimeout(function() {
-            if (typeof showWeekDetail === 'function') {
-                showWeekDetail(8);
-            }
-        }, 50);
+        // Organic Google visitor — no LMP known, show week card only
+        var statsCard = document.getElementById('statsCard');
+        if (statsCard) statsCard.style.display = 'none';
+        var resultPanel = document.getElementById('resultPanel');
+        if (resultPanel) resultPanel.style.paddingTop = '10px';
+        if (typeof showWeekDetail === 'function') showWeekDetail(8);
       }
     });
   </script>
 </body>
-
 </html>

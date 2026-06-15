@@ -10,5 +10,4 @@ diff-index.txt
 !script.js
 node_modules/
 *.png
-*.txt
 package*.json

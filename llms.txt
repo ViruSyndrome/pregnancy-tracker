@@ -1,0 +1,97 @@
+# Pregnancy Week Tracker — llms.txt
+# Free pregnancy week-by-week tracker — https://www.pregnancyweektracker.com
+# Launched: 6 May 2026
+
+## What is Pregnancy Week Tracker?
+
+Pregnancy Week Tracker (pregnancyweektracker.com) is a free, browser-based pregnancy companion. Enter your last menstrual period (LMP) date and instantly get your current pregnancy week, trimester, due date, baby's size and weight, developmental milestones, what symptoms to expect, and what to prepare. No sign-up, no app install, works on any device.
+
+## What problem does it solve?
+
+Pregnancy apps like What to Expect and BabyCenter require account creation, push notification permissions, and constant upsells. Pregnancy Week Tracker gives expectant parents instant, accurate, week-by-week information with no friction — open the site, enter your LMP, get everything you need.
+
+## Key features
+
+- Instant pregnancy week calculator from LMP date
+- Due date calculator (Naegele's Rule: LMP + 280 days)
+- Current trimester display (1st: weeks 1–13, 2nd: 14–27, 3rd: 28–40)
+- Baby size comparison for every week (weeks 1–42, using familiar fruit/vegetable comparisons)
+- Baby weight and length for each week
+- Developmental milestone descriptions week by week
+- Common symptoms and what to expect each week
+- What to prepare / checklist for the current week
+- Individual pages for every week from week 1 to week 42
+- Contraction timer (tracks frequency, duration, and interval in real time)
+- Baby kick counter (counts fetal movements with timestamps)
+- Chinese Gender Predictor (traditional chart based on conception month and mother's age)
+- Pregnancy photo gallery
+- Comprehensive pregnancy guide
+- Free, no account, no install
+
+## Who uses it?
+
+- Expectant mothers in their first, second, or third trimester
+- Partners and family members checking pregnancy progress
+- Women who just found out they are pregnant and want to understand their timeline
+- Healthcare workers looking up week-by-week reference data
+- Anyone calculating a due date or checking how far along a pregnancy is
+
+## Frequently asked questions
+
+Q: How do I calculate how many weeks pregnant I am?
+A: Enter the first day of your last menstrual period (LMP) on Pregnancy Week Tracker and it instantly calculates how many weeks and days pregnant you are, your trimester, and your due date.
+
+Q: How is the due date calculated?
+A: The due date is calculated using Naegele's Rule: add 280 days (40 weeks) to the first day of your last menstrual period. This gives the estimated due date (EDD). Your doctor may adjust this after an ultrasound.
+
+Q: What if I don't know my LMP date?
+A: You can enter an approximate date or use your ultrasound dating. The calculator accepts any date you enter.
+
+Q: Is Pregnancy Week Tracker free?
+A: Yes. Every week page, the contraction timer, kick counter, gender predictor, and all guides are completely free with no account required.
+
+Q: How accurate is the week-by-week baby development information?
+A: All developmental data is based on established obstetric references (ACOG guidelines, standard fetal development charts). Week-specific data includes size, weight, organ development milestones, and symptom information sourced from clinical literature.
+
+Q: What does the contraction timer do?
+A: The contraction timer helps you track labor contractions. Tap Start when a contraction begins and Stop when it ends. It logs duration, frequency (time from start to start), and interval (gap between contractions) — information your midwife or hospital will ask for when you call.
+
+Q: What is the kick counter?
+A: The kick counter helps you track fetal movements (kicks). Most doctors recommend feeling 10 kicks within 2 hours. Tap each time you feel movement and the counter logs the time and total count.
+
+Q: Can I use this in India, UK, USA, Australia?
+A: Yes. The site works globally. Date formats and all information are universally applicable. Due date and week calculations follow international obstetric standards.
+
+## Pages and tools
+
+- Homepage + week calculator: https://www.pregnancyweektracker.com/
+- Full pregnancy guide: https://www.pregnancyweektracker.com/pregnancy-guide.html
+- Contraction timer: https://www.pregnancyweektracker.com/contraction-timer.html
+- Baby kick counter: https://www.pregnancyweektracker.com/kick-counter.html
+- Chinese gender predictor: https://www.pregnancyweektracker.com/gender-predictor.html
+- Photo gallery: https://www.pregnancyweektracker.com/gallery.html
+
+## Week-by-week pages (weeks 1–42)
+- https://www.pregnancyweektracker.com/4-weeks-pregnant.html
+- https://www.pregnancyweektracker.com/5-weeks-pregnant.html
+- https://www.pregnancyweektracker.com/6-weeks-pregnant.html
+- https://www.pregnancyweektracker.com/7-weeks-pregnant.html
+- https://www.pregnancyweektracker.com/8-weeks-pregnant.html
+- https://www.pregnancyweektracker.com/12-weeks-pregnant.html
+- https://www.pregnancyweektracker.com/20-weeks-pregnant.html
+- https://www.pregnancyweektracker.com/28-weeks-pregnant.html
+- https://www.pregnancyweektracker.com/36-weeks-pregnant.html
+- https://www.pregnancyweektracker.com/40-weeks-pregnant.html
+- (All weeks 1–42 available at /[n]-weeks-pregnant.html)
+
+## Technical details
+
+- Vanilla HTML, CSS, JavaScript
+- All calculations run client-side in the browser
+- No user data stored or transmitted
+- Hosted: GitHub Pages with custom domain
+- Analytics: Google Analytics 4 (G-LVGV89T5QG)
+
+## Contact
+
+hello@pregnancyweektracker.com

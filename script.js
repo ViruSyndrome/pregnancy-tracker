@@ -149,7 +149,7 @@ function lsDel(key)                  { return _ls.del(key); }
     if (!type || (type !== 'fruit' && type !== 'object')) return null;
     if (wkNum < 1 || wkNum > LOCAL_WEEK_PHOTO_MAX) return null;
     var padded = String(wkNum).padStart(2, '0');
-    return 'assets/week-photos/week_' + padded + '_' + type + '.png';
+    return 'assets/week-photos/week_' + padded + '_' + type + '.webp';
   }
 
   function weekImg(wkNum, emoji, imageType) {

@@ -1557,7 +1557,7 @@ function lsDel(key)                  { return _ls.del(key); }
     var measurementNoticeHtml = '';
     if (weekNum >= 4) {
       if (weekNum === 20) {
-        measurementNoticeHtml = '<div class="crl-chl-notice" style="margin-top:16px;background:rgba(249,115,22,0.04);border:1px solid rgba(249,115,22,0.15);padding:14px 16px;border-radius:12px;font-size:0.85rem;color:var(--text);line-height:1.5;display:flex;gap:10px;align-items:flex-start;text-align:left;">' +
+        measurementNoticeHtml = '<div class="crl-chl-notice" style="margin-top:16px;background:rgba(249,115,22,0.04);border:1px solid rgba(249,115,22,0.15);padding:14px 16px;border-radius:12px;font-size:0.85rem;color:var(--text-muted);line-height:1.5;display:flex;gap:10px;align-items:flex-start;text-align:left;">' +
           '<span style="font-size:1.3rem;line-height:1.2;">📏</span>' +
           '<div>' +
             '<strong style="display:block;margin-bottom:4px;">Why did the length suddenly jump? (CRL to CHL)</strong> ' +
@@ -1567,7 +1567,7 @@ function lsDel(key)                  { return _ls.del(key); }
           '</div>' +
         '</div>';
       } else if (weekNum < 20) {
-        measurementNoticeHtml = '<div class="crl-chl-notice" style="margin-top:16px;background:rgba(100,116,139,0.07);border:1px solid rgba(100,116,139,0.18);padding:14px 16px;border-radius:12px;font-size:0.85rem;color:var(--text);line-height:1.5;display:flex;gap:10px;align-items:flex-start;text-align:left;">' +
+        measurementNoticeHtml = '<div class="crl-chl-notice" style="margin-top:16px;background:rgba(100,116,139,0.07);border:1px solid rgba(100,116,139,0.18);padding:14px 16px;border-radius:12px;font-size:0.85rem;color:var(--text-muted);line-height:1.5;display:flex;gap:10px;align-items:flex-start;text-align:left;">' +
           '<span style="font-size:1.3rem;line-height:1.2;">📏</span>' +
           '<div>' +
             '<strong style="display:block;margin-bottom:4px;">Size Measurement: Crown-to-Rump Length (CRL)</strong> ' +
@@ -1575,7 +1575,7 @@ function lsDel(key)                  { return _ls.del(key); }
           '</div>' +
         '</div>';
       } else {
-        measurementNoticeHtml = '<div class="crl-chl-notice" style="margin-top:16px;background:rgba(100,116,139,0.07);border:1px solid rgba(100,116,139,0.18);padding:14px 16px;border-radius:12px;font-size:0.85rem;color:var(--text);line-height:1.5;display:flex;gap:10px;align-items:flex-start;text-align:left;">' +
+        measurementNoticeHtml = '<div class="crl-chl-notice" style="margin-top:16px;background:rgba(100,116,139,0.07);border:1px solid rgba(100,116,139,0.18);padding:14px 16px;border-radius:12px;font-size:0.85rem;color:var(--text-muted);line-height:1.5;display:flex;gap:10px;align-items:flex-start;text-align:left;">' +
           '<span style="font-size:1.3rem;line-height:1.2;">📏</span>' +
           '<div>' +
             '<strong style="display:block;margin-bottom:4px;">Size Measurement: Crown-to-Heel Length (CHL)</strong> ' +

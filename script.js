@@ -1557,28 +1557,28 @@ function lsDel(key)                  { return _ls.del(key); }
     var measurementNoticeHtml = '';
     if (weekNum >= 4) {
       if (weekNum === 20) {
-        measurementNoticeHtml = '<div class="crl-chl-notice" style="margin-top:16px;background:rgba(249,115,22,0.04);border:1px solid rgba(249,115,22,0.15);padding:14px 16px;border-radius:12px;font-size:0.85rem;color:#fdba74;line-height:1.5;display:flex;gap:10px;align-items:flex-start;text-align:left;">' +
+        measurementNoticeHtml = '<div class="crl-chl-notice" style="margin-top:16px;background:rgba(249,115,22,0.04);border:1px solid rgba(249,115,22,0.15);padding:14px 16px;border-radius:12px;font-size:0.85rem;color:var(--text);line-height:1.5;display:flex;gap:10px;align-items:flex-start;text-align:left;">' +
           '<span style="font-size:1.3rem;line-height:1.2;">📏</span>' +
           '<div>' +
-            '<strong style="color:#f97316;display:block;margin-bottom:4px;">Why did the length suddenly jump? (CRL to CHL)</strong> ' +
+            '<strong style="display:block;margin-bottom:4px;">Why did the length suddenly jump? (CRL to CHL)</strong> ' +
             'Before Week 20, baby size is measured in <strong>Crown-to-Rump Length (CRL)</strong> (head to bottom, because legs are curled). ' +
             'Starting at Week 20, measurement shifts to <strong>Crown-to-Heel Length (CHL)</strong> (head to toe). ' +
             'This causes an apparent "jump" in length from ~15cm to ~25cm, but the baby\'s actual weight and volume continue to grow on a smooth, steady curve.' +
           '</div>' +
         '</div>';
       } else if (weekNum < 20) {
-        measurementNoticeHtml = '<div class="crl-chl-notice" style="margin-top:16px;background:rgba(100,116,139,0.07);border:1px solid rgba(100,116,139,0.18);padding:14px 16px;border-radius:12px;font-size:0.85rem;color:var(--text-muted);line-height:1.5;display:flex;gap:10px;align-items:flex-start;text-align:left;">' +
+        measurementNoticeHtml = '<div class="crl-chl-notice" style="margin-top:16px;background:rgba(100,116,139,0.07);border:1px solid rgba(100,116,139,0.18);padding:14px 16px;border-radius:12px;font-size:0.85rem;color:var(--text);line-height:1.5;display:flex;gap:10px;align-items:flex-start;text-align:left;">' +
           '<span style="font-size:1.3rem;line-height:1.2;">📏</span>' +
           '<div>' +
-            '<strong style="color:var(--text);display:block;margin-bottom:4px;">Size Measurement: Crown-to-Rump Length (CRL)</strong> ' +
+            '<strong style="display:block;margin-bottom:4px;">Size Measurement: Crown-to-Rump Length (CRL)</strong> ' +
             'Because the baby\'s legs are curled up against their body, fetal length at this stage is measured from the top of the head (crown) to the bottom (rump). This is the standard clinical method until Week 20.' +
           '</div>' +
         '</div>';
       } else {
-        measurementNoticeHtml = '<div class="crl-chl-notice" style="margin-top:16px;background:rgba(100,116,139,0.07);border:1px solid rgba(100,116,139,0.18);padding:14px 16px;border-radius:12px;font-size:0.85rem;color:var(--text-muted);line-height:1.5;display:flex;gap:10px;align-items:flex-start;text-align:left;">' +
+        measurementNoticeHtml = '<div class="crl-chl-notice" style="margin-top:16px;background:rgba(100,116,139,0.07);border:1px solid rgba(100,116,139,0.18);padding:14px 16px;border-radius:12px;font-size:0.85rem;color:var(--text);line-height:1.5;display:flex;gap:10px;align-items:flex-start;text-align:left;">' +
           '<span style="font-size:1.3rem;line-height:1.2;">📏</span>' +
           '<div>' +
-            '<strong style="color:var(--text);display:block;margin-bottom:4px;">Size Measurement: Crown-to-Heel Length (CHL)</strong> ' +
+            '<strong style="display:block;margin-bottom:4px;">Size Measurement: Crown-to-Heel Length (CHL)</strong> ' +
             'From Week 20 onward, as the baby stretches out, length is measured from the top of the head (crown) to the heel of the foot (CHL). This is why length measurements after Week 20 appear significantly larger.' +
           '</div>' +
         '</div>';

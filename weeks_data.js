@@ -277,7 +277,7 @@ const WEEKS = [
         "fruitEmoji": "🍎",
         "fruitLabel": "Apple",
         "objectEmoji": "🖱️",
-        "objectLabel": "Computer Mouse (Compact)",
+        "objectLabel": "Computer Mouse",
         "baby": "Taste buds form. Ears reach their final position — baby can now hear sounds from outside the womb. The skeleton is changing from cartilage to bone.",
         "mom": "You may feel the first faint flutters of baby movement — often described as butterflies or gas bubbles. Nosebleeds and gum sensitivity are common.",
         "tip": "Start talking and singing to your bump — baby can hear you now, and it supports early bonding.",

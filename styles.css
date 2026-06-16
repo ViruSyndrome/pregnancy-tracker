@@ -544,7 +544,7 @@
 
     /* ── HAMBURGER ── */
     .hamburger {
-      display: none; flex-direction: column; gap: 5px;
+      display: none !important; flex-direction: column; gap: 5px;
       background: none; border: none; cursor: pointer; padding: 4px;
       -webkit-tap-highlight-color: transparent;
   }
@@ -559,7 +559,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
-      .hamburger { display: flex; }
+      .hamburger { display: flex !important; }
       .nav-links {
         display: none; position: absolute; top: 56px; left: 0; right: 0;
         background: rgba(255,255,255,0.98); border-bottom: 1px solid var(--border);

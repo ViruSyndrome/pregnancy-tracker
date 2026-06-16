@@ -1765,6 +1765,16 @@ function lsDel(key)                  { return _ls.del(key); }
       
       if (weekCard) {
         weekCard.innerHTML = htmlContent;
+          
+          var heroBabySizeText = document.getElementById('heroBabySizeText');
+          if (heroBabySizeText) {
+            var isSingleMode = wd.singleMode || weekNum <= 2;
+            var cardImgTab = isSingleMode ? 'fruit' : currentImageTab;
+            var sizeLabel = isSingleMode
+              ? (wd.singleLabel || wd.fruitLabel || wd.size)
+              : (wd[cardImgTab + 'Label'] || wd.size);
+            heroBabySizeText.innerHTML = 'Your baby is the size of a <strong>' + sizeLabel + '</strong>. Discover exactly what is happening to your body and your baby this week.';
+          }
         console.log("DEBUG: innerHTML set. New child element count:", weekCard.childElementCount);
         weekCard.style.display = 'block'; // Ensure it's visible
         if (debug) debug.innerHTML += "<br>Successfully assigned innerHTML. Content length: " + htmlContent.length;

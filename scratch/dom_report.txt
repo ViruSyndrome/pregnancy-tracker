@@ -1,0 +1,49 @@
+Line 1105: document.getElementById('lmpDate').value  -->  document.getElementById('lmpDate').value = lmpParam;
+Line 1116: document.getElementById('lmpDate').value  -->  document.getElementById('lmpDate').value = sLMP;
+Line 1117: document.getElementById('cycleLen').value  -->  if (sCy) document.getElementById('cycleLen').value = sCy;
+Line 1123: document.getElementById('dueDate').value  -->  document.getElementById('dueDate').value = sDue;
+Line 1136: document.getElementById('lmpMode').style  -->  document.getElementById('lmpMode').style.display = mode === 'lmp' ? 'block' : 'none';
+Line 1137: document.getElementById('dueMode').style  -->  document.getElementById('dueMode').style.display = mode === 'due' ? 'block' : 'none';
+Line 1138: document.getElementById('btnLMP').classList  -->  document.getElementById('btnLMP').classList.toggle('active', mode === 'lmp');
+Line 1139: document.getElementById('btnDD').classList  -->  document.getElementById('btnDD').classList.toggle('active', mode === 'due');
+Line 1165: document.getElementById('cycleLen').value  -->  var cycleLen = parseInt(document.getElementById('cycleLen').value) || 28;
+Line 1169: document.getElementById('cycleLen').focus  -->  document.getElementById('cycleLen').focus();
+Line 1175: document.getElementById('lmpDate').value  -->  var lmpVal = document.getElementById('lmpDate').value;
+Line 1176: document.getElementById('lmpDate').focus  -->  if (!lmpVal) { document.getElementById('lmpDate').focus(); setCalcError('Please enter the first day of your last period.'); return; }
+Line 1179: document.getElementById('dueDate').value  -->  var dueDateVal = document.getElementById('dueDate').value;
+Line 1180: document.getElementById('dueDate').focus  -->  if (!dueDateVal) { document.getElementById('dueDate').focus(); setCalcError('Please enter your due date.'); return; }
+Line 1183: document.getElementById('dueDate').focus  -->  document.getElementById('dueDate').focus();
+Line 1197: document.getElementById('lmpDate').value  -->  localStorage.setItem('pwtSavedLMP', document.getElementById('lmpDate').value);
+Line 1198: document.getElementById('cycleLen').value  -->  localStorage.setItem('pwtSavedCycle', document.getElementById('cycleLen').value);
+Line 1200: document.getElementById('dueDate').value  -->  localStorage.setItem('pwtSavedDue', document.getElementById('dueDate').value);
+Line 1380: document.getElementById('statGrid').innerHTML  -->  document.getElementById('statGrid').innerHTML = [
+Line 1390: document.getElementById('trimBar').innerHTML  -->  document.getElementById('trimBar').innerHTML =
+Line 1398: document.getElementById('weekCard').innerHTML  -->  document.getElementById('weekCard').innerHTML = generateWeekCardHtml(r.weekNum, weekData, products, trimLabel, currentImageTab);
+Line 1665: document.getElementById('resultHeadline').innerHTML  -->  document.getElementById('resultHeadline').innerHTML =
+Line 1688: document.getElementById('statGrid').innerHTML  -->  document.getElementById('statGrid').innerHTML = [
+Line 1693: document.getElementById('trimBar').innerHTML  -->  document.getElementById('trimBar').innerHTML =
+Line 1781: document.getElementById('gBpm').value  -->  var bpm = parseInt(document.getElementById('gBpm').value);
+Line 1793: document.getElementById('gAge').value  -->  var age = parseInt(document.getElementById('gAge').value);
+Line 1794: document.getElementById('gMonth').value  -->  var month = parseInt(document.getElementById('gMonth').value);
+Line 1995: document.getElementById('graphTooltip').style  -->  document.getElementById('graphTooltip').style.display = 'none';
+Line 2076: document.getElementById('kcTimer').innerText  -->  document.getElementById('kcTimer').innerText = kcFormatTime(Date.now() - kcStartTime);
+Line 2093: document.getElementById('kcBtn').innerText  -->  document.getElementById('kcBtn').innerText = 'I Felt a Kick! 🦶';
+Line 2094: document.getElementById('kcStopBtn').style  -->  document.getElementById('kcStopBtn').style.display = 'inline-block';
+Line 2095: document.getElementById('kcEncourage').style  -->  document.getElementById('kcEncourage').style.display = 'none';
+Line 2097: document.getElementById('kcHistory').innerHTML  -->  document.getElementById('kcHistory').innerHTML = '<div style="text-align:center;padding:10px;color:var(--text-muted);font-size:0.85rem">Session started. Tap when you feel a movement.</div>';
+Line 2129: document.getElementById('kcEncourage').style  -->  document.getElementById('kcEncourage').style.display = 'block';
+Line 2143: document.getElementById('kcBtn').innerText  -->  document.getElementById('kcBtn').innerText = 'Start New Session';
+Line 2144: document.getElementById('kcStopBtn').style  -->  document.getElementById('kcStopBtn').style.display = 'none';
+Line 2187: document.getElementById('ctBtn').innerText  -->  document.getElementById('ctBtn').innerText = 'STOP TIMER (' + dur + ') 🛑';
+Line 2249: document.getElementById('ctAlert').style  -->  document.getElementById('ctAlert').style.display = 'block';
+Line 2251: document.getElementById('ctAlert').style  -->  document.getElementById('ctAlert').style.display = 'none';
+Line 2299: document.getElementById('ctInterval').innerText  -->  document.getElementById('ctInterval').innerText = intervalSinceLast ? ctFormatDuration(intervalSinceLast) : '--';
+Line 2328: document.getElementById('ctDuration').innerText  -->  document.getElementById('ctDuration').innerText = ctFormatDuration(duration);
+Line 2358: document.getElementById('ctDuration').innerText  -->  document.getElementById('ctDuration').innerText = '0s';
+Line 2359: document.getElementById('ctInterval').innerText  -->  document.getElementById('ctInterval').innerText = '--';
+Line 2365: document.getElementById('ctHistory').innerHTML  -->  document.getElementById('ctHistory').innerHTML = '';
+Line 2366: document.getElementById('ctAlert').style  -->  document.getElementById('ctAlert').style.display = 'none';
+Line 2396: document.getElementById('kcBtn').innerText  -->  document.getElementById('kcBtn').innerText = 'I Felt a Kick! 🦶';
+Line 2397: document.getElementById('kcStopBtn').style  -->  document.getElementById('kcStopBtn').style.display = 'inline-block';
+Line 2426: document.getElementById('ctInterval').innerText  -->  document.getElementById('ctInterval').innerText = intervalSinceLast ? ctFormatDuration(intervalSinceLast) : '--';
+Line 2445: document.getElementById('imgModal').style  -->  document.getElementById('imgModal').style.display = 'none';

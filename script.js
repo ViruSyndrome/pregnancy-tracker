@@ -1403,7 +1403,7 @@ function lsDel(key)                  { return _ls.del(key); }
     var rh = document.getElementById('resultHeadline');
     rh.innerHTML =
       '<div class="rh-week">You\'re ' + weekWord + ' pregnant! 🌸</div>' +
-      '<div class="rh-baby">Baby is the size of a <strong>' + ((weekData.singleMode || weekNum <= 2) ? weekData.size : (weekData[currentImageTab + 'Label'] || weekData.size)).toLowerCase() + '</strong>' + sizeNote + '</div>' +
+      '<div class="rh-baby">Baby is the size of a <strong>' + ((weekData.singleMode || r.weekNum <= 2) ? weekData.size : (weekData[currentImageTab + 'Label'] || weekData.size)).toLowerCase() + '</strong>' + sizeNote + '</div>' +
       '<div class="rh-sub">' + dueNote + '</div>';
       
     if (!window.isMainPage) {

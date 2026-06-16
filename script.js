@@ -1403,7 +1403,7 @@ function lsDel(key)                  { return _ls.del(key); }
     var rh = document.getElementById('resultHeadline');
     rh.innerHTML =
       '<div class="rh-week">You\'re ' + weekWord + ' pregnant! 🌸</div>' +
-      '<div class="rh-baby">Baby is the size of a <strong>' + weekData.size.toLowerCase() + '</strong>' + sizeNote + '</div>' +
+      '<div class="rh-baby">Baby is the size of a <strong>' + ((weekData.singleMode || weekNum <= 2) ? weekData.size : (weekData[currentImageTab + 'Label'] || weekData.size)).toLowerCase() + '</strong>' + sizeNote + '</div>' +
       '<div class="rh-sub">' + dueNote + '</div>';
       
     if (!window.isMainPage) {
@@ -1717,7 +1717,7 @@ function lsDel(key)                  { return _ls.del(key); }
       // Update headline when manually selecting a week so previous calc results don't stay visible
       document.getElementById('resultHeadline').innerHTML =
         '<div class="rh-week">Week ' + weekNum + ' selected</div>' +
-        '<div class="rh-baby">Baby is the size of a <strong>' + wd.size.toLowerCase() + '</strong>' +
+        '<div class="rh-baby">Baby is the size of a <strong>' + ((wd.singleMode || weekNum <= 2) ? wd.size : (wd[currentImageTab + 'Label'] || wd.size)).toLowerCase() + '</strong>' +
           (wd.size_mm > 0 ? ' — about ' + (wd.size_mm >= 10 ? (wd.size_mm / 10).toFixed(1) + ' cm long' : wd.size_mm + ' mm') : '') +
         '</div>' +
         '<div class="rh-sub">This is the week you tapped. The headline is now synced to the week card above.</div>';

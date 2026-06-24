@@ -1927,8 +1927,15 @@ function lsDel(key)                  { return _ls.del(key); }
     }
   }
 
+    if(typeof window._pwtBaseWeek === 'undefined') window._pwtBaseWeek = 1;
+  if(typeof window._pwtHoverWeek === 'undefined') window._pwtHoverWeek = null;
+
   function renderGrowthCurve(currentWeek) {
     try {
+      if (currentWeek !== null && currentWeek !== undefined) {
+        window._pwtBaseWeek = currentWeek;
+      }
+      
       var container = document.getElementById('growthGraph');
       if (!container) return;
       
@@ -1938,7 +1945,7 @@ function lsDel(key)                  { return _ls.del(key); }
       var chartW = W - padding.left - padding.right;
       var chartH = H - padding.top - padding.bottom;
       
-      var displayWeek = Math.max(1, Math.min(42, currentWeek || 1));
+      var displayWeek = Math.max(1, Math.min(42, window._pwtHoverWeek || window._pwtBaseWeek));
       var unit = chartW / 41;
       
       var lenPoints = [];
@@ -2019,6 +2026,16 @@ function lsDel(key)                  { return _ls.del(key); }
           '<animate attributeName="r" values="8;11;8" dur="2s" repeatCount="indefinite" />' +
         '</circle>';
 
+      var lenStrDisplay = currentLenPoint.val > 0 ? (currentLenPoint.val / 10).toFixed(1) + ' cm' : 'Microscopic';
+      var volStrDisplay = currentVolPoint.val > 0 ? (currentVolPoint.val >= 1000 ? (currentVolPoint.val / 1000).toFixed(2) + ' kg' : currentVolPoint.val + ' g') : '0 g';
+      
+      var tAnchor = displayWeek > 36 ? "end" : (displayWeek < 5 ? "start" : "middle");
+      var dx = displayWeek > 36 ? -15 : (displayWeek < 5 ? 15 : 0);
+
+      svg += 
+        '<text x="' + (currentLenPoint.x + dx) + '" y="' + (currentLenPoint.y - 15) + '" text-anchor="' + tAnchor + '" font-size="14" font-weight="800" fill="var(--primary)" filter="drop-shadow(0 2px 2px rgba(255,255,255,0.8))">' + lenStrDisplay + '</text>' +
+        '<text x="' + (currentVolPoint.x + dx) + '" y="' + (currentVolPoint.y + 25) + '" text-anchor="' + tAnchor + '" font-size="14" font-weight="800" fill="var(--accent)" filter="drop-shadow(0 2px 2px rgba(255,255,255,0.8))">' + volStrDisplay + '</text>';
+
       for (var i = 0; i < lenPoints.length; i++) {
         var lp = lenPoints[i];
         var vp = volPoints[i];
@@ -2032,7 +2049,9 @@ function lsDel(key)                  { return _ls.del(key); }
         
         svg += '<g class="graph-hover-point" style="cursor:pointer;">' +
           '<rect x="' + hoverX + '" y="' + padding.top + '" width="' + hoverW + '" height="' + chartH + '" fill="transparent">' +
-            '<title>Week ' + lp.week + ':\n• Length: ' + lenStr + ' (' + lp.label + ')\n• Volume: ' + volStr + ' (' + vp.label + ')</title>' +
+            '<title>Week ' + lp.week + ':
+  Length: ' + lenStr + ' (' + lp.label + ')
+  Volume: ' + volStr + ' (' + vp.label + ')</title>' +
           '</rect>' +
         '</g>';
       }
@@ -2051,6 +2070,38 @@ function lsDel(key)                  { return _ls.del(key); }
 
       svg += '</svg>';
       container.innerHTML = svg;
+      
+      // Setup interactivty
+      if (!container._hasHoverEvents) {
+        container._hasHoverEvents = true;
+        
+        function handleMove(e) {
+          var rect = container.getBoundingClientRect();
+          var cx = e.touches ? e.touches[0].clientX : e.clientX;
+          var x = cx - rect.left;
+          var ratio = x / rect.width;
+          
+          var svgX = ratio * 1000;
+          if (svgX < 85) svgX = 85;
+          if (svgX > 890) svgX = 890;
+          
+          var hoverWk = Math.round((svgX - 85) / (805 / 41)) + 1;
+          if (hoverWk !== window._pwtHoverWeek) {
+            window._pwtHoverWeek = hoverWk;
+            renderGrowthCurve(null);
+          }
+        }
+        
+        container.addEventListener('mousemove', handleMove);
+        container.addEventListener('touchmove', handleMove, {passive: true});
+        container.addEventListener('mouseleave', function() {
+          if (window._pwtHoverWeek !== null) {
+            window._pwtHoverWeek = null;
+            renderGrowthCurve(null);
+          }
+        });
+      }
+      
     } catch (e) { console.error("Graph Error:", e); }
   }
 

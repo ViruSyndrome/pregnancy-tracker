@@ -1144,6 +1144,9 @@ function lsDel(key)                  { return _ls.del(key); }
     // Also render immediately with fallback emojis (will be replaced once images load)
     renderWeeksTimeline(null);
     renderFAQ();
+    
+    // Render empty growth curve immediately
+    renderGrowthCurve(null);
 
     // Load from URL query params if present
     var params = new URLSearchParams(window.location.search);
@@ -1406,6 +1409,11 @@ function lsDel(key)                  { return _ls.del(key); }
       '<div class="rh-baby">Baby is the size of a <strong>' + ((weekData.singleMode || r.weekNum <= 2) ? weekData.size : (weekData[currentImageTab + 'Label'] || weekData.size)).toLowerCase() + '</strong>' + sizeNote + '</div>' +
       '<div class="rh-sub">' + dueNote + '</div>';
       
+    window.currentShareData = {
+      title: "My Pregnancy Tracker",
+      text: "I'm " + weekWord + " pregnant! My estimated due date is " + formatDisplayDate(r.dueDate) + ".",
+      url: window.location.origin
+    };
     if (!window.isMainPage) {
         rh.style.display = 'none';
     } else {

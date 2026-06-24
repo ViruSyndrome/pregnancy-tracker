@@ -2049,9 +2049,9 @@ function lsDel(key)                  { return _ls.del(key); }
         
         svg += '<g class="graph-hover-point" style="cursor:pointer;">' +
           '<rect x="' + hoverX + '" y="' + padding.top + '" width="' + hoverW + '" height="' + chartH + '" fill="transparent">' +
-            '<title>Week ' + lp.week + ':
-  Length: ' + lenStr + ' (' + lp.label + ')
-  Volume: ' + volStr + ' (' + vp.label + ')</title>' +
+            `<title>Week ${lp.week}:
+  Length: ${lenStr} (${lp.label})
+  Volume: ${volStr} (${vp.label})</title>` +
           '</rect>' +
         '</g>';
       }

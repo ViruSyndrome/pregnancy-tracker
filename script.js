@@ -1278,6 +1278,7 @@ function lsDel(key)                  { return _ls.del(key); }
 
     // Update currentResult object globally
     currentResult = { weekNum, daysExtra, dueDate, daysUntilDue, trimester, progress, lmpDate };
+    window.calculatedDueDate = dueDate;
 
     if (window.isMainPage) {
         // Redirect to the pSEO static page, passing the date in the URL
@@ -2683,3 +2684,17 @@ function lsDel(key)                  { return _ls.del(key); }
   window.predictGender = predictGender;
   window.selectGenderOpt = selectGenderOpt;
   window.toggleFAQ = toggleFAQ;
+
+function addDueToCalendar() {
+    if (!window.calculatedDueDate) return;
+    const date = new Date(window.calculatedDueDate);
+    const startString = date.toISOString().replace(/-|:|\.\d\d\d/g, '').substring(0, 8);
+    const endDate = new Date(date);
+    endDate.setDate(endDate.getDate() + 1);
+    const endString = endDate.toISOString().replace(/-|:|\.\d\d\d/g, '').substring(0, 8);
+    const title = encodeURIComponent('Estimated Due Date (EDD)');
+    const details = encodeURIComponent('Babys Estimated Due Date. Remember, only 4% of babies arrive exactly on this date!');
+    const url = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + title + '&dates=' + startString + '/' + endString + '&details=' + details;
+    window.open(url, '_blank');
+}
+

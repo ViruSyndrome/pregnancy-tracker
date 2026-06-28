@@ -140,11 +140,18 @@
     <div class="milestone-banner" id="milestoneBanner" hidden></div>
     <div class="trimester-bar-wrap" id="trimBar" hidden></div>
     <div class="week-card" id="weekCard"></div>
-    <div style="text-align: center; margin-top: 1.5rem;">
-      <button class="btn-calc" id="shareBtn" type="button" style="background-color: var(--secondary); margin: 0 auto; display: inline-flex; align-items: center; gap: 8px; justify-content: center;" onclick="shareResult()">
+    <div style="text-align: center; margin-top: 1.5rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+      <button class="btn-calc" id="shareBtn" type="button" style="background-color: var(--secondary); margin: 0; display: inline-flex; align-items: center; gap: 8px; justify-content: center;" onclick="shareResult()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
-        Save / Share My Due Date
+        Save / Share Due Date
       </button>
+      <button class="btn-calc" id="calendarBtn" type="button" style="background-color: #4285F4; margin: 0; display: inline-flex; align-items: center; gap: 8px; justify-content: center;" onclick="addDueToCalendar()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        Add to Google Calendar
+      </button>
+    </div>
+    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(239, 68, 68, 0.05); border-left: 3px solid var(--danger); border-radius: 4px; font-size: 0.85rem; color: var(--text-muted); text-align: left;">
+      <strong>Medical Disclaimer:</strong> This calculator provides estimates based on standard 280-day gestational models. Only 4% of babies are born on their exact due date. Always consult your healthcare provider or obstetrician for medical advice and accurate dating via ultrasound.
     </div>
   </div> <!-- END OF resultPanel -->
 
@@ -337,7 +344,7 @@
 <script>
   window.isMainPage = true;
 </script>
-<script src="script.js"></script>
+<script src="script.js" defer></script>
 
   <!-- Image Modal -->
   <div id="imgModal" class="img-modal" tabindex="-1" role="dialog" aria-modal="true" onclick="closeImgModal()">
@@ -369,3 +376,4 @@
   </script>
 </body>
 </html>
+

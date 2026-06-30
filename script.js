@@ -1216,7 +1216,6 @@ function lsDel(key)                  { return _ls.del(key); }
   // ─────────────────────────────────────────────────────────
   function calculate() {
     clearCalcError();
-    console.log('calculate button pressed');
     var lmpDate;
     var cycleLen = parseInt(document.getElementById('cycleLen').value) || 28;
     var today = new Date(); today.setHours(0,0,0,0);
@@ -1768,9 +1767,6 @@ function lsDel(key)                  { return _ls.del(key); }
       
       var htmlContent = generateWeekCardHtml(weekNum, wd, products, trimLabel, currentImageTab);
       
-      console.log("DEBUG: weekCard element in DOM:", weekCard);
-      console.log("DEBUG: length of generated HTML:", htmlContent ? htmlContent.length : 0);
-      console.log("DEBUG: generated HTML preview:", htmlContent ? htmlContent.substring(0, 100) + '...' : 'null');
       
       if (weekCard) {
         weekCard.innerHTML = htmlContent;
@@ -1784,7 +1780,6 @@ function lsDel(key)                  { return _ls.del(key); }
               : (wd[cardImgTab + 'Label'] || wd.size);
             heroBabySizeText.innerHTML = 'Your baby is the size of a <strong>' + sizeLabel + '</strong>. Discover exactly what is happening to your body and your baby this week.';
           }
-        console.log("DEBUG: innerHTML set. New child element count:", weekCard.childElementCount);
         weekCard.style.display = 'block'; // Ensure it's visible
         if (debug) debug.innerHTML += "<br>Successfully assigned innerHTML. Content length: " + htmlContent.length;
       } else {
@@ -2142,7 +2137,6 @@ function lsDel(key)                  { return _ls.del(key); }
     if ('wakeLock' in navigator) {
       try {
         wakeLock = await navigator.wakeLock.request('screen');
-        console.log('Wake Lock acquired');
       } catch (err) {
         console.warn('Wake Lock request failed:', err);
       }
@@ -2152,7 +2146,6 @@ function lsDel(key)                  { return _ls.del(key); }
     if (wakeLock !== null) {
       wakeLock.release().then(() => {
         wakeLock = null;
-        console.log('Wake Lock released');
       });
     }
   }

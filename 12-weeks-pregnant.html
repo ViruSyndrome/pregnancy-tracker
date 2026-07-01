@@ -106,7 +106,7 @@
             <!-- Week detail card (Will be dynamically populated by JS on load) -->
             <div class="week-card" id="weekCard"></div>
             
-            <!-- ── Growth Curve & Size Visualizer ── -->
+            <!-- Ã¢â€â‚¬Ã¢â€â‚¬ Growth Curve & Size Visualizer Ã¢â€â‚¬Ã¢â€â‚¬ -->
             <div class="ui-curated-section section-spaced">
               <div id="sizeVisualizerContainer"></div>
               <h2>Baby Growth Curve</h2>
@@ -114,7 +114,15 @@
               <div class="growth-graph growth-graph-wrap" id="growthGraph"></div>
             </div>
             
-            <div style="margin-top: 40px; display: flex; justify-content: space-between; gap:20px;">
+
+            <!-- Tools CTA -->
+            <div style="margin: 32px 0; padding: 18px 24px; background: var(--primary-light); border-radius: 16px; text-align: center;">
+              <p style="margin: 0 0 12px; font-size: 0.95rem; color: var(--text-muted); font-weight: 500;">Track your pregnancy journey</p>
+              <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                <a href="index.html#tracker" style="text-decoration: none; padding: 10px 20px; background: var(--primary); color: white; border-radius: 10px; font-weight: 600; font-size: 0.9rem; display: inline-block;">Calculate Your Due Date</a>
+                <a href="kick-counter.html" style="text-decoration: none; padding: 10px 20px; background: var(--accent); color: white; border-radius: 10px; font-weight: 600; font-size: 0.9rem; display: inline-block;">Baby Kick Counter</a>
+              </div>
+            </div>            <div style="margin-top: 40px; display: flex; justify-content: space-between; gap:20px;">
                <a href="11-weeks-pregnant.html" class="nav-btn" style="text-decoration:none; padding:12px 24px; background:linear-gradient(135deg,var(--primary),var(--accent)); border-radius:12px; color:white; font-weight:700; font-size:0.95rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display:flex; align-items:center; gap:8px; transition:all 0.2s ease;"><span style="font-size:1.2rem">&larr;</span> Week 11</a>
                <a href="13-weeks-pregnant.html" class="nav-btn" style="text-decoration:none; padding:12px 24px; background:linear-gradient(135deg,var(--primary),var(--accent)); border-radius:12px; color:white; font-weight:700; font-size:0.95rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display:flex; align-items:center; gap:8px; transition:all 0.2s ease;">Week 13 <span style="font-size:1.2rem">&rarr;</span></a>
             </div>
@@ -152,7 +160,7 @@
     </div>
     <div class="footer-copy">
       &copy; 2026 PregnancyWeekTracker. For informational purposes only &mdash; not medical advice.
-      <span class="footer-also-try">Also try: <a href="https://www.getniftyready.com">GetNiftyReady</a> &middot; <a href="https://www.getatsready.com">GetATSReady</a> &middot; <a href="https://www.globalvisamath.com">GlobalVisaMath</a> &middot; <a href="https://www.gpscamstamp.com">GPSCamStamp</a> &middot; <a href="https://www.globalvisamath.com">GlobalVisaMath</a> &middot; <a href="https://www.gpscamstamp.com">GPSCamStamp</a></span>
+      <span class="footer-also-try">Also try: <a href="https://www.getniftyready.com">GetNiftyReady</a> &middot; <a href="https://www.getatsready.com">GetATSReady</a> &middot; <a href="https://www.globalvisamath.com">GlobalVisaMath</a> &middot; <a href="https://www.gpscamstamp.com">GPSCamStamp</a></span>
     </div>
   </footer>
 
@@ -186,7 +194,7 @@
           if (btn.href) btn.href = btn.href.split('?')[0] + '?lmp=' + lmpParam;
         });
       } else {
-        // Organic Google visitor — no LMP known, show week card only
+        // Organic Google visitor Ã¢â‚¬â€ no LMP known, show week card only
         var statsCard = document.getElementById('statsCard');
         if (statsCard) statsCard.style.display = 'none';
         var resultPanel = document.getElementById('resultPanel');

@@ -1391,7 +1391,23 @@ function lsDel(key)                  { return _ls.del(key); }
     if (resultPanel) {
         resultPanel.style.display = 'block';
         setTimeout(function() { resultPanel.classList.add('reveal'); }, 50);
+        
+        // Trimester CTAs
+        var oldCtas = document.getElementById('trimester-ctas-container');
+        if (oldCtas) oldCtas.remove();
+        var ctas = '';
+        if (r.weekNum >= 28) { ctas += '<a href="kick-counter.html" style="display:inline-block; margin-top:15px; padding:8px 16px; background:#f43f5e; color:white; border-radius:20px; text-decoration:none; font-weight:600; margin-right:10px;">Track Kicks &rarr;</a>'; }
+        if (r.weekNum >= 36) { ctas += '<a href="contraction-timer.html" style="display:inline-block; margin-top:15px; padding:8px 16px; background:#8b5cf6; color:white; border-radius:20px; text-decoration:none; font-weight:600;">Time Contractions &rarr;</a>'; }
+        if (ctas) { 
+            var p = document.createElement('div');
+            p.id = 'trimester-ctas-container';
+            p.innerHTML = ctas;
+            p.style.textAlign = 'center';
+            p.style.marginBottom = '20px';
+            resultPanel.insertBefore(p, resultPanel.firstChild.nextSibling);
+        }
     }
+
     
     var weekData = WEEKS.find(function(w) { return w.week === r.weekNum; }) || WEEKS[WEEKS.length - 1];
     var trimLabel = ['First', 'Second', 'Third'][r.trimester - 1] + ' Trimester';
@@ -1713,6 +1729,21 @@ function lsDel(key)                  { return _ls.del(key); }
       if (resultPanel) {
         resultPanel.style.display = 'block';
         resultPanel.classList.add('reveal');
+        
+        // Trimester CTAs
+        var oldCtas = document.getElementById('trimester-ctas-container');
+        if (oldCtas) oldCtas.remove();
+        var ctas = '';
+        if (weekNum >= 28) { ctas += '<a href="kick-counter.html" style="display:inline-block; margin-top:15px; padding:8px 16px; background:#f43f5e; color:white; border-radius:20px; text-decoration:none; font-weight:600; margin-right:10px;">Track Kicks &rarr;</a>'; }
+        if (weekNum >= 36) { ctas += '<a href="contraction-timer.html" style="display:inline-block; margin-top:15px; padding:8px 16px; background:#8b5cf6; color:white; border-radius:20px; text-decoration:none; font-weight:600;">Time Contractions &rarr;</a>'; }
+        if (ctas) { 
+            var p = document.createElement('div');
+            p.id = 'trimester-ctas-container';
+            p.innerHTML = ctas;
+            p.style.textAlign = 'center';
+            p.style.marginBottom = '20px';
+            resultPanel.insertBefore(p, resultPanel.firstChild.nextSibling);
+        }
       }
       var shareRow = document.getElementById('shareRow');
       if (shareRow) shareRow.style.display = 'none';

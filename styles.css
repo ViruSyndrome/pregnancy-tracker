@@ -76,8 +76,7 @@
     .navbar {
       position: sticky; top: 0; z-index: 100;
       background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);`n      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       padding: 0 24px;
   }
@@ -132,8 +131,7 @@
       border-radius: 16px;
       border: 1px solid var(--border);
       background: rgba(255, 255, 255, 0.45);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);`n      backdrop-filter: blur(12px);
       font-size: 0.9rem;
       text-align: left;
       line-height: 1.5;
@@ -452,7 +450,7 @@
   }
     .week-chip {
       background: rgba(255, 255, 255, 0.4); border: 1px solid rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
       border-radius: 16px; padding: 18px 14px;
       min-height: 170px; justify-content: space-between;
       cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -637,7 +635,7 @@
     .gender-opt {
       padding: 5px 10px; border: 1.5px solid #e9d5ff; border-radius: 6px;
       font-size: 0.76rem; font-weight: 500; cursor: pointer; background: #fff;
-      transition: all 0.15s; color: var(--text); user-select: none; -webkit-user-select: none;
+      transition: all 0.15s; color: var(--text); -webkit-user-select: none; user-select: none;
   }
     .gender-opt:hover  { border-color: #7c3aed; background: #f5f3ff; }
     .gender-opt.selected { background: #7c3aed; color: #fff; border-color: #7c3aed; }
@@ -700,8 +698,7 @@
     /* ── GLASS CARDS ── */
     .glass-card {
       background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);`n      backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.4);
       border-radius: var(--radius);
       padding: 40px;
@@ -892,8 +889,7 @@ a[data-tooltip] {
   left: 50%;
   transform: translate(-50%, -6px);
   background: rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);`n      backdrop-filter: blur(8px);
   border: 1px solid rgba(244, 63, 94, 0.25);
   color: #fff;
   font-size: 0.78rem;

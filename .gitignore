@@ -1,2 +1,9 @@
 temp_build.js
 *.py
+node_modules/
+scratch/
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/

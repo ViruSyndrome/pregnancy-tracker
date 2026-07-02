@@ -1,13 +1,2 @@
-# Ignore temporary files
-/tmp_script*.js
-diff-index.txt
-
-# Ignore VS Code workspace
-.vscode/
-
+temp_build.js
 *.py
-*.js
-!script.js
-node_modules/
-*.png
-package*.json

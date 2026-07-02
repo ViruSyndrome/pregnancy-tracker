@@ -1043,3 +1043,5 @@ a[data-tooltip] {
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 .network-icon { font-size: 1.1rem; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }

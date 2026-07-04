@@ -1031,8 +1031,8 @@ function lsDel(key)                  { return _ls.del(key); }
 
   var USER_LOCALE = getAmazonLocale();
 
-  function amzLink(keyword) {
-    return 'https://www.' + USER_LOCALE.domain + '/s?k=' + encodeURIComponent(keyword) + '&tag=' + USER_LOCALE.tag;
+  function amzLink(asin) {
+    return 'https://www.' + USER_LOCALE.domain + '/dp/' + asin + '?tag=' + USER_LOCALE.tag;
 }
 
   function smoothScrollTo(element) {
@@ -1067,23 +1067,23 @@ function lsDel(key)                  { return _ls.del(key); }
   // ─────────────────────────────────────────────────────────
   var PRODUCTS = {
     t1: [
-      { icon: '💊', name: 'Prenatal Vitamins', why: 'Folic acid + iron + DHA for early development', keyword: 'prenatal vitamins' },
-      { icon: '🌊', name: 'Sea-Band Wristbands', why: 'Drug-free acupressure relief for morning sickness', keyword: 'sea band pregnancy' },
-      { icon: '🍪', name: 'Morning Sickness Crackers', why: 'Plain, easy-to-digest crackers for nausea and low appetite', keyword: 'saltine crackers' },
-      { icon: '📖', name: '"What to Expect When You\'re Expecting"', why: 'The most trusted pregnancy guide — covers every week', keyword: 'what to expect when expecting' },
-      { icon: '🫚', name: 'Pregnancy-Safe Body Oil', why: 'Start early to moisturise skin as it begins to stretch', keyword: 'bio oil pregnancy' }
+      { img: 'https://images.unsplash.com/photo-1584362917165-526a968579e8?auto=format&fit=crop&w=100&q=80', name: 'Prenatal Vitamins', why: 'Folic acid + iron + DHA for early development', asin: 'B07M6T3XBB' },
+      { img: 'https://images.unsplash.com/photo-1611078652433-855c3c0f6534?auto=format&fit=crop&w=100&q=80', name: 'Sea-Band Wristbands', why: 'Drug-free acupressure relief for morning sickness', asin: 'B001F731N0' },
+      { img: 'https://images.unsplash.com/photo-1590080874088-eec64895e423?auto=format&fit=crop&w=100&q=80', name: 'Morning Sickness Crackers', why: 'Plain, easy-to-digest crackers for nausea and low appetite', asin: 'B000GCEQZC' },
+      { img: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=100&q=80', name: '"What to Expect When You\'re Expecting"', why: 'The most trusted pregnancy guide — covers every week', asin: '0761187480' },
+      { img: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=100&q=80', name: 'Pregnancy-Safe Body Oil', why: 'Start early to moisturise skin as it begins to stretch', asin: 'B004HFGOMQ' }
     ],
     t2: [
-      { icon: '🛏️', name: 'U-Shaped Pregnancy Pillow', why: 'The most impactful purchase for sleep comfort in pregnancy', keyword: 'pregnancy pillow u shaped' },
-      { icon: '👗', name: 'Maternity Leggings \x26 Tops', why: 'Comfortable, bump-accommodating staples for everyday wear', keyword: 'maternity clothes' },
-      { icon: '🧴', name: 'Stretch Mark Cream', why: 'Shea butter and vitamin E to support skin elasticity', keyword: 'stretch mark cream pregnancy' },
-      { icon: '👶', name: 'Baby Names Book', why: 'Start the name conversation early — it takes longer than you think!', keyword: 'baby names book' }
+      { img: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=100&q=80', name: 'U-Shaped Pregnancy Pillow', why: 'The most impactful purchase for sleep comfort in pregnancy', asin: 'B07JMNP3YQ' },
+      { img: 'https://images.unsplash.com/photo-1506629082955-511b1aa562c8?auto=format&fit=crop&w=100&q=80', name: 'Maternity Leggings \x26 Tops', why: 'Comfortable, bump-accommodating staples for everyday wear', asin: 'B07Q85S2X2' },
+      { img: 'https://images.unsplash.com/photo-1629198688000-71f23e745b6e?auto=format&fit=crop&w=100&q=80', name: 'Stretch Mark Cream', why: 'Shea butter and vitamin E to support skin elasticity', asin: 'B001N45I7K' },
+      { img: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=100&q=80', name: 'Baby Names Book', why: 'Start the name conversation early — it takes longer than you think!', asin: 'B08F6TLNT8' }
     ],
     t3: [
-      { icon: '🎒', name: 'Hospital Bag Kit', why: 'Everything you need for labour, delivery, and the postnatal ward', keyword: 'hospital bag pregnancy kit' },
-      { icon: '📹', name: 'Baby Monitor (Video)', why: 'Peace of mind from day one — video + audio + breathing sensor', keyword: 'baby monitor video' },
-      { icon: '🤱', name: 'Nursing Bra Set (3-pack)', why: 'Essential for postpartum — whether breastfeeding or not', keyword: 'nursing bra set' },
-      { icon: '🍼', name: 'Muslin Swaddle Blankets', why: 'Swaddling calms newborns — you will go through 6+ per day', keyword: 'muslin swaddle blankets' }
+      { img: 'https://images.unsplash.com/photo-1551524164-687a55dd1126?auto=format&fit=crop&w=100&q=80', name: 'Hospital Bag Kit', why: 'Everything you need for labour, delivery, and the postnatal ward', asin: 'B08L7L37Q9' },
+      { img: 'https://images.unsplash.com/photo-1555252133-258eff9d6756?auto=format&fit=crop&w=100&q=80', name: 'Baby Monitor (Video)', why: 'Peace of mind from day one — video + audio + breathing sensor', asin: 'B01N3M7EZF' },
+      { img: 'https://images.unsplash.com/photo-1560243563-062bfc001d68?auto=format&fit=crop&w=100&q=80', name: 'Nursing Bra Set (3-pack)', why: 'Essential for postpartum — whether breastfeeding or not', asin: 'B01EFNPD7W' },
+      { img: 'https://images.unsplash.com/photo-1522771930-78848d9293e8?auto=format&fit=crop&w=100&q=80', name: 'Muslin Swaddle Blankets', why: 'Swaddling calms newborns — you will go through 6+ per day', asin: 'B0153RFTI0' }
     ]
 };
 
@@ -1544,12 +1544,12 @@ function lsDel(key)                  { return _ls.del(key); }
 
     var productsHtml = 
       '<div class="ui-curated-section" style="margin-top:24px">' +
-      '<h2>Recommended for ' + trimLabel + ' <span class="ui-badge" style="background:rgba(255,107,152,0.1);color:var(--accent);padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:700;text-transform:uppercase;margin-left:8px;border:1px solid rgba(255,107,152,0.2);">Affiliate</span></h2>' +
-      '<p class="tip-sub" style="font-size:0.8rem;color:var(--text-muted);line-height:1.65;margin-top:10px;margin-bottom:16px;font-style:italic;">Shop curated products for this stage of pregnancy. Clicking and purchasing supports this free tool at no extra cost to you.</p>' +
+      '<h2>Recommended for ' + trimLabel + '</h2>' +
+      '<p class="tip-sub" style="font-size:0.8rem;color:var(--text-muted);line-height:1.65;margin-top:10px;margin-bottom:16px;font-style:italic;">Note: As an Amazon Associate we earn from qualifying purchases. This supports our free tracker.</p>' +
       '<div class="ui-grid-layout">' +
       (products && products.length > 0 ? products.map(function(p) {
-        return '<a class="ui-grid-card" href="' + amzLink(p.keyword) + '" target="_blank" rel="noopener noreferrer">' +
-          '<div class="ui-grid-icon">' + p.icon + '</div>' +
+        return '<a class="ui-grid-card" href="' + amzLink(p.asin) + '" target="_blank" rel="noopener noreferrer" style="align-items:center;">' +
+          '<div class="ui-grid-icon" style="background:transparent; padding:0; height:48px; width:48px; border-radius:8px; overflow:hidden;"><img src="' + p.img + '" alt="' + p.name + '" style="width:100%; height:100%; object-fit:cover; display:block;"></div>' +
           '<div><div class="ui-grid-title">' + p.name + '</div><div class="ui-grid-desc">' + p.why + '</div></div>' +
           '</a>';
       }).join('') : '') +

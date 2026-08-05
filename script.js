@@ -1067,23 +1067,23 @@ function lsDel(key)                  { return _ls.del(key); }
   // ─────────────────────────────────────────────────────────
   var PRODUCTS = {
     t1: [
-      { img: 'https://images.unsplash.com/photo-1584362917165-526a968579e8?auto=format&fit=crop&w=100&q=80', name: 'Prenatal Vitamins', why: 'Folic acid + iron + DHA for early development', asin: 'B07M6T3XBB' },
-      { img: 'https://images.unsplash.com/photo-1611078652433-855c3c0f6534?auto=format&fit=crop&w=100&q=80', name: 'Sea-Band Wristbands', why: 'Drug-free acupressure relief for morning sickness', asin: 'B001F731N0' },
-      { img: 'https://images.unsplash.com/photo-1590080874088-eec64895e423?auto=format&fit=crop&w=100&q=80', name: 'Morning Sickness Crackers', why: 'Plain, easy-to-digest crackers for nausea and low appetite', asin: 'B000GCEQZC' },
-      { img: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=100&q=80', name: '"What to Expect When You\'re Expecting"', why: 'The most trusted pregnancy guide — covers every week', asin: '0761187480' },
-      { img: 'https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=100&q=80', name: 'Pregnancy-Safe Body Oil', why: 'Start early to moisturise skin as it begins to stretch', asin: 'B004HFGOMQ' }
+      { img: 'https://m.media-amazon.com/images/P/B07M6T3XBB.01._SCMZZZZZZZ_.jpg', name: 'Prenatal Vitamins', why: 'Folic acid + iron + DHA for early development', asin: 'B07M6T3XBB' },
+      { img: 'https://m.media-amazon.com/images/P/B001F731N0.01._SCMZZZZZZZ_.jpg', name: 'Sea-Band Wristbands', why: 'Drug-free acupressure relief for morning sickness', asin: 'B001F731N0' },
+      { img: 'https://m.media-amazon.com/images/P/B000GCEQZC.01._SCMZZZZZZZ_.jpg', name: 'Morning Sickness Crackers', why: 'Plain, easy-to-digest crackers for nausea and low appetite', asin: 'B000GCEQZC' },
+      { img: 'https://m.media-amazon.com/images/P/0761187480.01._SCMZZZZZZZ_.jpg', name: '"What to Expect When You\'re Expecting"', why: 'The most trusted pregnancy guide — covers every week', asin: '0761187480' },
+      { img: 'https://m.media-amazon.com/images/P/B004HFGOMQ.01._SCMZZZZZZZ_.jpg', name: 'Pregnancy-Safe Body Oil', why: 'Start early to moisturise skin as it begins to stretch', asin: 'B004HFGOMQ' }
     ],
     t2: [
-      { img: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=100&q=80', name: 'U-Shaped Pregnancy Pillow', why: 'The most impactful purchase for sleep comfort in pregnancy', asin: 'B07JMNP3YQ' },
-      { img: 'https://images.unsplash.com/photo-1506629082955-511b1aa562c8?auto=format&fit=crop&w=100&q=80', name: 'Maternity Leggings & Tops', why: 'Comfortable, bump-accommodating staples for everyday wear', asin: 'B07Q85S2X2' },
-      { img: 'https://images.unsplash.com/photo-1629198688000-71f23e745b6e?auto=format&fit=crop&w=100&q=80', name: 'Stretch Mark Cream', why: 'Shea butter and vitamin E to support skin elasticity', asin: 'B001N45I7K' },
-      { img: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=100&q=80', name: 'Baby Names Book', why: 'Start the name conversation early — it takes longer than you think!', asin: 'B08F6TLNT8' }
+      { img: 'https://m.media-amazon.com/images/P/B07JMNP3YQ.01._SCMZZZZZZZ_.jpg', name: 'U-Shaped Pregnancy Pillow', why: 'The most impactful purchase for sleep comfort in pregnancy', asin: 'B07JMNP3YQ' },
+      { img: 'https://m.media-amazon.com/images/P/B07Q85S2X2.01._SCMZZZZZZZ_.jpg', name: 'Maternity Leggings & Tops', why: 'Comfortable, bump-accommodating staples for everyday wear', asin: 'B07Q85S2X2' },
+      { img: 'https://m.media-amazon.com/images/P/B001N45I7K.01._SCMZZZZZZZ_.jpg', name: 'Stretch Mark Cream', why: 'Shea butter and vitamin E to support skin elasticity', asin: 'B001N45I7K' },
+      { img: 'https://m.media-amazon.com/images/P/B08F6TLNT8.01._SCMZZZZZZZ_.jpg', name: 'Baby Names Book', why: 'Start the name conversation early — it takes longer than you think!', asin: 'B08F6TLNT8' }
     ],
     t3: [
-      { img: 'https://images.unsplash.com/photo-1551524164-687a55dd1126?auto=format&fit=crop&w=100&q=80', name: 'Hospital Bag Kit', why: 'Everything you need for labour, delivery, and the postnatal ward', asin: 'B08L7L37Q9' },
-      { img: 'https://images.unsplash.com/photo-1555252133-258eff9d6756?auto=format&fit=crop&w=100&q=80', name: 'Baby Monitor (Video)', why: 'Peace of mind from day one — video + audio + breathing sensor', asin: 'B01N3M7EZF' },
-      { img: 'https://images.unsplash.com/photo-1560243563-062bfc001d68?auto=format&fit=crop&w=100&q=80', name: 'Nursing Bra Set (3-pack)', why: 'Essential for postpartum — whether breastfeeding or not', asin: 'B01EFNPD7W' },
-      { img: 'https://images.unsplash.com/photo-1522771930-78848d9293e8?auto=format&fit=crop&w=100&q=80', name: 'Muslin Swaddle Blankets', why: 'Swaddling calms newborns — you will go through 6+ per day', asin: 'B0153RFTI0' }
+      { img: 'https://m.media-amazon.com/images/P/B08L7L37Q9.01._SCMZZZZZZZ_.jpg', name: 'Hospital Bag Kit', why: 'Everything you need for labour, delivery, and the postnatal ward', asin: 'B08L7L37Q9' },
+      { img: 'https://m.media-amazon.com/images/P/B01N3M7EZF.01._SCMZZZZZZZ_.jpg', name: 'Baby Monitor (Video)', why: 'Peace of mind from day one — video + audio + breathing sensor', asin: 'B01N3M7EZF' },
+      { img: 'https://m.media-amazon.com/images/P/B01EFNPD7W.01._SCMZZZZZZZ_.jpg', name: 'Nursing Bra Set (3-pack)', why: 'Essential for postpartum — whether breastfeeding or not', asin: 'B01EFNPD7W' },
+      { img: 'https://m.media-amazon.com/images/P/B0153RFTI0.01._SCMZZZZZZZ_.jpg', name: 'Muslin Swaddle Blankets', why: 'Swaddling calms newborns — you will go through 6+ per day', asin: 'B0153RFTI0' }
     ]
   };
 

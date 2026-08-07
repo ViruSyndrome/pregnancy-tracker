@@ -4,7 +4,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $hostName = 'www.pregnancyweektracker.com'
-$key = '36937569df68561d14618be359da1876'
+$key = '4b8e2d1f0a9c43e7b6d215f9c4a8e731'
 $keyLocation = "https://$hostName/$key.txt"
 $sitemapPath = Join-Path $PSScriptRoot 'sitemap.xml'
 

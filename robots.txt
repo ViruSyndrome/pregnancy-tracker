@@ -3,6 +3,9 @@ Allow: /
 
 Sitemap: https://www.pregnancyweektracker.com/sitemap.xml
 
+# IndexNow key
+# https://www.pregnancyweektracker.com/36937569df68561d14618be359da1876.txt
+
 # AI crawlers
 User-agent: GPTBot
 Allow: /

@@ -1035,6 +1035,43 @@ function lsDel(key)                  { return _ls.del(key); }
     return 'https://www.' + USER_LOCALE.domain + '/dp/' + asin + '?tag=' + USER_LOCALE.tag;
 }
 
+  function escapeHtml(value) {
+    return String(value == null ? '' : value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function getAffiliateFallbackSrc(asin) {
+    if (!asin) return '';
+    return 'https://images-na.ssl-images-amazon.com/images/P/' + asin + '.01._SX160_SY160_.jpg';
+  }
+
+  function handleAffiliateImageFallback(img) {
+    if (!img) return;
+    var fallbackSrc = img.getAttribute('data-fallback-src') || '';
+    var triedFallback = img.getAttribute('data-fallback-tried') === '1';
+    if (!triedFallback && fallbackSrc) {
+      img.setAttribute('data-fallback-tried', '1');
+      img.src = fallbackSrc;
+      return;
+    }
+    img.src = 'assets/affiliate-placeholder.svg';
+    img.style.objectFit = 'contain';
+    img.style.padding = '6px';
+    img.style.background = '#f8fafc';
+  }
+
+  function validateAffiliateImage(img) {
+    if (!img) return;
+    // Amazon occasionally returns a 1x1 tracking placeholder instead of a product image.
+    if (img.naturalWidth <= 1 || img.naturalHeight <= 1) {
+      handleAffiliateImageFallback(img);
+    }
+  }
+
   function smoothScrollTo(element) {
     if (!element) return;
     setTimeout(function() {
@@ -1548,9 +1585,14 @@ function lsDel(key)                  { return _ls.del(key); }
       '<p class="tip-sub" style="font-size:0.8rem;color:var(--text-muted);line-height:1.65;margin-top:10px;margin-bottom:16px;font-style:italic;">Note: As an Amazon Associate we earn from qualifying purchases. This supports our free tracker.</p>' +
       '<div class="ui-grid-layout">' +
       (products && products.length > 0 ? products.map(function(p) {
-        return '<a class="ui-grid-card" href="' + amzLink(p.asin) + '" target="_blank" rel="noopener noreferrer" style="align-items:center;">' +
-          '<div class="ui-grid-icon" style="background:transparent; padding:0; height:48px; width:48px; border-radius:8px; overflow:hidden;"><img src="' + p.img + '" alt="' + p.name + '" style="width:100%; height:100%; object-fit:cover; display:block;"></div>' +
-          '<div><div class="ui-grid-title">' + p.name + '</div><div class="ui-grid-desc">' + p.why + '</div></div>' +
+        var safeName = escapeHtml(p.name);
+        var safeWhy = escapeHtml(p.why);
+        var safeImg = escapeHtml(p.img);
+        var fallbackSrc = escapeHtml(getAffiliateFallbackSrc(p.asin));
+        var productUrl = escapeHtml(amzLink(p.asin));
+        return '<a class="ui-grid-card" href="' + productUrl + '" target="_blank" rel="noopener noreferrer" style="align-items:center;">' +
+          '<div class="ui-grid-icon" style="background:transparent; padding:0; height:48px; width:48px; border-radius:8px; overflow:hidden;"><img src="' + safeImg + '" alt="' + safeName + '" data-fallback-src="' + fallbackSrc + '" data-fallback-tried="0" onerror="handleAffiliateImageFallback(this)" onload="validateAffiliateImage(this)" style="width:100%; height:100%; object-fit:cover; display:block;"></div>' +
+          '<div><div class="ui-grid-title">' + safeName + '</div><div class="ui-grid-desc">' + safeWhy + '</div></div>' +
           '</a>';
       }).join('') : '') +
       '</div></div>';

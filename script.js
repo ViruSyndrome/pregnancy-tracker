@@ -1102,25 +1102,28 @@ function lsDel(key)                  { return _ls.del(key); }
   //  PRODUCT RECOMMENDATIONS BY TRIMESTER
   //  Links auto-switch between amazon.in / .com / .co.uk / .ca / .com.au
   // ─────────────────────────────────────────────────────────
+  // Note: Amazon's m.media-amazon.com/images/P/{ASIN} guess only resolves when the ASIN
+  // happens to match Amazon's internal image ID — most do not, and return a 43-byte
+  // placeholder pixel. Verified-real Amazon photos are kept; the rest use local icons.
   var PRODUCTS = {
     t1: [
-      { img: 'https://m.media-amazon.com/images/P/B07M6T3XBB.01._SCMZZZZZZZ_.jpg', name: 'Prenatal Vitamins', why: 'Folic acid + iron + DHA for early development', asin: 'B07M6T3XBB' },
+      { img: 'assets/affiliate-icons/vitamins.svg', name: 'Prenatal Vitamins', why: 'Folic acid + iron + DHA for early development', asin: 'B07M6T3XBB' },
       { img: 'https://m.media-amazon.com/images/P/B001F731N0.01._SCMZZZZZZZ_.jpg', name: 'Sea-Band Wristbands', why: 'Drug-free acupressure relief for morning sickness', asin: 'B001F731N0' },
-      { img: 'https://m.media-amazon.com/images/P/B000GCEQZC.01._SCMZZZZZZZ_.jpg', name: 'Morning Sickness Crackers', why: 'Plain, easy-to-digest crackers for nausea and low appetite', asin: 'B000GCEQZC' },
+      { img: 'assets/affiliate-icons/crackers.svg', name: 'Morning Sickness Crackers', why: 'Plain, easy-to-digest crackers for nausea and low appetite', asin: 'B000GCEQZC' },
       { img: 'https://m.media-amazon.com/images/P/0761187480.01._SCMZZZZZZZ_.jpg', name: '"What to Expect When You\'re Expecting"', why: 'The most trusted pregnancy guide — covers every week', asin: '0761187480' },
-      { img: 'https://m.media-amazon.com/images/P/B004HFGOMQ.01._SCMZZZZZZZ_.jpg', name: 'Pregnancy-Safe Body Oil', why: 'Start early to moisturise skin as it begins to stretch', asin: 'B004HFGOMQ' }
+      { img: 'assets/affiliate-icons/body-oil.svg', name: 'Pregnancy-Safe Body Oil', why: 'Start early to moisturise skin as it begins to stretch', asin: 'B004HFGOMQ' }
     ],
     t2: [
-      { img: 'https://m.media-amazon.com/images/P/B07JMNP3YQ.01._SCMZZZZZZZ_.jpg', name: 'U-Shaped Pregnancy Pillow', why: 'The most impactful purchase for sleep comfort in pregnancy', asin: 'B07JMNP3YQ' },
-      { img: 'https://m.media-amazon.com/images/P/B07Q85S2X2.01._SCMZZZZZZZ_.jpg', name: 'Maternity Leggings & Tops', why: 'Comfortable, bump-accommodating staples for everyday wear', asin: 'B07Q85S2X2' },
-      { img: 'https://m.media-amazon.com/images/P/B001N45I7K.01._SCMZZZZZZZ_.jpg', name: 'Stretch Mark Cream', why: 'Shea butter and vitamin E to support skin elasticity', asin: 'B001N45I7K' },
-      { img: 'https://m.media-amazon.com/images/P/B08F6TLNT8.01._SCMZZZZZZZ_.jpg', name: 'Baby Names Book', why: 'Start the name conversation early — it takes longer than you think!', asin: 'B08F6TLNT8' }
+      { img: 'assets/affiliate-icons/pillow.svg', name: 'U-Shaped Pregnancy Pillow', why: 'The most impactful purchase for sleep comfort in pregnancy', asin: 'B07JMNP3YQ' },
+      { img: 'assets/affiliate-icons/clothing.svg', name: 'Maternity Leggings & Tops', why: 'Comfortable, bump-accommodating staples for everyday wear', asin: 'B07Q85S2X2' },
+      { img: 'assets/affiliate-icons/cream.svg', name: 'Stretch Mark Cream', why: 'Shea butter and vitamin E to support skin elasticity', asin: 'B001N45I7K' },
+      { img: 'assets/affiliate-icons/book.svg', name: 'Baby Names Book', why: 'Start the name conversation early — it takes longer than you think!', asin: 'B08F6TLNT8' }
     ],
     t3: [
-      { img: 'https://m.media-amazon.com/images/P/B08L7L37Q9.01._SCMZZZZZZZ_.jpg', name: 'Hospital Bag Kit', why: 'Everything you need for labour, delivery, and the postnatal ward', asin: 'B08L7L37Q9' },
-      { img: 'https://m.media-amazon.com/images/P/B01N3M7EZF.01._SCMZZZZZZZ_.jpg', name: 'Baby Monitor (Video)', why: 'Peace of mind from day one — video + audio + breathing sensor', asin: 'B01N3M7EZF' },
+      { img: 'assets/affiliate-icons/bag.svg', name: 'Hospital Bag Kit', why: 'Everything you need for labour, delivery, and the postnatal ward', asin: 'B08L7L37Q9' },
+      { img: 'assets/affiliate-icons/monitor.svg', name: 'Baby Monitor (Video)', why: 'Peace of mind from day one — video + audio + breathing sensor', asin: 'B01N3M7EZF' },
       { img: 'https://m.media-amazon.com/images/P/B01EFNPD7W.01._SCMZZZZZZZ_.jpg', name: 'Nursing Bra Set (3-pack)', why: 'Essential for postpartum — whether breastfeeding or not', asin: 'B01EFNPD7W' },
-      { img: 'https://m.media-amazon.com/images/P/B0153RFTI0.01._SCMZZZZZZZ_.jpg', name: 'Muslin Swaddle Blankets', why: 'Swaddling calms newborns — you will go through 6+ per day', asin: 'B0153RFTI0' }
+      { img: 'assets/affiliate-icons/blanket.svg', name: 'Muslin Swaddle Blankets', why: 'Swaddling calms newborns — you will go through 6+ per day', asin: 'B0153RFTI0' }
     ]
   };
 
@@ -1588,7 +1591,8 @@ function lsDel(key)                  { return _ls.del(key); }
         var safeName = escapeHtml(p.name);
         var safeWhy = escapeHtml(p.why);
         var safeImg = escapeHtml(p.img);
-        var fallbackSrc = escapeHtml(getAffiliateFallbackSrc(p.asin));
+        var isRemoteImg = /^https?:\/\//.test(p.img);
+        var fallbackSrc = escapeHtml(isRemoteImg ? getAffiliateFallbackSrc(p.asin) : '');
         var productUrl = escapeHtml(amzLink(p.asin));
         return '<a class="ui-grid-card" href="' + productUrl + '" target="_blank" rel="noopener noreferrer" style="align-items:center;">' +
           '<div class="ui-grid-icon" style="background:transparent; padding:0; height:48px; width:48px; border-radius:8px; overflow:hidden;"><img src="' + safeImg + '" alt="' + safeName + '" data-fallback-src="' + fallbackSrc + '" data-fallback-tried="0" onerror="handleAffiliateImageFallback(this)" onload="validateAffiliateImage(this)" style="width:100%; height:100%; object-fit:cover; display:block;"></div>' +

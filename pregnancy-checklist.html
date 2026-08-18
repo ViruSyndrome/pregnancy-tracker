@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pregnancy Week-by-Week Checklist | Free Printable</title>
+  <meta name="description" content="A free, medically-reviewed, printable pregnancy week-by-week checklist. Ensure you hit every milestone, appointment, and preparation step before your baby arrives.">
+  <link rel="canonical" href="https://www.pregnancyweektracker.com/pregnancy-checklist.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=9">
+  
+  <meta property="og:title" content="Pregnancy Week-by-Week Checklist | Free Printable">
+  <meta property="og:site_name" content="Pregnancy Week Tracker">
+  <meta property="og:description" content="A free, medically-reviewed, printable pregnancy week-by-week checklist.">
+  <meta property="og:url" content="https://www.pregnancyweektracker.com/pregnancy-checklist.html">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://www.pregnancyweektracker.com/og-image.webp">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .checklist-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      margin: 40px auto;
+      max-width: 800px;
+      box-shadow: 0 10px 30px rgba(190, 24, 93, 0.05);
+    }
+    .print-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .print-btn:hover { background: var(--primary-dark); }
+    
+    .trimester-section { margin-top: 40px; margin-bottom: 32px; }
+    .trimester-section h2 {
+      color: var(--primary);
+      margin-bottom: 24px;
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 8px;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .checklist-box {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--text-muted);
+      border-radius: 6px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .checklist-text {
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .checklist-text strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+    .checklist-text a {
+      color: var(--primary);
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    @media print {
+      body { background: white !important; }
+      .navbar, .footer-global, .no-print { display: none !important; }
+      .checklist-container { box-shadow: none; border: none; padding: 0; margin: 0; max-width: 100%; }
+      h1 { font-size: 24pt; margin-bottom: 10px; }
+      .checklist-box { border-color: #000; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand nav-brand-link">
+        <img src="favicon.svg" alt="PWT Logo" class="nav-brand-img" />
+        <div class="nav-brand-text">Pregnancy<span class="text-accent">Week</span>Tracker</div>
+      </a>
+      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
+      <div class="nav-links">
+        <a href="index.html#tracker">Calculator</a>
+        <a href="index.html#all-weeks">Timeline</a>
+        <a href="kick-counter.html">Kick Counter</a>
+        <a href="contraction-timer.html">Contraction Timer</a>
+        <a href="gender-predictor.html">Gender Predictor</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container checklist-container">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 16px;">
+         <h1 style="font-size:2.5rem; line-height:1.2;">Ultimate Pregnancy<br>Week-by-Week Checklist</h1>
+         <button class="print-btn no-print" onclick="window.print()">
+           <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+           Print Checklist
+         </button>
+      </div>
+      <p style="color:var(--text-muted); margin-top:16px; font-size:1.1rem;">A comprehensive, medically-reviewed checklist for every stage of your pregnancy to ensure you never miss a milestone or appointment.</p>
+      
+      <div class="trimester-section">
+        <h2>First Trimester (Weeks 1-13)</h2>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 4:</strong> Take a home pregnancy test and schedule your first prenatal appointment (usually set for week 8).</div></div>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 5:</strong> Start taking a daily prenatal vitamin containing at least 400mcg of folic acid.</div></div>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 6:</strong> Adjust your diet: avoid raw fish, undercooked meats, unpasteurized cheese, and excess caffeine.</div></div>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 8:</strong> Attend your first ultrasound (dating scan) and confirm the heartbeat and due date.</div></div>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 10:</strong> Start moisturizing your belly daily to soothe stretching skin and reduce itchiness.</div></div>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 12:</strong> Discuss Non-Invasive Prenatal Testing (NIPT) and genetic screening with your healthcare provider.</div></div>
+      </div>
+
+      <div class="trimester-section">
+        <h2>Second Trimester (Weeks 14-27)</h2>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 14:</strong> Welcome to the "honeymoon phase"! Start shopping for maternity clothes as your bump grows.</div></div>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 16:</strong> Start a baby registry and begin researching pediatricians in your local area.</div></div>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 20:</strong> Attend your mid-pregnancy anatomy scan (Level II ultrasound). Find out the sex if you wish!</div></div>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 22:</strong> Research and sign up for childbirth education classes and lactation consultations.</div></div>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 24:</strong> Take your glucose screening test to check for gestational diabetes.</div></div>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 26:</strong> Plan your baby shower or "babymoon" before travel becomes too uncomfortable.</div></div>
+      </div>
+
+      <div class="trimester-section">
+        <h2>Third Trimester (Weeks 28-40+)</h2>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 28:</strong> Start tracking fetal movements. Use a <a href="kick-counter.html">kick counter</a> daily to ensure your baby is active.</div></div>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 30:</strong> Finalize your birth plan and discuss your preferences and pain management with your provider.</div></div>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 32:</strong> Install the infant car seat and consider having it inspected by a certified technician.</div></div>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 34:</strong> Pack your hospital bag for yourself, your partner, and the baby. Keep it near the door.</div></div>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 36:</strong> Undergo Group B Strep (GBS) testing. Wash the baby's clothes and finalize the nursery.</div></div>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 38:</strong> Know the signs of true labor vs. Braxton Hicks. Familiarize yourself with a <a href="contraction-timer.html">contraction timer</a>.</div></div>
+        <div class="checklist-item"><div class="checklist-box"></div><div class="checklist-text"><strong>Week 40:</strong> Relax, rest, and wait. Try natural ways to induce labor (like walking), but know your baby will arrive when they are ready!</div></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer-global no-print">
+    <div style="max-width:900px; margin:0 auto; padding: 40px 20px; text-align:center; color: var(--text-muted);">
+      <div style="margin-bottom: 16px;">
+        <a href="/" style="color:var(--text-muted); text-decoration:none; margin: 0 10px;">Home</a>
+        <a href="about.html" style="color:var(--text-muted); text-decoration:none; margin: 0 10px;">About</a>
+        <a href="contact.html" style="color:var(--text-muted); text-decoration:none; margin: 0 10px;">Contact</a>
+        <a href="privacy.html" style="color:var(--text-muted); text-decoration:none; margin: 0 10px;">Privacy Policy</a>
+      </div>
+      <p style="font-size: 0.9rem;">&copy; 2026 PregnancyWeekTracker.com. All rights reserved. <br>Disclaimer: This site is for educational purposes only and does not provide medical advice.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

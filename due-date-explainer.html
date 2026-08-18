@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How is the Due Date Calculated? Week-Counting Explained</title>
+  <meta name="description" content="Why is pregnancy 40 weeks instead of 9 months? Learn exactly how due dates are calculated, what LMP means, and how pregnancy weeks are actually counted.">
+  <link rel="canonical" href="https://www.pregnancyweektracker.com/due-date-explainer.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=9">
+  
+  <meta property="og:title" content="How is Your Due Date Calculated?">
+  <meta property="og:site_name" content="Pregnancy Week Tracker">
+  <meta property="og:description" content="Why is pregnancy 40 weeks? Learn the math behind due dates and week counting.">
+  <meta property="og:url" content="https://www.pregnancyweektracker.com/due-date-explainer.html">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://www.pregnancyweektracker.com/og-image.webp">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .explainer-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      margin: 40px auto;
+      max-width: 800px;
+      box-shadow: 0 10px 30px rgba(190, 24, 93, 0.05);
+    }
+    .explainer-content h2 {
+      color: var(--primary);
+      margin-top: 32px;
+      margin-bottom: 16px;
+      font-size: 1.5rem;
+    }
+    .explainer-content p {
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    .math-box {
+      background: #f8fafc;
+      border-left: 4px solid var(--accent);
+      padding: 20px;
+      margin: 24px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .math-box h3 {
+      margin-top: 0;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .math-box p {
+      margin-bottom: 8px;
+    }
+    .math-box p:last-child {
+      margin-bottom: 0;
+    }
+    .highlight {
+      background: var(--primary-light);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand nav-brand-link">
+        <img src="favicon.svg" alt="PWT Logo" class="nav-brand-img" />
+        <div class="nav-brand-text">Pregnancy<span class="text-accent">Week</span>Tracker</div>
+      </a>
+      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
+      <div class="nav-links">
+        <a href="index.html#tracker">Calculator</a>
+        <a href="index.html#all-weeks">Timeline</a>
+        <a href="kick-counter.html">Kick Counter</a>
+        <a href="contraction-timer.html">Contraction Timer</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container explainer-container">
+      <h1 style="font-size:2.5rem; line-height:1.2; margin-bottom: 16px;">How is the Due Date Calculated? The Math of Pregnancy</h1>
+      
+      <div class="ymyl-trust-block" style="padding: 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; font-size: 0.85rem; color: #475569; display: flex; align-items: flex-start; gap: 12px; margin-bottom: 32px;">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0; color:#0ea5e9; margin-top:2px;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+        <div>
+          <strong>Medical & Editorial Review</strong><br>
+          Content reviewed against <a href="https://www.acog.org/clinical/clinical-guidance/committee-opinion/articles/2017/05/methods-for-estimating-the-due-date" target="_blank" rel="noopener noreferrer" style="color:var(--primary); text-decoration:underline;">ACOG Committee Opinion No. 700</a> on estimating due dates.<br>
+          <em>Last reviewed: August 2026. This information is for educational purposes only. Always consult your healthcare provider.</em>
+        </div>
+      </div>
+
+      <div class="explainer-content">
+        <p>One of the most confusing parts of early pregnancy is understanding how weeks are counted. If pregnancy is 9 months, why does everyone say it's 40 weeks? (Since 40 weeks is technically closer to 10 months!).</p>
+        <p>Furthermore, why does your doctor say you are "4 weeks pregnant" on the exact day you missed your period—when you likely only conceived 2 weeks ago?</p>
+        <p>Let's break down the clinical math behind how pregnancy weeks and due dates are actually calculated.</p>
+
+        <h2>The LMP Rule (Last Menstrual Period)</h2>
+        <p>Historically, before ultrasound technology existed, it was impossible to know exactly when ovulation or conception occurred. However, women almost always knew the date their last period started.</p>
+        <p>Because of this, the medical community standardized pregnancy tracking based on the <strong>first day of your Last Menstrual Period (LMP)</strong>.</p>
+        
+        <div class="math-box">
+          <h3>The 40-Week Math</h3>
+          <p>By medical standards, a full-term pregnancy lasts <strong>280 days (or exactly 40 weeks)</strong> starting from the first day of your LMP.</p>
+          <p>This means that during <strong>Week 1 and Week 2</strong> of your "pregnancy," you are not actually pregnant yet! Your body is simply preparing for ovulation. Conception typically occurs at the end of Week 2.</p>
+        </div>
+
+        <h2>Naegele's Rule</h2>
+        <p>If you don't have a calculator handy, doctors use a simple formula called Naegele's Rule to estimate the Estimated Date of Delivery (EDD):</p>
+        <p><strong>Step 1:</strong> Take the first day of your last period.<br>
+        <strong>Step 2:</strong> Add 7 days.<br>
+        <strong>Step 3:</strong> Subtract 3 months.</p>
+        <p><em>Example:</em> If your LMP was November 1st, adding 7 days gives you November 8th. Subtracting 3 months gives you August 8th as your due date.</p>
+
+        <h2>What if My Cycle Isn't 28 Days?</h2>
+        <p>The standard LMP calculation assumes a perfect 28-day cycle with ovulation occurring exactly on day 14. If you have longer or shorter cycles, Naegele's Rule becomes slightly inaccurate.</p>
+        <p>This is why <span class="highlight">ultrasound dating</span> is the gold standard in modern obstetrics.</p>
+
+        <h2>The Ultrasound "Dating Scan"</h2>
+        <p>Between 8 and 12 weeks of pregnancy, you will likely have a dating ultrasound. The sonographer will measure the fetus from the top of its head to its bottom (Crown-Rump Length, or CRL).</p>
+        <p>Because early fetal growth is incredibly uniform across all pregnancies, the CRL provides a highly accurate estimate of exactly how many weeks pregnant you are. If the ultrasound due date differs from your LMP due date by more than 5-7 days, your doctor will usually change your official due date to match the ultrasound.</p>
+
+        <h2>Is the Due Date a Guarantee?</h2>
+        <p>No! The Estimated Date of Delivery (EDD) is exactly that—an estimate. It simply marks the 40-week point. Only about <strong>4% to 5% of babies</strong> are actually born on their exact due date.</p>
+        <p>A pregnancy is considered "full-term" anywhere between 37 weeks and 42 weeks, giving you a 5-week window in which it is perfectly normal and healthy for your baby to arrive.</p>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer-global">
+    <div style="max-width:900px; margin:0 auto; padding: 40px 20px; text-align:center; color: var(--text-muted);">
+      <p style="font-size: 0.9rem;">&copy; 2026 PregnancyWeekTracker.com. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

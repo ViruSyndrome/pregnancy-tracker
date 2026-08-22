@@ -6,7 +6,7 @@
   <script src="https://js.sentry-cdn.com/d62024e9014b97cc89780c4a0051997e.min.js" crossorigin="anonymous"></script>
   <script>
     Sentry.onLoad(function() {
-      Sentry.init({ tracesSampleRate: 1.0, replaysSessionSampleRate: 0.1, replaysOnErrorSampleRate: 1.0 });
+      Sentry.init({ ignoreErrors: [/pageContext/i, /adsbygoogle/i, /@context/i], tracesSampleRate: 1.0, replaysSessionSampleRate: 0.1, replaysOnErrorSampleRate: 1.0 });
     });
   </script>
   <title>6 Weeks Pregnant: Baby Size, Symptoms & Development | Pregnancy Week Tracker</title>

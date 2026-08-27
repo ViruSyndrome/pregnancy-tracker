@@ -1900,8 +1900,27 @@ function lsDel(key)                  { return _ls.del(key); }
         '</div>' +
         '<div class="faq-a" id="fa' + i + '">' + f.a + '</div>' +
         '</div>';
-  }).join('');
-}
+    }).join('');
+
+    var schema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": FAQS.map(function(f) {
+        return {
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": f.a
+          }
+        };
+      })
+    };
+    var script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(schema);
+    document.head.appendChild(script);
+  }
 
   function toggleFAQ(i) {
     var q = document.getElementById('fq' + i);

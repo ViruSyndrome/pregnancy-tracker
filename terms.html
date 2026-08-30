@@ -8,7 +8,7 @@
   <script src="https://js.sentry-cdn.com/2510c386e2467c8dc3aad62f23805e09.min.js" crossorigin="anonymous"></script>
   <script>
     Sentry.onLoad(function() {
-      Sentry.init({ ignoreErrors: [/pageContext/i, /adsbygoogle/i, /@context/i], 
+      Sentry.init({ ignoreErrors: [/pageContext/i, /adsbygoogle/i, /@context/i, "Script error."], 
         tracesSampleRate: 1.0,
         replaysSessionSampleRate: 0.1,
         replaysOnErrorSampleRate: 1.0,

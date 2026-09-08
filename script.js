@@ -1000,9 +1000,6 @@ function lsDel(key)                  { return _ls.del(key); }
     'en-IN': { domain: 'amazon.in',  tag: 'pregnancyweek-21' },
     'hi':    { domain: 'amazon.in',  tag: 'pregnancyweek-21' },
     'hi-IN': { domain: 'amazon.in',  tag: 'pregnancyweek-21' },
-    'en-GB': { domain: 'amazon.co.uk', tag: 'pregnancywe08-20' },
-    'en-AU': { domain: 'amazon.com.au', tag: 'pregnancywe08-20' },
-    'en-CA': { domain: 'amazon.ca',  tag: 'pregnancywe08-20' },
     'default': { domain: 'amazon.com', tag: 'pregnancywe08-20' }
 };
 
@@ -1019,13 +1016,7 @@ function lsDel(key)                  { return _ls.del(key); }
         return AMAZON_LOCALES['en-IN'];
     }
   } catch(e) {}
-    // UK visitors
-    if (lang === 'en-gb') return AMAZON_LOCALES['en-GB'];
-    // Australia
-    if (lang === 'en-au') return AMAZON_LOCALES['en-AU'];
-    // Canada
-    if (lang === 'en-ca') return AMAZON_LOCALES['en-CA'];
-    // Everyone else → amazon.com
+    // UK / AU / CA: no local Associate store — send to amazon.com so the US tag can credit.
     return AMAZON_LOCALES['default'];
 }
 

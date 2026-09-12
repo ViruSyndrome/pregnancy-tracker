@@ -420,6 +420,57 @@
       padding: 1px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle;
   }
 
+    /* ── WEEK IN-DEPTH GUIDE ── */
+    .week-depth { margin: 4px 0 28px; }
+    .week-depth-head { margin-bottom: 16px; }
+    .week-depth-kicker {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--primary); margin-bottom: 6px;
+    }
+    .week-depth-head h2 {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      font-size: 1.55rem; font-weight: 800; color: var(--text); line-height: 1.25;
+    }
+    .week-depth-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .week-depth-chip {
+      background: var(--primary-light); color: var(--primary-dark);
+      border-radius: 999px; padding: 6px 12px; font-size: 0.78rem; font-weight: 600;
+    }
+    .week-depth-grid {
+      display: grid; grid-template-columns: 1fr; gap: 14px;
+    }
+    @media (min-width: 760px) {
+      .week-depth-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    .week-depth-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      padding: 20px 18px 18px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .week-depth-icon {
+      width: 42px; height: 42px; border-radius: 12px;
+      display: grid; place-items: center; font-size: 1.3rem;
+      background: var(--primary-light); margin-bottom: 4px;
+    }
+    .week-depth-card.prep .week-depth-icon { background: var(--accent-light); }
+    .week-depth-card h3 {
+      font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; color: var(--primary); margin: 0;
+    }
+    .week-depth-card p {
+      font-size: 0.92rem; color: var(--text); line-height: 1.65; margin: 0;
+    }
+    .week-depth-card ul {
+      margin: 4px 0 0 18px; color: var(--text); font-size: 0.9rem; line-height: 1.6;
+    }
+    .week-depth-card li { margin-bottom: 4px; }
+    .week-depth-note {
+      margin-top: 12px; font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;
+    }
+
     /* ── ADVERT SLOT (hidden until AdSense is approved) ── */
     .ad-slot {
       display: none !important;

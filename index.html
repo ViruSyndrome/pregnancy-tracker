@@ -62,7 +62,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2">
 
 <script type="application/ld+json">
 {
@@ -84,7 +84,7 @@
         <img src="favicon.svg" alt="PWT Logo" class="nav-brand-img" />
         <div class="nav-brand-text">Pregnancy<span class="text-accent">Week</span>Tracker</div>
       </a>
-      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
+      <button type="button" class="hamburger" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');this.setAttribute('aria-expanded',o?'true':'false');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open',o)"><span></span><span></span><span></span></button>
       <div class="nav-links">
         <a href="#tracker">Calculator</a>
         <a href="#all-weeks">Timeline</a>

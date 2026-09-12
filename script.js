@@ -1661,10 +1661,12 @@ function lsDel(key)                  { return _ls.del(key); }
             '<div class="week-size">' + headerImageLabel + '</div>' +
             '<div class="week-size-sub">' + sizeSubHtml + '</div>' +
           '</div>' +
-          '<div class="week-header-grid">' +
-            '<div class="week-section"><h3><span>👶</span> Baby&apos;s Development</h3><p>' + weekData.baby + '</p></div>' +
-            '<div class="week-section"><h3><span>🤰</span> What You May Feel</h3><p>' + weekData.mom + '</p></div>' +
-          '</div>' +
+          (window.isMainPage
+            ? ('<div class="week-header-grid">' +
+                '<div class="week-section"><h3><span>👶</span> Baby&apos;s Development</h3><p>' + weekData.baby + '</p></div>' +
+                '<div class="week-section"><h3><span>🤰</span> What You May Feel</h3><p>' + weekData.mom + '</p></div>' +
+              '</div>')
+            : '') +
           measurementNoticeHtml +
         '</div>' +
       '</div>' +

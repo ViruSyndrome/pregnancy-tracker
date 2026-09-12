@@ -467,6 +467,7 @@
       margin: 4px 0 0 18px; color: var(--text); font-size: 0.9rem; line-height: 1.6;
     }
     .week-depth-card li { margin-bottom: 4px; }
+    .week-depth-card a { color: var(--primary); font-weight: 600; text-decoration: underline; }
     .week-depth-note {
       margin-top: 12px; font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;
     }

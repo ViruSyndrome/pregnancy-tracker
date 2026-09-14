@@ -24,7 +24,6 @@ Pregnancy apps like What to Expect and BabyCenter require account creation, push
 - Contraction timer (tracks frequency, duration, and interval in real time)
 - Baby kick counter (counts fetal movements with timestamps)
 - Chinese Gender Predictor (traditional chart based on conception month and mother's age)
-- Pregnancy photo gallery
 - Comprehensive pregnancy guide
 - Free, no account, no install
 
@@ -69,7 +68,6 @@ A: Yes. The site works globally. Date formats and all information are universall
 - Contraction timer: https://www.pregnancyweektracker.com/contraction-timer.html
 - Baby kick counter: https://www.pregnancyweektracker.com/kick-counter.html
 - Chinese gender predictor: https://www.pregnancyweektracker.com/gender-predictor.html
-- Photo gallery: https://www.pregnancyweektracker.com/gallery.html
 
 ## Week-by-week pages (weeks 1–42)
 - https://www.pregnancyweektracker.com/4-weeks-pregnant.html

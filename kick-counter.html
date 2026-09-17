@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#FDF2F8">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <script src="https://js.sentry-cdn.com/2510c386e2467c8dc3aad62f23805e09.min.js" crossorigin="anonymous"></script>
   <script>
     Sentry.onLoad(function() {
@@ -1068,17 +1070,16 @@ a[data-tooltip] {
   <nav class="navbar">
     <div class="nav-inner">
       <a href="/" class="nav-brand">
-        <img src="favicon.svg" alt="PWT Logo" class="nav-brand-logo" />
+        <img src="logo.svg" alt="" class="nav-brand-logo" width="36" height="36" />
         <div class="nav-brand-text">Pregnancy<span class="nav-brand-accent">Week</span>Tracker</div>
       </a>
-      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
+      <button class="hamburger" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');this.setAttribute('aria-expanded',o?'true':'false');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open',o)"><span></span><span></span><span></span></button>
       <div class="nav-links">
         <a href="/#tracker">Calculator</a>
         <a href="/#all-weeks">Timeline</a>
         <a href="kick-counter.html">Kick Counter</a>
-        <a href="contraction-timer.html">Contraction Timer</a>
-        <a href="gender-predictor.html">Gender Predictor</a>
-        <a href="/#faq">FAQ</a>
+        <a href="pregnancy-guide.html">Guides</a>
+        <a href="about.html">About</a>
       </div>
     </div>
   </nav>
@@ -1088,11 +1089,12 @@ a[data-tooltip] {
     <span class="calc-link-text">Don't know your pregnancy week? </span>
     <a href="/" class="calc-link-anchor">Use the free pregnancy calculator →</a>
   </div>
+  <div id="weekNotesBanner" class="week-notes-banner" hidden></div>
 
   <div class="container tool-page-container">
     <div class="tools-wrapper glass-card"><section class="tools-section"><div class="tool-card" id="kick-counter">
           <h1>🦶 Baby Kick Counter</h1>
-          <p class="tool-desc">Standard medical advice is 10 kicks in 2 hours. Start counting when baby is active.</p>
+          <p class="tool-desc">A private counter in this browser. Many clinics use a count-to-ten check from around 28 weeks. This page does not diagnose reduced movement — if the pattern changes, contact your maternity unit.</p>
           
           <div id="kcEncourage" class="encouragement">🎉 All 10 kicks counted! Baby is doing great.</div>
 
@@ -1223,7 +1225,7 @@ a[data-tooltip] {
 <script>
   window.isMainPage = false;
 </script>
-<script src="script.js?v=2" defer></script>
+<script src="script.js?v=4" defer></script>
 
   <!-- Image Modal -->
   <div id="imgModal" class="img-modal" tabindex="-1" role="dialog" aria-modal="true" onclick="closeImgModal()">

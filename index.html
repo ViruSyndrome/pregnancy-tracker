@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#FDF2F8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Week Tracker">
   <script src="https://js.sentry-cdn.com/2510c386e2467c8dc3aad62f23805e09.min.js" crossorigin="anonymous"></script>
   <script>
     Sentry.onLoad(function() {
@@ -17,7 +21,8 @@
   <meta name="description" content="Free pregnancy week tracker. Enter your last period date to instantly find out how many weeks pregnant you are, your due date, baby's size and development this week. No sign-up required.">
   <meta name="msvalidate.01" content="FA7405A0B7623E8A404F74AE4952777C" />
   <link rel="canonical" href="https://www.pregnancyweektracker.com/">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=9">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=10">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <!-- Open Graph -->
   <meta property="og:title" content="Pregnancy Week Tracker — How Many Weeks Pregnant Am I?">
   <meta property="og:site_name" content="Pregnancy Week Tracker">
@@ -58,20 +63,20 @@
     "applicationCategory": "HealthApplication",
     "operatingSystem": "All",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "featureList": ["Due date calculator", "Week-by-week fetal development", "Baby size guide", "Trimester tracker", "Contraction timer", "Baby kick counter", "Gender predictor"]
+    "featureList": ["Due date calculator", "Week-by-week fetal development", "Baby size guide", "Trimester tracker", "Contraction timer", "Baby kick counter", "Gender predictor"],
+    "creator": { "@type": "Person", "name": "Vinod Isaac" }
   }
   </script>
 
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css?v=6">
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "MedicalWebPage",
+  "@type": "WebPage",
   "name": "Pregnancy Week by Week Tracker",
-  "description": "Comprehensive, private pregnancy tracker with week-by-week development guides, kick counter, and contraction timer.",
-  "publisher": { "@type": "Organization", "name": "Pregnancy Week Tracker" },
-  "audience": { "@type": "MedicalAudience", "audienceType": "Expecting Parents" }
+  "description": "Free in-browser pregnancy week calculator with week guides, kick counter, and contraction timer. Educational estimates, not medical advice.",
+  "publisher": { "@type": "Person", "name": "Vinod Isaac" }
 }
 </script>
 </head>
@@ -81,7 +86,7 @@
   <nav class="navbar">
     <div class="nav-inner">
       <a href="/" class="nav-brand nav-brand-link">
-        <img src="favicon.svg" alt="PWT Logo" class="nav-brand-img" />
+        <img src="logo.svg" alt="" class="nav-brand-img" width="36" height="36" />
         <div class="nav-brand-text">Pregnancy<span class="text-accent">Week</span>Tracker</div>
       </a>
       <button type="button" class="hamburger" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');this.setAttribute('aria-expanded',o?'true':'false');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open',o)"><span></span><span></span><span></span></button>
@@ -89,18 +94,18 @@
         <a href="#tracker">Calculator</a>
         <a href="#all-weeks">Timeline</a>
         <a href="kick-counter.html">Kick Counter</a>
-        <a href="contraction-timer.html">Contraction Timer</a>
-        <a href="gender-predictor.html">Gender Predictor</a>
-        <a href="#faq">FAQ</a>
+        <a href="pregnancy-guide.html">Guides</a>
+        <a href="about.html">About</a>
       </div>
     </div>
   </nav>
 
   <!-- HERO -->
   <section class="hero" id="tracker">
-    <div class="hero-eyebrow">Free · No Sign-Up · Private</div>
+    <div class="hero-eyebrow">Free · No sign-up · Stays in your browser</div>
     <h1>How Many Weeks<br>Pregnant Am I?</h1>
-    <p class="hero-sub">Enter your last period date and instantly see your pregnancy week, due date, baby size, and what's happening right now.</p>
+    <p class="hero-sub">Enter the first day of your last period. You’ll get an estimated week, due date, and what this week usually looks like — then a short list of what people typically do next. Same 280-day dating clinics use. An estimate, not a diagnosis.</p>
+    <p class="hero-byline">Built by <a href="about.html">Vinod Isaac</a> · father of two · Bengaluru</p>
 
     <div class="hero-note hero-note-box">
       <strong>New pregnancy guide:</strong> Learn how weeks are counted, what each trimester means, and how to interpret your calculator results for better preparation and planning.
@@ -137,6 +142,13 @@
       <button class="btn-calc" id="calcBtn" type="button" onclick="calculate()">Calculate My Pregnancy Week →</button>
       <div class="calc-error" id="calcError" role="alert" aria-live="assertive" hidden></div>
     </div>
+
+    <div class="tools-strip" style="margin-top:28px;text-align:left;">
+      <a href="kick-counter.html"><strong>Kick counter</strong><span>Count movements in the browser.</span></a>
+      <a href="hospital-bag-guide.html"><strong>Hospital bag</strong><span>A packing list for later weeks.</span></a>
+      <a href="pregnancy-checklist.html"><strong>Checklist</strong><span>Simple prep, no account.</span></a>
+      <a href="indian-pregnancy-diet.html"><strong>Food guide</strong><span>General eating notes, not a diet plan.</span></a>
+    </div>
   </section>
 
   <!-- RESULT PANEL -->
@@ -148,6 +160,7 @@
     <div class="milestone-banner" id="milestoneBanner" hidden></div>
     <div class="trimester-bar-wrap" id="trimBar" hidden></div>
     <div class="week-card" id="weekCard"></div>
+    <div id="nextSteps" class="next-steps" hidden></div>
     <div style="text-align: center; margin-top: 1.5rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
       <button class="btn-calc" id="shareBtn" type="button" style="background-color: var(--secondary); margin: 0; display: inline-flex; align-items: center; gap: 8px; justify-content: center;" onclick="shareResult()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
@@ -260,11 +273,6 @@
 
   </div><!-- /container -->
 
-  <!-- FOOTER -->
-  </div>
-  
-      
-
   <div class="seo-directory" style="max-width: 800px; margin: 0 auto 2rem; padding: 0 1rem; text-align: center; font-size: 0.85rem;">
     <p style="color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600;">Explore Pregnancy Week by Week:</p>
     <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;">
@@ -317,7 +325,7 @@
     <div class="footer-inner">
       <div>
         <div class="footer-brand">PregnancyWeekTracker</div>
-        <p class="footer-desc">Free pregnancy tools for expectant parents. No sign-up. No data stored. Just answers.</p>
+        <p class="footer-desc">Free pregnancy tools for expectant parents. No sign-up. Dates stay in your browser. Built by Vinod Isaac.</p>
       </div>
       <div class="footer-links">
         <h4>Tools</h4>
@@ -357,7 +365,7 @@
 <script>
   window.isMainPage = true;
 </script>
-<script src="script.js?v=2" defer></script>
+<script src="script.js?v=4" defer></script>
 
   <!-- Image Modal -->
   <div id="imgModal" class="img-modal" tabindex="-1" role="dialog" aria-modal="true" onclick="closeImgModal()">

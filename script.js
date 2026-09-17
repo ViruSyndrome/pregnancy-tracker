@@ -1420,23 +1420,12 @@ function lsDel(key)                  { return _ls.del(key); }
   function renderResult(r) {
     var resultPanel = document.getElementById('resultPanel');
     if (resultPanel) {
+        resultPanel.hidden = false;
         resultPanel.style.display = 'block';
         setTimeout(function() { resultPanel.classList.add('reveal'); }, 50);
         
-        // Trimester CTAs
-        var oldCtas = document.getElementById('trimester-ctas-container');
-        if (oldCtas) oldCtas.remove();
-        var ctas = '';
-        if (r.weekNum >= 28) { ctas += '<a href="kick-counter.html" style="display:inline-block; margin-top:15px; padding:8px 16px; background:#f43f5e; color:white; border-radius:20px; text-decoration:none; font-weight:600; margin-right:10px;">Track Kicks &rarr;</a>'; }
-        if (r.weekNum >= 36) { ctas += '<a href="contraction-timer.html" style="display:inline-block; margin-top:15px; padding:8px 16px; background:#8b5cf6; color:white; border-radius:20px; text-decoration:none; font-weight:600;">Time Contractions &rarr;</a>'; }
-        if (ctas) { 
-            var p = document.createElement('div');
-            p.id = 'trimester-ctas-container';
-            p.innerHTML = ctas;
-            p.style.textAlign = 'center';
-            p.style.marginBottom = '20px';
-            resultPanel.insertBefore(p, resultPanel.firstChild.nextSibling);
-        }
+        saveWeekNotes(r.weekNum, { dueDate: r.dueDate && r.dueDate.toISOString ? r.dueDate.toISOString() : String(r.dueDate || ''), trimester: r.trimester });
+        renderNextSteps(r.weekNum);
     }
 
     
@@ -1557,14 +1546,14 @@ function lsDel(key)                  { return _ls.del(key); }
     var privacySealHtml = 
       '<div class="privacy-trust-seal" style="margin-top:24px;display:flex;align-items:center;gap:8px;background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.2);padding:12px 14px;border-radius:10px;font-size:0.8rem;color:#065f46;line-height:1.4">' +
         '<span style="font-size:1.2rem">🔒</span>' +
-        '<div><strong>100% Privacy Guaranteed:</strong> Your pregnancy data is stored locally in your browser. We have no databases, require no login, and never track or sell your health history.</div>' +
+        '<div>Dates stay in this browser. There is no pregnancy account. Analytics and ads, if they load, are separate third-party scripts.</div>' +
       '</div>';
 
     var referencesHtml = 
       '<details open class="medical-sources-accordion" style="margin-top:16px;background:rgba(0,0,0,0.01);border:1px solid var(--border);border-radius:10px;padding:8px 12px;cursor:pointer;font-size:0.8rem;color:var(--text-muted)">' +
-        '<summary style="font-weight:700;color:var(--text);outline:none;user-select:none;list-style:none;">🩺 Clinical Evidence & Medical References</summary>' +
+        '<summary style="font-weight:700;color:var(--text);outline:none;user-select:none;list-style:none;">Sources for this week</summary>' +
         '<div style="margin-top:10px;line-height:1.5;cursor:default;">' +
-          'This week&apos;s development and clinical guidance are verified against standard global medical guidelines:' +
+          'General educational notes. Not a clinical review. Public guidelines you can read yourself:' +
           '<ul style="margin-top:6px;padding-left:18px;margin-bottom:0">' +
             '<li><strong>WHO (World Health Organization):</strong> Standards for pregnancy progression, gestational measurements, and pre-conception/prenatal nutritional recommendations.</li>' +
             '<li><strong>ACOG (American College of Obstetricians and Gynecologists):</strong> Clinical standards for prenatal screenings, genetic testing, and lifestyle boundaries (exercise, safe foods).</li>' +
@@ -1766,23 +1755,12 @@ function lsDel(key)                  { return _ls.del(key); }
       // Show the calculator-style result panel for a consistent week experience
       var resultPanel = document.getElementById('resultPanel');
       if (resultPanel) {
+        resultPanel.hidden = false;
         resultPanel.style.display = 'block';
         resultPanel.classList.add('reveal');
         
-        // Trimester CTAs
-        var oldCtas = document.getElementById('trimester-ctas-container');
-        if (oldCtas) oldCtas.remove();
-        var ctas = '';
-        if (weekNum >= 28) { ctas += '<a href="kick-counter.html" style="display:inline-block; margin-top:15px; padding:8px 16px; background:#f43f5e; color:white; border-radius:20px; text-decoration:none; font-weight:600; margin-right:10px;">Track Kicks &rarr;</a>'; }
-        if (weekNum >= 36) { ctas += '<a href="contraction-timer.html" style="display:inline-block; margin-top:15px; padding:8px 16px; background:#8b5cf6; color:white; border-radius:20px; text-decoration:none; font-weight:600;">Time Contractions &rarr;</a>'; }
-        if (ctas) { 
-            var p = document.createElement('div');
-            p.id = 'trimester-ctas-container';
-            p.innerHTML = ctas;
-            p.style.textAlign = 'center';
-            p.style.marginBottom = '20px';
-            resultPanel.insertBefore(p, resultPanel.firstChild.nextSibling);
-        }
+        saveWeekNotes(weekNum, { trimester: weekNum <= 12 ? 1 : weekNum <= 26 ? 2 : 3 });
+        renderNextSteps(weekNum);
       }
       var shareRow = document.getElementById('shareRow');
       if (shareRow) shareRow.style.display = 'none';
@@ -2710,6 +2688,7 @@ function lsDel(key)                  { return _ls.del(key); }
 
   document.addEventListener('DOMContentLoaded', function() {
     initTooltipLayer();
+    paintWeekNotes();
   });
 
   // Close modal on Escape key press
@@ -2754,6 +2733,89 @@ function lsDel(key)                  { return _ls.del(key); }
     }
   });
 
+  var PWT_NOTES_KEY = 'pwt_week_notes';
+
+  function saveWeekNotes(weekNum, extra) {
+    extra = extra || {};
+    lsSet(PWT_NOTES_KEY, {
+      weekNum: weekNum,
+      savedAt: new Date().toISOString(),
+      dueDate: extra.dueDate || '',
+      trimester: extra.trimester || (weekNum <= 12 ? 1 : weekNum <= 26 ? 2 : 3)
+    });
+  }
+
+  function ensureNextStepsEl() {
+    var el = document.getElementById('nextSteps');
+    if (el) return el;
+    var weekCard = document.getElementById('weekCard');
+    if (!weekCard || !weekCard.parentNode) return null;
+    el = document.createElement('div');
+    el.id = 'nextSteps';
+    el.className = 'next-steps';
+    el.hidden = true;
+    weekCard.parentNode.insertBefore(el, weekCard.nextSibling);
+    return el;
+  }
+
+  function nextStepsForWeek(weekNum) {
+    var onWeekPage = /(?:^|\/)\d+-weeks-pregnant\.html$/i.test(location.pathname);
+    var items = [];
+    if (!onWeekPage) {
+      items.push({ href: weekNum + '-weeks-pregnant.html', title: 'Week ' + weekNum + ' guide', sub: 'Development, size, and what people usually notice around this week.' });
+    } else {
+      items.push({ href: '/#tracker', title: 'Recalculate your dates', sub: 'Last period or due date. The estimate stays in this browser.' });
+    }
+    if (weekNum <= 12) {
+      items.push({ href: 'due-date-explainer.html', title: 'How dating works', sub: 'LMP plus 280 days is an estimate. An early scan can change it.' });
+      items.push({ href: 'pregnancy-checklist.html', title: 'First-trimester checklist', sub: 'Simple prep notes. Not a care plan.' });
+      items.push({ href: 'indian-pregnancy-diet.html', title: 'Food notes', sub: 'General eating notes, not a diet prescription.' });
+    } else if (weekNum <= 26) {
+      items.push({ href: 'pregnancy-checklist.html', title: 'This trimester checklist', sub: 'Anatomy-scan week, names, and practical prep.' });
+      items.push({ href: 'pregnancy-guide.html', title: 'Second-trimester guide', sub: 'What is typical now, without scare copy.' });
+      items.push({ href: weekNum >= 18 ? 'fetal-movement-guide.html' : 'indian-pregnancy-diet.html', title: weekNum >= 18 ? 'Movement notes' : 'Food notes', sub: weekNum >= 18 ? 'When people usually start feeling kicks. Ranges vary.' : 'General eating notes, not a diet prescription.' });
+    } else if (weekNum <= 32) {
+      items.push({ href: 'kick-counter.html', title: 'Kick counter', sub: 'Count in the browser. Ask your clinician about any change in pattern.' });
+      items.push({ href: 'fetal-movement-guide.html', title: 'Movement guide', sub: 'A calm read on counting. Not a diagnosis.' });
+      items.push({ href: 'hospital-bag-guide.html', title: 'Hospital bag', sub: 'Start a list now so you are not packing in a rush.' });
+    } else {
+      items.push({ href: 'hospital-bag-guide.html', title: 'Hospital bag', sub: 'A packing list for later weeks.' });
+      items.push({ href: 'contraction-timer.html', title: 'Contraction timer', sub: 'A stopwatch. It does not tell you when to go in.' });
+      items.push({ href: 'kick-counter.html', title: 'Kick counter', sub: 'Keep a private count if your clinician asked you to.' });
+    }
+    return items.slice(0, 4);
+  }
+
+  function renderNextSteps(weekNum) {
+    var el = ensureNextStepsEl();
+    if (!el) return;
+    var items = nextStepsForWeek(weekNum);
+    var trim = weekNum <= 12 ? 'first' : weekNum <= 26 ? 'second' : 'third';
+    el.hidden = false;
+    el.innerHTML =
+      '<h3>What people usually do at week ' + weekNum + '</h3>' +
+      '<p>Short next steps for the ' + trim + ' trimester. Educational only — your clinician dates the pregnancy.</p>' +
+      '<div class="next-steps-grid">' +
+      items.map(function(it) {
+        return '<a href="' + it.href + '"><strong>' + it.title + '</strong><span>' + it.sub + '</span></a>';
+      }).join('') +
+      '</div>';
+  }
+
+  function paintWeekNotes() {
+    var banner = document.getElementById('weekNotesBanner');
+    if (!banner) return;
+    var notes = lsGet(PWT_NOTES_KEY, null);
+    if (!notes || !notes.weekNum) {
+      banner.hidden = true;
+      banner.innerHTML = '';
+      return;
+    }
+    banner.hidden = false;
+    banner.style.cssText = 'max-width:720px;margin:16px auto;padding:14px 18px;border-radius:14px;border:1px solid rgba(249,168,212,0.55);background:rgba(255,255,255,0.78);font-size:0.92rem;color:#111827;';
+    banner.innerHTML = 'Last calculator result: about <strong>week ' + notes.weekNum + '</strong>. <a href="' + notes.weekNum + '-weeks-pregnant.html" style="color:#be185d;font-weight:700;text-decoration:none">Open this week guide</a> · <a href="/#tracker" style="color:#be185d;font-weight:700;text-decoration:none">Recalculate</a>';
+  }
+
   // Expose key functions globally so inline onclick handlers and MPA pages can call them
   // regardless of when script.js finishes loading relative to the DOM.
   window.calculate = calculate;
@@ -2766,6 +2828,9 @@ function lsDel(key)                  { return _ls.del(key); }
   window.predictGender = predictGender;
   window.selectGenderOpt = selectGenderOpt;
   window.toggleFAQ = toggleFAQ;
+  window.saveWeekNotes = saveWeekNotes;
+  window.renderNextSteps = renderNextSteps;
+  window.paintWeekNotes = paintWeekNotes;
 
 function addDueToCalendar() {
     if (!window.calculatedDueDate) return;

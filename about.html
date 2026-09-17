@@ -1,196 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="description" content="Calculate your pregnancy week by week, track your baby's development, and calculate your exact due date with Pregnancy-Tracker.">
-  <link rel="canonical" href="https://www.pregnancyweektracker.com/about.html">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#FDF2F8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Week Tracker">
+  <meta name="description" content="Pregnancy Week Tracker is a free in-browser due-date and week guide built by Vinod Isaac in Bengaluru. Educational estimates, not medical advice. No signup.">
+  <link rel="canonical" href="https://www.pregnancyweektracker.com/about.html">
   <meta name="msvalidate.01" content="FA7405A0B7623E8A404F74AE4952777C" />
   <script src="https://js.sentry-cdn.com/2510c386e2467c8dc3aad62f23805e09.min.js" crossorigin="anonymous"></script>
   <script>
     Sentry.onLoad(function() {
-      Sentry.init({ ignoreErrors: [/pageContext/i, /adsbygoogle/i, /@context/i, /runtime\.sendMessage/i, /Tab not found/i, /Extension context invalidated/i, "Script error."], 
+      Sentry.init({ ignoreErrors: [/pageContext/i, /adsbygoogle/i, /@context/i, /runtime\.sendMessage/i, /Tab not found/i, /Extension context invalidated/i, "Script error."],
         tracesSampleRate: 1.0,
         replaysSessionSampleRate: 0.1,
         replaysOnErrorSampleRate: 1.0,
       });
     });
   </script>
-  <title>About - Pregnancy Week Tracker</title>
+  <title>About — Vinod Isaac | Pregnancy Week Tracker</title>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVGV89T5QG"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-LVGV89T5QG');</script>
-
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=10">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #be185d;
-      --primary-dark: #9d174d;
-      --primary-light: #fce7f3;
-      --accent: #f97316;
-      --bg: #fdf4f7;
-      --text: #111827;
-      --text-muted: #6b7280;
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=6">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2959862133855422" crossorigin="anonymous"></script>
+  <meta property="og:image" content="https://www.pregnancyweektracker.com/og-image.webp">
+  <meta name="twitter:image" content="https://www.pregnancyweektracker.com/og-image.webp">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Pregnancy Week Tracker",
+    "url": "https://www.pregnancyweektracker.com/about.html",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Vinod Isaac",
+      "jobTitle": "Product builder",
+      "address": { "@type": "PostalAddress", "addressLocality": "Bengaluru", "addressCountry": "IN" },
+      "email": "mailto:vinodjamesisaac@gmail.com",
+      "url": "https://www.pregnancyweektracker.com"
     }
-    body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; margin: 0; }
-    .navbar { background: #fff; padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-    .nav-brand { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--primary); text-decoration: none; font-size: 1.2rem; display: flex; align-items: center; gap: 12px; }
-    .nav-links a { margin-left: 20px; text-decoration: none; color: var(--text); font-weight: 500; font-size: 0.9rem; }
-    .nav-links a:hover { color: var(--primary); }
-    
-    .container { max-width: 900px; margin: 60px auto; background: #fff; padding: 60px; border-radius: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
-    h1 { font-family: 'Outfit', sans-serif; color: var(--primary); margin-top: 0; font-size: 2.5rem; margin-bottom: 24px; text-align: center; }
-    h2 { font-family: 'Outfit', sans-serif; color: var(--text); font-size: 1.6rem; margin-top: 40px; margin-bottom: 16px; }
-    p { margin-bottom: 20px; font-size: 1.1rem; color: #374151; }
-    
-    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin: 48px 0; }
-    .feature-card { text-align: center; padding: 32px 24px; background: var(--bg); border-radius: 20px; border: 1px solid #f3d6e8; }
-    .feature-emoji { font-size: 2.5rem; margin-bottom: 16px; display: block; }
-    .feature-card h3 { font-family: 'Outfit', sans-serif; font-size: 1.2rem; color: var(--primary); margin-bottom: 8px; }
-    .feature-card p { font-size: 0.9rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
-
-    .source-list { background: #f9fafb; padding: 24px; border-radius: 16px; border-left: 4px solid var(--primary); font-size: 0.95rem; }
-    .source-list ul { margin: 12px 0 0; padding-left: 20px; }
-    .source-list li { margin-bottom: 8px; }
-
-    .footer { background: #fff; padding: 60px 20px 30px; border-top: 1px solid #eee; margin-top: 80px; }
-    .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
-    .footer-brand { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--primary); font-size: 1.4rem; margin-bottom: 10px; }
-    .footer-links h4 { margin-bottom: 20px; color: var(--text); }
-    .footer-links ul { list-style: none; padding: 0; }
-    .footer-links li { margin-bottom: 12px; }
-    .footer-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; }
-    .footer-links a:hover { color: var(--primary); }
-    .footer-copy { max-width: 1200px; margin: 40px auto 0; padding-top: 20px; border-top: 1px solid #eee; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
-
-    @media (max-width: 768px) {
-      .container { margin: 20px 15px; padding: 32px 20px; border-radius: 20px; }
-      h1 { font-size: 2rem; }
-      .footer-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-    }
-
-    /* Scroll Reveal animations */
-.reveal-scroll {
-  opacity: 0;
-  transform: translateY(15px);
-  transition: opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 1.0s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
-}
-
-.reveal-scroll.visible {
-  opacity: 1;
-}
-
-.reveal-scroll.visible:not(:hover) {
-  transform: translateY(0);
-}
-
-.nav-brand-logo { height: 36px; width: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
-.nav-brand-text { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.4rem; color: var(--text); letter-spacing: -0.03em; display: flex; align-items: center; height: 36px; }
-.nav-brand-accent { color: var(--accent); }
-.contribute-box { margin-top: 40px; padding: 30px; background: #fff5f5; border-radius: 16px; text-align: center; border: 1px dashed var(--primary); }
-.contribute-box h2 { margin-top: 0; }
-.btn-support-pwt { display: inline-block; font-size: 1.1rem; padding: 12px 30px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff; border-radius: 12px; font-weight: 700; text-decoration: none; transition: opacity 0.2s; }
-.footer-info-p { margin-top: 32px; text-align: center; }
-.footer-copy-extra { margin-left: 12px; }
-    
-  </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2959862133855422" crossorigin="anonymous"></script>
-
+  }
+  </script>
   <style>
-  /* Cross-Linking Footer Network CSS */
-  .network-footer { max-width: 800px; margin: 40px auto 20px; padding: 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; text-align: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-  .network-title { font-size: 0.95rem; font-weight: 600; color: #64748b; margin-bottom: 16px; margin-top: 0; text-transform: uppercase; letter-spacing: 0.5px; font-family: sans-serif; }
-  .network-links { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
-  .network-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; background: #f8fafc; color: #1e293b !important; text-decoration: none !important; border-radius: 8px; font-size: 0.95rem; font-weight: 500; transition: all 0.2s ease; border: 1px solid #e2e8f0; font-family: sans-serif; }
-  .network-link:hover { background: #f1f5f9; transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-  .network-icon-img { width: 18px; height: 18px; object-fit: contain; }
+    .about-wrap { max-width: 760px; margin: 40px auto 80px; padding: 0 20px; }
+    .about-wrap h1 { font-family: 'Outfit', sans-serif; font-size: 2.1rem; color: var(--primary); margin: 0 0 12px; }
+    .about-wrap h2 { font-family: 'Outfit', sans-serif; font-size: 1.35rem; margin: 28px 0 10px; }
+    .about-wrap p, .about-wrap li { color: #374151; font-size: 1.05rem; }
+    .about-wrap ul { padding-left: 20px; }
+    .maker-card { display: flex; gap: 16px; align-items: flex-start; margin: 18px 0 8px; }
+    .founder-avatar { width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-family: 'Outfit', sans-serif; flex-shrink: 0; }
+    .founder-name { font-weight: 800; margin: 0; }
+    .founder-role { margin: 2px 0 0; color: var(--text-muted); font-size: 0.92rem; }
+    .contribute-box { margin-top: 32px; padding: 24px; background: rgba(255,255,255,0.7); border-radius: 16px; text-align: center; border: 1px dashed var(--primary); }
+    .btn-support-pwt { display: inline-block; font-size: 1rem; padding: 12px 28px; background: linear-gradient(135deg, var(--primary), var(--accent)); color: #fff; border-radius: 12px; font-weight: 700; text-decoration: none; }
   </style>
-
-    <meta property="og:image" content="https://www.pregnancyweektracker.com/og-image.webp">
-    <meta name="twitter:image" content="https://www.pregnancyweektracker.com/og-image.webp">
 </head>
 <body>
   <nav class="navbar">
     <div class="nav-inner">
-      <a href="/" class="nav-brand">
-        <img src="favicon.svg" alt="PWT Logo" class="nav-brand-logo" />
-        <div class="nav-brand-text">Pregnancy<span class="nav-brand-accent">Week</span>Tracker</div>
+      <a href="/" class="nav-brand nav-brand-link">
+        <img src="logo.svg" alt="" class="nav-brand-img" width="36" height="36" />
+        <div class="nav-brand-text">Pregnancy<span class="text-accent">Week</span>Tracker</div>
       </a>
-      <button class="hamburger" aria-label="Menu" onclick="this.classList.toggle('open');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
-            <div class="nav-links">
+      <button type="button" class="hamburger" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');this.setAttribute('aria-expanded',o?'true':'false');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open',o)"><span></span><span></span><span></span></button>
+      <div class="nav-links">
         <a href="index.html#tracker">Calculator</a>
         <a href="index.html#all-weeks">Timeline</a>
         <a href="kick-counter.html">Kick Counter</a>
-        <a href="contraction-timer.html">Contraction Timer</a>
-        <a href="gender-predictor.html">Gender Predictor</a>
-        <a href="pregnancy-checklist.html">Checklist</a>
-        <a href="pregnancy-guide.html">Guide</a>
+        <a href="pregnancy-guide.html">Guides</a>
+        <a href="about.html">About</a>
       </div>
     </div>
   </nav>
 
-  <div class="container">
-    <h1>About Pregnancy Week Tracker</h1>
-    <p>Welcome to Pregnancy Week Tracker — a simple, premium, and privacy-first resource for expectant parents.</p>
-    
-    <h2>Why I Built This Tool</h2>
-    <p>As a father of two, I’ve seen first-hand the incredible journey of pregnancy — and the frustration of trying to find clear, simple information. Most apps today require forced sign-ups and collect too much personal data. We believe in keeping it simple and private.</p>
-    <p>I wanted to create a free, privacy-first resource for moms and their families. This project is the result of extensive research into fetal development, combined with our unique <strong>Scale-Accurate Photography</strong>. Unlike generic icons, our comparisons use real-world objects to give you a true sense of your baby's growth.</p>
+  <div class="about-wrap">
+    <div class="glass-card" style="padding: 40px 32px;">
+      <h1>A week calculator you can use without an account</h1>
+      <p>Pregnancy Week Tracker estimates how far along a pregnancy is from the first day of the last period, or from a due date you already have. It then points to that week’s guide and a short list of what people typically do next. No signup. The dates stay in this browser.</p>
 
-    <div class="feature-grid">
-      <div class="feature-card">
-        <span class="feature-emoji">🛡️</span>
-        <h3>Privacy First</h3>
-        <p>No data stored on any server. Everything stays in your browser. We don't track your pregnancy journey.</p>
+      <h2>Who makes this</h2>
+      <div class="maker-card">
+        <div class="founder-avatar" aria-hidden="true">VI</div>
+        <div>
+          <p class="founder-name">Vinod Isaac</p>
+          <p class="founder-role">Founder · Bengaluru · father of two</p>
+          <p>I built this after sitting through two pregnancies and watching every “tracker” demand an account before it would show a week. I am a product builder, not a clinician. The site is the tool I wanted in the waiting room: instant, private, and honest about what it cannot do.</p>
+        </div>
       </div>
-      <div class="feature-card">
-        <span class="feature-emoji">📏</span>
-        <h3>Scientifically Sourced</h3>
-        <p>Sizes and development milestones are based on vetted clinical data and international medical standards.</p>
-      </div>
-      <div class="feature-card">
-        <span class="feature-emoji">📸</span>
-        <h3>Real Scale</h3>
-        <p>Comparisons designed to give a tangible sense of scale using real-world objects, not just generic icons.</p>
-      </div>
-    </div>
 
-    <h2>Scientific Accuracy & Sources</h2>
-    <div class="source-list">
-      <strong>How we calculate your baby's size and progress:</strong>
-      <p>Our week-by-week data, fetal lengths, and development milestones are sourced from established medical and research organizations, including:</p>
+      <h2>How the dates work</h2>
+      <p>The calculator uses the same 280-day (40-week) count from the first day of the last menstrual period that clinics use as a starting estimate — Naegele’s rule, described in ACOG’s methods for estimating the due date. If you enter a due date instead, it counts backward from that date.</p>
+      <p>An estimated due date is not a deadline. Only a small share of babies arrive on that exact day. An early ultrasound, irregular cycles, or IVF dating can change the number. Your clinician’s date is the one that matters for care.</p>
+
+      <h2>What the week pages are</h2>
+      <p>Each week page is a general educational summary: typical size comparisons, common notes, and practical prep. Size photos use household objects as a visual aid. They are not ultrasound images and they are not a growth chart for your pregnancy.</p>
+      <p>Kick counting and contraction timing on this site are stopwatches. They do not diagnose labour, reduced movement, or anything else. If movement changes or you are worried, contact your maternity unit — do not wait on a webpage.</p>
+
+      <h2>What this is not</h2>
       <ul>
-        <li><strong>Carnegie Stages:</strong> The global standard for human embryonic development.</li>
-        <li><strong>World Health Organization (WHO):</strong> Fetal growth charts and prenatal care guidelines.</li>
-        <li><strong>NIH / PubMed:</strong> Clinical research on gestational development and anatomical changes.</li>
-        <li><strong>ACOG (American College of Obstetricians and Gynecologists):</strong> Standards for gestational age and due date calculation (Naegele's Rule).</li>
+        <li>Not medical advice, not a clinic, not a replacement for prenatal care.</li>
+        <li>Not a login wall, not a pregnancy social network, not an app store download.</li>
+        <li>Not reviewed by a medical board. Public guidelines are cited so you can read the source yourself.</li>
       </ul>
-    </div>
 
-    <div class="contribute-box">
-      <h2>Support Our Work</h2>
-      <p>If this tool has helped you during your pregnancy journey, consider supporting the project. Every contribution helps keep the free tracker running.</p>
-      <a href="https://paypal.me/virusyndrome" target="_blank" rel="noopener noreferrer" class="btn-support-pwt">Support Us ♥</a>
-    </div>
+      <h2>Privacy</h2>
+      <p>Calculator results can be saved in localStorage on your device so a kick counter or week page can remember the last week you ran. Nothing is uploaded to our servers for that. Analytics and ads, if they load, are separate third-party scripts.</p>
 
-    <p class="footer-info-p">If you have any feedback or suggestions, please feel free to reach out via our <a href="contact.html">contact page</a>.</p>
+      <div class="contribute-box">
+        <h2>Support the project</h2>
+        <p>If the tracker saved you from another signup form, you can help keep it running.</p>
+        <a href="https://paypal.me/virusyndrome" target="_blank" rel="noopener noreferrer" class="btn-support-pwt">Support via PayPal</a>
+      </div>
+
+      <p style="margin-top:28px;">Questions or corrections: <a href="contact.html">contact page</a> or <a href="mailto:vinodjamesisaac@gmail.com">vinodjamesisaac@gmail.com</a>.</p>
+    </div>
   </div>
-
-  
-      
-
-  
 
   <footer class="footer">
     <div class="footer-inner">
       <div>
         <div class="footer-brand">PregnancyWeekTracker</div>
-        <p class="footer-desc">Free pregnancy tools for expectant parents. No sign-up. No data stored. Just answers.</p>
+        <p class="footer-desc">Free pregnancy tools for expectant parents. No sign-up. Dates stay in your browser. Built by Vinod Isaac.</p>
       </div>
       <div class="footer-links">
         <h4>Tools</h4>
@@ -225,30 +162,5 @@
       &copy; 2026 PregnancyWeekTracker. For informational purposes only - not medical advice.
     </div>
   </footer>
-
-  <script>
-
-    // ── Native High-Performance Scroll-Reveal ──
-    window.addEventListener('load', () => {
-      const targets = document.querySelectorAll('.container, .feature-card, .source-list, .footer');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          } else {
-            entry.target.classList.remove('visible');
-          }
-        });
-      }, {
-        threshold: 0.05,
-        rootMargin: '0px 0px -10px 0px'
-      });
-      targets.forEach(target => {
-        target.classList.add('reveal-scroll');
-        observer.observe(target);
-      });
-    });
-  </script>
 </body>
 </html>
-

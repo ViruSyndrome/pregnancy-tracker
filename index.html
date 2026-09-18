@@ -10,7 +10,8 @@
   <script src="https://js.sentry-cdn.com/2510c386e2467c8dc3aad62f23805e09.min.js" crossorigin="anonymous"></script>
   <script>
     Sentry.onLoad(function() {
-      Sentry.init({ ignoreErrors: [/pageContext/i, /adsbygoogle/i, /@context/i, /runtime\.sendMessage/i, /Tab not found/i, /Extension context invalidated/i, "Script error."], 
+      Sentry.init({ ignoreErrors: [/pageContext/i, /adsbygoogle/i, /@context/i, /runtime\.sendMessage/i, /Tab not found/i, /Extension context invalidated/i, /int64/i, /rum_fy2021/i, "Script error."],
+        denyUrls: [/pagead2\.googlesyndication\.com/i, /googlesyndication\.com/i, /googleadservices\.com/i, /ep1\.adtrafficquality\.google/i],
         tracesSampleRate: 0.1,
         replaysSessionSampleRate: 0.05,
         replaysOnErrorSampleRate: 1.0,
@@ -224,6 +225,7 @@
               <li>12-week scan (dating scan) confirms due date</li>
               <li>Most couples share news publicly after week 12</li>
             </ul>
+            <p style="font-size:0.9rem;color:var(--text-muted);margin-top:12px;">Julie at <a href="https://www.fabworkingmomlife.com/things-no-one-tells-pregnant/">Fab Working Mom Life</a> collected first-pregnancy surprises (mood, nesting, shoe size) that the week count does not cover.</p>
           </div>
           <div class="content-card">
             <h3>🌸 Second Trimester (Weeks 13–26)</h3>

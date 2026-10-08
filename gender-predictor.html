@@ -1064,21 +1064,23 @@ a[data-tooltip] {
   .network-icon-img { width: 18px; height: 18px; object-fit: contain; }
   </style>
 
+  <link rel="stylesheet" href="nav.css?v=1">
 </head>
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar">
+  <nav class="navbar site-nav">
     <div class="nav-inner">
-      <a href="/" class="nav-brand">
-        <img src="logo.svg" alt="" class="nav-brand-logo" width="36" height="36" />
-        <div class="nav-brand-text">Pregnancy<span class="nav-brand-accent">Week</span>Tracker</div>
+      <a href="index.html" class="nav-brand">
+        <img src="logo.svg" alt="" class="nav-brand-img" width="36" height="36" />
+        <span class="nav-brand-text">Pregnancy<span class="text-accent">Week</span>Tracker</span>
       </a>
-      <button class="hamburger" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');this.setAttribute('aria-expanded',o?'true':'false');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open',o)"><span></span><span></span><span></span></button>
+      <button type="button" class="hamburger" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');this.setAttribute('aria-expanded',o?'true':'false');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open',o)"><span></span><span></span><span></span></button>
       <div class="nav-links">
-        <a href="/#tracker">Calculator</a>
-        <a href="/#all-weeks">Timeline</a>
+        <a href="index.html#tracker">Calculator</a>
+        <a href="index.html#all-weeks">Timeline</a>
         <a href="kick-counter.html">Kick Counter</a>
+        <a href="contraction-timer.html">Contraction Timer</a>
         <a href="pregnancy-guide.html">Guides</a>
         <a href="about.html">About</a>
       </div>
@@ -1277,7 +1279,7 @@ a[data-tooltip] {
 <script>
   window.isMainPage = false;
 </script>
-<script src="script.js?v=4" defer></script>
+<script src="script.js?v=11" defer></script>
 
   <!-- Image Modal -->
   <div id="imgModal" class="img-modal" tabindex="-1" role="dialog" aria-modal="true" onclick="closeImgModal()">

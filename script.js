@@ -149,7 +149,7 @@ function lsDel(key)                  { return _ls.del(key); }
     if (!type || (type !== 'fruit' && type !== 'object')) return null;
     if (wkNum < 1 || wkNum > LOCAL_WEEK_PHOTO_MAX) return null;
     var padded = String(wkNum).padStart(2, '0');
-    return 'assets/week-photos/week_' + padded + '_' + type + '.webp';
+    return 'assets/week-photos/week_' + padded + '_' + type + '.webp?v=4';
   }
 
   function weekImg(wkNum, emoji, imageType) {
@@ -881,7 +881,7 @@ function lsDel(key)                  { return _ls.del(key); }
         "fruitEmoji": "🥬",
         "fruitLabel": "Bunch of Celery",
         "objectEmoji": "🛌",
-        "objectLabel": "Pillow",
+        "objectLabel": "Small Cushion",
         "size_in": "Bunch of methi (fenugreek)",
         "baby": "Baby is early term. Lungs are mature. Baby practises all skills for birth: sucking, swallowing, gripping, and breathing movements.",
         "mom": "You may notice the mucus plug passing ('bloody show') — a sign labour is approaching in the coming days or weeks.",
@@ -919,8 +919,8 @@ function lsDel(key)                  { return _ls.del(key); }
         "emoji": "🍉",
         "fruitEmoji": "🧅",
         "fruitLabel": "Leek",
-        "objectEmoji": "🥣",
-        "objectLabel": "Stand Mixer",
+        "objectEmoji": "🎒",
+        "objectLabel": "Large Backpack",
         "baby": "Baby is 50cm and weighs about 3.3kg. The brain and lungs benefit enormously from every extra day inside the womb at this stage.",
         "mom": "You may feel every day is the day! Watch for: contractions 5 minutes apart for 1 hour, waters breaking, or strong bloody show.",
         "tip": "Prepare mentally for birth — hypnobirthing, breathing techniques, and visualisation are all clinically evidenced to help manage labour.",
@@ -1646,7 +1646,7 @@ function lsDel(key)                  { return _ls.del(key); }
         '</div>' +
         '<div class="week-header-content">' +
           '<div class="week-title-wrap">' +
-            '<div class="week-number">Week ' + weekNum + ' of 40' + ttcBadge + '</div>' +
+            '<div class="week-number">Week ' + weekNum + (weekNum > 40 ? '' : ' of 40') + ttcBadge + '</div>' +
             '<div class="week-size">' + headerImageLabel + '</div>' +
             '<div class="week-size-sub">' + sizeSubHtml + '</div>' +
           '</div>' +
@@ -2333,6 +2333,35 @@ function lsDel(key)                  { return _ls.del(key); }
     // Keep history visible but show it's ended
     var hist = document.getElementById('kcHistory');
     hist.insertAdjacentHTML('afterbegin', '<div style="text-align:center;padding:8px;font-size:0.75rem;color:var(--text-muted);border-bottom:1px dashed #ccc;margin-bottom:10px">Session ended. Total: ' + kcHits.length + ' kicks.</div>');
+  }
+
+  function kcReset() {
+    if (kcHits.length > 0 && !window.confirm('Clear this kick count?')) return;
+    kcActive = false;
+    clearInterval(kcInterval);
+    kcStartTime = null;
+    kcHits = [];
+    try {
+      _ls.setRaw('kcActive', 'false');
+      _ls.del('kcStartTime');
+      _ls.del('kcHits');
+    } catch (e) {}
+    if (!ctActive) releaseWakeLock();
+
+    var btn = document.getElementById('kcBtn');
+    if (btn) btn.innerText = 'Start Counting Kicks 🦶';
+    var stop = document.getElementById('kcStopBtn');
+    if (stop) stop.style.display = 'none';
+    var enc = document.getElementById('kcEncourage');
+    if (enc) enc.style.display = 'none';
+    var count = document.getElementById('kcCount');
+    if (count) count.innerText = '0';
+    var timer = document.getElementById('kcTimer');
+    if (timer) timer.innerText = '00:00';
+    var ring = document.getElementById('kcProgressRing');
+    if (ring) ring.style.strokeDashoffset = '502.6';
+    var hist = document.getElementById('kcHistory');
+    if (hist) hist.innerHTML = '';
   }
 
   // ─────────────────────────────────────────────────────────

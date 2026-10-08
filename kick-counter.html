@@ -1044,6 +1044,10 @@ a[data-tooltip] {
 .calc-link-anchor { color: var(--primary); font-weight: 700; text-decoration: none; }
 .tool-page-container { max-width: 900px; margin: 0 auto; padding-top: 32px; }
 .btn-stop-hidden { display: none; padding: 12px; margin-top: 8px; opacity: 0.8; font-size: 0.9rem; }
+.btn-reset-secondary { padding: 12px; margin-top: 8px; opacity: 0.8; font-size: 0.9rem; background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+.source-list { list-style: none; text-align: left; margin: 1rem 0 0; padding: 0; }
+.source-list li { margin: 0 0 0.75rem; line-height: 1.5; }
+.source-list li:last-child { margin-bottom: 0; }
 .guide-box-success { font-size: 0.85rem; color: var(--text-muted); margin-top: 24px; text-align: left; background: rgba(0,0,0,0.03); padding: 18px; border-radius: 14px; border-left: 4px solid var(--success); }
 .guide-strong { color: var(--text); }
 .guide-list { margin-top: 10px; padding-left: 20px; margin-bottom: 0; }
@@ -1063,21 +1067,23 @@ a[data-tooltip] {
   .network-icon-img { width: 18px; height: 18px; object-fit: contain; }
   </style>
 
+  <link rel="stylesheet" href="nav.css?v=1">
 </head>
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar">
+  <nav class="navbar site-nav">
     <div class="nav-inner">
-      <a href="/" class="nav-brand">
-        <img src="logo.svg" alt="" class="nav-brand-logo" width="36" height="36" />
-        <div class="nav-brand-text">Pregnancy<span class="nav-brand-accent">Week</span>Tracker</div>
+      <a href="index.html" class="nav-brand">
+        <img src="logo.svg" alt="" class="nav-brand-img" width="36" height="36" />
+        <span class="nav-brand-text">Pregnancy<span class="text-accent">Week</span>Tracker</span>
       </a>
-      <button class="hamburger" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');this.setAttribute('aria-expanded',o?'true':'false');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open',o)"><span></span><span></span><span></span></button>
+      <button type="button" class="hamburger" aria-label="Menu" aria-expanded="false" onclick="var o=this.classList.toggle('open');this.setAttribute('aria-expanded',o?'true':'false');this.closest('.navbar').querySelector('.nav-links').classList.toggle('open',o)"><span></span><span></span><span></span></button>
       <div class="nav-links">
-        <a href="/#tracker">Calculator</a>
-        <a href="/#all-weeks">Timeline</a>
-        <a href="kick-counter.html">Kick Counter</a>
+        <a href="index.html#tracker">Calculator</a>
+        <a href="index.html#all-weeks">Timeline</a>
+        <a href="kick-counter.html" class="active" aria-current="page">Kick Counter</a>
+        <a href="contraction-timer.html">Contraction Timer</a>
         <a href="pregnancy-guide.html">Guides</a>
         <a href="about.html">About</a>
       </div>
@@ -1115,6 +1121,7 @@ a[data-tooltip] {
 
           <button class="tool-btn-main btn-kick-pulse" id="kcBtn" data-tooltip="Start a new kick counting session" onclick="kcRecord()">Start Counting Kicks 🦶</button>
           <button class="tool-btn-main btn-stop btn-stop-hidden" id="kcStopBtn" onclick="kcStop()">Stop &amp; Save Session</button>
+          <button class="tool-btn-main btn-reset-secondary" id="kcResetBtn" type="button" onclick="kcReset()">Reset count</button>
 
           <div class="tool-history-list" id="kcHistory">
             <!-- History injected here -->
@@ -1176,7 +1183,7 @@ a[data-tooltip] {
       <div class="glass-card">
         <h2 id="sources-heading">Medical Sources &amp; Guidelines</h2>
         <p>The kick-count thresholds, timing guidance, and warning signs on this page are drawn from major obstetric organisations. This tool is a self-tracking aid; it does not diagnose complications or replace your maternity provider&rsquo;s advice.</p>
-        <ul style="line-height: 1.9;">
+        <ul class="source-list">
           <li><a href="https://www.acog.org/womens-health/faqs/special-tests-for-monitoring-fetal-well-being" target="_blank" rel="noopener noreferrer">ACOG &mdash; Special Tests for Monitoring Fetal Well-Being</a> (American College of Obstetricians and Gynecologists)</li>
           <li><a href="https://countthekicks.org/why-we-count/get-started/" target="_blank" rel="noopener noreferrer">Count the Kicks &mdash; How to Count Baby Kicks</a> (Iowa-based public health program)</li>
           <li><a href="https://www.mayoclinic.org/healthy-lifestyle/pregnancy-week-by-week/expert-answers/fetal-movement/faq-20058587" target="_blank" rel="noopener noreferrer">Mayo Clinic &mdash; Fetal Movement: What&rsquo;s Normal?</a></li>
@@ -1225,7 +1232,7 @@ a[data-tooltip] {
 <script>
   window.isMainPage = false;
 </script>
-<script src="script.js?v=4" defer></script>
+<script src="script.js?v=11" defer></script>
 
   <!-- Image Modal -->
   <div id="imgModal" class="img-modal" tabindex="-1" role="dialog" aria-modal="true" onclick="closeImgModal()">

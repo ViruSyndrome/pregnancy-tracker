@@ -191,14 +191,14 @@
       padding: 32px;
   }
     .calc-toggle {
-      display: flex; gap: 0;
+      display: flex; flex-wrap: wrap; gap: 4px;
       background: var(--bg); border-radius: 10px;
       padding: 4px; margin-bottom: 24px;
   }
     .calc-toggle button {
-      flex: 1; padding: 8px 16px;
+      flex: 1 1 auto; min-width: 4.5rem; padding: 8px 10px;
       border: none; cursor: pointer; border-radius: 8px;
-      font-size: 0.875rem; font-weight: 500; color: var(--text-muted);
+      font-size: 0.8rem; font-weight: 500; color: var(--text-muted);
       background: transparent; transition: all 0.2s;
   }
     .calc-toggle button.active {

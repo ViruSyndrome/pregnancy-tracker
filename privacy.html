@@ -85,7 +85,7 @@
     <h1>Privacy Policy</h1>
     <p><strong>Last updated: October 2026</strong></p>
     <p>This policy describes how <strong>Pregnancy Week Tracker</strong> (pregnancyweektracker.com) handles information. The data controller / site operator is <strong>Vinod Isaac</strong>. Contact: <a href="mailto:hello@pregnancyweektracker.com">hello@pregnancyweektracker.com</a>.</p>
-    <p>Pregnancy-related dates (last menstrual period, due date, cycle length) are sensitive. We no longer place them in page URLs, so they are not sent to analytics or ad systems as query parameters.</p>
+    <p>Pregnancy-related dates (last menstrual period, due date, conception or IVF transfer date, cycle length) are sensitive. We no longer place them in page URLs, so they are not sent to analytics or ad systems as query parameters.</p>
 
     <h2>1. What this site does</h2>
     <p>Week and due-date calculations run in your browser. Tools such as the kick counter and contraction timer also keep their working state on your device. We do not operate a user-account database for these tools.</p>
@@ -93,10 +93,12 @@
     <h2>2. Information stored on your device</h2>
     <p>Depending on which tools you use, the site may write to <code>localStorage</code> and/or <code>sessionStorage</code>, including:</p>
     <ul>
-      <li><code>pwtSavedLMP</code> — last menstrual period date you entered</li>
+      <li><code>pwtSavedLMP</code> — last menstrual period date you entered (or LMP-equivalent from other modes)</li>
       <li><code>pwtSavedDue</code> — estimated or entered due date</li>
       <li><code>pwtSavedCycle</code> — cycle length</li>
-      <li><code>pwtSavedMode</code> — calculator mode (LMP vs due date)</li>
+      <li><code>pwtSavedMode</code> — calculator mode (LMP, due date, conception, IVF Day 3, or IVF Day 5)</li>
+      <li><code>pwtSavedConception</code> — conception date when using conception mode</li>
+      <li><code>pwtSavedTransfer</code> — IVF transfer date when using IVF Day 3 or Day 5 mode</li>
       <li><code>pwtChecklistState</code> — checklist tick state</li>
       <li><code>kcHits</code> — kick-counter hits</li>
       <li><code>ctHistoryList</code> — contraction-timer history</li>

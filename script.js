@@ -122,12 +122,30 @@ function lsDel(key)                  { return _ls.del(key); }
     return '28+';
   }
 
-  function storePregnancySession(lmpYmd, dueYmd, cycle) {
+  function storePregnancySession(lmpYmd, dueYmd, cycle, extra) {
     try {
       if (lmpYmd) sessionStorage.setItem('pwtSavedLMP', lmpYmd);
       if (dueYmd) sessionStorage.setItem('pwtSavedDue', dueYmd);
       if (cycle != null && cycle !== '') sessionStorage.setItem('pwtSavedCycle', String(cycle));
+      if (extra && extra.conception) sessionStorage.setItem('pwtSavedConception', extra.conception);
+      if (extra && extra.transfer) sessionStorage.setItem('pwtSavedTransfer', extra.transfer);
     } catch (e) {}
+  }
+
+  function readStoredConception() {
+    try {
+      var s = sessionStorage.getItem('pwtSavedConception');
+      if (s) return s;
+    } catch (e) {}
+    return _ls.getRaw('pwtSavedConception') || '';
+  }
+
+  function readStoredTransfer() {
+    try {
+      var s = sessionStorage.getItem('pwtSavedTransfer');
+      if (s) return s;
+    } catch (e) {}
+    return _ls.getRaw('pwtSavedTransfer') || '';
   }
 
   function readStoredLMP() {
@@ -1253,6 +1271,7 @@ function lsDel(key)                  { return _ls.del(key); }
   const FAQS = [
     { q: 'How is my pregnancy due date calculated?', a: 'Your estimated due date (EDD) is calculated as 280 days (40 weeks) from the first day of your last menstrual period (LMP). This is called Naegele\'s rule. The calculation assumes a 28-day cycle — if your cycle is longer or shorter, your actual due date may differ slightly. Your 12-week dating scan gives a more accurate estimate based on baby\'s actual measurements.' },
     { q: 'Why does pregnancy start from the last period, not conception?', a: 'Doctors and obstetricians count pregnancy from the LMP because it\'s a known, consistent date — the exact moment of ovulation and conception varies and can\'t be pinpointed. So when your period is one week late, you\'re technically already 5 weeks pregnant (2 weeks before ovulation + 3 weeks since). It\'s a convention, not biology.' },
+    { q: 'How does IVF or conception dating work here?', a: 'Conception mode treats LMP as conception − 14 days and due date as conception + 266 days (standard obstetric equivalents). IVF Day 3 transfer uses due ≈ transfer + 263 days and LMP equivalent = transfer − 17 days; IVF Day 5 uses due ≈ transfer + 261 days and LMP equivalent = transfer − 19 days. These mirror common online calculator conventions and are estimates only — your clinic’s protocol or an early dating scan can differ and should take priority.' },
     { q: 'How accurate is this due date calculator?', a: 'This calculator uses the standard obstetric formula (Naegele\'s rule). However, due dates are estimates — only about 5% of babies arrive on their exact due date. Most are born within 2 weeks before or after. Your 12-week dating scan, which measures your baby\'s crown-rump length, gives a more accurate estimate and supersedes the LMP calculation if there\'s a significant difference.' },
     { q: 'What is the 5-1-1 rule for contractions?', a: 'The 5-1-1 rule is a standard guideline for when to head to the hospital. It means: your contractions are <strong>5 minutes apart</strong> (measured from the start of one to the start of the next), each one lasts for <strong>1 full minute</strong>, and this pattern has been consistent for <strong>1 full hour</strong>. Always call your doctor, healthcare provider, or hospital before leaving to confirm they are ready for you.' },
     { q: 'How should I use the Baby Kick Counter?', a: 'Standard medical advice is to start counting kicks daily from 28 weeks. Find a time when your baby is usually active (often after a meal or in the evening). You should aim to feel 10 movements (kicks, flutters, swishes, or rolls) within 2 hours. If you don\'t reach 10 in 2 hours, or if you notice a significant decrease in your baby\'s normal movement pattern, contact your maternity unit or doctor immediately.' },
@@ -1284,18 +1303,20 @@ function lsDel(key)                  { return _ls.del(key); }
   //  INIT
   // ─────────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', function() {
-    // Set max date for LMP input to today
+    // Set max date for LMP / conception / transfer inputs to today
     var today = new Date();
-    var maxLMP = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000); // at least 1 week ago
     var lmpDateEl = document.getElementById('lmpDate');
     var dueDateEl = document.getElementById('dueDate');
-    if (lmpDateEl) {
-      lmpDateEl.max = formatDateInput(today);
-    }
+    var todayYmd = formatDateInput(today);
+    if (lmpDateEl) lmpDateEl.max = todayYmd;
     if (dueDateEl) {
       dueDateEl.min = formatDateInput(new Date(today.getTime() - 28 * 24 * 60 * 60 * 1000));
       dueDateEl.max = formatDateInput(new Date(today.getTime() + 308 * 24 * 60 * 60 * 1000));
     }
+    ['conceptionDate', 'ivf3Date', 'ivf5Date'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.max = todayYmd;
+    });
 
     // Wait for Wikipedia images to load, then render timeline with real photos
     loadWeekImages().then(function() {
@@ -1328,13 +1349,24 @@ function lsDel(key)                  { return _ls.del(key); }
 
     // Prefill calculator from session/local storage (do not auto-redirect on load)
     if (window.isMainPage) {
-      var savedMode = _ls.getRaw('pwtSavedMode');
+      var savedMode = _ls.getRaw('pwtSavedMode') || 'lmp';
       var sLMP = readStoredLMP();
       var sCy = readStoredCycle();
       var sDue = readStoredDue();
+      var sConc = readStoredConception();
+      var sTrans = readStoredTransfer();
       if (savedMode === 'due' && sDue && document.getElementById('dueDate')) {
         document.getElementById('dueDate').value = sDue;
         switchMode('due');
+      } else if (savedMode === 'conception' && sConc && document.getElementById('conceptionDate')) {
+        document.getElementById('conceptionDate').value = sConc;
+        switchMode('conception');
+      } else if (savedMode === 'ivf3' && sTrans && document.getElementById('ivf3Date')) {
+        document.getElementById('ivf3Date').value = sTrans;
+        switchMode('ivf3');
+      } else if (savedMode === 'ivf5' && sTrans && document.getElementById('ivf5Date')) {
+        document.getElementById('ivf5Date').value = sTrans;
+        switchMode('ivf5');
       } else if (sLMP && document.getElementById('lmpDate')) {
         document.getElementById('lmpDate').value = sLMP;
         if (sCy && document.getElementById('cycleLen')) document.getElementById('cycleLen').value = sCy;
@@ -1348,15 +1380,32 @@ function lsDel(key)                  { return _ls.del(key); }
   // ─────────────────────────────────────────────────────────
   function switchMode(mode) {
     currentMode = mode;
-    var lmpM = document.getElementById('lmpMode');
-    var dueM = document.getElementById('dueMode');
-    var btnL = document.getElementById('btnLMP');
-    var btnD = document.getElementById('btnDD');
-    
-    if (lmpM) lmpM.style.display = mode === 'lmp' ? 'block' : 'none';
-    if (dueM) dueM.style.display = mode === 'due' ? 'block' : 'none';
-    if (btnL) btnL.classList.toggle('active', mode === 'lmp');
-    if (btnD) btnD.classList.toggle('active', mode === 'due');
+    var panels = {
+      lmp: document.getElementById('lmpMode'),
+      due: document.getElementById('dueMode'),
+      conception: document.getElementById('conceptionMode'),
+      ivf3: document.getElementById('ivf3Mode'),
+      ivf5: document.getElementById('ivf5Mode')
+    };
+    var buttons = {
+      lmp: document.getElementById('btnLMP'),
+      due: document.getElementById('btnDD'),
+      conception: document.getElementById('btnConception'),
+      ivf3: document.getElementById('btnIvf3'),
+      ivf5: document.getElementById('btnIvf5')
+    };
+    Object.keys(panels).forEach(function(key) {
+      var el = panels[key];
+      if (!el) return;
+      var on = key === mode;
+      el.style.display = on ? 'block' : 'none';
+      if (on) el.removeAttribute('hidden');
+      else el.setAttribute('hidden', '');
+    });
+    Object.keys(buttons).forEach(function(key) {
+      if (buttons[key]) buttons[key].classList.toggle('active', key === mode);
+    });
+    try { _ls.setRaw('pwtSavedMode', mode); } catch (e) {}
   }
 
   function setCalcError(message) {
@@ -1393,14 +1442,19 @@ function lsDel(key)                  { return _ls.del(key); }
   function calculate() {
     clearCalcError();
     var lmpDate;
+    var dueDate;
     var cycleLenEl = document.getElementById('cycleLen');
     var cycleLen = parseInt(cycleLenEl && cycleLenEl.value, 10) || 28;
     var today = new Date(); today.setHours(0, 0, 0, 0);
+    var conceptionYmd = '';
+    var transferYmd = '';
 
-    if (cycleLen < 20 || cycleLen > 45) {
-      if (cycleLenEl) cycleLenEl.focus();
-      setCalcError('Please enter a realistic cycle length between 20 and 45 days.');
-      return;
+    if (currentMode === 'lmp' || currentMode === 'due') {
+      if (cycleLen < 20 || cycleLen > 45) {
+        if (cycleLenEl) cycleLenEl.focus();
+        setCalcError('Please enter a realistic cycle length between 20 and 45 days.');
+        return;
+      }
     }
 
     if (currentMode === 'lmp') {
@@ -1415,7 +1469,8 @@ function lsDel(key)                  { return _ls.del(key); }
         setCalcError('Please enter a valid last-period date (YYYY-MM-DD).');
         return;
       }
-    } else {
+      dueDate = addDaysLocal(lmpDate, 280 + (cycleLen - 28));
+    } else if (currentMode === 'due') {
       var dueDateVal = document.getElementById('dueDate') && document.getElementById('dueDate').value;
       if (!dueDateVal) {
         if (document.getElementById('dueDate')) document.getElementById('dueDate').focus();
@@ -1434,6 +1489,55 @@ function lsDel(key)                  { return _ls.del(key); }
       }
       // LMP = dueDate − (280 + cycle adjustment) using local calendar days
       lmpDate = addDaysLocal(enteredDue, -(280 + (cycleLen - 28)));
+      dueDate = enteredDue;
+    } else if (currentMode === 'conception') {
+      var concVal = document.getElementById('conceptionDate') && document.getElementById('conceptionDate').value;
+      if (!concVal) {
+        if (document.getElementById('conceptionDate')) document.getElementById('conceptionDate').focus();
+        setCalcError('Please enter your conception date.');
+        return;
+      }
+      var conceptionDate = parseLocalYMD(concVal);
+      if (!conceptionDate) {
+        setCalcError('Please enter a valid conception date (YYYY-MM-DD).');
+        return;
+      }
+      if (conceptionDate > today) {
+        setCalcError('Conception date cannot be in the future.');
+        return;
+      }
+      // Obstetric LMP equivalent = conception − 14; due = conception + 266
+      lmpDate = addDaysLocal(conceptionDate, -14);
+      dueDate = addDaysLocal(conceptionDate, 266);
+      conceptionYmd = formatLocalYMD(conceptionDate);
+      cycleLen = 28;
+    } else if (currentMode === 'ivf3' || currentMode === 'ivf5') {
+      var transferId = currentMode === 'ivf3' ? 'ivf3Date' : 'ivf5Date';
+      var transferVal = document.getElementById(transferId) && document.getElementById(transferId).value;
+      var dayOffset = currentMode === 'ivf3' ? 3 : 5;
+      var dueOffset = currentMode === 'ivf3' ? 263 : 261;
+      var lmpOffset = 14 + dayOffset; // day-3 → 17, day-5 → 19
+      if (!transferVal) {
+        if (document.getElementById(transferId)) document.getElementById(transferId).focus();
+        setCalcError('Please enter your IVF Day ' + dayOffset + ' transfer date.');
+        return;
+      }
+      var transferDate = parseLocalYMD(transferVal);
+      if (!transferDate) {
+        setCalcError('Please enter a valid transfer date (YYYY-MM-DD).');
+        return;
+      }
+      if (transferDate > today) {
+        setCalcError('Transfer date cannot be in the future.');
+        return;
+      }
+      lmpDate = addDaysLocal(transferDate, -lmpOffset);
+      dueDate = addDaysLocal(transferDate, dueOffset);
+      transferYmd = formatLocalYMD(transferDate);
+      cycleLen = 28;
+    } else {
+      setCalcError('Unknown calculator mode. Please refresh and try again.');
+      return;
     }
 
     if (lmpDate > today) {
@@ -1442,11 +1546,9 @@ function lsDel(key)                  { return _ls.del(key); }
     }
 
     var lmpYmd = formatLocalYMD(lmpDate);
-    var adjustedDays = 280 + (cycleLen - 28);
-    var dueDate = addDaysLocal(lmpDate, adjustedDays);
     var dueYmd = formatLocalYMD(dueDate);
 
-    // Persist for returning users (localStorage) and this session (sessionStorage) — never put LMP in the URL
+    // Persist for returning users (localStorage) and this session (sessionStorage) — never put dates in the URL
     try {
       _ls.setRaw('pwtSavedMode', currentMode);
       _ls.setRaw('pwtSavedLMP', lmpYmd);
@@ -1455,8 +1557,10 @@ function lsDel(key)                  { return _ls.del(key); }
       if (currentMode === 'due' && document.getElementById('dueDate')) {
         _ls.setRaw('pwtSavedDue', document.getElementById('dueDate').value);
       }
+      if (conceptionYmd) _ls.setRaw('pwtSavedConception', conceptionYmd);
+      if (transferYmd) _ls.setRaw('pwtSavedTransfer', transferYmd);
     } catch (e) {}
-    storePregnancySession(lmpYmd, dueYmd, cycleLen);
+    storePregnancySession(lmpYmd, dueYmd, cycleLen, { conception: conceptionYmd, transfer: transferYmd });
 
     var ga = gestationalAgeFromLMP(lmpDate, today);
     if (!ga) {

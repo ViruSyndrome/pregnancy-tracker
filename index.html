@@ -133,9 +133,12 @@
     </div>
 
     <div class="calc-card">
-      <div class="calc-toggle">
-        <button class="active" id="btnLMP" onclick="switchMode('lmp')">I know when my period started</button>
-        <button id="btnDD" onclick="switchMode('due')">I know my due date</button>
+      <div class="calc-toggle" role="group" aria-label="Dating method">
+        <button type="button" class="active" id="btnLMP" onclick="switchMode('lmp')">LMP</button>
+        <button type="button" id="btnDD" onclick="switchMode('due')">Due date</button>
+        <button type="button" id="btnConception" onclick="switchMode('conception')">Conception</button>
+        <button type="button" id="btnIvf3" onclick="switchMode('ivf3')">IVF Day 3</button>
+        <button type="button" id="btnIvf5" onclick="switchMode('ivf5')">IVF Day 5</button>
       </div>
 
       <div id="lmpMode">
@@ -144,7 +147,7 @@
           <input type="date" id="lmpDate" max="">
           <p class="input-hint">Use the first day your period began. Don't worry if you're not 100% sure — an approximate date works fine.</p>
         </div>
-        <div class="input-group">
+        <div class="input-group" id="cycleLenGroup">
           <label for="cycleLen">Cycle length (days)</label>
           <input type="number" id="cycleLen" value="28" min="20" max="45">
           <p class="input-hint">Most cycles are 28 days. Adjust if yours is shorter or longer.</p>
@@ -156,6 +159,30 @@
           <label for="dueDate">Your due date</label>
           <input type="date" id="dueDate">
           <p class="input-hint">Your due date will be used to calculate how many weeks you are.</p>
+        </div>
+      </div>
+
+      <div id="conceptionMode" hidden>
+        <div class="input-group">
+          <label for="conceptionDate">Conception date</label>
+          <input type="date" id="conceptionDate" max="">
+          <p class="input-hint">We treat LMP as conception − 14 days (standard obstetric dating) and due date as conception + 266 days. An estimate — your clinic or dating scan may differ.</p>
+        </div>
+      </div>
+
+      <div id="ivf3Mode" hidden>
+        <div class="input-group">
+          <label for="ivf3Date">Day 3 embryo transfer date</label>
+          <input type="date" id="ivf3Date" max="">
+          <p class="input-hint">Due ≈ transfer + 263 days. Gestational age uses LMP equivalent = transfer − 17 days (common calculator convention). An estimate only.</p>
+        </div>
+      </div>
+
+      <div id="ivf5Mode" hidden>
+        <div class="input-group">
+          <label for="ivf5Date">Day 5 embryo transfer date</label>
+          <input type="date" id="ivf5Date" max="">
+          <p class="input-hint">Due ≈ transfer + 261 days. Gestational age uses LMP equivalent = transfer − 19 days. An estimate only — follow your clinic’s dating.</p>
         </div>
       </div>
 

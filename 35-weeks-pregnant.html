@@ -5,14 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#FDF2F8">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <script src="https://js.sentry-cdn.com/d62024e9014b97cc89780c4a0051997e.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://js.sentry-cdn.com/2510c386e2467c8dc3aad62f23805e09.min.js" crossorigin="anonymous"></script>
   <script>
     Sentry.onLoad(function() {
-      Sentry.init({ ignoreErrors: [/pageContext/i, /adsbygoogle/i, /@context/i, /runtime\.sendMessage/i, /Tab not found/i, /Extension context invalidated/i, "Script error."], tracesSampleRate: 1.0, replaysSessionSampleRate: 0.1, replaysOnErrorSampleRate: 1.0 });
+      Sentry.init({
+        ignoreErrors: [/pageContext/i, /adsbygoogle/i, /@context/i, /runtime\.sendMessage/i, /Tab not found/i, /Extension context invalidated/i, /int64/i, /rum_fy2021/i, "Script error."],
+        denyUrls: [/pagead2\.googlesyndication\.com/i, /googlesyndication\.com/i, /googleadservices\.com/i, /ep1\.adtrafficquality\.google/i],
+        tracesSampleRate: 0.1,
+        replaysSessionSampleRate: 0,
+        replaysOnErrorSampleRate: 0,
+        beforeSend: function(event) {
+          try {
+            if (event && event.request && event.request.url) {
+              var u = new URL(event.request.url);
+              u.search = '';
+              u.hash = '';
+              event.request.url = u.toString();
+            }
+          } catch (e) {}
+          return event;
+        }
+      });
     });
   </script>
   <title>35 Weeks Pregnant: Baby Size & Symptoms | Pregnancy Week Tracker</title>
-  <meta name="description" content="At 35 weeks pregnant, your baby is the size of a Winter Melon (Medium). Learn about week 35 fetal development, pregnancy symptoms, and calculate your exact due date.">
+  <meta name="description" content="At 35 weeks pregnant, your baby is the size of a Bunch of Bananas (Medium). Learn about week 35 fetal development, pregnancy symptoms, and calculate your exact due date.">
   <meta name="msvalidate.01" content="FA7405A0B7623E8A404F74AE4952777C" />
   <link rel="canonical" href="https://www.pregnancyweektracker.com/35-weeks-pregnant.html">
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=9">
@@ -29,7 +46,7 @@
   <meta property="og:image:secure_url" content="https://www.pregnancyweektracker.com/og-large.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="35 Weeks Pregnant: Symptoms & Baby Size | Pregnancy Week Tracker">
-  <meta name="twitter:description" content="At 35 weeks pregnant, your baby is the size of a Winter Melon (Medium). See fetal development, symptoms and tips.">
+  <meta name="twitter:description" content="At 35 weeks pregnant, your baby is the size of a Bunch of Bananas (Medium). See fetal development, symptoms and tips.">
   <meta name="twitter:image" content="https://www.pregnancyweektracker.com/og-large.jpg">
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +54,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVGV89T5QG" crossorigin="anonymous"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-LVGV89T5QG');</script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});gtag('js',new Date());gtag('config','G-LVGV89T5QG',{redact_query_parameters:['lmp','due','cycle']});</script>
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2959862133855422" crossorigin="anonymous"></script>
   <!-- Schema.org structured data -->
@@ -46,7 +63,7 @@
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": "35 Weeks Pregnant: Baby Size & Symptoms",
-    "description": "At 35 weeks pregnant, your baby is the size of a Winter Melon (Medium). Learn about week 35 fetal development, pregnancy symptoms, and calculate your exact due date.",
+    "description": "At 35 weeks pregnant, your baby is the size of a Bunch of Bananas (Medium). Learn about week 35 fetal development, pregnancy symptoms, and calculate your exact due date.",
     "url": "https://www.pregnancyweektracker.com/35-weeks-pregnant.html",
     "image": "https://www.pregnancyweektracker.com/og-large.jpg",
     "publisher": {
@@ -83,7 +100,7 @@
     <section class="hero">
       <span style="background: var(--primary-light); color: var(--primary); padding: 4px 12px; border-radius: 99px; font-weight: 600; font-size: 0.8rem; text-transform: uppercase;">Pregnancy Guide</span>
       <h1>35 Weeks Pregnant</h1>
-      <p id="heroBabySizeText" style="color: var(--text-muted); max-width: 600px; margin: 0 auto 24px;">Your baby is the size of a <strong>Winter Melon (Medium)</strong>. Discover exactly what is happening to your body and your baby this week.</p>
+      <p id="heroBabySizeText" style="color: var(--text-muted); max-width: 600px; margin: 0 auto 24px;">Your baby is the size of a <strong>Bunch of Bananas</strong>. Discover exactly what is happening to your body and your baby this week.</p>
       
       <div class="hero-note hero-note-box">
         <strong>New pregnancy guide:</strong> Learn how weeks are counted, what each trimester means, and how to interpret your calculator results for better preparation and planning.
@@ -91,12 +108,12 @@
       </div>
       
       <!-- ── Static SEO Content for Crawlers ── -->
-      <div class="seo-static-content" style="display: none;">
+      <div class="seo-static-content">
           <h2>35 Weeks Pregnant Fetal Development</h2>
           <p><strong>Baby Development:</strong> Baby weighs about 2.4kg. Most development is complete — the next weeks are mainly about weight gain and final lung maturation.</p>
           <p><strong>Pregnancy Symptoms:</strong> Monitor movements carefully — they should remain regular. Contact your doctor or healthcare provider if you notice a significant reduction in movement.</p>
           <p><strong>Weekly Tip:</strong> Prepare your postpartum recovery kit: maternity pads, comfortable underwear, pain relief, witch hazel, and hospital-bag snacks.</p>
-          <p>At 35 weeks pregnant, your baby is approximately the size of a Winter Melon (Medium).</p>
+          <p>At 35 weeks pregnant, your baby is approximately the size of a Bunch of Bananas (Medium).</p>
       </div>
       
       <div class="calculator-container" style="display:none; max-width:800px; margin: 0 auto;" id="calculatorCard"></div>
@@ -109,6 +126,12 @@
         <input type="hidden" id="cycleLen" value="28">
         
         <!-- THE MPA RESULT PANEL (Injected dynamically or rendered statically below) -->
+        <div id="userWeekBanner" class="user-week-banner" hidden style="margin:12px 0 20px;padding:12px 16px;background:#fdf2f8;border:1px solid #f3d6e8;border-radius:12px;font-size:0.95rem;color:#111827;"></div>
+        <div id="weekShareRow" style="display:none;text-align:center;margin:0 0 20px;flex-wrap:wrap;justify-content:center;gap:12px;">
+          <button class="btn-calc" id="shareBtn" type="button" style="background-color:var(--secondary);margin:0;display:inline-flex;align-items:center;gap:8px;" onclick="shareResult()">Save / Share Due Date</button>
+          <button class="btn-calc" id="calendarBtn" type="button" style="background-color:#4285F4;margin:0;display:inline-flex;align-items:center;gap:8px;" onclick="addDueToCalendar()">Add to Google Calendar</button>
+        </div>
+        <div id="calcError" role="alert" style="display:none;margin:0 0 16px;padding:12px 16px;background:#fef2f2;border:1px solid #fecaca;border-radius:12px;color:#991b1b;font-size:0.9rem;"></div>
         <div id="resultPanel" style="display: block; opacity: 1; transform: translateY(0);">
             <div class="glass-card" id="statsCard">
                 <div class="result-headline" id="resultHeadline"></div>
@@ -228,37 +251,19 @@
     <img id="imgModalContent" class="img-modal-content" src="" alt="">
   </div>
 
-  <script>
+    <script>
     window.isMainPage = false;
     window.currentMode = 'lmp';
     window.currentImageTab = 'fruit';
   </script>
-  <script src="script.js?v=11"></script>
+  <script src="script.js?v=12"></script>
 
   <script>
-    // --- MPA ROUTING LOGIC ---
     document.addEventListener('DOMContentLoaded', function() {
-      var params = new URLSearchParams(window.location.search);
-      var lmpParam = params.get('lmp');
-      
-      if (lmpParam) {
-        // User came from index.html calculator
-        document.getElementById('lmpDate').value = lmpParam;
-        window.setCalcError = function(e) { console.error(e); };
-        // calculate() renders everything: EDD, stats, trimester bar, weekCard, growth curve
-        calculate();
-        // Carry LMP param to next/prev links
-        var navBtns = document.querySelectorAll('.nav-btn');
-        navBtns.forEach(function(btn) {
-          if (btn.href) btn.href = btn.href.split('?')[0] + '?lmp=' + lmpParam;
-        });
-      } else {
-        // Organic Google visitor — no LMP known, show week card only
-        var statsCard = document.getElementById('statsCard');
-        if (statsCard) statsCard.style.display = 'none';
-        var resultPanel = document.getElementById('resultPanel');
-        if (resultPanel) resultPanel.style.paddingTop = '10px';
-        if (typeof showWeekDetail === 'function') showWeekDetail(35);
+      if (typeof initWeekPage === 'function') {
+        initWeekPage(35);
+      } else if (typeof showWeekDetail === 'function') {
+        showWeekDetail(35);
       }
     });
   </script>

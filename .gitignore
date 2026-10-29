@@ -8,3 +8,14 @@ Thumbs.db
 *.csv
 .vscode/
 .idea/
+
+assets/alternativeto/
+docs/
+assets/fruits/
+assets/growth-stages/
+package.json
+package-lock.json
+indexnow-submit.ps1
+
+# Keep GitHub Pages custom domain
+!CNAME

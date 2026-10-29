@@ -1,29 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="description" content="Calculate your pregnancy week by week, track your baby's development, and calculate your exact due date with Pregnancy-Tracker.">
-  <link rel="canonical" href="https://www.pregnancyweektracker.com/privacy.html">
-  <meta name="msvalidate.01" content="FA7405A0B7623E8A404F74AE4952777C" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://js.sentry-cdn.com/2510c386e2467c8dc3aad62f23805e09.min.js" crossorigin="anonymous"></script>
+  <meta name="description" content="Privacy Policy for Pregnancy Week Tracker — what we collect, third-party services, local storage, and how to clear your data.">
+  <link rel="canonical" href="https://www.pregnancyweektracker.com/privacy.html">
+  <meta name="msvalidate.01" content="FA7405A0B7623E8A404F74AE4952777C" />
+  <script defer src="https://js.sentry-cdn.com/2510c386e2467c8dc3aad62f23805e09.min.js" crossorigin="anonymous"></script>
   <script>
     Sentry.onLoad(function() {
-      Sentry.init({ ignoreErrors: [/pageContext/i, /adsbygoogle/i, /@context/i, /runtime\.sendMessage/i, /Tab not found/i, /Extension context invalidated/i, "Script error."], 
-        tracesSampleRate: 1.0,
-        replaysSessionSampleRate: 0.1,
-        replaysOnErrorSampleRate: 1.0,
+      Sentry.init({
+        ignoreErrors: [/pageContext/i, /adsbygoogle/i, /@context/i, /runtime\.sendMessage/i, /Tab not found/i, /Extension context invalidated/i, /int64/i, /rum_fy2021/i, "Script error."],
+        denyUrls: [/pagead2\.googlesyndication\.com/i, /googlesyndication\.com/i, /googleadservices\.com/i, /ep1\.adtrafficquality\.google/i],
+        tracesSampleRate: 0.1,
+        replaysSessionSampleRate: 0,
+        replaysOnErrorSampleRate: 0,
+        beforeSend: function(event) {
+          try {
+            if (event && event.request && event.request.url) {
+              var u = new URL(event.request.url);
+              u.search = '';
+              u.hash = '';
+              event.request.url = u.toString();
+            }
+          } catch (e) {}
+          return event;
+        }
       });
     });
   </script>
   <title>Privacy Policy - Pregnancy Week Tracker</title>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVGV89T5QG"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-LVGV89T5QG');</script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});gtag('js',new Date());gtag('config','G-LVGV89T5QG',{redact_query_parameters:['lmp','due','cycle']});</script>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=9">
+  <link rel="stylesheet" href="nav.css?v=1">
   <style>
     :root {
       --primary: #be185d; --primary-dark: #9d174d; --primary-light: #fce7f3;
@@ -32,64 +46,21 @@
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
-    .navbar { background: #fff; padding: 16px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
-    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.25rem; color: var(--primary); text-decoration: none; }
-    .logo span { color: var(--accent); }
     .container { max-width: 800px; margin: 60px auto; background: #fff; padding: 48px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
     h1 { font-family: 'Outfit', sans-serif; color: var(--primary); margin-bottom: 24px; }
-    h2 { font-family: 'Outfit', sans-serif; color: var(--text); margin-top: 32px; margin-bottom: 16px; }
-    p { margin-bottom: 16px; }
-.footer-dark { background: var(--text); color: #e5e7eb; padding: 60px 24px 32px; border-top: none; margin-top: 80px; }
-.footer-dark-inner { max-width: 1000px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between; text-align: left; }
-.footer-dark-col { flex: 1; min-width: 250px; }
-.footer-dark-brand { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.2rem; color: #fff; margin-bottom: 16px; }
-.footer-dark-brand span { color: var(--accent); }
-.footer-dark-desc { color: #9ca3af; font-size: 0.875rem; line-height: 1.6; }
-.footer-dark-h4 { font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; color: #9ca3af; margin-bottom: 20px; letter-spacing: 0.05em; }
-.footer-dark-ul { list-style: none; }
-.footer-dark-li { margin-bottom: 12px; }
-.footer-dark-link { text-decoration: none; font-size: 0.9rem; color: #d1d5db; }
-.footer-dark-copy { max-width: 1000px; margin: 60px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.82rem; color: #6b7280; text-align: center; }
-
-    /* Scroll Reveal animations */
-.reveal-scroll {
-  opacity: 0;
-  transform: translateY(15px);
-  transition: opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1), 
-              transform 1.0s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
-}
-
-.reveal-scroll.visible {
-  opacity: 1;
-}
-
-.reveal-scroll.visible:not(:hover) {
-  transform: translateY(0);
-}
-
-    
+    h2 { font-family: 'Outfit', sans-serif; color: var(--text); margin-top: 32px; margin-bottom: 16px; font-size: 1.25rem; }
+    p, li { margin-bottom: 12px; }
+    ul { padding-left: 1.25rem; margin-bottom: 16px; }
+    code { font-size: 0.9em; background: #f8fafc; padding: 1px 6px; border-radius: 4px; }
+    @media (max-width: 640px) { .container { margin: 24px 16px; padding: 28px 20px; } }
   </style>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2959862133855422" crossorigin="anonymous"></script>
-
-  <style>
-  /* Cross-Linking Footer Network CSS */
-  .network-footer { max-width: 800px; margin: 40px auto 20px; padding: 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; text-align: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-  .network-title { font-size: 0.95rem; font-weight: 600; color: #64748b; margin-bottom: 16px; margin-top: 0; text-transform: uppercase; letter-spacing: 0.5px; font-family: sans-serif; }
-  .network-links { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
-  .network-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; background: #f8fafc; color: #1e293b !important; text-decoration: none !important; border-radius: 8px; font-size: 0.95rem; font-weight: 500; transition: all 0.2s ease; border: 1px solid #e2e8f0; font-family: sans-serif; }
-  .network-link:hover { background: #f1f5f9; transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
-  .network-icon-img { width: 18px; height: 18px; object-fit: contain; }
-  </style>
-
-    <meta property="og:image" content="https://www.pregnancyweektracker.com/og-large.jpg">
-    <meta property="og:image:secure_url" content="https://www.pregnancyweektracker.com/og-large.jpg">
-    <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:image:width" content="2400">
-    <meta property="og:image:height" content="1254">
-    <meta name="twitter:image" content="https://www.pregnancyweektracker.com/og-large.jpg">
-  <link rel="stylesheet" href="nav.css?v=1">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2959862133855422" crossorigin="anonymous"></script>
+  <meta property="og:image" content="https://www.pregnancyweektracker.com/og-large.jpg">
+  <meta property="og:image:secure_url" content="https://www.pregnancyweektracker.com/og-large.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="2400">
+  <meta property="og:image:height" content="1254">
+  <meta name="twitter:image" content="https://www.pregnancyweektracker.com/og-large.jpg">
 </head>
 <body>
   <nav class="navbar site-nav">
@@ -109,87 +80,67 @@
       </div>
     </div>
   </nav>
+
   <div class="container">
     <h1>Privacy Policy</h1>
-    <p>Last updated: May 2026</p>
-    <p>At Pregnancy Week Tracker, we take your privacy seriously. This tool is designed to be completely anonymous and private.</p>
-    
-    <h2>1. No Data Collection</h2>
-    <p>We do not collect or store any personal information. All dates, calculations, and results stay entirely in your web browser. Nothing is sent to our servers.</p>
-    
-    <h2>2. Cookies</h2>
-    <p>We use essential local storage only to remember your comparison mode (Fruit vs Object). We do not use tracking cookies or third-party advertising cookies that track your identity.</p>
-    
-    <h2>3. External Links</h2>
-    <p>Our site contains links to other websites (like Amazon for product recommendations). We are not responsible for the privacy practices of those external sites.</p>
-    
-    <h2>4. Contact</h2>
-    <p>If you have any questions about this policy, please contact us via our contact page.</p>
+    <p><strong>Last updated: October 2026</strong></p>
+    <p>This policy describes how <strong>Pregnancy Week Tracker</strong> (pregnancyweektracker.com) handles information. The data controller / site operator is <strong>Vinod Isaac</strong>. Contact: <a href="mailto:hello@pregnancyweektracker.com">hello@pregnancyweektracker.com</a>.</p>
+    <p>Pregnancy-related dates (last menstrual period, due date, cycle length) are sensitive. We no longer place them in page URLs, so they are not sent to analytics or ad systems as query parameters.</p>
+
+    <h2>1. What this site does</h2>
+    <p>Week and due-date calculations run in your browser. Tools such as the kick counter and contraction timer also keep their working state on your device. We do not operate a user-account database for these tools.</p>
+
+    <h2>2. Information stored on your device</h2>
+    <p>Depending on which tools you use, the site may write to <code>localStorage</code> and/or <code>sessionStorage</code>, including:</p>
+    <ul>
+      <li><code>pwtSavedLMP</code> — last menstrual period date you entered</li>
+      <li><code>pwtSavedDue</code> — estimated or entered due date</li>
+      <li><code>pwtSavedCycle</code> — cycle length</li>
+      <li><code>pwtSavedMode</code> — calculator mode (LMP vs due date)</li>
+      <li><code>pwtChecklistState</code> — checklist tick state</li>
+      <li><code>kcHits</code> — kick-counter hits</li>
+      <li><code>ctHistoryList</code> — contraction-timer history</li>
+      <li><code>pwt_week_notes</code> — lightweight notes from the calculator</li>
+      <li><code>pwtImageTabPref</code> — fruit vs object size comparison preference</li>
+    </ul>
+    <p>These values stay on your device unless you clear them (see below). Session copies of LMP/due/cycle help keep URLs clean while you browse week pages in the same browser session.</p>
+
+    <h2>3. Third-party services</h2>
+    <p>Like many free websites, we load third-party scripts that may set cookies or receive technical data (IP address, user agent, page URL, approximate location, device type):</p>
+    <ul>
+      <li><strong>Google Analytics 4</strong> (measurement ID <code>G-LVGV89T5QG</code>) — traffic and usage analytics. We configure query-parameter redaction for <code>lmp</code>, <code>due</code>, and <code>cycle</code>.</li>
+      <li><strong>Google AdSense</strong> (publisher <code>ca-pub-2959862133855422</code>) — advertising. AdSense uses advertising cookies and similar technologies to show and measure ads. This is not “no advertising cookies.” For EEA/UK visitors, a Google-certified Consent Management Platform (CMP) must also be enabled in the AdSense console; site-level Consent Mode defaults are not a substitute.</li>
+      <li><strong>Sentry</strong> — client-side error monitoring so we can fix bugs. Session replay sampling is disabled. We strip query strings from reported URLs where possible.</li>
+      <li><strong>OpenMoji CDN / image CDNs</strong> — icons and some images are loaded from third-party CDNs; those requests include the usual browser request metadata.</li>
+      <li><strong>Amazon Associates</strong> — product links may include our affiliate tags. If you buy through those links, Amazon may credit a commission. Affiliate links are marked with <code>rel="sponsored"</code> where generated by our scripts.</li>
+    </ul>
+    <p>Each provider has its own privacy policy. We do not control how Google, Amazon, Sentry, or CDNs process data once their scripts or links are used.</p>
+
+    <h2>4. What we do not claim</h2>
+    <p>We do <strong>not</strong> claim that “nothing is sent to any server” or that we use “no advertising cookies.” Analytics, ads, and error monitoring involve network requests to third parties. Calculations themselves are client-side; marketing and reliability tooling are not.</p>
+
+    <h2>5. How to clear your data</h2>
+    <ul>
+      <li>In your browser: clear site data / cookies for pregnancyweektracker.com (this removes localStorage, sessionStorage, and cookies for this origin).</li>
+      <li>Or open the browser console on this site and run: <code>localStorage.clear(); sessionStorage.clear();</code></li>
+      <li>Use browser controls or Google’s ad settings to limit ad personalisation where available.</li>
+    </ul>
+
+    <h2>6. Children</h2>
+    <p>This site is intended for adults seeking pregnancy information. It is not directed at children under 13 (or the equivalent age in your jurisdiction).</p>
+
+    <h2>7. Changes</h2>
+    <p>We may update this policy as the site changes. The “Last updated” date at the top will change when we do.</p>
+
+    <h2>8. Contact</h2>
+    <p>Questions about privacy: <a href="mailto:hello@pregnancyweektracker.com">hello@pregnancyweektracker.com</a> or the <a href="contact.html">contact page</a>.</p>
   </div>
-  
-      
-
-<footer class="footer-dark">
-    <div class="footer-dark-inner">
-      <div class="footer-dark-col">
-        <div class="footer-dark-brand">Pregnancy<span>Week</span>Tracker</div>
-        <p class="footer-dark-desc">Free pregnancy tools for expectant parents. No sign-up. No data stored. Just answers.</p>
-      </div>
-      <div class="footer-links">
-        <h4 class="footer-dark-h4">Tools</h4>
-        <ul class="footer-dark-ul">
-          <li class="footer-dark-li"><a href="/" class="footer-dark-link">Pregnancy Week Tracker</a></li>
-          <li class="footer-dark-li"><a href="/#all-weeks" class="footer-dark-link">Week by Week Guide</a></li>
-          <li class="footer-dark-li"><a href="kick-counter.html" class="footer-dark-link">Baby Kick Counter</a></li>
-          <li class="footer-dark-li"><a href="contraction-timer.html" class="footer-dark-link">Contraction Timer</a></li>
-          <li class="footer-dark-li"><a href="gender-predictor.html" class="footer-dark-link">Fun Gender Predictor</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4 class="footer-dark-h4">Info</h4>
-        <ul class="footer-dark-ul">
-          <li class="footer-dark-li"><a href="about.html" class="footer-dark-link">About</a></li>
-          <li class="footer-dark-li"><a href="contact.html" class="footer-dark-link">Contact</a></li>
-          <li class="footer-dark-li"><a href="privacy.html" class="footer-dark-link">Privacy Policy</a></li>
-          <li class="footer-dark-li"><a href="terms.html" class="footer-dark-link">Terms of Use</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-dark-copy">
-      © 2026 PregnancyWeekTracker. For informational purposes only — not medical advice.
-    </div>
-  </footer>
-
-  <script>
-
-    // ── Native High-Performance Scroll-Reveal ──
-    window.addEventListener('load', () => {
-      const targets = document.querySelectorAll('.container, .footer');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          } else {
-            entry.target.classList.remove('visible');
-          }
-        });
-      }, {
-        threshold: 0.05,
-        rootMargin: '0px 0px -10px 0px'
-      });
-      targets.forEach(target => {
-        target.classList.add('reveal-scroll');
-        observer.observe(target);
-      });
-    });
-  </script>
-  
 
   <footer class="footer">
     <div class="footer-inner">
       <div>
         <div class="footer-brand">PregnancyWeekTracker</div>
-        <p class="footer-desc">Free pregnancy tools for expectant parents. No sign-up. No data stored. Just answers.</p>
+        <p class="footer-desc">Free pregnancy tools for expectant parents. Informational only — not medical advice.</p>
       </div>
       <div class="footer-links">
         <h4>Tools</h4>
@@ -221,10 +172,8 @@
       </div>
     </div>
     <div class="footer-copy">
-      &copy; 2026 PregnancyWeekTracker. For informational purposes only - not medical advice.
+      &copy; 2026 PregnancyWeekTracker. For informational purposes only — not medical advice.
     </div>
   </footer>
 </body>
 </html>
-
-

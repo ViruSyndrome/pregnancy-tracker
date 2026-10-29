@@ -1,3 +1,36 @@
+// Cookie Consent — Accept grants analytics/ads storage
+function acceptCookies() {
+  try { localStorage.setItem('cookieConsent', 'true'); } catch (e) {}
+  var banner = document.getElementById('cookieConsent');
+  if (banner) banner.classList.add('hidden');
+  if (typeof gtag === 'function') {
+    gtag('consent', 'update', {
+      ad_storage: 'granted',
+      analytics_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted'
+    });
+  }
+}
+
+window.addEventListener('load', function () {
+  var banner = document.getElementById('cookieConsent');
+  if (!banner) return;
+  try {
+    if (localStorage.getItem('cookieConsent') === 'true') {
+      banner.classList.add('hidden');
+      if (typeof gtag === 'function') {
+        gtag('consent', 'update', {
+          ad_storage: 'granted',
+          analytics_storage: 'granted',
+          ad_user_data: 'granted',
+          ad_personalization: 'granted'
+        });
+      }
+    }
+  } catch (e) {}
+});
+
 // ── Safe localStorage Wrapper ──────────────────────────────────────────────
 // Catches QuotaExceededError and private-browsing SecurityError silently.
 // Usage: lsSet('key', value)  lsGet('key', fallback)  lsDel('key')
@@ -43,8 +76,104 @@ const _ls = (() => {
 function lsGet(key, fallback = null) { return _ls.get(key, fallback); }
 function lsSet(key, val)             { return _ls.set(key, val); }
 function lsDel(key)                  { return _ls.del(key); }
-// ──────────────────────────────────────────────────────────────────────────// ──────────────────────────────────────────────────────────────────────────
+// ──────────────────────────────────────────────────────────────────────────
 
+  // ── Local calendar-date helpers (avoid UTC/DST skew from toISOString) ──
+  function parseLocalYMD(ymd) {
+    if (!ymd || typeof ymd !== 'string') return null;
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(ymd.trim());
+    if (!m) return null;
+    var y = +m[1], mo = +m[2], d = +m[3];
+    if (mo < 1 || mo > 12 || d < 1 || d > 31) return null;
+    var dt = new Date(y, mo - 1, d);
+    if (dt.getFullYear() !== y || dt.getMonth() !== mo - 1 || dt.getDate() !== d) return null;
+    dt.setHours(0, 0, 0, 0);
+    return dt;
+  }
+
+  function formatLocalYMD(d) {
+    if (!d || isNaN(d.getTime())) return '';
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+
+  function addDaysLocal(d, days) {
+    var r = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    r.setDate(r.getDate() + days);
+    return r;
+  }
+
+  /** Calendar-day difference (b − a), DST-safe via UTC noon of each local date. */
+  function calendarDaysBetween(a, b) {
+    var utcA = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+    var utcB = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+    return Math.round((utcB - utcA) / 86400000);
+  }
+
+  function getTrimesterFromWeek(w) {
+    var n = Math.max(0, Number(w) || 0);
+    if (n <= 13) return 1;
+    if (n <= 27) return 2;
+    return 3;
+  }
+
+  function trimesterRangeLabel(t) {
+    if (t === 1) return '1–13';
+    if (t === 2) return '14–27';
+    return '28+';
+  }
+
+  function storePregnancySession(lmpYmd, dueYmd, cycle) {
+    try {
+      if (lmpYmd) sessionStorage.setItem('pwtSavedLMP', lmpYmd);
+      if (dueYmd) sessionStorage.setItem('pwtSavedDue', dueYmd);
+      if (cycle != null && cycle !== '') sessionStorage.setItem('pwtSavedCycle', String(cycle));
+    } catch (e) {}
+  }
+
+  function readStoredLMP() {
+    try {
+      var s = sessionStorage.getItem('pwtSavedLMP');
+      if (s) return s;
+    } catch (e) {}
+    return _ls.getRaw('pwtSavedLMP') || '';
+  }
+
+  function readStoredCycle() {
+    try {
+      var s = sessionStorage.getItem('pwtSavedCycle');
+      if (s) return s;
+    } catch (e) {}
+    return _ls.getRaw('pwtSavedCycle') || '28';
+  }
+
+  function readStoredDue() {
+    try {
+      var s = sessionStorage.getItem('pwtSavedDue');
+      if (s) return s;
+    } catch (e) {}
+    return _ls.getRaw('pwtSavedDue') || '';
+  }
+
+  /** Gestational age from LMP: completed weeks + days (0w0d on LMP day). */
+  function gestationalAgeFromLMP(lmpDate, today) {
+    var days = calendarDaysBetween(lmpDate, today);
+    if (days < 0) return null;
+    return {
+      daysSinceLMP: days,
+      completedWeeks: Math.floor(days / 7),
+      daysIntoWeek: days % 7
+    };
+  }
+
+  function pageWeekFromCompleted(completedWeeks) {
+    return Math.max(1, Math.min(42, completedWeeks));
+  }
+
+  function formatGestationalPhrase(completedWeeks, daysIntoWeek) {
+    var wLabel = completedWeeks + ' week' + (completedWeeks === 1 ? '' : 's');
+    var dLabel = daysIntoWeek + ' day' + (daysIntoWeek === 1 ? '' : 's');
+    return wLabel + ' and ' + dLabel;
+  }
 
   // ─────────────────────────────────────────────────────────
   //  REAL PHOTO IMAGE SYSTEM — Wikipedia thumbnails via API
@@ -902,7 +1031,7 @@ function lsDel(key)                  { return _ls.del(key); }
         "fruitLabel": "Iceberg Lettuce",
         "objectEmoji": "🧘‍♀️",
         "objectLabel": "Rolled-up Yoga Mat",
-        "baby": "Baby is full term. All organs function. Baby continues gaining fat. Vernix and lanugo shed and are swallowed into the amniotic fluid.",
+        "baby": "Baby is early term (ACOG: 37w0d–38w6d). All organs function. Baby continues gaining fat. Vernix and lanugo shed and are swallowed into the amniotic fluid.",
         "mom": "The nesting instinct often kicks in strongly. Irregular contractions and backache may signal that labour is not far away.",
         "tip": "Double-check your hospital bag is packed. Make sure your birth partner knows the route, where to park, and which entrance to use.",
         "checklist": [
@@ -921,7 +1050,7 @@ function lsDel(key)                  { return _ls.del(key); }
         "fruitLabel": "Leek",
         "objectEmoji": "🎒",
         "objectLabel": "Large Backpack",
-        "baby": "Baby is 50cm and weighs about 3.3kg. The brain and lungs benefit enormously from every extra day inside the womb at this stage.",
+        "baby": "Baby is full term (ACOG: 39w0d–40w6d). About 50cm and 3.3kg. The brain and lungs benefit enormously from every extra day inside the womb at this stage.",
         "mom": "You may feel every day is the day! Watch for: contractions 5 minutes apart for 1 hour, waters breaking, or strong bloody show.",
         "tip": "Prepare mentally for birth — hypnobirthing, breathing techniques, and visualisation are all clinically evidenced to help manage labour.",
         "checklist": [
@@ -960,7 +1089,7 @@ function lsDel(key)                  { return _ls.del(key); }
         "fruitLabel": "Watermelon",
         "objectEmoji": "⏲️",
         "objectLabel": "Microwave Oven",
-        "baby": "Baby continues to grow. Placental function is monitored closely. Baby is considered overdue (post-term) this week.",
+        "baby": "Baby continues to grow. Placental function is monitored closely. ACOG calls this late term (41w0d–41w6d), not yet post-term.",
         "mom": "Induction is typically offered between 41 and 42 weeks. CTG monitoring checks baby's heart rate and movements regularly.",
         "tip": "Induction is a safe, well-evidenced option. Discuss it with your doctor or healthcare provider — it significantly reduces risk beyond 42 weeks.",
         "checklist": [
@@ -979,7 +1108,7 @@ function lsDel(key)                  { return _ls.del(key); }
         "fruitLabel": "Jackfruit",
         "objectEmoji": "🧳",
         "objectLabel": "Suitcase",
-        "baby": "At 42 weeks most hospitals strongly recommend induction. Placental function naturally decreases after 42 weeks, so timing is important.",
+        "baby": "At 42 weeks (ACOG post-term: 42w0d and beyond) most hospitals strongly recommend induction. Placental function naturally decreases after 42 weeks, so timing is important.",
         "mom": "You are post-term. Induction should be arranged. Amniotic fluid levels and placental function are closely monitored.",
         "tip": "Discuss all options with your doctor or healthcare provider. You are so close to meeting your baby — and they will be here very soon.",
         "checklist": [
@@ -1127,9 +1256,9 @@ function lsDel(key)                  { return _ls.del(key); }
     { q: 'How accurate is this due date calculator?', a: 'This calculator uses the standard obstetric formula (Naegele\'s rule). However, due dates are estimates — only about 5% of babies arrive on their exact due date. Most are born within 2 weeks before or after. Your 12-week dating scan, which measures your baby\'s crown-rump length, gives a more accurate estimate and supersedes the LMP calculation if there\'s a significant difference.' },
     { q: 'What is the 5-1-1 rule for contractions?', a: 'The 5-1-1 rule is a standard guideline for when to head to the hospital. It means: your contractions are <strong>5 minutes apart</strong> (measured from the start of one to the start of the next), each one lasts for <strong>1 full minute</strong>, and this pattern has been consistent for <strong>1 full hour</strong>. Always call your doctor, healthcare provider, or hospital before leaving to confirm they are ready for you.' },
     { q: 'How should I use the Baby Kick Counter?', a: 'Standard medical advice is to start counting kicks daily from 28 weeks. Find a time when your baby is usually active (often after a meal or in the evening). You should aim to feel 10 movements (kicks, flutters, swishes, or rolls) within 2 hours. If you don\'t reach 10 in 2 hours, or if you notice a significant decrease in your baby\'s normal movement pattern, contact your maternity unit or doctor immediately.' },
-    { q: 'Are the size comparison photos real?', a: 'Yes! We use custom-shot scale reference photos that show common fruits and vegetables in a real human hand. This gives you a much more accurate sense of your baby\'s actual size and volume compared to generic stock photos or icons used in other apps.' },
+    { q: 'Are the size comparison photos real?', a: 'Size comparisons use familiar fruit and everyday-object references (with OpenMoji icons and photographic references where available) so you can visualise approximate scale. They are illustrative, not clinical measurements.' },
     { q: 'When will I feel my baby move for the first time?', a: 'First movements (called quickening) are typically felt between weeks 16 and 20. First-time mothers often feel them later (around week 20) as they may not recognise the sensation at first. Women who have been pregnant before often recognise the flutter-like movements sooner. From around week 28, your doctor or healthcare provider will ask you to monitor movements daily.' },
-    { q: 'Is this tool safe to use? Does it store my data?', a: 'All calculations happen entirely in your browser — no data is sent to any server. We do not store your dates, results, or any personal information. This tool respects your privacy completely. The URL sharing feature only works if you choose to copy and share it; we do not record who visits or what dates they enter.' }
+    { q: 'Is this tool safe to use? Does it store my data?', a: 'Week and due-date maths run in your browser. Dates you enter are kept in localStorage/sessionStorage on your device (not put in page URLs). Like most websites, we also use Google Analytics, AdSense, and Sentry — see our Privacy Policy for details and how to clear stored data.' }
   ];
 
   // ─────────────────────────────────────────────────────────
@@ -1179,33 +1308,37 @@ function lsDel(key)                  { return _ls.del(key); }
     // Render empty growth curve immediately
     renderGrowthCurve(null);
 
-    // Load from URL query params if present
-    var params = new URLSearchParams(window.location.search);
-    var lmpParam = params.get('lmp');
-    if (lmpParam) {
-      if (document.getElementById('lmpDate')) {
-        document.getElementById('lmpDate').value = lmpParam;
-        calculate();
-      }
-    } else {
-      // Load from localStorage if returning user
-      var savedMode = _ls.getRaw('pwtSavedMode');
-      if (savedMode) {
-        if (savedMode === 'lmp') {
-          var sLMP = _ls.getRaw('pwtSavedLMP');
-          var sCy = _ls.getRaw('pwtSavedCycle');
-          if (sLMP && document.getElementById('lmpDate')) {
-            document.getElementById('lmpDate').value = sLMP;
-            if (sCy) document.getElementById('cycleLen').value = sCy;
-            switchMode('lmp');
-          }
-        } else {
-          var sDue = _ls.getRaw('pwtSavedDue');
-          if (sDue && document.getElementById('dueDate')) {
-            document.getElementById('dueDate').value = sDue;
-            switchMode('due');
-          }
+    // Migrate legacy ?lmp= / #lmp= into sessionStorage, then strip query from the address bar
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var hashParams = new URLSearchParams((window.location.hash || '').replace(/^#/, ''));
+      var legacyLmp = params.get('lmp') || hashParams.get('lmp');
+      var legacyDue = params.get('due') || hashParams.get('due');
+      var legacyCycle = params.get('cycle') || hashParams.get('cycle');
+      if (legacyLmp || legacyDue || legacyCycle) {
+        storePregnancySession(legacyLmp, legacyDue, legacyCycle);
+        if (legacyLmp) _ls.setRaw('pwtSavedLMP', legacyLmp);
+        if (legacyDue) _ls.setRaw('pwtSavedDue', legacyDue);
+        if (legacyCycle) _ls.setRaw('pwtSavedCycle', legacyCycle);
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(null, '', window.location.pathname + (window.location.hash && !hashParams.get('lmp') ? window.location.hash : ''));
         }
+      }
+    } catch (e) {}
+
+    // Prefill calculator from session/local storage (do not auto-redirect on load)
+    if (window.isMainPage) {
+      var savedMode = _ls.getRaw('pwtSavedMode');
+      var sLMP = readStoredLMP();
+      var sCy = readStoredCycle();
+      var sDue = readStoredDue();
+      if (savedMode === 'due' && sDue && document.getElementById('dueDate')) {
+        document.getElementById('dueDate').value = sDue;
+        switchMode('due');
+      } else if (sLMP && document.getElementById('lmpDate')) {
+        document.getElementById('lmpDate').value = sLMP;
+        if (sCy && document.getElementById('cycleLen')) document.getElementById('cycleLen').value = sCy;
+        switchMode('lmp');
       }
     }
 });
@@ -1228,6 +1361,18 @@ function lsDel(key)                  { return _ls.del(key); }
 
   function setCalcError(message) {
     var error = document.getElementById('calcError');
+    if (!error && message) {
+      error = document.createElement('div');
+      error.id = 'calcError';
+      error.setAttribute('role', 'alert');
+      error.style.cssText = 'display:block;margin:0 0 16px;padding:12px 16px;background:#fef2f2;border:1px solid #fecaca;border-radius:12px;color:#991b1b;font-size:0.9rem;';
+      var anchor = document.getElementById('resultPanel') || document.getElementById('weekCard') || document.body;
+      if (anchor.parentNode && anchor !== document.body) {
+        anchor.parentNode.insertBefore(error, anchor);
+      } else {
+        document.body.insertBefore(error, document.body.firstChild);
+      }
+    }
     if (!error) return;
     if (message) {
       error.textContent = message;
@@ -1248,80 +1393,137 @@ function lsDel(key)                  { return _ls.del(key); }
   function calculate() {
     clearCalcError();
     var lmpDate;
-    var cycleLen = parseInt(document.getElementById('cycleLen').value) || 28;
-    var today = new Date(); today.setHours(0,0,0,0);
+    var cycleLenEl = document.getElementById('cycleLen');
+    var cycleLen = parseInt(cycleLenEl && cycleLenEl.value, 10) || 28;
+    var today = new Date(); today.setHours(0, 0, 0, 0);
 
     if (cycleLen < 20 || cycleLen > 45) {
-      document.getElementById('cycleLen').focus();
+      if (cycleLenEl) cycleLenEl.focus();
       setCalcError('Please enter a realistic cycle length between 20 and 45 days.');
       return;
     }
 
     if (currentMode === 'lmp') {
-      var lmpVal = document.getElementById('lmpDate').value;
-      if (!lmpVal) { document.getElementById('lmpDate').focus(); setCalcError('Please enter the first day of your last period.'); return; }
-      lmpDate = new Date(lmpVal + 'T00:00:00');
-  } else {
-      var dueDateVal = document.getElementById('dueDate').value;
-      if (!dueDateVal) { document.getElementById('dueDate').focus(); setCalcError('Please enter your due date.'); return; }
-      var dueDate = new Date(dueDateVal + 'T00:00:00');
-      if (dueDate > new Date(today.getTime() + 315 * 24 * 60 * 60 * 1000)) {
-        document.getElementById('dueDate').focus();
+      var lmpVal = document.getElementById('lmpDate') && document.getElementById('lmpDate').value;
+      if (!lmpVal) {
+        if (document.getElementById('lmpDate')) document.getElementById('lmpDate').focus();
+        setCalcError('Please enter the first day of your last period.');
+        return;
+      }
+      lmpDate = parseLocalYMD(lmpVal);
+      if (!lmpDate) {
+        setCalcError('Please enter a valid last-period date (YYYY-MM-DD).');
+        return;
+      }
+    } else {
+      var dueDateVal = document.getElementById('dueDate') && document.getElementById('dueDate').value;
+      if (!dueDateVal) {
+        if (document.getElementById('dueDate')) document.getElementById('dueDate').focus();
+        setCalcError('Please enter your due date.');
+        return;
+      }
+      var enteredDue = parseLocalYMD(dueDateVal);
+      if (!enteredDue) {
+        setCalcError('Please enter a valid due date (YYYY-MM-DD).');
+        return;
+      }
+      if (calendarDaysBetween(today, enteredDue) > 315) {
+        if (document.getElementById('dueDate')) document.getElementById('dueDate').focus();
         setCalcError('Please enter a due date within the next 45 weeks.');
         return;
       }
-      // LMP = dueDate - 280 days (adjusted for cycle length deviation)
-      lmpDate = new Date(dueDate.getTime() - (280 + (cycleLen - 28)) * 24 * 60 * 60 * 1000);
-  }
+      // LMP = dueDate − (280 + cycle adjustment) using local calendar days
+      lmpDate = addDaysLocal(enteredDue, -(280 + (cycleLen - 28)));
+    }
 
-    if (lmpDate > today) { setCalcError('The first day of your last period cannot be in the future.'); return; }
+    if (lmpDate > today) {
+      setCalcError('The first day of your last period cannot be in the future.');
+      return;
+    }
 
-    // Save to localStorage so returning users don't have to re-enter
+    var lmpYmd = formatLocalYMD(lmpDate);
+    var adjustedDays = 280 + (cycleLen - 28);
+    var dueDate = addDaysLocal(lmpDate, adjustedDays);
+    var dueYmd = formatLocalYMD(dueDate);
+
+    // Persist for returning users (localStorage) and this session (sessionStorage) — never put LMP in the URL
     try {
       _ls.setRaw('pwtSavedMode', currentMode);
-      if (currentMode === 'lmp') {
-        _ls.setRaw('pwtSavedLMP', document.getElementById('lmpDate').value);
-        _ls.setRaw('pwtSavedCycle', document.getElementById('cycleLen').value);
-      } else {
+      _ls.setRaw('pwtSavedLMP', lmpYmd);
+      _ls.setRaw('pwtSavedCycle', String(cycleLen));
+      _ls.setRaw('pwtSavedDue', dueYmd);
+      if (currentMode === 'due' && document.getElementById('dueDate')) {
         _ls.setRaw('pwtSavedDue', document.getElementById('dueDate').value);
       }
-    } catch(e) {}
+    } catch (e) {}
+    storePregnancySession(lmpYmd, dueYmd, cycleLen);
 
-    // Cycle-length adjusted ovulation offset
-    var ovulationOffset = cycleLen - 14;
-    // conceptualLMP = lmpDate (simplified from redundant math offset)
-    var conceptualLMP = lmpDate;
-    // Due date: LMP + 280 days (standard), adjusted for cycle
-    var adjustedDays = 280 + (cycleLen - 28);
-    var dueDate = new Date(lmpDate.getTime() + adjustedDays * 24 * 60 * 60 * 1000);
+    var ga = gestationalAgeFromLMP(lmpDate, today);
+    if (!ga) {
+      setCalcError('Your last period date appears to be in the future. Please check the date.');
+      return;
+    }
 
-    var daysSinceLMP = Math.floor((today - lmpDate) / (24 * 60 * 60 * 1000));
-    var weekNum = Math.max(1, Math.floor(daysSinceLMP / 7) + 1);
-    var daysExtra = daysSinceLMP % 7;
+    var completedWeeks = ga.completedWeeks;
+    var daysExtra = ga.daysIntoWeek;
+    var daysSinceLMP = ga.daysSinceLMP;
 
-    if (weekNum < 1) { setCalcError('Your last period date appears to be in the future. Please check the date.'); return; }
-    if (weekNum > 45) { setCalcError('The date you entered is more than 45 weeks ago. Please check it.'); return; }
+    if (completedWeeks > 42) {
+      setCalcError('Past 42 weeks — contact your maternity unit / baby may have arrived. We do not have week pages beyond week 42.');
+      var pastPanel = document.getElementById('resultPanel');
+      if (pastPanel) {
+        pastPanel.hidden = false;
+        pastPanel.style.display = 'block';
+      }
+      var pastHeadline = document.getElementById('resultHeadline');
+      if (pastHeadline) {
+        pastHeadline.style.display = 'block';
+        pastHeadline.innerHTML =
+          '<div class="rh-week">Past 42 weeks</div>' +
+          '<div class="rh-baby">Based on your dates you are about <strong>' + completedWeeks + 'w ' + daysExtra + 'd</strong>.</div>' +
+          '<div class="rh-sub">Contact your maternity unit — your baby may already have arrived, or you may need induction planning.</div>';
+      }
+      currentResult = {
+        weekNum: completedWeeks,
+        completedWeeks: completedWeeks,
+        daysExtra: daysExtra,
+        dueDate: dueDate,
+        daysUntilDue: calendarDaysBetween(today, dueDate),
+        trimester: 3,
+        progress: 100,
+        lmpDate: lmpDate,
+        pastTerm: true
+      };
+      window.calculatedDueDate = dueDate;
+      trackEvent('calculate_week', { mode: currentMode, past_term: true });
+      return;
+    }
 
-    var daysUntilDue = Math.ceil((dueDate - today) / (24 * 60 * 60 * 1000));
-    var trimester = weekNum <= 12 ? 1 : weekNum <= 26 ? 2 : 3;
+    var pageWeek = pageWeekFromCompleted(completedWeeks);
+    var daysUntilDue = calendarDaysBetween(today, dueDate);
+    var trimester = getTrimesterFromWeek(Math.max(completedWeeks, 1));
     var progress = Math.min((daysSinceLMP / 280) * 100, 100);
 
-    // Update currentResult object globally
-    currentResult = { weekNum, daysExtra, dueDate, daysUntilDue, trimester, progress, lmpDate };
+    currentResult = {
+      weekNum: pageWeek,
+      completedWeeks: completedWeeks,
+      daysExtra: daysExtra,
+      dueDate: dueDate,
+      daysUntilDue: daysUntilDue,
+      trimester: trimester,
+      progress: progress,
+      lmpDate: lmpDate
+    };
     window.calculatedDueDate = dueDate;
 
     if (window.isMainPage) {
-        // Redirect to the pSEO static page, passing the date in the URL
-        var lmpValFormatted = lmpDate.getFullYear() + '-' + String(lmpDate.getMonth() + 1).padStart(2, '0') + '-' + String(lmpDate.getDate()).padStart(2, '0');
-        window.location.href = weekNum + "-weeks-pregnant.html?lmp=" + lmpValFormatted;
-        return;
-    } else {
-        // We are already on a pSEO page, so render directly
-        renderResult(currentResult);
+      window.location.href = pageWeek + '-weeks-pregnant.html';
+      return;
     }
 
+    // On week pages, calculate() should not replace the page's week content — banner handles personalisation
+    renderResult(currentResult);
 
-    // Push AdSense only once, after the panel is visible and has a real width
     if (!window._adSlot1Pushed) {
       window._adSlot1Pushed = true;
       setTimeout(function() {
@@ -1352,8 +1554,8 @@ function lsDel(key)                  { return _ls.del(key); }
     if (w === 10) return { icon: '🎓', title: 'Graduating to a fetus!', sub: 'The embryonic stage is officially over. Baby is now a fetus, and the vital organs are fully formed and starting to function.' };
     if (w === 11) return { icon: '👣', title: 'Fingers and toes', sub: 'Baby\'s hands and feet are losing their webbing, and tiny tooth buds are forming under the gums.' };
     if (w === 12) return { icon: '🌟', title: 'Dating scan week!', sub: 'The 12-week scan confirms your due date and checks for chromosomal conditions. Miscarriage risk drops sharply after this point.' };
-    if (w === 13) return { icon: '🌸', title: 'Second trimester — you made it!', sub: 'The worst of the symptoms are usually behind you now. Energy returns, nausea fades, and your bump begins to show.' };
-    if (w === 14) return { icon: '👂', title: 'Practicing expressions', sub: 'Baby\'s facial muscles are getting a workout. They can squint, frown, and even suck their thumb.' };
+    if (w === 13) return { icon: '🌸', title: 'End of the first trimester', sub: 'You are completing weeks 1–13. Energy often returns soon; many people share news after this point.' };
+    if (w === 14) return { icon: '🌸', title: 'Second trimester begins!', sub: 'Weeks 14–27. Energy often returns, nausea fades for many, and baby\'s facial muscles can squint, frown, and suck a thumb.' };
     if (w === 15) return { icon: '👀', title: 'Sensing light', sub: 'Even though their eyes are fused shut, baby can now sense bright light from outside your belly.' };
     if (w === 16) return { icon: '🦋', title: 'First flutters', sub: 'You might start feeling \'quickening\' — tiny movements that feel like gas bubbles or butterfly wings.' };
     if (w === 17) return { icon: '🫀', title: 'Heartbeat getting stronger', sub: 'Baby\'s heartbeat is now easily detectable with a standard doppler and their hearing is starting to develop.' };
@@ -1366,8 +1568,8 @@ function lsDel(key)                  { return _ls.del(key); }
     if (w === 24) return { icon: '🏥', title: 'Viability milestone', sub: 'This is a major medical milestone. Babies born at 24 weeks now have a chance of survival with specialized NICU care.' };
     if (w === 25) return { icon: '✋', title: 'A firm grip', sub: 'Baby\'s hands are fully formed and they are learning to grip things, often holding onto their umbilical cord.' };
     if (w === 26) return { icon: '👁️', title: 'Eyes opening', sub: 'Baby\'s eyes are beginning to open and blink. They are starting to distinguish between light and dark.' };
-    if (w === 27) return { icon: '👶', title: 'Third trimester begins!', sub: 'Baby is gaining weight rapidly now. You can feel strong movements every day. Start preparing your hospital bag.' };
-    if (w === 28) return { icon: '💤', title: 'Dreaming away', sub: 'Baby is experiencing REM (Rapid Eye Movement) sleep, which means they are likely dreaming!' };
+    if (w === 27) return { icon: '👶', title: 'End of the second trimester', sub: 'You are completing weeks 14–27. Baby is gaining weight rapidly. Strong movements are common every day.' };
+    if (w === 28) return { icon: '👶', title: 'Third trimester begins!', sub: 'Weeks 28+. Baby may be dreaming (REM sleep). Start preparing your hospital bag if you have not already.' };
     if (w === 29) return { icon: '🦴', title: 'Bones hardening', sub: 'Baby\'s skeleton is hardening. Ensure you are getting plenty of calcium to support this rapid bone growth.' };
     if (w === 30) return { icon: '🧠', title: 'Brain folds forming', sub: 'Instead of being smooth, baby\'s brain is developing the characteristic grooves and folds to hold more brain tissue.' };
     if (w === 31) return { icon: '💪', title: 'Stronger kicks', sub: 'As space gets tighter, those flutters turn into sharp jabs and kicks. You might even see a foot press against your belly!' };
@@ -1376,12 +1578,12 @@ function lsDel(key)                  { return _ls.del(key); }
     if (w === 34) return { icon: '💅', title: 'Fingernails and toenails', sub: 'Tiny fingernails have reached the tips of baby\'s fingers. They might even scratch themselves in the womb.' };
     if (w === 35) return { icon: '⚖️', title: 'Gaining fat', sub: 'Baby is putting on about half a pound a week. This fat will help regulate their body temperature after birth.' };
     if (w === 36) return { icon: '🎈', title: 'Lungs maturing', sub: 'Baby\'s lungs are nearing full maturity and producing surfactant, a substance needed to keep air sacs open.' };
-    if (w === 37) return { icon: '🎀', title: 'Early term!', sub: 'Baby is considered \'early term\'. Their organs are ready to function on their own. Rest and finalize your birth plan.' };
-    if (w === 38) return { icon: '🍉', title: 'Shedding the vernix', sub: 'Baby is shedding their protective vernix and lanugo hair into the amniotic fluid, which they will swallow to form their first poop (meconium).' };
-    if (w === 39) return { icon: '⏳', title: 'Any day now!', sub: 'Baby is fully formed and just waiting for the right moment. Keep an eye out for signs of labor.' };
-    if (w === 40) return { icon: '✨', title: 'Due date week!', sub: 'Your estimated due date is this week. Only 5% of babies arrive exactly on time — stay calm and trust your body.' };
-    if (w === 41) return { icon: '🤗', title: 'Baby is taking their time!', sub: 'Completely normal — babies often arrive up to 2 weeks after their due date. Your doctor or healthcare provider will monitor you closely.' };
-    if (w >= 42) return { icon: '⏰', title: 'Time to meet baby', sub: 'If baby hasn\'t arrived yet, your doctor will likely discuss induction to ensure both you and baby stay safe.' };
+    if (w === 37) return { icon: '🎀', title: 'Early term!', sub: 'ACOG early term starts at 37w0d (through 38w6d). Organs are ready to function. Rest and finalize your birth plan.' };
+    if (w === 38) return { icon: '🍉', title: 'Still early term', sub: 'Through 38w6d you remain early term. Baby sheds vernix and lanugo into the amniotic fluid (later meconium).' };
+    if (w === 39) return { icon: '⏳', title: 'Full term!', sub: 'ACOG full term is 39w0d–40w6d. Baby is fully formed — keep an eye out for signs of labour.' };
+    if (w === 40) return { icon: '✨', title: 'Due date week!', sub: 'Still full term through 40w6d. Only about 5% of babies arrive on their exact due date — stay calm and trust your body.' };
+    if (w === 41) return { icon: '🤗', title: 'Late term', sub: 'ACOG late term is 41w0d–41w6d. Completely common — your clinician will monitor you closely and may discuss induction.' };
+    if (w >= 42) return { icon: '⏰', title: 'Post-term', sub: 'ACOG post-term is 42w0d+. Your doctor will usually discuss induction to keep you and baby safe.' };
     return null;
   }
 
@@ -1390,9 +1592,10 @@ function lsDel(key)                  { return _ls.del(key); }
   // ─────────────────────────────────────────────────────────
   function shareResult() {
     if (!currentResult) return;
-    var wk  = currentResult.weekNum;
+    var cw = currentResult.completedWeeks != null ? currentResult.completedWeeks : currentResult.weekNum;
+    var dd = currentResult.daysExtra != null ? currentResult.daysExtra : 0;
     var due = formatDisplayDate(currentResult.dueDate);
-    var txt = 'I\'m ' + wk + ' weeks pregnant! 🌸\nMy due date is ' + due + '\nFind out your pregnancy week free: https://www.pregnancyweektracker.com';  
+    var txt = 'I\'m ' + cw + ' weeks and ' + dd + ' days pregnant! 🌸\nMy due date is ' + due + '\nFind out your pregnancy week free: https://www.pregnancyweektracker.com';  
     var btn = document.getElementById('shareBtn');
     if (navigator.share) {
       navigator.share({ title: 'My Pregnancy Week', text: txt }).catch(function() {});
@@ -1424,7 +1627,7 @@ function lsDel(key)                  { return _ls.del(key); }
         resultPanel.style.display = 'block';
         setTimeout(function() { resultPanel.classList.add('reveal'); }, 50);
         
-        saveWeekNotes(r.weekNum, { dueDate: r.dueDate && r.dueDate.toISOString ? r.dueDate.toISOString() : String(r.dueDate || ''), trimester: r.trimester });
+        saveWeekNotes(r.weekNum, { dueDate: r.dueDate ? formatLocalYMD(r.dueDate) : '', trimester: r.trimester });
         renderNextSteps(r.weekNum);
     }
 
@@ -1432,29 +1635,29 @@ function lsDel(key)                  { return _ls.del(key); }
     var weekData = WEEKS.find(function(w) { return w.week === r.weekNum; }) || WEEKS[WEEKS.length - 1];
     var trimLabel = ['First', 'Second', 'Third'][r.trimester - 1] + ' Trimester';
     var daysStr = r.daysUntilDue >= 0 ? r.daysUntilDue + ' days to go' : Math.abs(r.daysUntilDue) + ' days overdue';
+    var completedWeeks = r.completedWeeks != null ? r.completedWeeks : r.weekNum;
+    var daysExtra = r.daysExtra != null ? r.daysExtra : 0;
 
-    // ── Celebratory headline ──────────────────────────────
-    var weekWord = r.weekNum + ' week' + (r.weekNum === 1 ? '' : 's');
+    // ── Celebratory headline (completed weeks · BabyCenter/NHS style) ──
+    var gestPhrase = formatGestationalPhrase(completedWeeks, daysExtra);
     var sizeNote = weekData.size_mm > 0 ? ' — about ' + (weekData.size_mm >= 10 ? (weekData.size_mm / 10).toFixed(1) + ' cm' : weekData.size_mm + ' mm') + ' long' : '';
     var dueNote  = r.daysUntilDue >= 0
       ? 'Due date: ' + formatDisplayDate(r.dueDate) + ' &nbsp;·&nbsp; ' + r.daysUntilDue + ' days to go'
       : formatDisplayDate(r.dueDate) + ' &nbsp;·&nbsp; ' + Math.abs(r.daysUntilDue) + ' days past your due date';
     var rh = document.getElementById('resultHeadline');
-    rh.innerHTML =
-      '<div class="rh-week">You\'re ' + weekWord + ' pregnant! 🌸</div>' +
-      '<div class="rh-baby">Baby is the size of a <strong>' + ((weekData.singleMode || r.weekNum <= 2) ? weekData.size : (weekData[currentImageTab + 'Label'] || weekData.size)).toLowerCase() + '</strong>' + sizeNote + '</div>' +
-      '<div class="rh-sub">' + dueNote + '</div>';
+    if (rh) {
+      rh.innerHTML =
+        '<div class="rh-week">You\'re ' + gestPhrase + ' pregnant</div>' +
+        '<div class="rh-baby">Baby is the size of a <strong>' + ((weekData.singleMode || r.weekNum <= 2) ? weekData.size : (weekData[currentImageTab + 'Label'] || weekData.size)).toLowerCase() + '</strong>' + sizeNote + '</div>' +
+        '<div class="rh-sub">' + dueNote + ' &nbsp;·&nbsp; ' + completedWeeks + 'w ' + daysExtra + 'd</div>';
+      rh.style.display = 'block';
+    }
       
     window.currentShareData = {
       title: "My Pregnancy Tracker",
-      text: "I'm " + weekWord + " pregnant! My estimated due date is " + formatDisplayDate(r.dueDate) + ".",
+      text: "I'm " + gestPhrase + " pregnant! My estimated due date is " + formatDisplayDate(r.dueDate) + ".",
       url: window.location.origin
     };
-    if (!window.isMainPage) {
-        rh.style.display = 'none';
-    } else {
-        rh.style.display = 'block';
-    }
 
     // ── Milestone banner ──────────────────────────────────
     var ms = getMilestone(r.weekNum);
@@ -1474,20 +1677,27 @@ function lsDel(key)                  { return _ls.del(key); }
     updateSizeVisualizer(r.weekNum);
 
     // Stats grid
-    document.getElementById('statGrid').innerHTML = [
-      '<div class="result-stat"><div class="stat-value">Week ' + r.weekNum + '</div><div class="stat-label">Pregnancy Week</div><div class="stat-sub">' + r.daysExtra + ' day' + (r.daysExtra !== 1 ? 's' : '') + ' into this week</div></div>',
-      '<div class="result-stat"><div class="stat-value">' + formatDisplayDate(r.dueDate) + '</div><div class="stat-label">Due Date (EDD)</div><div class="stat-sub">' + daysStr + '</div></div>',
-      '<div class="result-stat"><div class="stat-value">' + trimLabel.split(' ')[0] + '</div><div class="stat-label">Trimester</div><div class="stat-sub">Weeks ' + (r.trimester === 1 ? '1–12' : r.trimester === 2 ? '13–26' : '27–40') + '</div></div>'
-    ].join('');
+    var statGrid = document.getElementById('statGrid');
+    if (statGrid) {
+      statGrid.innerHTML = [
+        '<div class="result-stat"><div class="stat-value">' + completedWeeks + 'w ' + daysExtra + 'd</div><div class="stat-label">Gestational age</div><div class="stat-sub">You\'re ' + gestPhrase + ' pregnant</div></div>',
+        '<div class="result-stat"><div class="stat-value">' + formatDisplayDate(r.dueDate) + '</div><div class="stat-label">Due Date (EDD)</div><div class="stat-sub">' + daysStr + '</div></div>',
+        '<div class="result-stat"><div class="stat-value">' + trimLabel.split(' ')[0] + '</div><div class="stat-label">Trimester</div><div class="stat-sub">Weeks ' + trimesterRangeLabel(r.trimester) + '</div></div>'
+      ].join('');
+    }
 
     // Trimester bar
     var t1W = r.trimester === 1 ? 'font-weight:700;color:var(--primary)' : '';
     var t2W = r.trimester === 2 ? 'font-weight:700;color:var(--primary)' : '';
     var t3W = r.trimester === 3 ? 'font-weight:700;color:var(--primary)' : '';
-    document.getElementById('trimBar').innerHTML =
-      '<div class="trimester-labels"><span style="' + t1W + '">1st Trimester</span><span style="' + t2W + '">2nd Trimester</span><span style="' + t3W + '">3rd Trimester</span></div>' +
-      '<div class="progress-track"><div class="progress-fill" style="width:' + r.progress.toFixed(1) + '%"></div></div>' +
-      '<div class="trimester-dividers"><span class="tri-div">Week 1</span><span class="tri-div">Week 13</span><span class="tri-div">Week 27</span><span class="tri-div">Week 40</span></div>';
+    var trimBar = document.getElementById('trimBar');
+    if (trimBar) {
+      trimBar.hidden = false;
+      trimBar.innerHTML =
+        '<div class="trimester-labels"><span style="' + t1W + '">1st Trimester</span><span style="' + t2W + '">2nd Trimester</span><span style="' + t3W + '">3rd Trimester</span></div>' +
+        '<div class="progress-track"><div class="progress-fill" style="width:' + r.progress.toFixed(1) + '%"></div></div>' +
+        '<div class="trimester-dividers"><span class="tri-div">Week 1</span><span class="tri-div">Week 14</span><span class="tri-div">Week 28</span><span class="tri-div">Week 40</span></div>';
+    }
 
     var products = PRODUCTS[r.trimester === 1 ? 't1' : r.trimester === 2 ? 't2' : 't3'];
 
@@ -1574,7 +1784,7 @@ function lsDel(key)                  { return _ls.del(key); }
         var isRemoteImg = /^https?:\/\//.test(p.img);
         var fallbackSrc = escapeHtml(isRemoteImg ? getAffiliateFallbackSrc(p.asin) : '');
         var productUrl = escapeHtml(amzLink(p.asin));
-        return '<a class="ui-grid-card" href="' + productUrl + '" target="_blank" rel="noopener noreferrer" style="align-items:center;">' +
+        return '<a class="ui-grid-card" href="' + productUrl + '" target="_blank" rel="sponsored noopener noreferrer" style="align-items:center;">' +
           '<div class="ui-grid-icon" style="background:transparent; padding:0; height:48px; width:48px; border-radius:8px; overflow:hidden;"><img src="' + safeImg + '" alt="' + safeName + '" data-fallback-src="' + fallbackSrc + '" data-fallback-tried="0" onerror="handleAffiliateImageFallback(this)" onload="validateAffiliateImage(this)" style="width:100%; height:100%; object-fit:cover; display:block;"></div>' +
           '<div><div class="ui-grid-title">' + safeName + '</div><div class="ui-grid-desc">' + safeWhy + '</div></div>' +
           '</a>';
@@ -1673,9 +1883,9 @@ function lsDel(key)                  { return _ls.del(key); }
   // ─────────────────────────────────────────────────────────
   function renderWeeksTimeline(currentWeek) {
     var trimesters = [
-      { label: 'First Trimester', range: [1, 12] },
-      { label: 'Second Trimester', range: [13, 26] },
-      { label: 'Third Trimester', range: [27, 42] }
+      { label: 'First Trimester', range: [1, 13] },
+      { label: 'Second Trimester', range: [14, 27] },
+      { label: 'Third Trimester', range: [28, 42] }
     ];
     var html = '';
     var onMainPage = !!window.isMainPage;
@@ -1759,7 +1969,7 @@ function lsDel(key)                  { return _ls.del(key); }
         resultPanel.style.display = 'block';
         resultPanel.classList.add('reveal');
         
-        saveWeekNotes(weekNum, { trimester: weekNum <= 12 ? 1 : weekNum <= 26 ? 2 : 3 });
+        saveWeekNotes(weekNum, { trimester: getTrimesterFromWeek(weekNum) });
         renderNextSteps(weekNum);
       }
       var shareRow = document.getElementById('shareRow');
@@ -1788,21 +1998,27 @@ function lsDel(key)                  { return _ls.del(key); }
       }
 
       // Determine trimester from week number for product recommendations
-      var trimester = weekNum <= 12 ? 1 : weekNum <= 26 ? 2 : 3;
+      var trimester = getTrimesterFromWeek(weekNum);
       var prodKey = trimester === 1 ? 't1' : trimester === 2 ? 't2' : 't3';
       var trimLabel = trimester === 1 ? 'First Trimester' : trimester === 2 ? 'Second Trimester' : 'Third Trimester';
-      // Sync result panel stats and trimester bar to the selected week
-      var daysSinceLMP = weekNum * 7;
+      // Guide view for this page's week (not a personal LMP recalculation)
       var daysExtra = 0;
-      document.getElementById('statGrid').innerHTML = [
-        '<div class="result-stat"><div class="stat-value">Week ' + weekNum + '</div><div class="stat-label">Pregnancy Week</div><div class="stat-sub">' + daysExtra + ' days into this week</div></div>',
-        '<div class="result-stat"><div class="stat-value">—</div><div class="stat-label">Due Date (EDD)</div><div class="stat-sub">Estimate only</div></div>',
-        '<div class="result-stat"><div class="stat-value">' + trimLabel.split(' ')[0] + '</div><div class="stat-label">Trimester</div><div class="stat-sub">Weeks ' + (trimester === 1 ? '1–12' : trimester === 2 ? '13–26' : '27–40') + '</div></div>'
-      ].join('');
-      document.getElementById('trimBar').innerHTML =
-        '<div class="trimester-labels"><span' + (trimester===1?' style="font-weight:700;color:var(--primary)"':'') + '>1st Trimester</span><span' + (trimester===2?' style="font-weight:700;color:var(--primary)"':'') + '>2nd Trimester</span><span' + (trimester===3?' style="font-weight:700;color:var(--primary)"':'') + '>3rd Trimester</span></div>' +
-        '<div class="progress-track"><div class="progress-fill" style="width:' + (Math.min((weekNum / 40) * 100, 100)).toFixed(1) + '%"></div></div>' +
-        '<div class="trimester-dividers"><span class="tri-div">Week 1</span><span class="tri-div">Week 13</span><span class="tri-div">Week 27</span><span class="tri-div">Week 40</span></div>';
+      var statGridEl = document.getElementById('statGrid');
+      if (statGridEl) {
+        statGridEl.innerHTML = [
+          '<div class="result-stat"><div class="stat-value">Week ' + weekNum + '</div><div class="stat-label">Guide week</div><div class="stat-sub">' + weekNum + 'w 0d (completed weeks)</div></div>',
+          '<div class="result-stat"><div class="stat-value">—</div><div class="stat-label">Due Date (EDD)</div><div class="stat-sub">Use the calculator for your personal date</div></div>',
+          '<div class="result-stat"><div class="stat-value">' + trimLabel.split(' ')[0] + '</div><div class="stat-label">Trimester</div><div class="stat-sub">Weeks ' + trimesterRangeLabel(trimester) + '</div></div>'
+        ].join('');
+      }
+      var trimBarEl = document.getElementById('trimBar');
+      if (trimBarEl) {
+        trimBarEl.hidden = false;
+        trimBarEl.innerHTML =
+          '<div class="trimester-labels"><span' + (trimester===1?' style="font-weight:700;color:var(--primary)"':'') + '>1st Trimester</span><span' + (trimester===2?' style="font-weight:700;color:var(--primary)"':'') + '>2nd Trimester</span><span' + (trimester===3?' style="font-weight:700;color:var(--primary)"':'') + '>3rd Trimester</span></div>' +
+          '<div class="progress-track"><div class="progress-fill" style="width:' + (Math.min((weekNum / 40) * 100, 100)).toFixed(1) + '%"></div></div>' +
+          '<div class="trimester-dividers"><span class="tri-div">Week 1</span><span class="tri-div">Week 14</span><span class="tri-div">Week 28</span><span class="tri-div">Week 40</span></div>';
+      }
       
       renderGrowthCurve(weekNum);
       updateSizeVisualizer(weekNum);
@@ -2770,7 +2986,7 @@ function lsDel(key)                  { return _ls.del(key); }
       weekNum: weekNum,
       savedAt: new Date().toISOString(),
       dueDate: extra.dueDate || '',
-      trimester: extra.trimester || (weekNum <= 12 ? 1 : weekNum <= 26 ? 2 : 3)
+      trimester: extra.trimester || getTrimesterFromWeek(weekNum)
     });
   }
 
@@ -2795,11 +3011,11 @@ function lsDel(key)                  { return _ls.del(key); }
     } else {
       items.push({ href: '/#tracker', title: 'Recalculate your dates', sub: 'Last period or due date. The estimate stays in this browser.' });
     }
-    if (weekNum <= 12) {
+    if (weekNum <= 13) {
       items.push({ href: 'due-date-explainer.html', title: 'How dating works', sub: 'LMP plus 280 days is an estimate. An early scan can change it.' });
       items.push({ href: 'pregnancy-checklist.html', title: 'First-trimester checklist', sub: 'Simple prep notes. Not a care plan.' });
       items.push({ href: 'indian-pregnancy-diet.html', title: 'Food notes', sub: 'General eating notes, not a diet prescription.' });
-    } else if (weekNum <= 26) {
+    } else if (weekNum <= 27) {
       items.push({ href: 'pregnancy-checklist.html', title: 'This trimester checklist', sub: 'Anatomy-scan week, names, and practical prep.' });
       items.push({ href: 'pregnancy-guide.html', title: 'Second-trimester guide', sub: 'What is typical now, without scare copy.' });
       items.push({ href: weekNum >= 18 ? 'fetal-movement-guide.html' : 'indian-pregnancy-diet.html', title: weekNum >= 18 ? 'Movement notes' : 'Food notes', sub: weekNum >= 18 ? 'When people usually start feeling kicks. Ranges vary.' : 'General eating notes, not a diet prescription.' });
@@ -2819,7 +3035,7 @@ function lsDel(key)                  { return _ls.del(key); }
     var el = ensureNextStepsEl();
     if (!el) return;
     var items = nextStepsForWeek(weekNum);
-    var trim = weekNum <= 12 ? 'first' : weekNum <= 26 ? 'second' : 'third';
+    var trim = weekNum <= 13 ? 'first' : weekNum <= 27 ? 'second' : 'third';
     el.hidden = false;
     el.innerHTML =
       '<h3>What people usually do at week ' + weekNum + '</h3>' +
@@ -2863,14 +3079,143 @@ function lsDel(key)                  { return _ls.del(key); }
 
 function addDueToCalendar() {
     if (!window.calculatedDueDate) return;
-    const date = new Date(window.calculatedDueDate);
-    const startString = date.toISOString().replace(/-|:|\.\d\d\d/g, '').substring(0, 8);
-    const endDate = new Date(date);
-    endDate.setDate(endDate.getDate() + 1);
-    const endString = endDate.toISOString().replace(/-|:|\.\d\d\d/g, '').substring(0, 8);
-    const title = encodeURIComponent('Estimated Due Date (EDD)');
-    const details = encodeURIComponent('Babys Estimated Due Date. Remember, only 4% of babies arrive exactly on this date!');
-    const url = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + title + '&dates=' + startString + '/' + endString + '&details=' + details;
+    var date = new Date(window.calculatedDueDate);
+    if (isNaN(date.getTime())) return;
+    var y = date.getFullYear();
+    var m = String(date.getMonth() + 1).padStart(2, '0');
+    var d = String(date.getDate()).padStart(2, '0');
+    var startString = y + m + d;
+    var endDate = addDaysLocal(date, 1);
+    var endString = endDate.getFullYear() + String(endDate.getMonth() + 1).padStart(2, '0') + String(endDate.getDate()).padStart(2, '0');
+    var title = encodeURIComponent('Estimated Due Date (EDD)');
+    var details = encodeURIComponent('Babys Estimated Due Date. Remember, only 4% of babies arrive exactly on this date!');
+    var url = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + title + '&dates=' + startString + '/' + endString + '&details=' + details;
     window.open(url, '_blank');
 }
+
+  /**
+   * Week-page bootstrap: always render THIS page's week from WEEKS.
+   * Personal LMP stays in sessionStorage/localStorage (never query string).
+   * Shows a banner + share/calendar when the visitor has saved dates.
+   */
+  function initWeekPage(pageWeek) {
+    pageWeek = Math.max(1, Math.min(42, parseInt(pageWeek, 10) || 1));
+
+    // Migrate legacy ?lmp= / hash into storage and clean the URL
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var hashParams = new URLSearchParams((window.location.hash || '').replace(/^#/, ''));
+      var legacyLmp = params.get('lmp') || hashParams.get('lmp');
+      var legacyDue = params.get('due') || hashParams.get('due');
+      var legacyCycle = params.get('cycle') || hashParams.get('cycle');
+      if (legacyLmp || legacyDue || legacyCycle) {
+        storePregnancySession(legacyLmp, legacyDue, legacyCycle);
+        if (legacyLmp) _ls.setRaw('pwtSavedLMP', legacyLmp);
+        if (legacyDue) _ls.setRaw('pwtSavedDue', legacyDue);
+        if (legacyCycle) _ls.setRaw('pwtSavedCycle', legacyCycle);
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(null, '', window.location.pathname);
+        }
+      }
+    } catch (e) {}
+
+    // Always show this page's week guide (P-H4)
+    if (typeof showWeekDetail === 'function') {
+      showWeekDetail(pageWeek);
+    }
+
+    var lmpYmd = readStoredLMP();
+    var cycleLen = parseInt(readStoredCycle(), 10) || 28;
+    var banner = document.getElementById('userWeekBanner');
+    var shareRow = document.getElementById('weekShareRow');
+    var statsCard = document.getElementById('statsCard');
+
+    if (!lmpYmd) {
+      if (statsCard) statsCard.style.display = 'none';
+      if (banner) banner.hidden = true;
+      if (shareRow) shareRow.style.display = 'none';
+      return;
+    }
+
+    var lmpDate = parseLocalYMD(lmpYmd);
+    if (!lmpDate) {
+      setCalcError('Saved last-period date looks invalid. Please recalculate from the home page.');
+      if (statsCard) statsCard.style.display = 'none';
+      return;
+    }
+
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    var ga = gestationalAgeFromLMP(lmpDate, today);
+    if (!ga) {
+      setCalcError('Saved last-period date cannot be in the future. Please recalculate.');
+      return;
+    }
+
+    var dueDate = addDaysLocal(lmpDate, 280 + (cycleLen - 28));
+    window.calculatedDueDate = dueDate;
+    currentResult = {
+      weekNum: pageWeekFromCompleted(ga.completedWeeks),
+      completedWeeks: ga.completedWeeks,
+      daysExtra: ga.daysIntoWeek,
+      dueDate: dueDate,
+      daysUntilDue: calendarDaysBetween(today, dueDate),
+      trimester: getTrimesterFromWeek(Math.max(ga.completedWeeks, 1)),
+      progress: Math.min((ga.daysSinceLMP / 280) * 100, 100),
+      lmpDate: lmpDate
+    };
+
+    var lmpInput = document.getElementById('lmpDate');
+    if (lmpInput) lmpInput.value = lmpYmd;
+    var cycleInput = document.getElementById('cycleLen');
+    if (cycleInput) cycleInput.value = String(cycleLen);
+
+    var userPage = pageWeekFromCompleted(ga.completedWeeks);
+    var gestPhrase = formatGestationalPhrase(ga.completedWeeks, ga.daysIntoWeek);
+
+    if (banner) {
+      if (ga.completedWeeks > 42) {
+        banner.hidden = false;
+        banner.innerHTML = 'Past 42 weeks (' + ga.completedWeeks + 'w ' + ga.daysIntoWeek + 'd) — contact your maternity unit / baby may have arrived. <a href="index.html#tracker">Recalculate</a>';
+      } else if (userPage !== pageWeek) {
+        banner.hidden = false;
+        banner.innerHTML = 'You\'re <strong>' + gestPhrase + '</strong> pregnant (' + ga.completedWeeks + 'w ' + ga.daysIntoWeek + 'd) — <a href="' + userPage + '-weeks-pregnant.html">go to your week</a>';
+      } else {
+        banner.hidden = false;
+        banner.innerHTML = 'You\'re <strong>' + gestPhrase + '</strong> pregnant · due ' + formatDisplayDate(dueDate) + ' · <a href="index.html#tracker">Recalculate</a>';
+      }
+    }
+
+    if (shareRow) shareRow.style.display = 'flex';
+
+    // Personal due-date strip when viewing your own week
+    if (userPage === pageWeek && statsCard) {
+      statsCard.style.display = '';
+      var rh = document.getElementById('resultHeadline');
+      if (rh) {
+        rh.style.display = 'block';
+        rh.innerHTML =
+          '<div class="rh-week">You\'re ' + gestPhrase + ' pregnant</div>' +
+          '<div class="rh-sub">Due date: ' + formatDisplayDate(dueDate) + ' &nbsp;·&nbsp; ' + ga.completedWeeks + 'w ' + ga.daysIntoWeek + 'd</div>';
+      }
+      var sg = document.getElementById('statGrid');
+      if (sg) {
+        var daysUntil = calendarDaysBetween(today, dueDate);
+        var daysStr = daysUntil >= 0 ? daysUntil + ' days to go' : Math.abs(daysUntil) + ' days overdue';
+        var tri = getTrimesterFromWeek(Math.max(ga.completedWeeks, 1));
+        sg.innerHTML = [
+          '<div class="result-stat"><div class="stat-value">' + ga.completedWeeks + 'w ' + ga.daysIntoWeek + 'd</div><div class="stat-label">Gestational age</div><div class="stat-sub">You\'re ' + gestPhrase + ' pregnant</div></div>',
+          '<div class="result-stat"><div class="stat-value">' + formatDisplayDate(dueDate) + '</div><div class="stat-label">Due Date (EDD)</div><div class="stat-sub">' + daysStr + '</div></div>',
+          '<div class="result-stat"><div class="stat-value">' + ['First', 'Second', 'Third'][tri - 1] + '</div><div class="stat-label">Trimester</div><div class="stat-sub">Weeks ' + trimesterRangeLabel(tri) + '</div></div>'
+        ].join('');
+      }
+    } else if (statsCard && userPage !== pageWeek) {
+      // Keep guide stats from showWeekDetail; personal info is in the banner
+    }
+  }
+
+  window.initWeekPage = initWeekPage;
+  window.addDueToCalendar = addDueToCalendar;
+  window.parseLocalYMD = parseLocalYMD;
+  window.formatLocalYMD = formatLocalYMD;
+  window.setCalcError = setCalcError;
 

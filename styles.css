@@ -500,10 +500,21 @@
       margin-top: 12px; font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;
     }
 
-    /* ── ADVERT SLOT (hidden until AdSense is approved) ── */
+    /* ── ADVERT SLOT ── */
     .ad-slot {
+      margin: 32px auto;
+      text-align: center;
+      max-width: 800px;
+      width: 100%;
+      display: block;
+    }
+    .ad-slot ins.adsbygoogle {
+      display: block;
+      width: 100%;
+    }
+    .ad-slot ins.adsbygoogle[data-ad-status="unfilled"] {
       display: none !important;
-  }
+    }
     .growth-graph-wrap,
     .growth-graph {
       width: 100%;

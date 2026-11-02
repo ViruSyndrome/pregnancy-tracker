@@ -16,9 +16,19 @@
         replaysOnErrorSampleRate: 0,
         beforeSend: function(event) {
           try {
-            var msg = (event && event.message) || (event && event.exception && event.exception.values && event.exception.values[0] && event.exception.values[0].value) || '';
-            if (/TagError|adsbygoogle|availableWidth/i.test(msg)) {
+            var ex = event && event.exception && event.exception.values && event.exception.values[0];
+            var msg = (event && event.message) || (ex && ex.value) || '';
+            var typ = (ex && ex.type) || '';
+            if (/TagError/i.test(typ) || /TagError|adsbygoogle|availableWidth|No slot size/i.test(msg)) {
               return null;
+            }
+            var frames = (ex && ex.stacktrace && ex.stacktrace.frames) || [];
+            for (var i = 0; i < frames.length; i++) {
+              var f = frames[i] || {};
+              var loc = (f.filename || '') + ' ' + (f.module || '') + ' ' + (f.abs_path || '');
+              if (/adsbygoogle|googlesyndication|googleadservices|adtrafficquality/i.test(loc)) {
+                return null;
+              }
             }
           } catch (e) {}
           try {
@@ -79,7 +89,7 @@
     }
   }
   </script>
-  <link rel="stylesheet" href="styles.css?v=9">
+  <link rel="stylesheet" href="styles.css?v=10">
   <link rel="stylesheet" href="nav.css?v=1">
 </head>
 <body>
@@ -189,17 +199,28 @@
             </section>
     
             <!-- AdSense Banner -->
-            <div class="ad-slot" style="margin: 32px auto; text-align: center; max-width: 800px; display: block; width: 100%;">
+            <div class="ad-slot" style="margin: 32px auto; text-align: center; max-width: 800px; display: block; width: 100%; min-height: 90px;">
               <ins class="adsbygoogle"
-                   style="display:block"
+                   style="display:block;width:100%;min-height:90px"
                    data-ad-client="ca-pub-2959862133855422"
-                   data-ad-slot="auto"
                    data-ad-format="auto"
                    data-full-width-responsive="true"></ins>
               <script>
-               try {
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-               } catch (e) {}
+               (function () {
+                 var tries = 0;
+                 var slot = document.currentScript && document.currentScript.previousElementSibling;
+                 function pushWhenReady() {
+                   if (!slot || !slot.classList || !slot.classList.contains('adsbygoogle')) return;
+                   if (slot.getAttribute('data-ad-status') || slot.getAttribute('data-adsbygoogle-status')) return;
+                   if (slot.offsetWidth > 0) {
+                     try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
+                     return;
+                   }
+                   if (++tries < 24) setTimeout(pushWhenReady, 250);
+                 }
+                 if (document.readyState === 'complete') pushWhenReady();
+                 else window.addEventListener('load', pushWhenReady);
+               })();
              </script>
             </div>
 
@@ -264,7 +285,7 @@
     window.currentMode = 'lmp';
     window.currentImageTab = 'fruit';
   </script>
-  <script src="script.js?v=12"></script>
+  <script src="script.js?v=13"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {

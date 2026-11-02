@@ -16,9 +16,19 @@
         replaysOnErrorSampleRate: 0,
         beforeSend: function(event) {
           try {
-            var msg = (event && event.message) || (event && event.exception && event.exception.values && event.exception.values[0] && event.exception.values[0].value) || '';
-            if (/TagError|adsbygoogle|availableWidth/i.test(msg)) {
+            var ex = event && event.exception && event.exception.values && event.exception.values[0];
+            var msg = (event && event.message) || (ex && ex.value) || '';
+            var typ = (ex && ex.type) || '';
+            if (/TagError/i.test(typ) || /TagError|adsbygoogle|availableWidth|No slot size/i.test(msg)) {
               return null;
+            }
+            var frames = (ex && ex.stacktrace && ex.stacktrace.frames) || [];
+            for (var i = 0; i < frames.length; i++) {
+              var f = frames[i] || {};
+              var loc = (f.filename || '') + ' ' + (f.module || '') + ' ' + (f.abs_path || '');
+              if (/adsbygoogle|googlesyndication|googleadservices|adtrafficquality/i.test(loc)) {
+                return null;
+              }
             }
           } catch (e) {}
           try {
@@ -1281,7 +1291,7 @@ a[data-tooltip] {
 <script>
   window.isMainPage = false;
 </script>
-<script src="script.js?v=11" defer></script>
+<script src="script.js?v=13" defer></script>
 
   <!-- Image Modal -->
   <div id="imgModal" class="img-modal" tabindex="-1" role="dialog" aria-modal="true" onclick="closeImgModal()">

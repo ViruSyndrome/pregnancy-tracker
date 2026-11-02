@@ -21,9 +21,19 @@
         replaysOnErrorSampleRate: 0,
         beforeSend: function(event) {
           try {
-            var msg = (event && event.message) || (event && event.exception && event.exception.values && event.exception.values[0] && event.exception.values[0].value) || '';
-            if (/TagError|adsbygoogle|availableWidth/i.test(msg)) {
+            var ex = event && event.exception && event.exception.values && event.exception.values[0];
+            var msg = (event && event.message) || (ex && ex.value) || '';
+            var typ = (ex && ex.type) || '';
+            if (/TagError/i.test(typ) || /TagError|adsbygoogle|availableWidth|No slot size/i.test(msg)) {
               return null;
+            }
+            var frames = (ex && ex.stacktrace && ex.stacktrace.frames) || [];
+            for (var i = 0; i < frames.length; i++) {
+              var f = frames[i] || {};
+              var loc = (f.filename || '') + ' ' + (f.module || '') + ' ' + (f.abs_path || '');
+              if (/adsbygoogle|googlesyndication|googleadservices|adtrafficquality/i.test(loc)) {
+                return null;
+              }
             }
           } catch (e) {}
           try {
@@ -47,7 +57,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=9">
+  <link rel="stylesheet" href="styles.css?v=10">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2959862133855422" crossorigin="anonymous"></script>
   <meta property="og:image" content="https://www.pregnancyweektracker.com/og-large.jpg">
   <meta property="og:image:secure_url" content="https://www.pregnancyweektracker.com/og-large.jpg">

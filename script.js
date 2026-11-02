@@ -1628,17 +1628,6 @@ function lsDel(key)                  { return _ls.del(key); }
     // On week pages, calculate() should not replace the page's week content — banner handles personalisation
     renderResult(currentResult);
 
-    if (!window._adSlot1Pushed) {
-      window._adSlot1Pushed = true;
-      setTimeout(function() {
-        try {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (e) {
-          console.error('AdSense push failed');
-        }
-      }, 500);
-    }
-
     trackEvent('calculate_week', { mode: currentMode });
 }
 

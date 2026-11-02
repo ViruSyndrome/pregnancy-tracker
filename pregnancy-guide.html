@@ -66,7 +66,19 @@
     tr:last-child td { border-bottom: none; }
     tr:hover { background: rgba(190, 24, 93, 0.02); }
   </style>
-    <script src="https://js.sentry-cdn.com/2510c386e2467c8dc3aad62f23805e09.min.js" crossorigin="anonymous"></script>
+      <script>
+    // Drop Google AdSense TagErrors before Sentry sees them.
+    window.addEventListener('error', function (e) {
+      var msg = (e && (e.message || (e.error && e.error.message))) || '';
+      var src = (e && e.filename) || '';
+      if (/TagError|adsbygoogle|availableWidth|No slot size/i.test(msg) || /googlesyndication|googleadservices|adtrafficquality/i.test(src)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        return true;
+      }
+    }, true);
+  </script>
+<script src="https://js.sentry-cdn.com/2510c386e2467c8dc3aad62f23805e09.min.js" crossorigin="anonymous"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2959862133855422" crossorigin="anonymous"></script>
 
   <style>

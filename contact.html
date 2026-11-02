@@ -6,7 +6,19 @@
   <meta name="msvalidate.01" content="FA7405A0B7623E8A404F74AE4952777C" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script defer src="https://js.sentry-cdn.com/2510c386e2467c8dc3aad62f23805e09.min.js" crossorigin="anonymous"></script>
+    <script>
+    // Drop Google AdSense TagErrors before Sentry sees them.
+    window.addEventListener('error', function (e) {
+      var msg = (e && (e.message || (e.error && e.error.message))) || '';
+      var src = (e && e.filename) || '';
+      if (/TagError|adsbygoogle|availableWidth|No slot size/i.test(msg) || /googlesyndication|googleadservices|adtrafficquality/i.test(src)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        return true;
+      }
+    }, true);
+  </script>
+<script defer src="https://js.sentry-cdn.com/2510c386e2467c8dc3aad62f23805e09.min.js" crossorigin="anonymous"></script>
   <script>
     Sentry.onLoad(function() {
       Sentry.init({

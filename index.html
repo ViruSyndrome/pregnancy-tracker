@@ -7,7 +7,19 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Week Tracker">
-  <script defer src="https://js.sentry-cdn.com/2510c386e2467c8dc3aad62f23805e09.min.js" crossorigin="anonymous"></script>
+    <script>
+    // Drop Google AdSense TagErrors before Sentry sees them.
+    window.addEventListener('error', function (e) {
+      var msg = (e && (e.message || (e.error && e.error.message))) || '';
+      var src = (e && e.filename) || '';
+      if (/TagError|adsbygoogle|availableWidth|No slot size/i.test(msg) || /googlesyndication|googleadservices|adtrafficquality/i.test(src)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        return true;
+      }
+    }, true);
+  </script>
+<script defer src="https://js.sentry-cdn.com/2510c386e2467c8dc3aad62f23805e09.min.js" crossorigin="anonymous"></script>
   <script>
     Sentry.onLoad(function() {
       Sentry.init({

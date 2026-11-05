@@ -22,7 +22,7 @@
   <script>
     Sentry.onLoad(function() {
       Sentry.init({
-        ignoreErrors: [/TagError/i, /No slot size/i, /pageContext/i, /adsbygoogle/i, /@context/i, /runtime\.sendMessage/i, /Tab not found/i, /Extension context invalidated/i, /int64/i, /rum_fy2021/i, "Script error."],
+        ignoreErrors: [/TagError/i, /No slot size/i, /pageContext/i, /adsbygoogle/i, /@context/i, /runtime\.sendMessage/i, /Tab not found/i, /Extension context invalidated/i, /int64/i, /rum_fy2021/i, "Script error.", /Script error/i, /ErrorEvent/i],
         denyUrls: [/pagead2\.googlesyndication\.com/i, /googlesyndication\.com/i, /googleadservices\.com/i, /ep1\.adtrafficquality\.google/i],
         tracesSampleRate: 0.1,
         replaysSessionSampleRate: 0,
@@ -32,7 +32,7 @@
             var ex = event && event.exception && event.exception.values && event.exception.values[0];
             var msg = (event && event.message) || (ex && ex.value) || '';
             var typ = (ex && ex.type) || '';
-            if (/TagError/i.test(typ) || /TagError|adsbygoogle|availableWidth|No slot size/i.test(msg)) {
+            if (/TagError|ErrorEvent/i.test(typ) || /TagError|adsbygoogle|availableWidth|No slot size|Script error|ErrorEvent/i.test(msg)) {
               return null;
             }
             var frames = (ex && ex.stacktrace && ex.stacktrace.frames) || [];
